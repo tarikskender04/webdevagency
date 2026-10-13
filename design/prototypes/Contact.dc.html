@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#E9EEF2; color:#0A1A25; font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0C7CC4; text-decoration:none; }
+  a:hover { color:#084B7A; }
+  ::selection { background:#DCEEFA; }
+  input::placeholder { color:#93A3AE; }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<section data-screen-label="Turn 1 Contact" style="padding:80px; display:flex; flex-direction:column; gap:40px;">
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <span style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">Turn 1 · Contact + final CTA</span>
+    <span style="font-size:15px; color:#42545F; max-width:80ch;">Both forms work: fill them in, pick a slot, confirm. <a href="#1a">1a</a> puts the host beside the form on white. <a href="#1b">1b</a> is on dark ink, with the host introducing the form inside the card.</span>
+  </div>
+
+  <div style="display:flex; gap:80px; align-items:flex-start;">
+
+    <!-- ═════ 1a ═════ -->
+    <div id="1a" style="display:flex; flex-direction:column; gap:16px; flex:none;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="display:inline-flex; align-items:center; justify-content:center; height:30px; padding:0 12px; border-radius:8px; background:#0A1A25; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:500;">1a</span>
+        <span style="font-size:15px; font-weight:600;">Light · host beside the form</span>
+      </div>
+
+      <div data-screen-label="1a Contact light" style="position:relative; width:1280px; overflow:hidden; background:#FFFFFF; border-radius:4px; box-shadow:0 1px 2px rgba(10,26,37,.06), 0 20px 50px rgba(10,26,37,.08);">
+        <div style="position:absolute; inset:0; opacity:.45; pointer-events:none; mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 30%,#000 100%); -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 30%,#000 100%);">
+          <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#9CCCEB,#0C7CC4" amplitude="1.1" blend="0.55" speed="0.5" light-mode="true" hint-size="100%,100%"></x-import>
+        </div>
+
+        <div style="position:relative; display:grid; grid-template-columns:minmax(0,1fr) 540px; gap:80px; padding:112px 72px 120px; align-items:start;">
+
+          <div style="display:flex; flex-direction:column; gap:36px; padding-top:8px;">
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4;"></span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">Start a project</span>
+              </div>
+              <h2 style="margin:0; font-weight:600; letter-spacing:-0.035em; line-height:1.02; font-size:68px; max-width:13ch; text-wrap:pretty;">Tell us about the business. <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400; letter-spacing:-0.015em;">We'll bring the plan.</span></h2>
+              <p style="margin:0; max-width:46ch; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">Book a free 30-minute call. We'll look at what you have now and what you need it to do, then give you a plan and a price range. No commitment.</p>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="width:64px; height:64px; flex:none;"><image-slot id="contact-host-a" shape="circle" placeholder="Host photo"></image-slot></div>
+              <div style="display:flex; flex-direction:column; gap:3px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">You'll talk to</span>
+                <span style="font-size:17px; font-weight:600; letter-spacing:-0.01em;">Alex Moreno</span>
+                <span style="font-size:14px; color:#42545F;">Founder and lead designer, Meridian</span>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; border-top:1px solid #E3EAF0; max-width:480px;">
+              <div style="display:grid; grid-template-columns:44px minmax(0,1fr); gap:12px; padding:16px 0; border-bottom:1px solid #EDF2F6;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#0C7CC4; padding-top:2px;">01</span>
+                <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:16px; font-weight:600;">Tell us a little</span><span style="font-size:14.5px; line-height:1.5; color:#42545F;">A few quick questions. Under a minute.</span></div>
+              </div>
+              <div style="display:grid; grid-template-columns:44px minmax(0,1fr); gap:12px; padding:16px 0; border-bottom:1px solid #EDF2F6;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#0C7CC4; padding-top:2px;">02</span>
+                <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:16px; font-weight:600;">Pick a time</span><span style="font-size:14.5px; line-height:1.5; color:#42545F;">Straight into the calendar. No back-and-forth emails.</span></div>
+              </div>
+              <div style="display:grid; grid-template-columns:44px minmax(0,1fr); gap:12px; padding:16px 0; border-bottom:1px solid #EDF2F6;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#0C7CC4; padding-top:2px;">03</span>
+                <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:16px; font-weight:600;">Talk it through</span><span style="font-size:14.5px; line-height:1.5; color:#42545F;">30 minutes on video. You leave with a plan and a price range.</span></div>
+              </div>
+            </div>
+
+            <span style="font-size:15px; color:#42545F;">Rather write? <a href="mailto:hello@meridian.agency" style="font-weight:600;">hello@meridian.agency</a></span>
+          </div>
+
+          <div style="border-radius:20px; border:1px solid #E3EAF0; background:#FFFFFF; box-shadow:0 2px 6px rgba(10,26,37,.05), 0 24px 60px rgba(10,26,37,.10); overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid #EDF2F6; background:#F8FBFD;">
+              <span style="width:6px; height:6px; border-radius:50%; background:#0C7CC4;"></span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">{{ a.stepLabel }}</span>
+              <div style="margin-left:auto; display:flex; gap:4px;">
+                <span style="width:28px; height:4px; border-radius:2px; background:{{ a.seg1 }}; transition:background .3s;"></span>
+                <span style="width:28px; height:4px; border-radius:2px; background:{{ a.seg2 }}; transition:background .3s;"></span>
+              </div>
+            </div>
+
+            <sc-if value="{{ a.isForm }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:28px; display:flex; flex-direction:column; gap:22px;">
+                <label style="display:flex; flex-direction:column; gap:8px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Name</span>
+                  <input value="{{ a.name }}" onChange="{{ a.onName }}" placeholder="Full name" style="width:100%; box-sizing:border-box; height:48px; padding:0 14px; border-radius:12px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:15px; color:#0A1A25; outline:none; transition:border-color .2s, box-shadow .2s;" style-focus="border-color:#0C7CC4; box-shadow:0 0 0 4px rgba(12,124,196,.12);">
+                </label>
+                <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px;">
+                  <label style="display:flex; flex-direction:column; gap:8px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Email</span>
+                    <input type="email" value="{{ a.email }}" onChange="{{ a.onEmail }}" placeholder="you@business.com" style="width:100%; box-sizing:border-box; height:48px; padding:0 14px; border-radius:12px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:15px; color:#0A1A25; outline:none; transition:border-color .2s, box-shadow .2s;" style-focus="border-color:#0C7CC4; box-shadow:0 0 0 4px rgba(12,124,196,.12);">
+                  </label>
+                  <label style="display:flex; flex-direction:column; gap:8px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Phone <span style="color:#93A3AE;">· optional</span></span>
+                    <input type="tel" value="{{ a.phone }}" onChange="{{ a.onPhone }}" placeholder="(555) 000-0000" style="width:100%; box-sizing:border-box; height:48px; padding:0 14px; border-radius:12px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:15px; color:#0A1A25; outline:none; transition:border-color .2s, box-shadow .2s;" style-focus="border-color:#0C7CC4; box-shadow:0 0 0 4px rgba(12,124,196,.12);">
+                  </label>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Business type</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ a.bizChips }}" as="c" hint-placeholder-count="5">
+                      <button onClick="{{ c.pick }}" style="height:38px; padding:0 15px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s, color .2s, border-color .2s;">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Budget</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ a.budgetChips }}" as="c" hint-placeholder-count="4">
+                      <button onClick="{{ c.pick }}" style="height:38px; padding:0 15px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s, color .2s, border-color .2s;">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Timeline</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ a.timeChips }}" as="c" hint-placeholder-count="4">
+                      <button onClick="{{ c.pick }}" style="height:38px; padding:0 15px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s, color .2s, border-color .2s;">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <sc-if value="{{ a.err }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:14px; color:#B3402A;">Add your name and a valid email so we can send the invite.</span>
+                </sc-if>
+                <div style="display:flex; flex-direction:column; gap:12px; padding-top:4px;">
+                  <button onClick="{{ a.submit }}" style="display:flex; align-items:center; justify-content:space-between; height:56px; padding:0 8px 0 26px; border:0; border-radius:999px; background:#0A1A25; color:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:16px; font-weight:600; cursor:pointer; transition:background .22s, transform .22s;" style-hover="background:#1E3442; transform:translateY(-1px);">Pick a time<span style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.16);"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button>
+                  <span style="font-size:13.5px; color:#5B6B78; text-align:center;">Free call. No commitment.</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ a.isCal }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:28px; display:flex; flex-direction:column; gap:22px;">
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  <button onClick="{{ a.back }}" style="align-self:flex-start; padding:0; border:0; background:none; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; color:#0C7CC4; cursor:pointer;">← Edit details</button>
+                  <span style="font-size:26px; font-weight:600; letter-spacing:-0.025em;">Pick a time, <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">{{ a.firstName }}</span></span>
+                  <span style="font-size:14.5px; color:#42545F;">30 min · Video call with Alex · Your local time</span>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">{{ a.month }}</span>
+                  <div style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px;">
+                    <sc-for list="{{ a.days }}" as="d" hint-placeholder-count="10">
+                      <button onClick="{{ d.pick }}" style="height:62px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; border-radius:12px; border:1px solid {{ d.bd }}; background:{{ d.bg }}; color:{{ d.fg }}; font-family:'Instrument Sans',sans-serif; cursor:pointer; transition:background .2s, color .2s, border-color .2s;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.75;">{{ d.dow }}</span><span style="font-size:19px; font-weight:600;">{{ d.num }}</span></button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">{{ a.dayLong }}</span>
+                  <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;">
+                    <sc-for list="{{ a.slots }}" as="s" hint-placeholder-count="6">
+                      <button onClick="{{ s.pick }}" style="height:46px; border-radius:12px; border:1px solid {{ s.bd }}; background:{{ s.bg }}; color:{{ s.fg }}; text-decoration:{{ s.deco }}; font-family:'Instrument Sans',sans-serif; font-size:15px; font-weight:500; cursor:{{ s.cursor }}; transition:background .2s, color .2s, border-color .2s;">{{ s.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <button onClick="{{ a.confirm }}" style="height:56px; border:0; border-radius:999px; background:{{ a.confirmBg }}; color:{{ a.confirmFg }}; font-family:'Instrument Sans',sans-serif; font-size:16px; font-weight:600; cursor:pointer; transition:background .22s, color .22s;">{{ a.confirmLabel }}</button>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ a.isDone }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:44px 28px 36px; display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
+                <span style="width:56px; height:56px; border-radius:50%; background:#0C7CC4; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 8px rgba(12,124,196,.12);"><svg width="22" height="22" viewBox="0 0 10 10" fill="none"><path d="M2 5.2l2.2 2.2L8 3.2" stroke="#FFF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:34px; font-weight:600; letter-spacing:-0.03em; line-height:1.05;">You're <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">booked.</span></span>
+                <div style="display:flex; flex-direction:column; width:100%; border-top:1px solid #E3EAF0;">
+                  <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #EDF2F6; font-size:15px;"><span style="color:#5B6B78;">When</span><span style="font-weight:600;">{{ a.bookedLabel }}</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #EDF2F6; font-size:15px;"><span style="color:#5B6B78;">With</span><span style="font-weight:600;">Alex Moreno · Video call</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #EDF2F6; font-size:15px;"><span style="color:#5B6B78;">Invite sent to</span><span style="font-weight:600;">{{ a.emailShown }}</span></div>
+                </div>
+                <span style="font-size:15px; line-height:1.6; color:#42545F;">Have your current website or menu handy. That's all you need to bring.</span>
+                <button onClick="{{ a.rebook }}" style="padding:0; border:0; background:none; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; color:#0C7CC4; cursor:pointer;">Change the time</button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════ 1b ═════ -->
+    <div id="1b" style="display:flex; flex-direction:column; gap:16px; flex:none;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="display:inline-flex; align-items:center; justify-content:center; height:30px; padding:0 12px; border-radius:8px; background:#0A1A25; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:500;">1b</span>
+        <span style="font-size:15px; font-weight:600;">Dark · host introduces the form</span>
+      </div>
+
+      <div data-screen-label="1b Contact dark" style="position:relative; width:1280px; overflow:hidden; background:#0A1A25; border-radius:4px; box-shadow:0 1px 2px rgba(10,26,37,.06), 0 20px 50px rgba(10,26,37,.14);">
+        <div style="position:absolute; right:-160px; top:-220px; width:820px; height:620px; border-radius:50%; background:radial-gradient(circle,#0C7CC4 0%,rgba(12,124,196,0) 66%); filter:blur(70px); opacity:.5; pointer-events:none;"></div>
+        <div style="position:absolute; left:-200px; bottom:-300px; width:700px; height:520px; border-radius:50%; background:radial-gradient(circle,#6FB6E2 0%,rgba(111,182,226,0) 66%); filter:blur(80px); opacity:.18; pointer-events:none;"></div>
+
+        <div style="position:relative; display:grid; grid-template-columns:minmax(0,1fr) 520px; gap:80px; padding:112px 72px 96px; align-items:start;">
+
+          <div style="display:flex; flex-direction:column; gap:28px; padding-top:8px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="width:7px; height:7px; border-radius:50%; background:#6FB6E2;"></span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#93A3AE;">Start a project</span>
+            </div>
+            <h2 style="margin:0; font-weight:600; letter-spacing:-0.038em; line-height:1; font-size:80px; color:#FFFFFF; max-width:11ch; text-wrap:pretty;">Let's get your business <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400; letter-spacing:-0.015em; color:#9CCCEB;">working online.</span></h2>
+            <p style="margin:0; max-width:44ch; font-size:18px; line-height:1.6; color:#B7C6D1; text-wrap:pretty;">A free 30-minute call is where every Meridian project starts. No pitch deck and no commitment. Just an honest look at what your site should do.</p>
+
+            <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; margin-top:28px; padding-top:28px; border-top:1px solid rgba(255,255,255,.12);">
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#6FB6E2;">// 01</span>
+                <span style="font-size:17px; font-weight:600; color:#FFFFFF;">Tell us a little</span>
+                <span style="font-size:14.5px; line-height:1.5; color:#93A3AE;">A few quick questions. Under a minute.</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#6FB6E2;">// 02</span>
+                <span style="font-size:17px; font-weight:600; color:#FFFFFF;">Pick a time</span>
+                <span style="font-size:14.5px; line-height:1.5; color:#93A3AE;">Straight into the calendar. No email tag.</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#6FB6E2;">// 03</span>
+                <span style="font-size:17px; font-weight:600; color:#FFFFFF;">Talk it through</span>
+                <span style="font-size:14.5px; line-height:1.5; color:#93A3AE;">You leave with a plan and a price range.</span>
+              </div>
+            </div>
+
+            <span style="margin-top:12px; font-size:15px; color:#93A3AE;">Rather write? <a href="mailto:hello@meridian.agency" style="font-weight:600; color:#9CCCEB;">hello@meridian.agency</a></span>
+          </div>
+
+          <div style="border-radius:24px; background:#FFFFFF; box-shadow:0 30px 80px rgba(0,0,0,.35); overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:14px; padding:22px 24px; border-bottom:1px solid #EDF2F6;">
+              <div style="width:52px; height:52px; flex:none;"><image-slot id="contact-host-b" shape="circle" placeholder="Host photo"></image-slot></div>
+              <div style="display:flex; flex-direction:column; gap:2px; min-width:0;">
+                <span style="font-size:15.5px; font-weight:600;">Hi, I'm Alex.</span>
+                <span style="font-size:14px; line-height:1.45; color:#42545F;">Tell me a bit about the business and grab a time. I'll be the one on the call.</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 24px; background:#F8FBFD; border-bottom:1px solid #EDF2F6;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">{{ b.stepLabel }}</span>
+              <div style="margin-left:auto; display:flex; gap:4px;">
+                <span style="width:28px; height:4px; border-radius:2px; background:{{ b.seg1 }}; transition:background .3s;"></span>
+                <span style="width:28px; height:4px; border-radius:2px; background:{{ b.seg2 }}; transition:background .3s;"></span>
+              </div>
+            </div>
+
+            <sc-if value="{{ b.isForm }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:24px; display:flex; flex-direction:column; gap:20px;">
+                <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px;">
+                  <label style="display:flex; flex-direction:column; gap:8px; grid-column:1 / -1;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Name</span>
+                    <input value="{{ b.name }}" onChange="{{ b.onName }}" placeholder="Full name" style="width:100%; box-sizing:border-box; height:48px; padding:0 14px; border-radius:12px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:15px; color:#0A1A25; outline:none; transition:border-color .2s, box-shadow .2s;" style-focus="border-color:#0C7CC4; box-shadow:0 0 0 4px rgba(12,124,196,.12);">
+                  </label>
+                  <label style="display:flex; flex-direction:column; gap:8px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Email</span>
+                    <input type="email" value="{{ b.email }}" onChange="{{ b.onEmail }}" placeholder="you@business.com" style="width:100%; box-sizing:border-box; height:48px; padding:0 14px; border-radius:12px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:15px; color:#0A1A25; outline:none; transition:border-color .2s, box-shadow .2s;" style-focus="border-color:#0C7CC4; box-shadow:0 0 0 4px rgba(12,124,196,.12);">
+                  </label>
+                  <label style="display:flex; flex-direction:column; gap:8px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Phone <span style="color:#93A3AE;">· optional</span></span>
+                    <input type="tel" value="{{ b.phone }}" onChange="{{ b.onPhone }}" placeholder="(555) 000-0000" style="width:100%; box-sizing:border-box; height:48px; padding:0 14px; border-radius:12px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:15px; color:#0A1A25; outline:none; transition:border-color .2s, box-shadow .2s;" style-focus="border-color:#0C7CC4; box-shadow:0 0 0 4px rgba(12,124,196,.12);">
+                  </label>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Business type</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ b.bizChips }}" as="c" hint-placeholder-count="5">
+                      <button onClick="{{ c.pick }}" style="height:38px; padding:0 15px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s, color .2s, border-color .2s;">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Budget</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ b.budgetChips }}" as="c" hint-placeholder-count="4">
+                      <button onClick="{{ c.pick }}" style="height:38px; padding:0 15px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s, color .2s, border-color .2s;">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Timeline</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ b.timeChips }}" as="c" hint-placeholder-count="4">
+                      <button onClick="{{ c.pick }}" style="height:38px; padding:0 15px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s, color .2s, border-color .2s;">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <sc-if value="{{ b.err }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:14px; color:#B3402A;">Add your name and a valid email so we can send the invite.</span>
+                </sc-if>
+                <div style="display:flex; flex-direction:column; gap:12px; padding-top:4px;">
+                  <button onClick="{{ b.submit }}" style="display:flex; align-items:center; justify-content:space-between; height:56px; padding:0 8px 0 26px; border:0; border-radius:999px; background:#0C7CC4; color:#FFFFFF; font-family:'Instrument Sans',sans-serif; font-size:16px; font-weight:600; cursor:pointer; transition:background .22s, transform .22s;" style-hover="background:#0A6BAA; transform:translateY(-1px);">Pick a time with Alex<span style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.2);"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button>
+                  <span style="font-size:13.5px; color:#5B6B78; text-align:center;">Free call. No commitment.</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ b.isCal }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:24px; display:flex; flex-direction:column; gap:22px;">
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  <button onClick="{{ b.back }}" style="align-self:flex-start; padding:0; border:0; background:none; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; color:#0C7CC4; cursor:pointer;">← Edit details</button>
+                  <span style="font-size:26px; font-weight:600; letter-spacing:-0.025em;">Pick a time, <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">{{ b.firstName }}</span></span>
+                  <span style="font-size:14.5px; color:#42545F;">30 min · Video call · Your local time</span>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">{{ b.month }}</span>
+                  <div style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px;">
+                    <sc-for list="{{ b.days }}" as="d" hint-placeholder-count="10">
+                      <button onClick="{{ d.pick }}" style="height:62px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; border-radius:12px; border:1px solid {{ d.bd }}; background:{{ d.bg }}; color:{{ d.fg }}; font-family:'Instrument Sans',sans-serif; cursor:pointer; transition:background .2s, color .2s, border-color .2s;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.75;">{{ d.dow }}</span><span style="font-size:19px; font-weight:600;">{{ d.num }}</span></button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">{{ b.dayLong }}</span>
+                  <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;">
+                    <sc-for list="{{ b.slots }}" as="s" hint-placeholder-count="6">
+                      <button onClick="{{ s.pick }}" style="height:46px; border-radius:12px; border:1px solid {{ s.bd }}; background:{{ s.bg }}; color:{{ s.fg }}; text-decoration:{{ s.deco }}; font-family:'Instrument Sans',sans-serif; font-size:15px; font-weight:500; cursor:{{ s.cursor }}; transition:background .2s, color .2s, border-color .2s;">{{ s.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <button onClick="{{ b.confirm }}" style="height:56px; border:0; border-radius:999px; background:{{ b.confirmBg }}; color:{{ b.confirmFg }}; font-family:'Instrument Sans',sans-serif; font-size:16px; font-weight:600; cursor:pointer; transition:background .22s, color .22s;">{{ b.confirmLabel }}</button>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ b.isDone }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:40px 24px 32px; display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
+                <span style="width:56px; height:56px; border-radius:50%; background:#0C7CC4; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 8px rgba(12,124,196,.12);"><svg width="22" height="22" viewBox="0 0 10 10" fill="none"><path d="M2 5.2l2.2 2.2L8 3.2" stroke="#FFF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:34px; font-weight:600; letter-spacing:-0.03em; line-height:1.05;">See you <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">{{ b.bookedDay }}.</span></span>
+                <div style="display:flex; flex-direction:column; width:100%; border-top:1px solid #E3EAF0;">
+                  <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #EDF2F6; font-size:15px;"><span style="color:#5B6B78;">When</span><span style="font-weight:600;">{{ b.bookedLabel }}</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #EDF2F6; font-size:15px;"><span style="color:#5B6B78;">With</span><span style="font-weight:600;">Alex Moreno · Video call</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #EDF2F6; font-size:15px;"><span style="color:#5B6B78;">Invite sent to</span><span style="font-weight:600;">{{ b.emailShown }}</span></div>
+                </div>
+                <span style="font-size:15px; line-height:1.6; color:#42545F;">Have your current website or menu handy. That's all you need to bring.</span>
+                <button onClick="{{ b.rebook }}" style="padding:0; border:0; background:none; font-family:'Instrument Sans',sans-serif; font-size:14px; font-weight:500; color:#0C7CC4; cursor:pointer;">Change the time</button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startStep&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Form&quot;,&quot;options&quot;:[&quot;Form&quot;,&quot;Calendar&quot;,&quot;Booked&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Preview state&quot;}}">
+class Component extends DCLogic {
+  state = { a: this.init(), b: this.init() };
+
+  init(step) {
+    return { step: step || 'form', name: '', email: '', phone: '', biz: null, budget: null, time: null, day: 0, slot: null, err: false };
+  }
+  stepFromProp() {
+    return { Form: 'form', Calendar: 'cal', Booked: 'done' }[this.props.startStep] || 'form';
+  }
+  componentDidMount() {
+    const s = this.stepFromProp();
+    if (s !== 'form') this.setState({ a: this.demo(s), b: this.demo(s) });
+  }
+  componentDidUpdate(prev) {
+    if (prev.startStep !== this.props.startStep) {
+      const s = this.stepFromProp();
+      this.setState({ a: this.demo(s), b: this.demo(s) });
+    }
+  }
+  demo(step) {
+    const o = this.init(step);
+    if (step !== 'form') Object.assign(o, { name: 'Maya Chen', email: 'maya@loafandvine.com', biz: 'Restaurant / café', budget: '$3–6k', time: '1–2 months', day: 1, slot: step === 'done' ? '10:30' : null });
+    return o;
+  }
+
+  days() {
+    if (this._days) return this._days;
+    const out = [];
+    const d = new Date(); d.setHours(0, 0, 0, 0);
+    while (out.length < 10) {
+      d.setDate(d.getDate() + 1);
+      const w = d.getDay();
+      if (w !== 0 && w !== 6) out.push(new Date(d));
+    }
+    return (this._days = out);
+  }
+
+  view(k, accent) {
+    const s = this.state[k];
+    const set = patch => this.setState(st => ({ [k]: Object.assign({}, st[k], patch) }));
+    const chips = (list, key) => list.map(label => {
+      const on = s[key] === label;
+      return { label, pick: () => set({ [key]: on ? null : label }),
+        bg: on ? accent : '#FFFFFF', fg: on ? '#FFFFFF' : '#42545F', bd: on ? accent : '#DCE7EF' };
+    });
+    const days = this.days();
+    const cur = days[s.day] || days[0];
+    const fmt = (d, o) => d.toLocaleDateString('en-US', o);
+    const slotTimes = ['9:00', '10:30', '12:00', '13:30', '15:00', '16:30'];
+    const slots = slotTimes.map((label, i) => {
+      const off = (s.day * 7 + i * 3) % 5 === 0;
+      const on = s.slot === label;
+      return { label, pick: () => { if (!off) set({ slot: label }); },
+        bg: off ? '#F8FBFD' : on ? accent : '#FFFFFF', fg: off ? '#B8C4CC' : on ? '#FFFFFF' : '#0A1A25',
+        bd: off ? '#EDF2F6' : on ? accent : '#DCE7EF', deco: off ? 'line-through' : 'none', cursor: off ? 'default' : 'pointer' };
+    });
+    const dayShort = fmt(cur, { weekday: 'short', day: 'numeric', month: 'short' });
+    const labels = { form: 'Step 1 of 2 · About you', cal: 'Step 2 of 2 · Pick a time', done: 'Booked' };
+    return {
+      stepLabel: labels[s.step],
+      seg1: accent, seg2: s.step === 'form' ? '#DCE7EF' : accent,
+      isForm: s.step === 'form', isCal: s.step === 'cal', isDone: s.step === 'done',
+      name: s.name, email: s.email, phone: s.phone,
+      onName: e => set({ name: e.target.value, err: false }),
+      onEmail: e => set({ email: e.target.value, err: false }),
+      onPhone: e => set({ phone: e.target.value }),
+      bizChips: chips(['Restaurant / café', 'Retail', 'Salon / beauty', 'Trades / services', 'Other'], 'biz'),
+      budgetChips: chips(['Under $3k', '$3–6k', '$6–12k', '$12k+'], 'budget'),
+      timeChips: chips(['ASAP', '1–2 months', '3+ months', 'Just exploring'], 'time'),
+      err: s.err,
+      submit: () => {
+        const ok = s.name.trim() && /\S+@\S+\.\S+/.test(s.email);
+        set(ok ? { step: 'cal', err: false } : { err: true });
+      },
+      firstName: (s.name.trim().split(/\s+/)[0]) || 'there',
+      back: () => set({ step: 'form' }),
+      month: fmt(days[0], { month: 'long', year: 'numeric' }),
+      dayLong: fmt(cur, { weekday: 'long', day: 'numeric', month: 'long' }),
+      days: days.map((d, i) => {
+        const on = i === s.day;
+        return { dow: fmt(d, { weekday: 'short' }), num: d.getDate(), pick: () => set({ day: i, slot: null }),
+          bg: on ? '#0A1A25' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0A1A25', bd: on ? '#0A1A25' : '#DCE7EF' };
+      }),
+      slots,
+      confirm: () => { if (s.slot) set({ step: 'done' }); },
+      confirmLabel: s.slot ? 'Confirm ' + dayShort + ', ' + s.slot : 'Choose a time',
+      confirmBg: s.slot ? accent : '#EDF2F6', confirmFg: s.slot ? '#FFFFFF' : '#93A3AE',
+      bookedLabel: dayShort + ' · ' + (s.slot || ''),
+      bookedDay: fmt(cur, { weekday: 'long' }),
+      emailShown: s.email || 'your inbox',
+      rebook: () => set({ step: 'cal' })
+    };
+  }
+
+  renderVals() {
+    return { a: this.view('a', '#0A1A25'), b: this.view('b', '#0C7CC4') };
+  }
+}
+</script>
+</body>
+</html>

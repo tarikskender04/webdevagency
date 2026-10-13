@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Hanken+Grotesk:wght@400;500;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FFFFFF; color:#0A1A25; font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0C7CC4; text-decoration:none; }
+  a:hover { color:#084B7A; }
+  ::selection { background:#CFE8F7; }
+  @keyframes heroRise { from { opacity:0; transform:translateY(0.42em); } to { opacity:1; transform:translateY(0); } }
+  @keyframes heroFade { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes heroCue { 0%,100% { transform:translateY(0); opacity:.55; } 50% { transform:translateY(7px); opacity:1; } }
+</style>
+</helmet>
+
+<div style="position:relative; width:100%; min-height:780px; height:100vh; overflow:hidden; background:linear-gradient(180deg,#EFF7FD 0%,#E8F3FC 40%,#DCEEFA 100%); display:flex; flex-direction:column;">
+
+  <div ref="{{ plateRef }}" style="position:absolute; left:-2%; right:-2%; top:0; bottom:0; will-change:transform; background-image:url('./uploads/pasted-1789954960628-0.png'); background-size:cover; background-position:50% 100%; mask-image:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.8) 18%,#000 40%); -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.8) 18%,#000 40%);"></div>
+
+  <div style="position:relative; display:flex; align-items:center; gap:32px; padding:26px clamp(20px,4vw,56px); flex-wrap:wrap; animation:heroFade .7s cubic-bezier(.22,.61,.36,1) both;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span style="display:inline-flex; align-items:center; justify-content:center; width:58px; height:22px; overflow:hidden; flex-shrink:0;"><img src="./uploads/pasted-1789947878169-0.png" alt="Meridian mark" style="width:95px; height:95px; flex-shrink:0;"></span>
+      <span style="font-family:'Hanken Grotesk','Instrument Sans',sans-serif; font-size:23px; font-weight:800; letter-spacing:-0.03em;">Meridian</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:clamp(18px,3vw,38px); margin-left:clamp(16px,6vw,90px); flex-wrap:wrap;">
+      <a href="#work" style="font-size:15px; color:#2C3E4A;" style-hover="color:#0C7CC4;">Work</a>
+      <a href="#studio" style="font-size:15px; color:#2C3E4A;" style-hover="color:#0C7CC4;">Studio</a>
+      <a href="#process" style="font-size:15px; color:#2C3E4A;" style-hover="color:#0C7CC4;">Process</a>
+      <a href="#journal" style="font-size:15px; color:#2C3E4A;" style-hover="color:#0C7CC4;">Journal</a>
+    </div>
+    <a href="#start" style="margin-left:auto; display:inline-flex; align-items:center; gap:10px; height:46px; padding:0 22px; border-radius:999px; background:#0C7CC4; color:#FFFFFF; font-size:15px; font-weight:600; letter-spacing:-0.01em; box-shadow:0 8px 22px rgba(12,124,196,.24);" style-hover="background:#084B7A; color:#FFFFFF;">Start a project <span style="font-size:16px;">→</span></a>
+  </div>
+
+  <div style="position:relative; padding:clamp(30px,6vh,72px) clamp(20px,4vw,56px) 0; display:flex; flex-direction:column; align-items:flex-start; gap:clamp(18px,2.8vh,30px);">
+    <h1 style="margin:0; font-family:'Hanken Grotesk','Instrument Sans',sans-serif; font-weight:800; letter-spacing:-0.038em; line-height:1.06; font-size:6.4vw; white-space:nowrap;">
+      <span style="display:inline-block; animation:heroRise .8s cubic-bezier(.22,.61,.36,1) .05s both;">We</span>
+      <span style="display:inline-block; animation:heroRise .8s cubic-bezier(.22,.61,.36,1) .11s both;">don't</span>
+      <span style="display:inline-block; animation:heroRise .8s cubic-bezier(.22,.61,.36,1) .17s both;">just</span>
+      <span style="display:inline-block; animation:heroRise .8s cubic-bezier(.22,.61,.36,1) .23s both;">shift</span>
+      <span ref="{{ limeRef }}" style="display:inline-block; animation:heroRise .8s cubic-bezier(.22,.61,.36,1) .29s both; background:#C2E62A; border-radius:6px; padding:0 .12em .04em; margin-left:.02em;">colors.</span>
+      <br>
+      <span style="display:inline-block; animation:heroRise .8s cubic-bezier(.22,.61,.36,1) .36s both; font-weight:500; color:#2C3E4A; font-size:0.705em; letter-spacing:-0.03em;">We change the way people see your brand.</span>
+    </h1>
+    <p style="margin:0; max-width:40ch; font-size:clamp(15px,1.2vw,18px); line-height:1.55; color:#33454F; animation:heroFade .8s cubic-bezier(.22,.61,.36,1) .5s both;">Strategy, design, and digital experiences for brands that want a brighter tomorrow.</p>
+    <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-top:4px; animation:heroFade .8s cubic-bezier(.22,.61,.36,1) .6s both;">
+      <a href="#start" style="display:inline-flex; align-items:center; gap:12px; height:56px; padding:0 30px; border-radius:999px; background:#0C7CC4; color:#FFFFFF; font-size:17px; font-weight:600; letter-spacing:-0.015em; box-shadow:0 14px 34px rgba(12,124,196,.26);" style-hover="background:#084B7A; color:#FFFFFF;">Start a project <span style="font-size:18px;">→</span></a>
+      <a href="#work" style="font-size:16px; color:#0A1A25; border-bottom:1px solid #9FB4C2; padding-bottom:3px;" style-hover="color:#0C7CC4; border-bottom-color:#0C7CC4;">See our work</a>
+    </div>
+  </div>
+
+  <div style="position:relative; margin-top:auto; display:flex; align-items:center; gap:clamp(16px,3vw,34px); padding:0 clamp(20px,4vw,56px) 30px; flex-wrap:wrap; animation:heroFade .9s cubic-bezier(.22,.61,.36,1) .8s both;">
+    <span style="width:34px; height:1px; background:#7E95A5;"></span>
+    <div style="display:flex; gap:clamp(16px,2.4vw,30px); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#2C3E4A;">
+      <span>Brands</span><span>People</span><span>Progress</span>
+    </div>
+    <div style="margin-left:auto; display:flex; align-items:center; gap:12px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#2C3E4A;">
+      <span>Scroll</span>
+      <span style="font-size:17px; animation:heroCue 2.2s ease-in-out infinite;">↓</span>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;highlightColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C2E62A&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C2E62A&quot;,&quot;#0C7CC4&quot;,&quot;#0A1A25&quot;,&quot;#9CCCEB&quot;],&quot;section&quot;:&quot;Accent&quot;},&quot;parallax&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;parallaxDepth&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2.5,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.plate = React.createRef();
+    this.lime = React.createRef();
+    this.mx = 0; this.my = 0; this.sy = 0; this.raf = null;
+  }
+  componentDidMount() {
+    if (this.lime.current) this.lime.current.style.background = this.props.highlightColor ?? '#C2E62A';
+    if (this.props.parallax === false) return;
+    this.onMove = (e) => {
+      const w = window.innerWidth || 1, h = window.innerHeight || 1;
+      this.mx = (e.clientX / w - 0.5) * 2;
+      this.my = (e.clientY / h - 0.5) * 2;
+      this.schedule();
+    };
+    this.onScroll = () => { this.sy = window.scrollY || 0; this.schedule(); };
+    window.addEventListener('mousemove', this.onMove, { passive: true });
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentDidUpdate() {
+    if (this.lime.current) this.lime.current.style.background = this.props.highlightColor ?? '#C2E62A';
+  }
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.onMove);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+  schedule() {
+    if (this.raf) return;
+    this.raf = requestAnimationFrame(() => {
+      this.raf = null;
+      const el = this.plate.current;
+      if (!el) return;
+      const d = (this.props.parallaxDepth ?? 1);
+      const x = this.mx * 14 * d;
+      const y = this.my * 9 * d + this.sy * 0.14 * d;
+      el.style.transform = 'translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px,0) scale(1.03)';
+    });
+  }
+  renderVals() {
+    return { plateRef: this.plate, limeRef: this.lime };
+  }
+}
+
+</script>
+</body>
+</html>

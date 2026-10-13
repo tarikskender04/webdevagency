@@ -1,0 +1,74 @@
+/* Meridian design tokens — source of truth: Design Kit.dc.html (Claude Design project "Web Design Kit System") */
+:root {
+  /* Blue family */
+  --azure: #0C7CC4;      /* primary action, links */
+  --deep: #084B7A;       /* hover, gradient anchor */
+  --sky: #9CCCEB;        /* glow, mid-gradient */
+  --vapor: #E0F0FA;      /* tinted surfaces */
+  --sky-mid: #6FB6E2;    /* halo blobs, dark-surface accents */
+  --selection: #CFE8F7;
+
+  /* Neutrals */
+  --ink: #0A1A25;        /* all headings and body. Never #000 */
+  --ink-hover: #1E3442;
+  --slate: #42545F;      /* body copy */
+  --slate-2: #5B6B78;    /* secondary copy, labels */
+  --mute: #93A3AE;
+  --line: #E3EAF0;       /* hairline borders */
+  --line-soft: #EDF2F6;  /* inner dividers */
+  --line-input: #DCE7EF; /* inputs, chips, secondary button border */
+  --mist: #F2F6FA;
+  --mist-2: #F8FBFD;     /* card header strips */
+  --paper: #FFFFFF;
+  --error: #B3402A;
+
+  /* Hero-only accent */
+  --lime: #C2E62A;
+
+  /* Gradients */
+  --grad-dawn: linear-gradient(180deg, #FFFFFF 0%, #E0F0FA 100%);
+  --grad-aurora: linear-gradient(115deg, #FFFFFF 0%, #CFE8F7 38%, #9CCCEB 68%, #0C7CC4 100%);
+  --grad-halo: radial-gradient(120% 90% at 20% 110%, #0C7CC4 0%, #9CCCEB 38%, #FFFFFF 78%);
+  --grad-band: linear-gradient(165deg, #FFFFFF 0%, #F4FAFE 46%, #DCEEFA 100%);
+
+  /* Type */
+  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-display: 'Hanken Grotesk', 'Instrument Sans', sans-serif; /* hero H1 + wordmark, weight 800 */
+  --font-serif: 'Newsreader', serif;  /* italic accent only, weight 300–400 */
+  --font-mono: 'JetBrains Mono', monospace; /* labels, uppercase, +0.12–0.14em */
+
+  /* Type scale: size / line-height / tracking */
+  --t-display: 600 76px/0.95 var(--font-sans);  /* -0.035em */
+  --t-h1: 600 48px/1.08 var(--font-sans);       /* -0.03em */
+  --t-h2: 600 34px/1.18 var(--font-sans);       /* -0.025em */
+  --t-h3: 600 24px/1.33 var(--font-sans);       /* -0.02em */
+  --t-lead: 400 20px/1.6 var(--font-sans);
+  --t-body: 400 17px/1.65 var(--font-sans);
+  --t-small: 400 15px/1.6 var(--font-sans);
+  --t-label: 400 12px/1.4 var(--font-mono);     /* uppercase, +0.14em */
+
+  /* Spacing (4px rhythm) */
+  --s-1: 4px; --s-2: 8px; --s-4: 16px; --s-6: 24px; --s-8: 32px;
+  --s-12: 48px; --s-16: 64px; --s-24: 96px; --s-32: 128px;
+
+  /* Layout */
+  --container: 1240px;
+  --gutter: 32px;
+  --columns: 12;
+
+  /* Radii */
+  --r-sm: 8px; --r-md: 14px; --r-card: 20px; --r-panel: 24px; --r-hero: 28px; --r-pill: 999px;
+
+  /* Elevation */
+  --e-0: 0 0 0 1px var(--line);
+  --e-1: 0 1px 2px rgba(10,26,37,.05), 0 4px 12px rgba(10,26,37,.05);
+  --e-2: 0 2px 6px rgba(10,26,37,.06), 0 16px 32px rgba(10,26,37,.08);
+  --e-3: 0 4px 12px rgba(10,26,37,.07), 0 32px 64px rgba(12,124,196,.16);
+  --e-mock: 0 2px 6px rgba(10,26,37,.05), 0 24px 60px rgba(10,26,37,.10);
+  --e-cta: 0 6px 18px rgba(12,124,196,.24);
+
+  /* Motion */
+  --ease-out: cubic-bezier(.22,.61,.36,1);
+  --dur-hover: 220ms;
+  --dur-fade: 700ms;
+}

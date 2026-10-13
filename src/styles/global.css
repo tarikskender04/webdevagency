@@ -1,0 +1,55 @@
+/* Starter layout; imported design/tokens.css owns the visual constants. */
+:root { --muted: var(--slate); --accent: var(--azure); font-family: var(--font-sans); color: var(--ink); background: var(--paper); font-synthesis: none; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+a { color: inherit; text-underline-offset: .25em; }
+button, input, textarea { font: inherit; }
+:focus-visible { outline: 3px solid var(--azure); outline-offset: 5px; }
+.container { width: min(var(--container), calc(100% - 2 * var(--gutter))); margin-inline: auto; }
+.skip-link { position: absolute; left: 20px; top: -100px; padding: 12px 20px; background: var(--ink); color: white; z-index: 10; }
+.skip-link:focus { top: 20px; }
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding-block: 30px; border-bottom: 1px solid var(--line); }
+.wordmark { display: inline-flex; align-items: center; gap: 12px; font: 800 23px var(--font-display); letter-spacing: -.03em; text-decoration: none; }
+.brand-mark { display: inline-flex; align-items: center; justify-content: center; height: 22px; width: 58px; overflow: hidden; flex-shrink: 0; }
+.brand-mark img { width: 95px; height: 95px; flex-shrink: 0; }
+nav { display: flex; flex-wrap: wrap; gap: 28px; font-size: 14px; }
+nav a { text-decoration: none; }
+.eyebrow { font: var(--t-label); letter-spacing: .14em; text-transform: uppercase; }
+.hero { padding-block: 56px 80px; text-align: center; }
+h1 { max-width: 15ch; font-size: clamp(40px, 6vw, 76px); line-height: 1; letter-spacing: -.035em; font-weight: 600; margin: 0 auto 48px; text-wrap: pretty; }
+h1 em { font-family: var(--font-serif); font-weight: 400; letter-spacing: -.015em; }
+.hero-bottom { display: flex; align-items: center; flex-direction: column; gap: 32px; }
+.hero-bottom p { max-width: 52ch; font-size: 18px; line-height: 1.55; margin: 0; color: var(--muted); }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; border-radius: var(--r-pill); background: var(--accent); color: var(--paper); font-size: 15px; font-weight: 600; text-decoration: none; transition: background var(--dur-hover) ease, transform var(--dur-hover) ease; }
+.button:hover { background: var(--deep); transform: translateY(-1px); }
+.button span { font-size: 22px; }
+.section { border-top: 1px solid var(--line); padding-block: 64px; scroll-margin-top: 20px; }
+.section-heading { margin-bottom: 36px; }
+h2 { font-size: clamp(28px, 3.3vw, 44px); letter-spacing: -.035em; font-weight: 500; margin: 20px 0; }
+.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.service-number { display: block; margin-bottom: 40px; color: var(--muted); font-size: 13px; }
+h3 { font-size: 21px; letter-spacing: -.025em; font-weight: 500; }
+.service p, details p, .error-page p { color: var(--muted); line-height: 1.75; }
+.questions { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+details { border-bottom: 1px solid var(--line); padding: 24px 0; }
+details:first-child { padding-top: 16px; }
+summary { cursor: pointer; font-size: 17px; line-height: 1.5; }
+details p { max-width: 60ch; margin-bottom: 0; }
+.contact h2 { margin-bottom: 30px; }
+.site-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-top: 1px solid var(--line); padding-block: 30px; color: var(--muted); font-size: 13px; }
+.error-page { min-height: 75vh; padding-block: 90px; }
+@media (max-width: 720px) {
+  .container { width: calc(100% - 40px); }
+  .site-header { align-items: flex-start; flex-direction: column; padding-block: 22px; gap: 22px; }
+  nav { gap: 24px; }
+  .hero { padding-block: 54px; }
+  h1 { margin-block: 28px 36px; }
+  .hero-bottom { flex-direction: column; align-items: center; }
+  .hero-bottom p { font-size: 16px; }
+  .section { padding-block: 42px; }
+  .service-grid, .questions { grid-template-columns: 1fr; gap: 26px; }
+  .service-number { margin-bottom: 18px; }
+  .questions .section-heading { margin-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }

@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Hero } from '../components/Hero';
+import { site } from '../config/site';
+import { Image } from 'astro:assets';
+import mark from '../../design/prototypes/uploads/pasted-1789947878169-0.png';
+---
+<BaseLayout title={`Custom Websites for US Businesses | ${site.name}`}>
+  <header class="site-header container">
+    <a class="wordmark" href="/" aria-label={`${site.name} home`}><span class="brand-mark"><Image src={mark} alt="" width={95} height={95} format="webp" loading="eager" /></span>{site.name}</a>
+    {site.email && <nav aria-label="Main navigation"><a href={`mailto:${site.email}`}>Contact</a></nav>}
+  </header>
+  <main id="main" class="container">
+    <Hero />
+  </main>
+</BaseLayout>

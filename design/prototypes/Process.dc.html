@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&amp;family=Bricolage+Grotesque:opsz,wght@12..96,700..800&amp;family=Archivo:wght@600..700&amp;family=DM+Mono:wght@400;500&amp;family=Kalam:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FFFFFF; color:#0A1A25; font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0C7CC4; text-decoration:none; }
+  a:hover { color:#084B7A; }
+  ::selection { background:#DCEEFA; }
+  html.lenis, html.lenis body { height:auto; }
+  .lenis.lenis-smooth { scroll-behavior:auto !important; }
+  .lenis.lenis-stopped { overflow:hidden; }
+  @keyframes pDrift { 0%,100% { transform:translateY(0) rotate(var(--r,0deg)); } 50% { transform:translateY(-14px) rotate(var(--r,0deg)); } }
+  @keyframes blink { 50% { opacity:0; } }
+  @keyframes lvPulse { 50% { opacity:.45; } }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div data-process-root="" style="position:relative; overflow:hidden; background:#FFFFFF; padding-bottom:clamp(60px,10vh,120px);">
+
+  <div style="position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.5; mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 90%,transparent 100%); -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 90%,transparent 100%);">
+    <x-import component="Aurora" from="./Aurora.jsx" color-stops="{{ auroraStops }}" amplitude="1.2" blend="0.55" speed="0.6" light-mode="true" hint-size="100%,100%"></x-import>
+  <img src="./uploads/pasted-1789950072713-0.png" alt="" style="position: absolute; top: 423px; width: 150px; height: 150px; pointer-events: none; z-index: 3; --r: 8deg; transform: rotate(8deg); animation: pDrift 13s ease-in-out infinite; left: 1309px"></div>
+
+  <div style="position:relative; max-width:1240px; margin:0 auto; box-sizing:border-box; padding:clamp(80px,12vh,150px) clamp(20px,4vw,32px) 0;">
+
+    <!-- ── section head ── -->
+    <div data-head="" style="display:flex; flex-direction:column; gap:24px; max-width:60ch;">
+      <div data-t="" style="display:flex; align-items:center; gap:12px;">
+        <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4;"></span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">How the work happens</span>
+      </div>
+      <h2 data-t="" style="margin:0; font-weight:600; letter-spacing:-0.035em; line-height:1.02; font-size:clamp(36px,5.4vw,68px); max-width:16ch; text-wrap:pretty;">From a pencil line to <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400; letter-spacing:-0.015em;">thousands of orders</span></h2>
+      <p data-t="" style="margin:0; max-width:54ch; font-size:18px; line-height:1.6; color:#42545F;">Five steps, in order, every time. Here's what they looked like for Crochê, a one-woman bag studio in Sarajevo, start to finish.</p>
+    </div>
+
+    <!-- ── rows ── -->
+    <div data-rows="" style="position:relative; margin-top:clamp(20px,4vh,50px);">
+
+      <div data-spine="" style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:#EDF2F6; pointer-events:none; z-index:0;">
+        <div data-spine-fill="" style="position:absolute; inset:0; background:linear-gradient(180deg,#9CCCEB 0%,#0C7CC4 100%); transform:scaleY(0); transform-origin:top;"></div>
+      </div>
+
+      <!-- ══ 01 — draw ══ -->
+      
+
+      <!-- ══ 02 — digital ══ -->
+      <div data-row="" data-dir="right" style="position: relative; z-index: 26; display: grid; grid-template-columns: repeat(auto-fit,minmax(330px,1fr)); gap: clamp(36px,5vw,84px); align-items: center; padding: clamp(56px,8vh,104px) 0">
+        <div data-dot="" style="position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1px #DCE7EF; z-index:2;"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 22px; max-width: 46ch; position: relative">
+          <span data-t="" style="display:inline-flex; align-items:center; align-self:flex-start; height:34px; padding:0 16px; border-radius:999px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.1em; color:#42545F;">// 01</span>
+          <h3 data-t="" style="margin:0; font-weight:600; letter-spacing:-0.032em; line-height:1.04; font-size:clamp(30px,3.8vw,48px); position:relative;">Plan it <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">out</span></h3>
+          <p data-t="" style="margin:0; font-size:17px; line-height:1.65; color:#42545F;">Before any screen, we wrote down how it should behave. For Crochê that started with the homepage film: a view from inside the bag, onto the beach, played by the scroll and never on its own.</p>
+          <div data-t="" style="display:flex; flex-direction:column; border-top:1px solid #E3EAF0; margin-top:4px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Hero film, storyboarded in three frames</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Scroll behaviour written as an exact spec</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Two order tracks: collections and build your own</div>
+          </div>
+        <img src="./uploads/pasted-1790097103829-0.png" alt="" style="position: absolute; left: 199px; top: -56px; width: 197px; height: 197px; margin-left: -6px; pointer-events: none; z-index: 0; --r: 9deg; transform: rotate(9deg); animation: pDrift 13s ease-in-out infinite"></div>
+
+        <div data-visual="" style="position:relative; width:100%; max-width:560px; justify-self:center;">
+          
+          <div aria-hidden="true" style="position:absolute; inset:0; border-radius:3px; background:#F2ECDF; box-shadow:0 1px 2px rgba(60,48,30,.08), 0 16px 36px rgba(60,48,30,.10); transform:rotate(2.4deg) translate(12px,10px);"></div>
+          <div style="position:relative; border-radius:3px; background:#FAF6EC; box-shadow:0 1px 1px rgba(60,48,30,.10), 0 4px 10px rgba(60,48,30,.06), 0 30px 60px rgba(60,48,30,.14); transform:rotate(-1.4deg); overflow:hidden;">
+            <svg aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;"><filter id="lvMottle"><feTurbulence type="fractalNoise" baseFrequency=".011" numOctaves="2" seed="7"></feTurbulence><feColorMatrix values="0 0 0 0 .55  0 0 0 0 .45  0 0 0 0 .3  0 0 0 .09 0"></feColorMatrix></filter><filter id="lvGrain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix values="0 0 0 0 .3  0 0 0 0 .25  0 0 0 0 .16  0 0 0 .16 0"></feColorMatrix></filter><rect width="100%" height="100%" filter="url(#lvMottle)"></rect><rect width="100%" height="100%" filter="url(#lvGrain)"></rect></svg>
+            <div aria-hidden="true" style="position:absolute; inset:0; box-shadow:inset 0 0 50px rgba(120,95,50,.09); pointer-events:none;"></div>
+            <div style="position:relative; padding:clamp(22px,3vw,34px);">
+            <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg,rgba(12,124,196,.075) 0 1px,rgba(0,0,0,0) 1px 26px); pointer-events:none;"></div>
+            <div style="position:relative; display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+              <span style="font-family:'Kalam',cursive; font-size:16px; color:#6F6654;">Crochê — planning notebook</span>
+              <span style="font-family:'Kalam',cursive; font-size:15px; color:#6F6654;">p. 01</span>
+            </div>
+            <div data-sketch-wrap="" style="position:relative;">
+            <div data-collage="" style="position:relative; width:100%; aspect-ratio:4/5;">
+              <img data-sticker="" data-rot="-3" data-x="0" data-y="0" data-w="56" data-h="26" src="./assets/croche/stickers/sitemap.png" alt="Sitemap" style="position:absolute; left:0%; top:0%; width:56%; height:auto; transform:rotate(-3deg); filter:drop-shadow(0 1px 2px rgba(60,48,30,.2)) drop-shadow(0 8px 14px rgba(60,48,30,.12));">
+              <img data-sticker="" data-rot="4" data-x="54" data-y="2" data-w="46" data-h="30" src="./assets/croche/stickers/logo-a.png" alt="Logo sketches" style="position:absolute; left:54%; top:2%; width:46%; height:auto; transform:rotate(4deg); filter:drop-shadow(0 1px 2px rgba(60,48,30,.2)) drop-shadow(0 8px 14px rgba(60,48,30,.12));">
+              <img data-sticker="" data-rot="3" data-x="0" data-y="31" data-w="44" data-h="40" src="./assets/croche/stickers/sun-salt.png" alt="Sun &amp; Salt collection page" style="position:absolute; left:0%; top:31%; width:44%; height:auto; transform:rotate(3deg); filter:drop-shadow(0 1px 2px rgba(60,48,30,.2)) drop-shadow(0 8px 14px rgba(60,48,30,.12));">
+              <img data-sticker="" data-rot="-2" data-x="42" data-y="34" data-w="56" data-h="21" src="./assets/croche/stickers/palette.png" alt="Colour palette" style="position:absolute; left:42%; top:34%; width:56%; height:auto; transform:rotate(-2deg); filter:drop-shadow(0 1px 2px rgba(60,48,30,.2)) drop-shadow(0 8px 14px rgba(60,48,30,.12));">
+              <img data-sticker="" data-rot="-3" data-x="36" data-y="60" data-w="62" data-h="37" src="./assets/croche/stickers/hero-film.png" alt="Hero film storyboard" style="position:absolute; left:36%; top:60%; width:62%; height:auto; transform:rotate(-3deg); filter:drop-shadow(0 1px 2px rgba(60,48,30,.2)) drop-shadow(0 8px 14px rgba(60,48,30,.12));">
+            </div>
+            <div data-pencil="" style="position:absolute; left:48%; top:10%; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; background:#45413A; box-shadow:0 0 0 3px rgba(250,246,236,.9), 0 3px 8px rgba(60,48,30,.3); opacity:0; z-index:5; pointer-events:none;"></div>
+            </div>
+            </div>
+            <div style="position:relative; display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:12px 24px 14px; border-top:1.5px dashed rgba(90,75,50,.26); background:rgba(120,95,50,.035);">
+              <span style="font-family:'Kalam',cursive; font-size:18px; color:#3E3A31;">Frame by frame, before a line of code</span>
+              <span style="margin-left:auto; font-family:'Kalam',cursive; font-size:15px; color:#6F6654;">logo, colour, pages, film</span>
+            </div>
+          </div>
+          <span aria-hidden="true" style="position:absolute; top:-10px; left:34px; z-index:3; width:78px; height:22px; background:rgba(234,226,204,.82); box-shadow:0 1px 2px rgba(60,48,30,.12); transform:rotate(-9deg);"></span>
+          <span aria-hidden="true" style="position:absolute; top:-4px; right:46px; z-index:3; width:70px; height:22px; background:rgba(234,226,204,.82); box-shadow:0 1px 2px rgba(60,48,30,.12); transform:rotate(7deg);"></span>
+          <div data-piece="" data-px="40" style="position:absolute; left:-26px; top:75%; z-index:4;">
+            <div style="position:relative; width:150px; padding:20px 16px 16px; background:#FBF0B8; box-shadow:0 1px 1px rgba(60,48,30,.12), 0 14px 26px rgba(60,48,30,.18); transform:rotate(4deg); font-family:'Kalam',cursive; font-size:18px; line-height:1.2; color:#3E3A31;"><span style="position:absolute; top:-9px; left:50%; width:58px; height:18px; margin-left:-29px; background:rgba(234,226,204,.85); transform:rotate(-3deg);"></span>the bag is the only warm thing in frame</div>
+          </div>
+          
+        </div>
+      <div data-piece="" data-px="-40" style="position: absolute; left: 656px; z-index: 4; padding: 10px 14px; border-radius: 2px; background: #FAF6EC; color: #084B7A; font-family: 'Kalam',cursive; font-size: 18px; box-shadow: 0 1px 1px rgba(60,48,30,.1), 0 10px 22px rgba(60,48,30,.14); top: 561px">motion is scroll-driven only</div></div><div data-row="" data-dir="left" style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:clamp(36px,5vw,84px); align-items:center; padding:clamp(56px,8vh,104px) 0;">
+        <div data-dot="" style="position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1px #DCE7EF; z-index:2;"></div>
+
+        <div data-visual="" style="position:relative; width:100%; max-width:560px; justify-self:center;">
+          
+          <div style="position:relative; z-index:1; border-radius:20px; border:1px solid #E3EAF0; box-shadow:0 2px 6px rgba(10,26,37,.05), 0 24px 60px rgba(10,26,37,.10); overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid #EDF2F6; background:#F8FBFD;">
+              <span style="width:6px; height:6px; border-radius:50%; background:#0C7CC4;"></span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">Crochê — design system v1.1</span>
+            </div>
+            <div style="background:#F4F0E9; padding:clamp(20px,3vw,28px); display:flex; flex-direction:column; gap:22px; color:#14110F;">
+              <div data-piece="" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <span style="display:flex; align-items:center; gap:8px;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:44px; width:auto;"><img src="./assets/croche/logo-wordmark.svg" alt="Crochê" style="display:block; height:20px; width:auto;"></span>
+                <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#7A6C5A;">Primary lockup</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px;"><div data-piece="" style="min-width:0;"><div style="display:flex; flex-direction:column; gap:6px; cursor:default; transition:transform .25s ease;" style-hover="transform:translateY(-4px);"><span style="height:52px; background:#F4F0E9; box-shadow:inset 0 0 0 1px #DDD6CA;"></span><span style="font-family:'Bodoni Moda',serif; font-size:13px; color:#14110F;">Kost</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B645C;">#F4F0E9</span></div></div><div data-piece="" style="min-width:0;"><div style="display:flex; flex-direction:column; gap:6px; cursor:default; transition:transform .25s ease;" style-hover="transform:translateY(-4px);"><span style="height:52px; background:#E4DCCB;"></span><span style="font-family:'Bodoni Moda',serif; font-size:13px; color:#14110F;">Tone</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B645C;">#E4DCCB</span></div></div><div data-piece="" style="min-width:0;"><div style="display:flex; flex-direction:column; gap:6px; cursor:default; transition:transform .25s ease;" style-hover="transform:translateY(-4px);"><span style="height:52px; background:#B9A78C;"></span><span style="font-family:'Bodoni Moda',serif; font-size:13px; color:#14110F;">Warm</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B645C;">#B9A78C</span></div></div><div data-piece="" style="min-width:0;"><div style="display:flex; flex-direction:column; gap:6px; cursor:default; transition:transform .25s ease;" style-hover="transform:translateY(-4px);"><span style="height:52px; background:#14110F;"></span><span style="font-family:'Bodoni Moda',serif; font-size:13px; color:#14110F;">Ink</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B645C;">#14110F</span></div></div><div data-piece="" style="min-width:0;"><div style="display:flex; flex-direction:column; gap:6px; cursor:default; transition:transform .25s ease;" style-hover="transform:translateY(-4px);"><span style="height:52px; background:#7B1E3A;"></span><span style="font-family:'Bodoni Moda',serif; font-size:13px; color:#14110F;">Vino</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B645C;">#7B1E3A</span></div></div></div>
+              <div data-piece="" style="display:flex; flex-direction:column; gap:10px; padding-top:18px; border-top:1px solid #DDD6CA;">
+                <div style="display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;">
+                  <span style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:32px; letter-spacing:-0.01em; line-height:1.05;">Salt &amp; Sun</span>
+                  <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#7A6C5A;">Bodoni Moda / Archivo / Mono</span>
+                </div>
+                <div style="display:flex; align-items:baseline; gap:10px; font-size:15px;"><span>Clutch · Classic</span><span style="flex:1; border-bottom:1px solid #DDD6CA; transform:translateY(-4px);"></span><span style="font-family:'JetBrains Mono',monospace; font-size:13px;">60 KM</span></div>
+                <div style="display:flex; align-items:baseline; gap:10px; font-size:15px;"><span>Square · Classic</span><span style="flex:1; border-bottom:1px solid #DDD6CA; transform:translateY(-4px);"></span><span style="font-family:'JetBrains Mono',monospace; font-size:13px;">70 KM</span></div>
+              </div>
+            </div>
+            <div data-glasszone="" style="position:relative; overflow:hidden;">
+              <div data-glass="" style="position:relative; z-index:1; display:flex; align-items:center; padding:14px 24px; background:rgba(255,255,255,.34); border-top:1px solid rgba(255,255,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 -18px 30px -24px rgba(10,26,37,.3); backdrop-filter:blur(13px) saturate(170%); -webkit-backdrop-filter:blur(13px) saturate(170%);">
+            <div style="flex:1; min-width:0; display:flex; align-items:center; gap:10px 16px; flex-wrap:wrap;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#42545F;">System rules</span>
+              <span data-piece="" style="display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:600; color:#0A1A25;"><span style="width:6px; height:6px; border-radius:50%; background:#7B1E3A;"></span>Radius 0</span><span data-piece="" style="display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:600; color:#0A1A25;"><span style="width:6px; height:6px; border-radius:50%; background:#7B1E3A;"></span>No icons, only words</span><span data-piece="" style="display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:600; color:#0A1A25;"><span style="width:6px; height:6px; border-radius:50%; background:#7B1E3A;"></span>Accent under 5%</span>
+            </div>
+              </div>
+            </div>
+          </div>
+          <div data-piece="" data-px="46" style="position:absolute; right:-24px; top:-62px; z-index:4; padding:10px 12px; border-radius:14px; background:#FFFFFF; border:1px solid #E3EAF0; box-shadow:0 12px 30px rgba(10,26,37,.12); display:flex; flex-direction:column; gap:7px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Sitemap</span>
+            <div style="display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:500; color:#0A1A25;"><span style="padding:3px 8px; border-radius:6px; background:#0A1A25; color:#FFFFFF;">Home</span><span style="color:#93A3AE;">→</span><span>Models</span><span>Making</span><span>About Iman</span><span>Contact</span></div>
+          </div>
+        <img src="./uploads/pasted-1789950091124-0.png" alt="" style="position: absolute; left: -73px; width: 140px; height: 140px; pointer-events: none; z-index: 0; --r: 12deg; transform: rotate(12deg); animation: pDrift 14s ease-in-out infinite; top: 361px"></div>
+
+        <div style="display:flex; flex-direction:column; gap:22px; max-width:46ch;">
+          <span data-t="" style="display:inline-flex; align-items:center; align-self:flex-start; height:34px; padding:0 16px; border-radius:999px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.1em; color:#42545F;">// 02</span>
+          <h3 data-t="" style="margin:0; font-weight:600; letter-spacing:-0.032em; line-height:1.04; font-size:clamp(30px,3.8vw,48px);">Take it <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">digital</span></h3>
+          <p data-t="" style="margin:0; font-size:17px; line-height:1.65; color:#42545F;">The plan became a system: nine colour roles and one wine accent, Bodoni for names, a mono for every price, and a voice with short sentences and no exclamation marks.</p>
+          <div data-t="" style="display:flex; flex-direction:column; border-top:1px solid #E3EAF0; margin-top:4px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Brand and type system</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Sitemap: Models, Making, About Iman, Contact</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Voice rules, written down</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 03 — engineer ══ -->
+      <div data-row="" data-dir="right" style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:clamp(36px,5vw,84px); align-items:center; padding:clamp(56px,8vh,104px) 0;">
+        <div data-dot="" style="position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1px #DCE7EF; z-index:2;"></div>
+
+        <div style="display:flex; flex-direction:column; gap:22px; max-width:46ch;">
+          <span data-t="" style="display:inline-flex; align-items:center; align-self:flex-start; height:34px; padding:0 16px; border-radius:999px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.1em; color:#42545F;">// 03</span>
+          <h3 data-t="" style="margin:0; font-weight:600; letter-spacing:-0.032em; line-height:1.04; font-size:clamp(30px,3.8vw,48px);">Engineer <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">it</span></h3>
+          <p data-t="" style="margin:0; font-size:17px; line-height:1.65; color:#42545F;">Then it got built for real: the homepage, both order tracks and the owner panel in React, with the catalogue and orders in Supabase. No media queries in the order flow, just grids that hold down to 320 px.</p>
+          <div data-t="" style="display:flex; flex-direction:column; border-top:1px solid #E3EAF0; margin-top:4px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Homepage, order flow and owner panel</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Safe down to a 320 px screen</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Hero film that follows the scroll</div>
+          </div>
+        </div>
+
+        <div data-visual="" style="position:relative; width:100%; max-width:560px; justify-self:center;">
+          <div style="position:relative; z-index:1; border-radius:20px; border:1px solid #E3EAF0; box-shadow:0 2px 6px rgba(10,26,37,.05), 0 24px 60px rgba(10,26,37,.11); overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid #EDF2F6; background:#F8FBFD;">
+              <span style="width:9px; height:9px; border-radius:50%; background:#DCE7EF;"></span>
+              <span style="width:9px; height:9px; border-radius:50%; background:#DCE7EF;"></span>
+              <span style="width:9px; height:9px; border-radius:50%; background:#DCE7EF;"></span>
+              <span style="flex:1; height:24px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; margin-left:8px; display:flex; align-items:center; padding:0 12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#93A3AE;">localhost:3000</span>
+            </div>
+            <div style="display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); background:#F4F0E9;">
+              <div style="padding:14px 16px 16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #DDD6CA; color:#14110F; min-width:0;">
+                <div data-piece="" style="display:flex; align-items:center; gap:6px;">
+                  <span style="display:flex; align-items:center; gap:4px;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:20px; width:auto;"><img src="./assets/croche/logo-wordmark.svg" alt="Crochê" style="display:block; height:9px; width:auto;"></span>
+                  <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.14em; color:#6B645C;">MODELS</span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.14em; color:#14110F;">CART (0)</span>
+                </div>
+                <div data-piece="" style="display:flex; flex-direction:column; gap:7px;">
+                  <span style="font-family:'Bodoni Moda',serif; font-size:25px; line-height:1.02; letter-spacing:-0.01em; text-wrap:balance;">Row by row. No machine.</span>
+                  <span style="font-size:11.5px; color:#7A6C5A;">Crocheted in Sarajevo after you order.</span>
+                  <span style="align-self:flex-start; display:inline-flex; align-items:center; height:28px; padding:0 14px; margin-top:3px; background:#7B1E3A; color:#FFFFFF; font-size:10px; font-weight:500; letter-spacing:.06em;">CHOOSE A MODEL ↗</span>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:auto;"><div data-piece="" style="min-width:0;"><div style="background:#FBF9F5; border:1px solid #DDD6CA; padding:5px; display:flex; flex-direction:column; gap:4px; transition:transform .25s ease, box-shadow .25s ease; cursor:default;" style-hover="transform:translateY(-3px); box-shadow:0 8px 18px rgba(20,17,15,.12);"><img src="./assets/croche/product-clutch.png" alt="" style="display:block; width:100%; height:44px; object-fit:cover; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB;"><span style="font-family:'Bodoni Moda',serif; font-size:11.5px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Clutch</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#4A443E;">from 54 KM</span></div></div><div data-piece="" style="min-width:0;"><div style="background:#FBF9F5; border:1px solid #DDD6CA; padding:5px; display:flex; flex-direction:column; gap:4px; transition:transform .25s ease, box-shadow .25s ease; cursor:default;" style-hover="transform:translateY(-3px); box-shadow:0 8px 18px rgba(20,17,15,.12);"><img src="./assets/croche/product-square.png" alt="" style="display:block; width:100%; height:44px; object-fit:cover; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB;"><span style="font-family:'Bodoni Moda',serif; font-size:11.5px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Square</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#4A443E;">from 62 KM</span></div></div><div data-piece="" style="min-width:0;"><div style="background:#FBF9F5; border:1px solid #DDD6CA; padding:5px; display:flex; flex-direction:column; gap:4px; transition:transform .25s ease, box-shadow .25s ease; cursor:default;" style-hover="transform:translateY(-3px); box-shadow:0 8px 18px rgba(20,17,15,.12);"><img src="./assets/croche/product-triangle.png" alt="" style="display:block; width:100%; height:44px; object-fit:cover; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB;"><span style="font-family:'Bodoni Moda',serif; font-size:11.5px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Triangle</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#4A443E;">from 58 KM</span></div></div>
+                </div>
+              </div>
+              <div style="padding:18px 14px; background:#0A1A25; display:flex; flex-direction:column; gap:9px; font-family:'JetBrains Mono',monospace; font-size:10.5px; min-width:0; overflow:hidden;">
+                <div data-piece="" data-px="30" style="display:flex; gap:10px;"><span style="color:#3E5665;">01</span><span data-type="p = scrollY / (h - vh)" style="color:#6FB6E2; white-space:pre;"></span></div>
+                <div data-piece="" data-px="30" style="display:flex; gap:10px;"><span style="color:#3E5665;">02</span><span data-type="s += (p - s) * 0.12" style="color:#E8F3FA; white-space:pre;"></span></div>
+                <div data-piece="" data-px="30" style="display:flex; gap:10px;"><span style="color:#3E5665;">03</span><span data-type="i = Math.round(s * 89)" style="color:#E8F3FA; white-space:pre;"></span></div>
+                <div data-piece="" data-px="30" style="display:flex; gap:10px;"><span style="color:#3E5665;">04</span><span data-type="draw(frames[i])" style="color:#E8F3FA; white-space:pre;"></span></div>
+                <div data-piece="" data-px="30" style="display:flex; gap:10px; align-items:center;"><span style="color:#3E5665;">05</span><span data-type="// scroll-driven only" style="color:#6FB6E2;"></span><span data-cursor="" style="display:none; color:#9CCCEB; animation:blink 1s step-start infinite;">▌</span></div>
+                <div data-piece="" data-px="30" style="display:flex; gap:10px; margin-top:auto; align-items:center;"><span style="width:6px; height:6px; border-radius:50%; background:#3FD18C;"></span><span style="color:#7E94A2;">React · Vite · Supabase</span></div>
+              </div>
+            </div>
+            <div data-glasszone="" style="position:relative; overflow:hidden;">
+              <div data-glass="" style="position:relative; z-index:1; display:flex; align-items:center; padding:14px 24px; background:rgba(255,255,255,.34); border-top:1px solid rgba(255,255,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 -18px 30px -24px rgba(10,26,37,.3); backdrop-filter:blur(13px) saturate(170%); -webkit-backdrop-filter:blur(13px) saturate(170%); padding-left:0; padding-right:0;">
+            <div style="flex:1; min-width:0; display:flex;">
+              <div data-piece="" style="flex:1; padding:0 18px; border-right:1px solid rgba(10,26,37,.1); display:flex; flex-direction:column; gap:3px;"><span style="font-size:24px; font-weight:600; letter-spacing:-0.03em;"><span data-count="6" data-dec="0">0</span></span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#42545F;">Order routes</span></div>
+              <div data-piece="" style="flex:1; padding:0 18px; border-right:1px solid rgba(10,26,37,.1); display:flex; flex-direction:column; gap:3px;"><span style="font-size:24px; font-weight:600; letter-spacing:-0.03em;"><span data-count="320" data-dec="0">0</span>px</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#42545F;">Smallest screen</span></div>
+              <div data-piece="" style="flex:1; padding:0 18px; display:flex; flex-direction:column; gap:3px;"><span style="font-size:24px; font-weight:600; letter-spacing:-0.03em;"><span data-count="44" data-dec="0">0</span>px</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#42545F;">Touch targets</span></div>
+            </div>
+              </div>
+            </div>
+          </div>
+          <div data-piece="" data-px="46" style="position:absolute; right:-26px; top:-22px; z-index:4; padding:10px 15px; border-radius:999px; background:#0A1A25; color:#FFFFFF; font-size:13.5px; font-weight:600; box-shadow:0 12px 30px rgba(10,26,37,.24);">The film follows the scroll</div>
+          
+        <img src="./uploads/pasted-1790097113968-0.png" alt="" style="position: absolute; left: -88px; width: 140px; height: 140px; pointer-events: none; z-index: 0; --r: -10deg; transform: rotate(-10deg); animation: pDrift 11s ease-in-out infinite; top: 276px"></div>
+      </div>
+
+      <!-- ══ 04 — polish ══ -->
+      <div data-row="" data-dir="left" style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:clamp(36px,5vw,84px); align-items:center; padding:clamp(56px,8vh,104px) 0;">
+        <div data-dot="" style="position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1px #DCE7EF; z-index:2;"></div>
+
+        <div data-visual="" style="position:relative; width:100%; max-width:560px; justify-self:center;">
+          <div style="position:relative; z-index:1; border-radius:20px; border:1px solid #E3EAF0; box-shadow:0 2px 6px rgba(10,26,37,.05), 0 24px 60px rgba(10,26,37,.11); overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:10px; padding:10px 12px 10px 16px; border-bottom:1px solid #EDF2F6; background:#F8FBFD; flex-wrap:wrap;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">Review — round 2</span>
+              <div style="margin-left:auto; display:flex; gap:2px; padding:3px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0;">
+                <sc-for list="{{ p4Tabs }}" as="t" hint-placeholder-count="3">
+                  <button onClick="{{ t.pick }}" style="height:24px; padding:0 11px; border:0; border-radius:999px; background:{{ t.bg }}; color:{{ t.fg }}; font-family:'Instrument Sans',sans-serif; font-size:11.5px; font-weight:600; cursor:pointer; transition:background .2s ease, color .2s ease;">{{ t.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); background:#FFFFFF;">
+              <div style="padding:18px; background:#F4F0E9; border-right:1px solid #DDD6CA;">
+                <div style="position:relative; background:#FBF9F5; border:1px solid #DDD6CA; padding:10px; display:flex; flex-direction:column; gap:9px; color:#14110F; height:236px; box-sizing:border-box;">
+                  <sc-if value="{{ p4Loading }}" hint-placeholder-val="{{ false }}">
+                    <span style="height:96px; border-radius:9px; background:#E4DCCB; animation:lvPulse 1.2s ease-in-out infinite;"></span>
+                    <span style="height:16px; width:70%; border-radius:6px; background:#F0E7DA; margin-top:4px; animation:lvPulse 1.2s ease-in-out infinite;"></span>
+                    <span style="height:12px; width:40%; border-radius:6px; background:#EDE7DC; animation:lvPulse 1.2s ease-in-out infinite;"></span>
+                    <span style="height:32px; border-radius:999px; background:#F4EDE2; margin-top:auto; animation:lvPulse 1.2s ease-in-out infinite;"></span>
+                  </sc-if>
+                  <sc-if value="{{ p4Stock }}" hint-placeholder-val="{{ true }}">
+                    <img src="./assets/croche/product-square.png" alt="Square" style="display:block; width:100%; height:96px; object-fit:cover; object-position:center 55%; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB;">
+                    <span style="font-family:'Bodoni Moda',serif; font-size:19px; margin-top:4px;">Square</span>
+                    <span style="display:flex; align-items:center; gap:8px; font-size:12.5px;"><span style="font-family:'JetBrains Mono',monospace;">from 62 KM</span><span style="color:#4A443E;">Made to order</span></span>
+                    <span style="display:flex; align-items:center; justify-content:center; height:32px; background:#14110F; color:#F4F0E9; font-size:11px; font-weight:500; letter-spacing:.06em; margin-top:auto;">CHOOSE A SIZE ↗</span>
+                  </sc-if>
+                  <sc-if value="{{ p4Sold }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:relative; height:96px; border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB; overflow:hidden;"><img src="./assets/croche/product-special.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 55%; filter:grayscale(1); opacity:.35;"><span style="position:absolute; left:8px; top:8px; padding:4px 9px; background:#7B1E3A; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em;">AT LAUNCH</span></span>
+                    <span style="font-family:'Bodoni Moda',serif; font-size:19px; margin-top:4px; color:#4A443E;">Special</span>
+                    <span style="font-size:12.5px; color:#6B645C;">Revealed on 27.08. at 20:00</span>
+                    <span style="display:flex; align-items:center; justify-content:center; height:32px; border:1px solid #14110F; box-sizing:border-box; color:#14110F; font-size:11px; font-weight:500; letter-spacing:.06em; margin-top:auto;">LET ME KNOW</span>
+                  </sc-if>
+                  <span data-piece="" style="position:absolute; right:-8px; bottom:14px; z-index:3; width:22px; height:22px; border-radius:50% 50% 50% 4px; background:#0C7CC4; color:#FFFFFF; font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(12,124,196,.32);">1</span>
+                  <span data-piece="" style="position:absolute; right:-6px; top:4px; z-index:3; width:22px; height:22px; border-radius:50% 50% 50% 4px; background:#0C7CC4; color:#FFFFFF; font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(12,124,196,.32);">2</span>
+                  <span data-piece="" style="position:absolute; left:44%; top:132px; z-index:3; width:22px; height:22px; border-radius:50% 50% 50% 4px; background:#0A1A25; color:#FFFFFF; font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(12,124,196,.32);">3</span>
+                </div>
+              </div>
+              <div style="padding:6px 18px 10px; display:flex; flex-direction:column;">
+                <div data-piece="" style="display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid #EDF2F6;"><span style="flex:none; width:20px; height:20px; border-radius:50% 50% 50% 4px; background:#0C7CC4; color:#FFFFFF; font-size:10.5px; font-weight:600; display:flex; align-items:center; justify-content:center;">1</span><div style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:12.5px; line-height:1.4; color:#0A1A25;">Skeletons keep the real geometry. No text inside.</span><span style="display:flex; align-items:center; gap:6px; font-size:11px; color:#5B6B78;">Meridian QA<span style="width:3px; height:3px; border-radius:50%; background:#93A3AE;"></span><span style="color:#5B6B78; font-weight:400;">Resolved</span></span></div></div>
+                <div data-piece="" style="display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid #EDF2F6;"><span style="flex:none; width:20px; height:20px; border-radius:50% 50% 50% 4px; background:#0C7CC4; color:#FFFFFF; font-size:10.5px; font-weight:600; display:flex; align-items:center; justify-content:center;">2</span><div style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:12.5px; line-height:1.4; color:#0A1A25;">Wait 200 ms before showing it, then keep it 500 ms.</span><span style="display:flex; align-items:center; gap:6px; font-size:11px; color:#5B6B78;">Meridian<span style="width:3px; height:3px; border-radius:50%; background:#93A3AE;"></span><span style="color:#5B6B78; font-weight:400;">Resolved</span></span></div></div>
+                <div data-piece="" style="display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid #EDF2F6;"><span style="flex:none; width:20px; height:20px; border-radius:50% 50% 50% 4px; background:#0A1A25; color:#FFFFFF; font-size:10.5px; font-weight:600; display:flex; align-items:center; justify-content:center;">3</span><div style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:12.5px; line-height:1.4; color:#0A1A25;">Loading can't shove the price around.</span><span style="display:flex; align-items:center; gap:6px; font-size:11px; color:#5B6B78;">Meridian QA<span style="width:3px; height:3px; border-radius:50%; background:#93A3AE;"></span><span style="color:#0C7CC4; font-weight:600;">Open</span></span></div></div>
+              </div>
+            </div>
+            <div data-glasszone="" style="position:relative; overflow:hidden;">
+              <div data-glass="" style="position:relative; z-index:1; display:flex; align-items:center; padding:14px 24px; background:rgba(255,255,255,.34); border-top:1px solid rgba(255,255,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 -18px 30px -24px rgba(10,26,37,.3); backdrop-filter:blur(13px) saturate(170%); -webkit-backdrop-filter:blur(13px) saturate(170%);">
+            <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:7px;">
+              <div data-piece="" style="display:flex; align-items:center; gap:10px; font-size:13.5px; color:#42545F;"><span style="width:17px; height:17px; border-radius:50%; background:#0C7CC4; display:flex; align-items:center; justify-content:center;"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5.2l2.2 2.2L8 3.2" stroke="#FFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Skeleton, empty and error states</div>
+              <div data-piece="" style="display:flex; align-items:center; gap:10px; font-size:13.5px; color:#42545F;"><span style="width:17px; height:17px; border-radius:50%; background:#0C7CC4; display:flex; align-items:center; justify-content:center;"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5.2l2.2 2.2L8 3.2" stroke="#FFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Copy pass in Bosnian, diacritics kept</div>
+              <div data-piece="" style="display:flex; align-items:center; gap:10px; font-size:13.5px; color:#42545F;"><span style="width:17px; height:17px; border-radius:50%; border:1.5px solid rgba(10,26,37,.3); box-sizing:border-box;"></span>Emails tested in Gmail, Apple Mail, Outlook</div>
+            </div>
+              </div>
+            </div>
+          </div>
+          
+          <div data-piece="" data-px="48" style="position:absolute; right:-26px; bottom:14%; z-index:4; padding:10px 14px; border-radius:16px 16px 4px 16px; background:#0A1A25; color:#FFFFFF; font-size:13px; font-weight:500; box-shadow:0 14px 34px rgba(10,26,37,.26);">Done — shipped to staging</div>
+          
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:22px; max-width:46ch;">
+          <span data-t="" style="display:inline-flex; align-items:center; align-self:flex-start; height:34px; padding:0 16px; border-radius:999px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.1em; color:#42545F;">// 04</span>
+          <h3 data-t="" style="margin:0; font-weight:600; letter-spacing:-0.032em; line-height:1.04; font-size:clamp(30px,3.8vw,48px);">Polish <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">it</span></h3>
+          <p data-t="" style="margin:0; font-size:17px; line-height:1.65; color:#42545F;">A nice site is not the same as a working one. We tested every state: slow loads, a fourth yarn pick, a bag marked finished without a photo, an order shipped with no tracking number.</p>
+          <div data-t="" style="display:flex; flex-direction:column; border-top:1px solid #E3EAF0; margin-top:4px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Skeleton, empty and error states</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Copy pass in Bosnian, diacritics kept</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Emails tested in Gmail, Apple Mail, Outlook</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 05 — ship ══ -->
+      <div data-row="" data-dir="right" style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:clamp(36px,5vw,84px); align-items:center; padding:clamp(56px,8vh,104px) 0;">
+        <div data-dot="" style="position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1px #DCE7EF; z-index:2;"></div>
+
+        <div style="display:flex; flex-direction:column; gap:22px; max-width:46ch;">
+          <span data-t="" style="display:inline-flex; align-items:center; align-self:flex-start; height:34px; padding:0 16px; border-radius:999px; border:1px solid #DCE7EF; background:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.1em; color:#42545F;">// 05</span>
+          <h3 data-t="" style="margin:0; font-weight:600; letter-spacing:-0.032em; line-height:1.04; font-size:clamp(30px,3.8vw,48px);">Ship <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">it</span></h3>
+          <p data-t="" style="margin:0; font-size:17px; line-height:1.65; color:#42545F;">Then it goes live. A coming-soon page with a countdown and signup, a 51-second reel for Instagram and TikTok, and the shop opening on 27 August at 20:00.</p>
+          <div data-t="" style="display:flex; flex-direction:column; border-top:1px solid #E3EAF0; margin-top:4px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Coming-soon page with countdown</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Launch reel for Instagram and TikTok</div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #EDF2F6; font-size:14.5px; color:#42545F;"><span style="width:5px; height:5px; border-radius:50%; background:#9CCCEB;"></span>Launch-week support, actually available</div>
+          </div>
+        </div>
+
+        <div data-visual="" style="position:relative; width:100%; max-width:560px; justify-self:center;">
+          <div style="position:relative; z-index:1; border-radius:20px; border:1px solid #E3EAF0; box-shadow:0 2px 6px rgba(10,26,37,.05), 0 26px 64px rgba(10,26,37,.14); overflow:hidden; background:#FFFFFF;">
+            <div style="display:flex; align-items:center; gap:9px; padding:12px 16px; border-bottom:1px solid #EDF2F6; background:#F8FBFD;">
+              <span style="width:10px; height:10px; border-radius:50%; background:#F3665D;"></span>
+              <span style="width:10px; height:10px; border-radius:50%; background:#F2C14E;"></span>
+              <span style="width:10px; height:10px; border-radius:50%; background:#3FBE72;"></span>
+              <span style="flex:1; height:24px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; margin-left:8px; display:flex; align-items:center; gap:6px; padding:0 12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#5B6B78;">croche.ba — launch</span>
+            </div>
+            <div style="padding:20px 22px 14px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px;">
+                <div data-piece="" style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:24px; font-weight:600; letter-spacing:-0.03em; color:#0A1A25;"><span data-count="51" data-dec="0">0</span>s</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Launch reel</span></div>
+                <div data-piece="" style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:24px; font-weight:600; letter-spacing:-0.03em; color:#0A1A25;"><span data-count="6" data-dec="0">0</span></span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Customer emails</span></div>
+                <div data-piece="" style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:24px; font-weight:600; letter-spacing:-0.03em; color:#0A1A25;"><span data-count="14" data-dec="0">0</span></span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#5B6B78;">Yarns at launch</span></div>
+              </div>
+              <div data-piece="" style="display:flex; flex-direction:column; gap:6px;">
+                <img src="./assets/croche/screen-coming-soon.png" alt="Crochê coming-soon page with the countdown" style="display:block; width:100%; height:auto; border:1px solid #EDF2F6;">
+              </div>
+              <div style="display:flex; flex-direction:column; border-top:1px solid #EDF2F6; padding-top:6px;">
+                <div data-piece="" style="display:grid; grid-template-columns:78px minmax(0,1fr); gap:12px; padding:8px 10px; margin:0 -10px; border-radius:8px; font-size:13px; line-height:1.4; color:#0A1A25; transition:background .2s ease; cursor:default;" style-hover="background:#F2F7FB;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#5B6B78; padding-top:1px;">18.08.</span><span>Homepage, order flow and owner panel built</span></div>
+                <div data-piece="" style="display:grid; grid-template-columns:78px minmax(0,1fr); gap:12px; padding:8px 10px; margin:0 -10px; border-radius:8px; font-size:13px; line-height:1.4; color:#0A1A25; transition:background .2s ease; cursor:default;" style-hover="background:#F2F7FB;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#5B6B78; padding-top:1px;">22.08.</span><span>Design system v1.1</span></div>
+                <div data-piece="" style="display:grid; grid-template-columns:78px minmax(0,1fr); gap:12px; padding:8px 10px; margin:0 -10px; border-radius:8px; font-size:13px; line-height:1.4; color:#0A1A25; transition:background .2s ease; cursor:default;" style-hover="background:#F2F7FB;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#5B6B78; padding-top:1px;">Countdown</span><span>Coming-soon page with signup</span></div>
+                <div data-piece="" style="display:grid; grid-template-columns:78px minmax(0,1fr); gap:12px; padding:8px 10px; margin:0 -10px; border-radius:8px; font-size:13px; line-height:1.4; color:#0A1A25; transition:background .2s ease; cursor:default;" style-hover="background:#F2F7FB;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#5B6B78; padding-top:1px;">27.08. 20:00</span><span>The webshop opens</span></div>
+              </div>
+            </div>
+            <div data-glasszone="" style="position:relative; overflow:hidden;">
+              <div data-glass="" style="position:relative; z-index:1; display:flex; align-items:center; gap:14px; padding:14px 24px; background:rgba(255,255,255,.34); border-top:1px solid rgba(255,255,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 -18px 30px -24px rgba(10,26,37,.3); backdrop-filter:blur(13px) saturate(170%); -webkit-backdrop-filter:blur(13px) saturate(170%);">
+              <div style="flex:1; min-width:0; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                <span style="display:flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#42545F;"><span style="width:6px; height:6px; border-radius:50%; background:#0C7CC4;"></span>Built for</span>
+                <span style="font-size:15px; font-weight:600; letter-spacing:-0.015em;">whatever you're putting online</span>
+                <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#42545F;">Live</span>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div data-piece="" data-px="48" style="position:absolute; right:-26px; top:-20px; z-index:4; padding:10px 15px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; font-size:13.5px; font-weight:600; box-shadow:0 14px 34px rgba(10,26,37,.14);">Opens 27.08. · 20:00</div>
+          
+          
+        <img src="./uploads/pasted-1789950103853-0.png" alt="" style="position: absolute; left: 521px; top: -89px; width: 146px; height: 146px; pointer-events: none; z-index: 0; --r: -14deg; transform: rotate(-14deg); animation: pDrift 15s ease-in-out infinite"></div>
+      <div data-piece="" data-px="-48" style="position: absolute; left: 595px; z-index: 4; padding: 10px 15px; border-radius: 999px; background: #0C7CC4; color: #FFFFFF; font-size: 13.5px; font-weight: 600; box-shadow: 0 14px 34px rgba(12,124,196,.32); top: 530px">Still on the phone with you</div></div>
+
+    </div>
+
+    <!-- ── closing band ── -->
+    <div data-close="" style="position:relative; margin-top:clamp(30px,5vh,60px); border-radius:24px; overflow:hidden; background:linear-gradient(165deg,#FFFFFF 0%,#F4FAFE 46%,#DCEEFA 100%); border:1px solid #E6EEF4; padding:clamp(36px,5vw,58px); display:flex; align-items:center; gap:32px; flex-wrap:wrap;">
+      <div style="position:absolute; bottom:-200px; left:50%; transform:translateX(-50%); width:760px; height:420px; border-radius:50%; background:radial-gradient(circle,#6FB6E2 0%,rgba(156,204,235,0) 66%); filter:blur(58px); opacity:.42; pointer-events:none;"></div>
+      <p data-t="" style="position:relative; margin:0; flex:1 1 380px; font-size:clamp(21px,2.4vw,30px); line-height:1.3; letter-spacing:-0.025em; max-width:24ch; text-wrap:pretty;">At every phase we are fully with you, providing only the <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">best</span>.</p>
+      <a data-t="" href="#start" style="position:relative; display:inline-flex; align-items:center; gap:10px; height:54px; padding:0 8px 0 28px; border-radius:999px; background:#0A1A25; color:#FFFFFF; font-size:16px; font-weight:600; letter-spacing:-0.01em; transition:background .22s ease, transform .22s ease;" style-hover="background:#1E3442; color:#FFFFFF; transform:translateY(-1px);">Start a project<span style="display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,.16);"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+    </div>
+
+  <img src="./uploads/pasted-1790097120424-0.png" alt="" style="position: absolute; top: 2565px; width: 158px; height: 158px; pointer-events: none; z-index: 0; --r: -8deg; transform: rotate(-8deg); animation: pDrift 12s ease-in-out infinite; left: -65px"></div>
+
+  <x-import component="GradualBlur" from="./GradualBlur.jsx" target="page" position="bottom" height="8rem" strength="1.1" div-count="6" curve="bezier" opacity="0.92" hint-size="100%,120px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;smooth&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;intensity&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Restrained&quot;,&quot;options&quot;:[&quot;Restrained&quot;,&quot;Rich&quot;,&quot;Showy&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { p4: 'stock' };
+  componentDidMount() {
+    this.p4Timer = setInterval(() => { if (!this.p4Manual) this.setState(st => ({ p4: { stock: 'sold', sold: 'loading', loading: 'stock' }[st.p4] })); }, 2800);
+    this.gen = 0; this.trigs = []; this.boot();
+    // safety net: if gsap/ScrollTrigger haven't revealed the page within 4s
+    // (slow CDN, blocked script, or any other boot failure), show the
+    // content plainly rather than leaving it permanently invisible.
+    this.revealTimer = setTimeout(() => this.forceRevealIfStuck(), 4000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.p4Timer);
+    this.gen = (this.gen || 0) + 1; this.teardown();
+    if (this.revealTimer) { clearTimeout(this.revealTimer); this.revealTimer = null; }
+  }
+
+  forceRevealIfStuck() {
+    const root = document.querySelector('[data-process-root]');
+    if (!root) return;
+    const sel = '[data-t],[data-visual],[data-piece],[data-dot],[data-close],[data-glass]';
+    const els = Array.from(root.querySelectorAll(sel));
+    const stillHidden = els.some(el => parseFloat(el.style.opacity !== '' ? el.style.opacity : getComputedStyle(el).opacity) < 0.5);
+    const hasTriggers = window.ScrollTrigger && window.ScrollTrigger.getAll().length > 0;
+    if (stillHidden && !hasTriggers) {
+      els.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; el.style.filter = 'none'; });
+      this.gen = (this.gen || 0) + 1; this.boot();
+    }
+  }
+  componentDidUpdate(prev) {
+    if (prev.smooth !== this.props.smooth || prev.intensity !== this.props.intensity) {
+      if (this.booting) { this.pendingRebuild = true; return; }
+      this.gen = (this.gen || 0) + 1; this.teardown(); this.boot();
+    }
+  }
+
+  teardown() {
+    if (this.watchdog) { clearInterval(this.watchdog); this.watchdog = null; }
+    (this.trigs || []).forEach(t => t && t.kill && t.kill());
+    this.trigs = [];
+    if (this.tick && window.gsap) window.gsap.ticker.remove(this.tick);
+    this.tick = null;
+    if (this.lenis) { this.lenis.destroy(); this.lenis = null; }
+    if (this.onResize) { window.removeEventListener('resize', this.onResize); this.onResize = null; }
+  }
+
+  wait(test, ms) {
+    return new Promise(res => {
+      const t0 = performance.now();
+      const step = () => {
+        if (test()) return res(true);
+        if (performance.now() - t0 > (ms || 12000)) return res(false);
+        requestAnimationFrame(step);
+      };
+      step();
+    });
+  }
+
+  async boot() {
+    const mine = (this.gen = (this.gen || 0) + 1);
+    this.booting = true;
+    try {
+      await this.bootInner(mine);
+    } catch (e) {
+      console.error('Process boot failed, revealing content as fallback', e);
+      const root = document.querySelector('[data-process-root]');
+      if (root && window.gsap) window.gsap.set(root.querySelectorAll('[data-t],[data-visual],[data-piece],[data-dot],[data-close],[data-glass]'), { clearProps: 'all' });
+    } finally {
+      this.booting = false;
+      if (mine === this.gen && this.pendingRebuild) {
+        this.pendingRebuild = false;
+        this.teardown();
+        this.boot();
+      }
+    }
+  }
+
+  async bootInner(mine) {
+    const ok = await this.wait(() => window.gsap && window.ScrollTrigger, 25000);
+    if (!ok || mine !== this.gen) return;
+    const root = document.querySelector('[data-process-root]');
+    if (!root) return;
+
+    const gsap = window.gsap, ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
+    this.trigs = [];
+
+    // scrub helper: the tween stays PAUSED unless a live ScrollTrigger drives it,
+    // so a dropped trigger can never strand an element at its end state.
+    const scrub = (cfg, target, vars) => {
+      const tw = gsap.to(target, Object.assign({ paused: true, ease: 'none' }, vars));
+      const t = ST.create(Object.assign({ animation: tw }, cfg));
+      this.trigs.push(t);
+      return t;
+    };
+    const scrubFrom = (cfg, target, from, to) => {
+      const tw = gsap.fromTo(target, from, Object.assign({ paused: true, ease: 'none', immediateRender: false }, to));
+      const t = ST.create(Object.assign({ animation: tw }, cfg));
+      this.trigs.push(t);
+      return t;
+    };
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const level = this.props.intensity || 'Rich';
+    const k = reduce ? 0 : level === 'Restrained' ? 0.55 : level === 'Showy' ? 1.55 : 1;
+    const dur = d => reduce ? 0.01 : d;
+    const q = (el, s) => Array.from(el.querySelectorAll(s));
+
+    // ── smooth scroll ──
+    if (this.props.smooth !== false && !reduce && window.Lenis && !this.lenis) {
+      this.lenis = new window.Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.8 });
+      this.lenis.on('scroll', ST.update);
+      this.tick = t => { if (this.lenis) this.lenis.raf(t * 1000); };
+      gsap.ticker.add(this.tick);
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // ScrollTrigger only fires onEnter on a state TRANSITION during scroll/refresh.
+    // isActive/start/end aren't finalized until ST.refresh() runs, so checking it
+    // right after ST.create() (before refresh) always reads stale/false — the
+    // manual-fire check has to happen AFTER the single ST.refresh() call below.
+    const add = cfg => {
+      const t = ST.create(cfg);
+      t._onEnter = cfg.onEnter;
+      this.trigs.push(t);
+      return t;
+    };
+
+    // ── section head ──
+    const headBits = q(root, '[data-head] [data-t]');
+    if (headBits.length) {
+      gsap.set(headBits, { opacity: 0, y: 26 * k });
+      add({ trigger: headBits[0], start: 'top 88%', once: true, onEnter: () =>
+        gsap.to(headBits, { opacity: 1, y: 0, duration: dur(0.85), stagger: 0.09, ease: 'power3.out' }) });
+    }
+
+    // ── rows ──
+    q(root, '[data-row]').forEach(row => {
+      const dir = row.dataset.dir === 'left' ? -1 : 1;
+      const vis = row.querySelector('[data-visual]');
+      const bits = q(row, '[data-t]');
+      const dot = row.querySelector('[data-dot]');
+      const pencil = row.querySelector('[data-pencil]');
+      const stickers = q(row, '[data-sticker]');
+      if (stickers.length && !reduce) stickers.forEach(s => gsap.set(s, { rotation: Number(s.dataset.rot || 0), clipPath: 'inset(0% 100% 0% 0%)', opacity: 0 }));
+
+      gsap.set(bits, { opacity: 0, y: 30 * k, x: -14 * k * dir });
+      if (vis) gsap.set(vis, { opacity: 0, x: 110 * k * dir, y: 34 * k, rotate: 3 * k * dir, scale: 1 - 0.06 * k, filter: 'blur(' + (14 * k) + 'px)' });
+
+      const pieces = vis ? q(vis, '[data-piece]') : [];
+      const draws = vis ? q(vis, '[data-draw]') : [];
+      const bars = vis ? q(vis, '[data-bar]') : [];
+      const typeEls = vis ? q(vis, '[data-type]') : [];
+      const glassBar = vis ? vis.querySelector('[data-glass]') : null;
+      if (glassBar) gsap.set(glassBar, { opacity: 0, yPercent: 100 });
+
+      draws.forEach(p => {
+        const len = (p.getTotalLength ? p.getTotalLength() : 0) || 400;
+        gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+      });
+      if (pieces.length) gsap.set(pieces, { opacity: 0 });
+      if (pencil) gsap.set(pencil, { opacity: 0 });
+
+      add({
+        trigger: row, start: 'top 72%', once: true,
+        onEnter: () => {
+          gsap.to(bits, { opacity: 1, y: 0, x: 0, duration: dur(0.8), stagger: 0.085, ease: 'power3.out' });
+          if (vis) gsap.to(vis, { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, filter: 'blur(0px)', duration: dur(1.2), ease: 'expo.out', onComplete: () => gsap.set(vis, { clearProps: 'filter' }) });
+          if (draws.length) gsap.to(draws, { strokeDashoffset: 0, duration: dur(1.1), stagger: 0.045, delay: 0.3, ease: 'power2.inOut' });
+          if (pieces.length) gsap.fromTo(pieces,
+            { opacity: 0, y: (i, el) => Number(el.dataset.py || 26) * k, x: (i, el) => Number(el.dataset.px || 0) * k, scale: 1 - 0.12 * k },
+            { opacity: 1, y: 0, x: 0, scale: 1, duration: dur(0.7), stagger: 0.055, delay: 0.42, ease: k > 1.2 ? 'back.out(2)' : 'back.out(1.4)' });
+          bars.forEach((b, i) => gsap.fromTo(b, { height: 0 },
+            { height: b.dataset.h + '%', duration: dur(0.75), delay: 0.5 + i * 0.05, ease: 'power3.out' }));
+          if (glassBar) gsap.fromTo(glassBar,
+            { opacity: 0, yPercent: 100 },
+            { opacity: 1, yPercent: 0, duration: dur(1.05), delay: 0.55, ease: 'expo.out' });
+          if (dot) gsap.to(dot, { background: '#0C7CC4', boxShadow: '0 0 0 4px rgba(12,124,196,.16)', scale: 1.15, duration: dur(0.45), ease: 'power2.out' });
+
+          // pencil that "draws" the sketch, tracing a handful of checkpoints over the shapes
+          if (stickers.length && !reduce) {
+            const stl = gsap.timeline({ delay: 0.5 });
+            if (pencil) stl.set(pencil, { left: stickers[0].dataset.x + '%', top: (Number(stickers[0].dataset.y) + Number(stickers[0].dataset.h) / 2) + '%' }).to(pencil, { opacity: 1, duration: 0.15 });
+            stickers.forEach(s => {
+              const x = Number(s.dataset.x), y = Number(s.dataset.y), w = Number(s.dataset.w), h = Number(s.dataset.h);
+              const rot = Number(s.dataset.rot || 0);
+              const at = stl.duration();
+              if (pencil) stl.to(pencil, { left: x + '%', top: (y + h * 0.3) + '%', duration: 0.18, ease: 'power1.inOut' }, at);
+              stl.fromTo(s, { opacity: 1, clipPath: 'inset(0% 100% 0% 0%)', scale: 1.06, y: -6, rotation: rot - 3 },
+                { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.6, ease: 'power2.inOut' }, at + 0.16);
+              stl.to(s, { scale: 1, y: 0, rotation: rot, duration: 0.45, ease: 'back.out(2.2)' }, at + 0.6);
+              if (pencil) stl.to(pencil, { keyframes: [{ left: (x + w) + '%', top: (y + h * 0.5) + '%' }, { left: (x + w * 0.2) + '%', top: (y + h * 0.75) + '%' }, { left: (x + w * 0.9) + '%', top: (y + h) + '%' }], duration: 0.6, ease: 'none' }, at + 0.16);
+            });
+            if (pencil) stl.to(pencil, { opacity: 0, duration: 0.25 });
+          } else if (stickers.length) gsap.set(stickers, { opacity: 1, clipPath: 'none' });
+
+          // code typing itself out, line by line
+          if (typeEls.length) {
+            if (reduce) { typeEls.forEach(el => { el.textContent = el.dataset.type; }); }
+            else {
+              const ttl = gsap.timeline({ delay: 0.95 });
+              typeEls.forEach(el => {
+                const full = el.dataset.type;
+                const p = { i: 0 };
+                ttl.to(p, { i: full.length, duration: Math.max(0.22, full.length * 0.032), ease: 'none',
+                  onUpdate: () => { el.textContent = full.slice(0, Math.round(p.i)); } });
+              });
+              ttl.call(() => { const cur = row.querySelector('[data-cursor]'); if (cur) cur.style.display = 'inline-block'; });
+            }
+          }
+        }
+      });
+
+      // parallax drift + exit drift, both driven by paused tweens (see scrub helper)
+      if (vis && !reduce) {
+        scrubFrom(
+          { trigger: row, start: 'top bottom', end: 'bottom top', scrub: 0.7 },
+          vis, { yPercent: 5 * k }, { yPercent: -7 * k }
+        );
+      }
+    });
+
+    // ── spine ──
+    const rowsWrap = root.querySelector('[data-rows]');
+    const spine = root.querySelector('[data-spine]');
+    const fill = root.querySelector('[data-spine-fill]');
+    if (fill && rowsWrap && !reduce) {
+      gsap.set(fill, { scaleY: 0, transformOrigin: 'top' });
+      scrub(
+        { trigger: rowsWrap, start: 'top 72%', end: 'bottom 62%', scrub: 0.5 },
+        fill, { scaleY: 1, transformOrigin: 'top' }
+      );
+    }
+    if (spine) {
+      this.onResize = () => { spine.style.display = root.clientWidth < 920 ? 'none' : 'block'; };
+      this.onResize();
+      window.addEventListener('resize', this.onResize);
+    }
+
+    // ── counters ──
+    q(root, '[data-count]').forEach(el => {
+      const target = parseFloat(el.dataset.count);
+      const dec = parseInt(el.dataset.dec || '0', 10);
+      const grp = el.dataset.thousands === '1';
+      const fmt = v => grp ? Math.round(v).toLocaleString('en-US') : v.toFixed(dec);
+      const o = { v: 0 };
+      add({ trigger: el, start: 'top 90%', once: true, onEnter: () => {
+        if (reduce) { el.textContent = fmt(target); return; }
+        gsap.to(o, { v: target, duration: 1.5, ease: 'power2.out', onUpdate: () => { el.textContent = fmt(o.v); } });
+      } });
+    });
+
+    // ── closing band ──
+    const close = root.querySelector('[data-close]');
+    if (close) {
+      gsap.set(close, { opacity: 0, y: 44 * k, scale: 1 - 0.03 * k });
+      add({ trigger: close, start: 'top 86%', once: true, onEnter: () =>
+        gsap.to(close, { opacity: 1, y: 0, scale: 1, duration: dur(1), ease: 'expo.out' }) });
+    }
+
+    ST.refresh();
+
+    // triggers already active at the current scroll position (above-the-fold
+    // content on initial load) were born active and never transitioned, so their
+    // onEnter never fired — fire it manually now that positions are finalized.
+    this.trigs.forEach(t => { if (t.isActive && t._onEnter) { t._onEnter(t); } });
+
+    // watchdog: if every trigger gets dropped (remount / DOM swap), clear any
+    // stranded state and rebuild against the live DOM.
+    let strikes = 0;
+    this.watchdog = setInterval(() => {
+      if (mine !== this.gen) { clearInterval(this.watchdog); this.watchdog = null; return; }
+      const alive = this.trigs.filter(t => t && t.trigger && document.contains(t.trigger)).length;
+      if (alive) { strikes = 0; return; }
+      if (++strikes < 2) return;
+      clearInterval(this.watchdog); this.watchdog = null;
+      const live = document.querySelector('[data-process-root]');
+      if (!live) return;
+      gsap.set(live.querySelectorAll('[data-row]'), { clearProps: 'opacity,transform' });
+      this.teardown();
+      this.boot();
+    }, 900);
+  }
+
+  renderVals() {
+    const p4 = this.state.p4;
+    const p4Tabs = [['stock', 'Ready'], ['sold', 'At launch'], ['loading', 'Loading']].map(([id, label]) => ({
+      label, bg: p4 === id ? '#0A1A25' : 'transparent', fg: p4 === id ? '#FFFFFF' : '#42545F',
+      pick: () => { this.p4Manual = true; this.setState({ p4: id }); }
+    }));
+    return { auroraStops: ['#FFFFFF', '#9CCCEB', '#0C7CC4'], p4Tabs, p4Stock: p4 === 'stock', p4Sold: p4 === 'sold', p4Loading: p4 === 'loading' };
+  }
+}
+
+</script>
+</body>
+</html>

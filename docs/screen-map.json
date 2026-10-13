@@ -1,0 +1,11 @@
+{
+  "route": "/",
+  "designImported": true,
+  "sections": [
+    { "section": "Hero", "variant": "B", "design": "design/prototypes/Hero B.dc.html", "implementation": "src/components/Hero.tsx", "status": "headline-scaffold-work-deck-and-motion-pending" },
+    { "section": "Capabilities", "design": "design/prototypes/Capabilities.dc.html", "status": "pending" },
+    { "section": "Process", "design": "design/prototypes/Process.dc.html", "status": "pending" },
+    { "section": "Contact", "variant": "1a", "design": "design/prototypes/Contact.dc.html", "status": "pending-email-and-scheduler" },
+    { "section": "Footer", "variant": "1b", "design": "design/prototypes/Footer.dc.html", "status": "pending" }
+  ]
+}

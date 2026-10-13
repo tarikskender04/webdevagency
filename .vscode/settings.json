@@ -1,0 +1,4 @@
+{
+  "files.associations": { "*.astro": "astro" },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

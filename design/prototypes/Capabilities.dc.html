@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&amp;family=Archivo:wght@300;400;500;600&amp;family=Archivo+Black&amp;family=Anton&amp;family=Sacramento&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FFFFFF; color:#0A1A25; font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0C7CC4; text-decoration:none; }
+  a:hover { color:#084B7A; }
+  ::selection { background:#CFE8F7; }
+  [data-track]::-webkit-scrollbar { display:none; }
+  @keyframes kRip { from { transform:scale(.2); opacity:.9; } to { transform:scale(1.4); opacity:0; } }
+  @keyframes kPulse { 0%,100% { opacity:1; } 50% { opacity:.35; } }
+  @keyframes kSpin { to { transform:rotate(360deg); } }
+  @keyframes kBlink { 50% { opacity:0; } }
+  @keyframes kRowIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:none; } }
+  @keyframes kPop { from { opacity:0; transform:translateY(8px) scale(.96); } to { opacity:1; transform:none; } }
+</style>
+</helmet>
+
+<div data-cap-root="" ref="{{ rootRef }}" style="position:relative; overflow:clip; background:#FFFFFF;">
+<div data-stage="" style="position:relative;">
+<div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
+  <div data-layer="intro" style="position:absolute; inset:0; background:#FFFFFF; opacity:1;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#CFE8F7,#9CCCEB" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <div data-layer="brand" style="position:absolute; inset:0; background:#FFFFFF; opacity:0;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#9CCCEB,#0C7CC4" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <div data-layer="ordering" style="position:absolute; inset:0; background:#FFFFFF; opacity:0;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#BFE9EC,#2BD2C8" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <div data-layer="editing" style="position:absolute; inset:0; background:#FFFFFF; opacity:0;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#CFE8F7,#6FB6E2" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <div data-layer="dashboard" style="position:absolute; inset:0; background:#FFFFFF; opacity:0;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#9CCCEB,#084B7A" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <div data-layer="emails" style="position:absolute; inset:0; background:#FFFFFF; opacity:0;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#BFE9EC,#0C7CC4" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <div data-layer="close" style="position:absolute; inset:0; background:linear-gradient(180deg,#FFFFFF 0%,#EFF7FD 45%,#DCEEFA 100%); opacity:0;">
+    <div style="position:absolute; inset:0; opacity:.5; mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%); -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 28%,rgba(0,0,0,0) 55%);">
+      <x-import component="Aurora" from="./Aurora.jsx" color-stops="#FFFFFF,#9CCCEB,#0C7CC4" amplitude="1.0" blend="0.55" speed="0.3" light-mode="true" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+</div>
+<div data-track="" style="position:relative; display:flex; align-items:flex-start; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; cursor:grab; touch-action:pan-x pan-y;">
+
+<section data-screen-label="Capabilities intro" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:clamp(40px,6vw,96px); align-items:center;">
+    <div style="display:flex; flex-direction:column; gap:28px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4;"></span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">What we build</span>
+      </div>
+      <h2 style="margin:0; display:flex; flex-direction:column; font-weight:600; letter-spacing:-0.035em; line-height:1.02; font-size:clamp(40px,5.6vw,76px); color:#0A1A25;">
+        <x-import component="TextReveal" from="./Motion.jsx" text="We don't just make it pretty." hint-size="100%,1.02em"></x-import>
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="We make it work." delay="60" hint-size="100%,1.02em"></x-import></span>
+      </h2>
+      <p style="margin:0; max-width:44ch; font-size:19px; line-height:1.6; color:#42545F; text-wrap:pretty;">One maker in Sarajevo, start to finish. Every screen below is the shop and back office we built for Crochê, playing itself.</p>
+      <div style="display:flex; align-items:center; gap:16px; margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5B6B78;">
+        <span>Drag or swipe</span>
+        <span style="width:72px; height:1px; background:#C7D6E1;"></span>
+        <span style="font-size:15px; letter-spacing:0;">→</span>
+      </div>
+    </div>
+    <div style="position:relative; display:flex; align-items:center; justify-content:center; min-height:clamp(260px,34vw,520px);">
+      <div aria-hidden="true" style="position:absolute; left:50%; bottom:-6%; width:110%; height:55%; transform:translateX(-50%); border-radius:50%; background:radial-gradient(closest-side,#9CCCEB 0%,rgba(156,204,235,0) 100%); filter:blur(34px); opacity:.6;"></div>
+      <img data-ghost="" src="./uploads/pasted-1789950072713-0.png" alt="" style="position:relative; width:min(100%,460px); height:auto; display:block; will-change:transform;">
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Capabilities 01 Brand" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; display:flex; flex-direction:column; gap:clamp(64px,8vw,104px);">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:clamp(48px,6vw,96px); align-items:center;">
+      <div style="position:relative; order:-1; display:flex; flex-direction:column; gap:24px; max-width:46ch;">
+        <img data-ghost="" src="./uploads/pasted-1789950094688-0.png" alt="" style="width:clamp(88px,8vw,124px); height:auto; display:block; align-self:flex-start; margin-bottom:4px; will-change:transform;">
+        <span style="display:inline-flex; align-items:center; gap:10px; align-self:flex-start; height:32px; padding:0 15px 0 13px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; font-size:13px; color:#42545F;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; color:#93A3AE;">01</span><span style="width:1px; height:12px; background:#E3EAF0;"></span>Brand identity</span>
+        <h3 style="margin:0; display:flex; flex-direction:column; font-weight:600; letter-spacing:-0.035em; line-height:1.04; color:#0A1A25; font-size:clamp(36px,4.4vw,60px);">
+          <x-import component="TextReveal" from="./Motion.jsx" text="Not a logo." hint-size="100%,1.04em"></x-import>
+          <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="A whole look." delay="50" hint-size="100%,1.04em"></x-import></span>
+        </h3>
+        <p style="margin:0; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">Nine colour roles and one wine accent. Bodoni for the names, a mono for every price. Rules Iman can follow without calling us. Then it goes on everything: the shop, the emails, the thank-you cards and the hang tags.</p>
+      </div>
+
+      <div data-demo="" style="position:relative; min-width:0; transform-origin:50% 50%; will-change:transform;"><x-import component="BorderGlow" from="./BorderGlow.jsx" background-color="#FFFFFF" glow-color="202 78% 56%" colors="#9CCCEB,#0C7CC4,#CFE8F7" border-radius="28" glow-radius="40" edge-sensitivity="24" glow-intensity="0.9" cone-spread="25" hint-size="100%,520px">
+        <div ref="{{ vp1 }}" data-vp="1" style="position:relative; width:100%; aspect-ratio:{{ c1.aspect }}; border-radius:28px; overflow:hidden; background:radial-gradient(120% 90% at 20% 110%,#9CCCEB 0%,#E0F0FA 40%,#FFFFFF 78%);">
+          <div data-app="" style="position:absolute; left:0; top:0; width:1040px; height:680px; transform-origin:0 0; transform:{{ c1.appT }}; opacity:{{ c1.appO }}; transition:transform 1.15s cubic-bezier(.65,0,.35,1), opacity .4s; border-radius:18px; background:#FBF9F5; border:1px solid #DDD6CA; box-shadow:0 30px 80px rgba(20,17,15,.14); overflow:hidden; font-family:'Archivo',sans-serif; font-size:13px; color:#14110F;">
+            <div style="height:44px; display:flex; align-items:center; gap:18px; padding:0 18px; background:#EDE7DC; border-bottom:1px solid #DDD6CA;">
+              <div style="display:flex; gap:7px;"><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span></div>
+              <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="#9A9186" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1L1 6l5 5M24 1l5 5-5 5"></path></svg>
+              <div style="flex:1; display:flex; justify-content:center;"><span style="height:26px; min-width:320px; padding:0 14px; box-sizing:border-box; border-radius:8px; background:#FBF9F5; border:1px solid #DDD6CA; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B645C;">croche.ba/design-system</span></div>
+              <div style="width:48px;"></div>
+            </div>
+            <div style="height:50px; display:flex; align-items:center; gap:4px; padding:0 18px; border-bottom:1px solid #DDD6CA;">
+              <span style="margin-right:14px; font-family:'Bodoni Moda',serif; font-size:17px;">Design system</span>
+              <span style="padding:7px 13px; border:1px solid #14110F; font-weight:500;">Build</span>
+              <span style="padding:7px 13px; color:#6B645C;">Guidelines</span>
+              <span style="padding:7px 13px; color:#6B645C;">Downloads</span>
+              <span style="margin-left:auto; margin-right:12px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#6B645C;">{{ c1.note }}</span>
+              <span data-tgt="apply" style="height:32px; padding:0 16px; background:{{ c1.applyBg }}; color:{{ c1.applyFg }}; font-weight:500; font-size:12px; letter-spacing:.06em; text-transform:uppercase; display:flex; align-items:center; transition:background .3s, color .3s;">{{ c1.applyLabel }}</span>
+            </div>
+            <div style="display:flex; height:586px;">
+              <div style="width:290px; flex:none; box-sizing:border-box; border-right:1px solid #DDD6CA; padding:20px; display:flex; flex-direction:column; gap:20px;">
+                <div data-tgt="panel-palette" style="display:flex; flex-direction:column; gap:8px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#6B645C; margin-bottom:2px;">Palette</span>
+                  <sc-for list="{{ c1.palettes }}" as="p" hint-placeholder-count="3">
+                    <div data-tgt="pal-{{ p.id }}" style="display:flex; align-items:center; gap:10px; height:48px; padding:0 12px; box-sizing:border-box; border:1px solid {{ p.bd }}; background:{{ p.bg }}; transition:background .3s, border-color .3s;">
+                      <span style="display:flex; flex-direction:column; gap:1px; min-width:0;"><span style="font-family:'Bodoni Moda',serif; font-size:14px;">{{ p.name }}</span><span style="font-size:10.5px; color:#6B645C;">{{ p.sub }}</span></span>
+                      <span style="margin-left:auto; display:flex;"><sc-for list="{{ p.strip }}" as="s" hint-placeholder-count="5"><span style="width:14px; height:22px; background:{{ s.hex }}; box-shadow:inset 0 0 0 1px rgba(20,17,15,.08);"></span></sc-for></span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div data-tgt="panel-font" style="display:flex; flex-direction:column; gap:8px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#6B645C; margin-bottom:2px;">Display type</span>
+                  <sc-for list="{{ c1.fonts }}" as="f" hint-placeholder-count="3">
+                    <div data-tgt="font-{{ f.id }}" style="display:flex; align-items:center; gap:12px; height:44px; padding:0 12px; box-sizing:border-box; border:1px solid {{ f.bd }}; background:{{ f.bg }}; transition:background .3s, border-color .3s;">
+                      <span style="width:32px; font-family:{{ f.fam }}; font-size:20px;">Aa</span>
+                      <span style="display:flex; flex-direction:column; gap:1px;"><span style="font-weight:500;">{{ f.name }}</span><span style="font-size:10.5px; color:#6B645C;">{{ f.full }}</span></span>
+                      <span style="margin-left:auto; width:12px; height:12px; box-sizing:border-box; border:{{ f.radio }}; transition:border .2s;"></span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div data-tgt="panel-logo" style="display:flex; flex-direction:column; gap:8px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#6B645C; margin-bottom:2px;">Mark</span>
+                  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+                    <sc-for list="{{ c1.logos }}" as="g" hint-placeholder-count="3">
+                      <div data-tgt="logo-{{ g.id }}" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; height:78px; border:1px solid {{ g.bd }}; background:{{ g.bg }}; transition:background .3s, border-color .3s;">
+                        <span style="height:34px; display:flex; align-items:center; gap:5px;">
+                          <sc-if value="{{ g.showMark }}" hint-placeholder-val="{{ false }}"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:{{ g.markH }}; width:auto;"></sc-if>
+                          <sc-if value="{{ g.showWord }}" hint-placeholder-val="{{ false }}"><img src="./assets/croche/logo-wordmark.svg" alt="" style="display:block; height:{{ g.wordH }}; width:auto;"></sc-if>
+                        </span>
+                        <span style="font-size:10.5px; color:#6B645C;">{{ g.name }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+              <div style="position:relative; flex:1; min-width:0; background:{{ c1.tone }}; padding:20px; display:flex; flex-direction:column; gap:14px; transition:background .4s;">
+                <div data-tgt="preview" style="flex:1; min-height:0; background:{{ c1.paper }}; box-shadow:0 10px 30px rgba(20,17,15,.08); overflow:hidden; display:flex; flex-direction:column; transition:background .4s;">
+                  <div style="height:22px; flex:none; background:{{ c1.accent }}; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.18em; transition:background .4s;">EVERY PIECE IS CROCHETED AFTER YOU ORDER · 7–10 DAYS</div>
+                  <div style="height:48px; flex:none; display:flex; align-items:center; gap:20px; padding:0 22px; border-bottom:1px solid #DDD6CA;">
+                    <span style="display:flex; align-items:center; gap:7px;">
+                      <sc-if value="{{ c1.hasMark }}" hint-placeholder-val="{{ false }}"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:24px; width:auto; animation:kPop .35s ease-out both;"></sc-if>
+                      <sc-if value="{{ c1.hasWord }}" hint-placeholder-val="{{ true }}"><img src="./assets/croche/logo-wordmark.svg" alt="Crochê" style="display:block; height:12px; width:auto;"></sc-if>
+                    </span>
+                    <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; color:{{ c1.body }};">MODELS</span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; color:{{ c1.body }};">MAKING</span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; color:{{ c1.body }};">ABOUT IMAN</span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; color:{{ c1.ink }};">CART (0)</span>
+                  </div>
+                  <div data-tgt="preview-hero" style="flex:1; display:grid; grid-template-columns:1.15fr .85fr; gap:22px; padding:22px 22px 0; align-items:end;">
+                    <div style="display:flex; flex-direction:column; gap:14px; padding-bottom:22px;">
+                      <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.18em; color:{{ c1.body }};">MADE BY HAND IN SARAJEVO</span>
+                      <span data-tgt="preview-head" style="font-family:{{ c1.headFam }}; font-weight:400; font-size:{{ c1.headSize }}; line-height:1.0; letter-spacing:{{ c1.headLs }}; text-transform:{{ c1.headTt }}; color:{{ c1.ink }};">Row by row. No machine.</span>
+                      <span style="align-self:flex-start; height:34px; padding:0 18px; background:{{ c1.accent }}; color:#FFFFFF; font-weight:500; font-size:11px; letter-spacing:.06em; display:flex; align-items:center; transition:background .4s;">CHOOSE A MODEL ↗</span>
+                    </div>
+                    <div style="height:184px; border-radius:50% 50% 0 0 / 24% 24% 0 0; background:{{ c1.panel }}; overflow:hidden; display:flex; align-items:center; justify-content:center; transition:background .4s;">
+                      <img src="./assets/croche/product-square.png" alt="" style="display:block; width:88%; height:88%; object-fit:contain; filter:grayscale(1); mix-blend-mode:multiply;">
+                    </div>
+                  </div>
+                </div>
+                <div data-tgt="apps" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; height:156px; flex:none;">
+                  <div style="background:{{ c1.panel }}; padding:12px; display:flex; flex-direction:column; gap:8px; transition:background .4s;">
+                    <div style="flex:1; background:{{ c1.paper }}; box-shadow:inset 0 0 0 1px #DDD6CA; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; transition:background .4s;">
+                      <span style="font-family:{{ c1.headFam }}; font-size:14px; line-height:1.1; color:{{ c1.ink }};">Arrives as a gift.</span>
+                      <span style="font-family:'Sacramento',cursive; font-size:19px; line-height:1; color:{{ c1.accent }};">even when it isn't</span>
+                    </div>
+                    <span style="font-size:11px; color:#6B645C;">Thank-you card · A6</span>
+                  </div>
+                  <div style="background:{{ c1.panel }}; padding:12px; display:flex; flex-direction:column; gap:8px; transition:background .4s;">
+                    <div style="flex:1; display:flex; align-items:center; justify-content:center;"><span style="width:84px; height:84px; border-radius:50%; background:{{ c1.accent }}; display:flex; align-items:center; justify-content:center; transition:background .4s;"><img src="./assets/croche/logo-mark-white.svg" alt="" style="display:block; width:44px; height:auto;"></span></div>
+                    <span style="font-size:11px; color:#6B645C;">Sticker · ø 50 mm</span>
+                  </div>
+                  <div style="background:{{ c1.panel }}; padding:12px; display:flex; flex-direction:column; gap:8px; transition:background .4s;">
+                    <div style="flex:1; display:flex; align-items:center; justify-content:center;"><div style="width:60px; height:92px; box-sizing:border-box; background:{{ c1.paper }}; box-shadow:inset 0 0 0 1px #DDD6CA; display:flex; flex-direction:column; align-items:center; gap:8px; padding-top:9px; transition:background .4s;"><span style="width:7px; height:7px; border-radius:50%; box-shadow:inset 0 0 0 1px #B9A78C;"></span><img src="./assets/croche/logo-wordmark.svg" alt="" style="display:block; width:40px; height:auto;"><span style="font-family:'JetBrains Mono',monospace; font-size:5.5px; letter-spacing:.12em; line-height:1.5; color:{{ c1.body }}; text-align:center;">DO NOT<br>MACHINE<br>WASH</span></div></div>
+                    <span style="font-size:11px; color:#6B645C;">Hang tag · 45 × 70 mm</span>
+                  </div>
+                </div>
+                <sc-if value="{{ c1.toast }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute; left:50%; top:30px; margin-left:-170px; width:340px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; padding:13px 16px; background:#14110F; color:#F4F0E9; box-shadow:0 14px 34px rgba(20,17,15,.3); animation:kPop .4s cubic-bezier(.22,.61,.36,1) both;">
+                    <span style="font-weight:500;">Applied to the shop, 6 emails and the packaging</span>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+            <div style="position:absolute; left:{{ c1.curX }}; top:{{ c1.curY }}; z-index:50; pointer-events:none; opacity:{{ c1.curO }}; transition:left .75s cubic-bezier(.5,0,.2,1), top .75s cubic-bezier(.5,0,.2,1), opacity .3s;">
+              <div style="transform:{{ c1.curT }}; transform-origin:0 0; transition:transform 1.15s cubic-bezier(.65,0,.35,1);">
+                <sc-if value="{{ c1.rip }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:-20px; top:-20px; width:40px; height:40px; box-sizing:border-box; border-radius:50%; border:2px solid #0C7CC4; animation:kRip .5s ease-out forwards;"></span></sc-if>
+                <svg width="22" height="24" viewBox="0 0 22 24" style="display:block; transform:{{ c1.press }}; transform-origin:2px 2px; transition:transform .12s; filter:drop-shadow(0 3px 6px rgba(10,26,37,.3));"><path d="M2 1.5V19l4.6-4.2 3 6.8 3-1.3-2.9-6.7 6.3-.2z" fill="#0A1A25" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute; left:16px; right:16px; bottom:16px; z-index:60; display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:18px; background:rgba(255,255,255,.5); border:1px solid rgba(255,255,255,.8); box-shadow:0 12px 30px rgba(10,26,37,.10); backdrop-filter:blur(18px) saturate(170%); -webkit-backdrop-filter:blur(18px) saturate(170%);">
+            <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4; flex:none;"></span>
+            <span style="flex:1; min-width:0; font-size:15px; font-weight:600; letter-spacing:-0.015em; color:#0A1A25;">{{ c1.say }}</span>
+            <div style="display:flex; gap:5px; flex:none;"><sc-for list="{{ c1.dots }}" as="d" hint-placeholder-count="9"><span style="width:{{ d.w }}; height:5px; border-radius:999px; background:{{ d.bg }}; transition:width .3s, background .3s;"></span></sc-for></div>
+          </div>
+        </div>
+      </x-import></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Capabilities 02 Ordering" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:clamp(48px,6vw,96px); align-items:center;">
+
+    <div data-demo="" style="position:relative; min-width:0; transform-origin:50% 50%; will-change:transform;"><x-import component="BorderGlow" from="./BorderGlow.jsx" background-color="#FFFFFF" glow-color="202 78% 56%" colors="#9CCCEB,#0C7CC4,#CFE8F7" border-radius="28" glow-radius="40" edge-sensitivity="24" glow-intensity="0.9" cone-spread="25" hint-size="100%,520px">
+      <div ref="{{ vp2 }}" data-vp="2" style="position:relative; width:100%; aspect-ratio:{{ c2.aspect }}; border-radius:28px; overflow:hidden; background:radial-gradient(120% 90% at 20% 110%,#9CCCEB 0%,#E0F0FA 40%,#FFFFFF 78%);">
+        <div data-app="" style="position:absolute; left:0; top:0; width:1040px; height:680px; transform-origin:0 0; transform:{{ c2.appT }}; opacity:{{ c2.appO }}; transition:transform 1.15s cubic-bezier(.65,0,.35,1), opacity .4s; border-radius:18px; background:#17110F; border:1px solid #DDD6CA; box-shadow:0 30px 80px rgba(20,17,15,.2); overflow:hidden; font-family:'Archivo',sans-serif; font-size:13px; color:#F4F0E9;">
+          <div style="height:44px; display:flex; align-items:center; gap:18px; padding:0 18px; background:#EDE7DC; border-bottom:1px solid #DDD6CA;">
+            <div style="display:flex; gap:7px;"><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span></div>
+            <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="#9A9186" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1L1 6l5 5M24 1l5 5-5 5"></path></svg>
+            <div style="flex:1; display:flex; justify-content:center;"><span style="height:26px; min-width:320px; padding:0 14px; box-sizing:border-box; border-radius:8px; background:#FBF9F5; border:1px solid #DDD6CA; display:flex; align-items:center; justify-content:center; gap:7px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B645C;"><svg width="9" height="11" viewBox="0 0 9 11" fill="none" stroke="#6B645C" stroke-width="1.2"><rect x="1" y="4.5" width="7" height="5.5" rx="1.2"></rect><path d="M2.5 4.5V3a2 2 0 014 0v1.5"></path></svg>croche.ba/order/colour/</span></div>
+            <div style="width:48px;"></div>
+          </div>
+          <div style="height:26px; display:flex; align-items:center; justify-content:center; background:#7B1E3A; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.18em;">EVERY PIECE IS CROCHETED AFTER YOU ORDER · 7–10 DAYS</div>
+          <div style="height:52px; display:flex; align-items:center; gap:28px; padding:0 26px; background:#F4F0E9; color:#14110F; border-bottom:1px solid #DDD6CA;">
+            <span style="display:flex; align-items:center; gap:7px;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:24px; width:auto;"><img src="./assets/croche/logo-wordmark.svg" alt="Crochê" style="display:block; height:11px; width:auto;"></span>
+            <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; color:#6B645C;">COLLECTIONS</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; padding:5px 0; box-shadow:inset 0 -1.5px 0 #7B1E3A;">BUILD YOUR OWN</span>
+            <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; color:#6B645C;">{{ c2.stepLabel }}</span>
+          </div>
+          <div style="display:flex; gap:26px; padding:22px 26px; height:558px; box-sizing:border-box;">
+            <div data-tgt="bag" style="width:390px; flex:none; box-sizing:border-box; border:1px solid #2E2420; background:radial-gradient(80% 70% at 50% 45%,#261C18 0%,#17110F 100%); display:flex; flex-direction:column;">
+              <div style="flex:1; display:flex; align-items:center; justify-content:center; position:relative;">
+                <div style="position:relative; width:250px; height:150px;">
+                  <span style="position:absolute; left:50%; top:-7px; width:34px; height:9px; margin-left:-17px; background:#C9BFAF; z-index:2;"></span>
+                  <div style="position:absolute; inset:0; border-radius:48% 48% 14px 14px / 62% 62% 14px 14px; background:{{ c2.bagBg }}; box-shadow:{{ c2.bagShadow }}; transition:background .45s;"></div>
+                </div>
+              </div>
+              <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; padding:0 18px 12px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; color:#9A9186; line-height:1.6;"><span>MIX PREVIEW<br>{{ c2.mixNames }}</span><span>{{ c2.count }} / 3 COLOURS</span></div>
+              <div style="display:flex; align-items:flex-end; gap:12px; padding:14px 18px; border-top:1px solid #2E2420;">
+                <span style="display:flex; flex-direction:column; gap:3px;"><span style="font-family:'Bodoni Moda',serif; font-size:24px; line-height:1;">Clutch</span><span style="font-size:12px; color:#C9BFAF;">{{ c2.sizeLine }}</span></span>
+                <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:16px; font-weight:500;">{{ c2.price }}</span>
+              </div>
+            </div>
+            <div style="position:relative; flex:1; min-width:0; display:flex; flex-direction:column;">
+              <sc-if value="{{ c2.notDone }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex; flex-direction:column; gap:16px; height:100%;">
+                  <div style="display:flex; flex-direction:column; gap:6px;">
+                    <span style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:36px; line-height:1;">Choose your colours</span>
+                    <span style="font-size:12.5px; line-height:1.5; color:#C9BFAF;">Pick one to three. Iman decides where each one goes while she works.</span>
+                  </div>
+                  <div data-tgt="sizes" style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px;">
+                    <sc-for list="{{ c2.sizes }}" as="s" hint-placeholder-count="3">
+                      <span data-tgt="size-{{ s.id }}" style="height:40px; padding:0 12px; box-sizing:border-box; border:1px solid {{ s.bd }}; background:{{ s.bg }}; color:{{ s.fg }}; display:flex; align-items:center; justify-content:space-between; transition:background .25s, color .25s;"><span style="font-weight:500;">{{ s.name }}</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px;">{{ s.price }}</span></span>
+                    </sc-for>
+                  </div>
+                  <div data-tgt="yarns" style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#9A9186;"><span>REGULAR YARN IN STOCK · 14</span><span style="color:{{ c2.fullFg }};">{{ c2.fullLabel }}</span></div>
+                    <div style="display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px 6px;">
+                      <sc-for list="{{ c2.yarns }}" as="y" hint-placeholder-count="14">
+                        <div style="display:flex; flex-direction:column; gap:5px; min-width:0;">
+                          <span data-tgt="yarn-{{ y.id }}" style="position:relative; height:32px; background:{{ y.hex }}; box-shadow:{{ y.ring }}; transition:box-shadow .25s;"><sc-if value="{{ y.on }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:3px; top:3px; font-family:'JetBrains Mono',monospace; font-size:8.5px; padding:1px 3px; background:#14110F; color:#F4F0E9;">{{ y.n }}</span></sc-if></span>
+                          <span style="font-size:10px; color:{{ y.fg }}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ y.name }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div data-tgt="glitter" style="display:flex; flex-direction:column; gap:8px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#9A9186;">GLITTER · OPTIONAL · MAX ONE · +3 KM</span>
+                    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px;">
+                      <sc-for list="{{ c2.glitter }}" as="g" hint-placeholder-count="4">
+                        <span data-tgt="gl-{{ g.id }}" style="height:34px; padding:0 10px; box-sizing:border-box; border:1px solid {{ g.bd }}; display:flex; align-items:center; gap:8px; transition:border-color .25s;"><span style="width:14px; height:14px; flex:none; background:repeating-linear-gradient(135deg,{{ g.hex }} 0 2px,rgba(0,0,0,0) 2px 4px);"></span><span style="font-size:11.5px; color:{{ g.fg }};">{{ g.name }}</span></span>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div style="margin-top:auto; display:flex; flex-direction:column; gap:10px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#9A9186;">{{ c2.summary }}</span>
+                    <span data-tgt="cta" style="height:46px; background:#7B1E3A; color:#FFFFFF; font-weight:500; font-size:12px; letter-spacing:.06em; display:flex; align-items:center; justify-content:center; gap:10px; opacity:{{ c2.ctaO }}; transition:opacity .3s;">
+                      <sc-if value="{{ c2.sending }}" hint-placeholder-val="{{ false }}"><span style="width:13px; height:13px; box-sizing:border-box; border-radius:50%; border:2px solid rgba(255,255,255,.3); border-top-color:#FFFFFF; animation:kSpin .7s linear infinite;"></span></sc-if>
+                      {{ c2.ctaLabel }}
+                    </span>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ c2.done }}" hint-placeholder-val="{{ false }}">
+                <div style="position:relative; display:flex; flex-direction:column; gap:14px; height:100%; justify-content:center; animation:kPop .45s cubic-bezier(.22,.61,.36,1) both;">
+                  <span style="font-family:'Sacramento',cursive; font-size:48px; line-height:1;">welcome to your crochet era.</span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.18em; color:#9A9186;">ORDER CR-MYB-0182</span>
+                  <div style="display:flex; flex-direction:column; border-top:1px solid #2E2420;">
+                    <sc-for list="{{ c2.receipt }}" as="r" hint-placeholder-count="5">
+                      <div style="display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid #2E2420;"><span style="color:#C9BFAF;">{{ r.k }}</span><span>{{ r.v }}</span></div>
+                    </sc-for>
+                    <div style="display:flex; justify-content:space-between; align-items:baseline; padding:12px 0;"><span style="color:#C9BFAF;">Total</span><span style="font-family:'Bodoni Moda',serif; font-size:26px;">70 KM</span></div>
+                  </div>
+                  <span style="font-size:12.5px; line-height:1.55; color:#C9BFAF; max-width:44ch;">Cash or card when it arrives. Iman confirms your order and tells you when she starts.</span>
+                  <span style="position:absolute; right:6px; top:30px; transform:rotate(-8deg); padding:8px 10px; border:1.5px solid #DDA6A0; color:#DDA6A0; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.14em; line-height:1.5; text-align:center;">CAREFUL: THIS BAG<br>ATTRACTS LOOKS</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="position:absolute; left:{{ c2.curX }}; top:{{ c2.curY }}; z-index:50; pointer-events:none; opacity:{{ c2.curO }}; transition:left .75s cubic-bezier(.5,0,.2,1), top .75s cubic-bezier(.5,0,.2,1), opacity .3s;">
+            <div style="transform:{{ c2.curT }}; transform-origin:0 0; transition:transform 1.15s cubic-bezier(.65,0,.35,1);">
+              <sc-if value="{{ c2.rip }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:-20px; top:-20px; width:40px; height:40px; box-sizing:border-box; border-radius:50%; border:2px solid #9CCCEB; animation:kRip .5s ease-out forwards;"></span></sc-if>
+              <svg width="22" height="24" viewBox="0 0 22 24" style="display:block; transform:{{ c2.press }}; transform-origin:2px 2px; transition:transform .12s; filter:drop-shadow(0 3px 6px rgba(0,0,0,.45));"><path d="M2 1.5V19l4.6-4.2 3 6.8 3-1.3-2.9-6.7 6.3-.2z" fill="#FFFFFF" stroke="#0A1A25" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; left:16px; right:16px; bottom:16px; z-index:60; display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:18px; background:rgba(255,255,255,.74); border:1px solid rgba(255,255,255,.85); box-shadow:0 12px 30px rgba(10,26,37,.10); backdrop-filter:blur(18px) saturate(170%); -webkit-backdrop-filter:blur(18px) saturate(170%);">
+          <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4; flex:none;"></span>
+          <span style="flex:1; min-width:0; font-size:15px; font-weight:600; letter-spacing:-0.015em; color:#0A1A25;">{{ c2.say }}</span>
+          <div style="display:flex; gap:5px; flex:none;"><sc-for list="{{ c2.dots }}" as="d" hint-placeholder-count="9"><span style="width:{{ d.w }}; height:5px; border-radius:999px; background:{{ d.bg }}; transition:width .3s, background .3s;"></span></sc-for></div>
+        </div>
+      </div>
+    </x-import></div>
+
+    <div style="position:relative; order:-1; display:flex; flex-direction:column; gap:24px; max-width:46ch;">
+      <img data-ghost="" src="./uploads/pasted-1789950091124-0.png" alt="" style="width:clamp(88px,8vw,124px); height:auto; display:block; align-self:flex-start; margin-bottom:4px; will-change:transform;">
+      <span style="display:inline-flex; align-items:center; gap:10px; align-self:flex-start; height:32px; padding:0 15px 0 13px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; font-size:13px; color:#42545F;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; color:#93A3AE;">02</span><span style="width:1px; height:12px; background:#E3EAF0;"></span>Online ordering</span>
+      <h3 style="margin:0; display:flex; flex-direction:column; font-weight:600; letter-spacing:-0.035em; line-height:1.04; color:#0A1A25; font-size:clamp(36px,4.4vw,60px);">
+        <x-import component="TextReveal" from="./Motion.jsx" text="Pick a shape." hint-size="100%,1.04em"></x-import>
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="Mix your colours." delay="50" hint-size="100%,1.04em"></x-import></span>
+      </h3>
+      <p style="margin:0; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">Model, size, up to three yarns. The bag redraws with every pick, the price stays in view, and payment waits until the bag reaches the door.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Capabilities 03 Editing" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:clamp(48px,6vw,96px); align-items:center;">
+
+    <div style="position:relative; order:-1; display:flex; flex-direction:column; gap:24px; max-width:46ch;">
+      <img data-ghost="" src="./uploads/pasted-1789950077786-0.png" alt="" style="width:clamp(88px,8vw,124px); height:auto; display:block; align-self:flex-start; margin-bottom:4px; will-change:transform;">
+      <span style="display:inline-flex; align-items:center; gap:10px; align-self:flex-start; height:32px; padding:0 15px 0 13px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; font-size:13px; color:#42545F;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; color:#93A3AE;">03</span><span style="width:1px; height:12px; background:#E3EAF0;"></span>Content editing</span>
+      <h3 style="margin:0; display:flex; flex-direction:column; font-weight:600; letter-spacing:-0.035em; line-height:1.04; color:#0A1A25; font-size:clamp(36px,4.4vw,60px);">
+        <x-import component="TextReveal" from="./Motion.jsx" text="Her stock." hint-size="100%,1.04em"></x-import>
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="Her call." delay="50" hint-size="100%,1.04em"></x-import></span>
+      </h3>
+      <p style="margin:0; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">Yarn runs low, a new model opens at launch. Iman changes both from the back office, and the shop updates before the next customer looks. No ticket, no waiting on us.</p>
+    </div>
+
+    <div data-demo="" style="position:relative; min-width:0; transform-origin:50% 50%; will-change:transform;"><x-import component="BorderGlow" from="./BorderGlow.jsx" background-color="#FFFFFF" glow-color="202 78% 56%" colors="#9CCCEB,#0C7CC4,#CFE8F7" border-radius="28" glow-radius="40" edge-sensitivity="24" glow-intensity="0.9" cone-spread="25" hint-size="100%,520px">
+      <div ref="{{ vp3 }}" data-vp="3" style="position:relative; width:100%; aspect-ratio:{{ c3.aspect }}; border-radius:28px; overflow:hidden; background:radial-gradient(120% 90% at 20% 110%,#9CCCEB 0%,#E0F0FA 40%,#FFFFFF 78%);">
+        <div data-app="" style="position:absolute; left:0; top:0; width:1040px; height:680px; transform-origin:0 0; transform:{{ c3.appT }}; opacity:{{ c3.appO }}; transition:transform 1.15s cubic-bezier(.65,0,.35,1), opacity .4s; border-radius:18px; background:#F4F0E9; border:1px solid #DDD6CA; box-shadow:0 30px 80px rgba(20,17,15,.14); overflow:hidden; font-family:'Archivo',sans-serif; font-size:13px; color:#14110F;">
+          <div style="height:44px; display:flex; align-items:center; gap:18px; padding:0 18px; background:#EDE7DC; border-bottom:1px solid #DDD6CA;">
+            <div style="display:flex; gap:7px;"><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span></div>
+            <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="#9A9186" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1L1 6l5 5M24 1l5 5-5 5"></path></svg>
+            <div style="flex:1; display:flex; justify-content:center;"><span style="height:26px; min-width:320px; padding:0 14px; box-sizing:border-box; border-radius:8px; background:#FBF9F5; border:1px solid #DDD6CA; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B645C;">croche.ba/owner/catalogue</span></div>
+            <div style="width:48px;"></div>
+          </div>
+          <div style="display:flex; height:636px;">
+            <div style="width:176px; flex:none; box-sizing:border-box; background:#FBF9F5; border-right:1px solid #DDD6CA; display:flex; flex-direction:column;">
+              <div style="height:64px; flex:none; display:flex; align-items:center; gap:10px; padding:0 18px; border-bottom:1px solid #DDD6CA;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:22px; width:auto;"><span style="display:flex; flex-direction:column; gap:2px;"><span style="font-family:'Bodoni Moda',serif; font-size:13px; letter-spacing:.2em;">CROCHÊ</span><span style="font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.18em; color:#6B645C;">ADMIN</span></span></div>
+              <div style="display:flex; flex-direction:column; padding:14px 0;">
+                <sc-for list="{{ c3.nav }}" as="n" hint-placeholder-count="7">
+                  <div style="position:relative; height:38px; display:flex; align-items:center; padding:0 18px; font-size:13.5px; color:{{ n.fg }};"><span style="position:absolute; left:0; top:9px; bottom:9px; width:2px; background:{{ n.bar }};"></span>{{ n.label }}<sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto; min-width:18px; height:18px; padding:0 5px; box-sizing:border-box; background:#7B1E3A; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:10px; display:flex; align-items:center; justify-content:center;">4</span></sc-if></div>
+                </sc-for>
+              </div>
+              <div style="margin-top:auto; padding:16px 18px; border-top:1px solid #DDD6CA; display:flex; flex-direction:column; gap:2px;"><span>Iman Delić</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; color:#6B645C;">OWNER</span></div>
+            </div>
+            <div style="position:relative; flex:1; min-width:0; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span style="font-family:'Bodoni Moda',serif; font-size:30px; line-height:1;">Catalogue</span>
+                <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; color:{{ c3.noteFg }};">{{ c3.note }}</span>
+                <span data-tgt="save" style="height:32px; padding:0 18px; background:{{ c3.saveBg }}; color:{{ c3.saveFg }}; font-weight:500; font-size:12px; letter-spacing:.06em; display:flex; align-items:center; transition:background .3s, color .3s;">SAVE</span>
+              </div>
+              <div data-tgt="stock" style="display:flex; flex-direction:column;">
+                <div style="display:grid; grid-template-columns:minmax(0,1fr) 132px 112px; gap:12px; padding:0 12px 8px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;"><span>YARN · REGULAR</span><span>BALLS</span><span>STATUS</span></div>
+                <sc-for list="{{ c3.stock }}" as="r" hint-placeholder-count="4">
+                  <div style="display:grid; grid-template-columns:minmax(0,1fr) 132px 112px; gap:12px; align-items:center; height:44px; padding:0 12px; background:{{ r.bg }}; border:1px solid #DDD6CA; margin-top:-1px; transition:background .6s;">
+                    <span style="display:flex; align-items:center; gap:10px;"><span style="width:16px; height:16px; background:{{ r.hex }}; box-shadow:inset 0 0 0 1px rgba(20,17,15,.1);"></span>{{ r.name }}</span>
+                    <span style="display:flex; align-items:center;"><span style="width:26px; height:26px; box-sizing:border-box; border:1px solid #DDD6CA; display:flex; align-items:center; justify-content:center; color:#6B645C;">−</span><span style="width:40px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:13px;">{{ r.n }}</span><span data-tgt="plus-{{ r.id }}" style="width:26px; height:26px; box-sizing:border-box; border:1px solid #14110F; display:flex; align-items:center; justify-content:center;">+</span></span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:{{ r.stFg }};">{{ r.st }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div data-tgt="models" style="display:flex; flex-direction:column;">
+                <div style="display:grid; grid-template-columns:minmax(0,1fr) 80px 70px 60px; gap:12px; padding:0 12px 8px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;"><span>MODEL</span><span>SIZE</span><span>PRICE</span><span>ACTIVE</span></div>
+                <sc-for list="{{ c3.models }}" as="m" hint-placeholder-count="0">
+                  <div style="display:grid; grid-template-columns:minmax(0,1fr) 80px 70px 60px; gap:12px; align-items:center; height:44px; padding:0 12px; background:{{ m.bg }}; border:1px solid #DDD6CA; margin-top:-1px; transition:background .6s;">
+                    <span style="display:flex; align-items:center; gap:10px;"><img src="{{ m.img }}" alt="" style="width:28px; height:30px; object-fit:cover; filter:grayscale(1); background:#E4DCCB;"><span style="font-family:'Bodoni Moda',serif; font-size:15px;">{{ m.name }}</span></span>
+                    <span style="color:#4A443E;">Classic</span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:12px;">{{ m.price }}</span>
+                    <span data-tgt="tog-{{ m.id }}" style="position:relative; width:34px; height:18px; background:{{ m.togBg }}; transition:background .3s;"><span style="position:absolute; left:2px; top:2px; width:14px; height:14px; background:#FBF9F5; transform:{{ m.knob }}; transition:transform .3s cubic-bezier(.5,0,.2,1);"></span></span>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ c3.toast }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; left:22px; bottom:24px; padding:12px 16px; background:#14110F; color:#F4F0E9; font-weight:500; box-shadow:0 14px 34px rgba(20,17,15,.28); animation:kPop .35s cubic-bezier(.22,.61,.36,1) both;">{{ c3.toastText }}</div>
+              </sc-if>
+            </div>
+            <div style="width:300px; flex:none; box-sizing:border-box; border-left:1px solid #DDD6CA; background:#EDE7DC; padding:20px 26px; display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <span style="align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;">LIVE ON THE SHOP</span>
+              <div data-tgt="phone" style="width:236px; height:520px; box-sizing:border-box; border-radius:30px; background:#F4F0E9; border:6px solid #14110F; padding:16px 14px; display:flex; flex-direction:column; gap:10px; overflow:hidden;">
+                <span style="display:flex; align-items:center; gap:6px;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:18px; width:auto;"><img src="./assets/croche/logo-wordmark.svg" alt="" style="display:block; height:9px; width:auto;"><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:7.5px; letter-spacing:.16em;">MENU</span></span>
+                <span style="font-family:'Bodoni Moda',serif; font-size:22px; line-height:1.05; margin-top:6px;">Choose a model</span>
+                <sc-for list="{{ c3.shop }}" as="m" hint-placeholder-count="0">
+                  <div style="display:flex; align-items:center; gap:10px; padding:6px; background:{{ m.flash }}; border-bottom:1px solid #DDD6CA; transition:background .6s;">
+                    <img src="{{ m.img }}" alt="" style="width:38px; height:42px; object-fit:cover; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB; opacity:{{ m.o }};">
+                    <span style="display:flex; flex-direction:column; gap:2px; min-width:0;"><span style="font-family:'Bodoni Moda',serif; font-size:14px;">{{ m.name }}</span><span style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:.12em; color:{{ m.subFg }};">{{ m.sub }}</span></span>
+                  </div>
+                </sc-for>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:7.5px; letter-spacing:.16em; color:#6B645C; margin-top:4px;">YARN IN STOCK</span>
+                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+                  <sc-for list="{{ c3.shopYarn }}" as="y" hint-placeholder-count="4">
+                    <span style="display:flex; flex-direction:column; gap:4px; opacity:{{ y.o }}; transition:opacity .4s;"><span style="height:22px; background:{{ y.hex }}; box-shadow:inset 0 0 0 1px rgba(20,17,15,.1);"></span><span style="font-size:8.5px; color:{{ y.fg }};">{{ y.label }}</span></span>
+                  </sc-for>
+                </div>
+                <span style="margin-top:auto; height:36px; background:#7B1E3A; color:#FFFFFF; font-weight:500; font-size:10.5px; letter-spacing:.06em; display:flex; align-items:center; justify-content:center;">CHOOSE A MODEL ↗</span>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute; left:{{ c3.curX }}; top:{{ c3.curY }}; z-index:50; pointer-events:none; opacity:{{ c3.curO }}; transition:left .75s cubic-bezier(.5,0,.2,1), top .75s cubic-bezier(.5,0,.2,1), opacity .3s;">
+            <div style="transform:{{ c3.curT }}; transform-origin:0 0; transition:transform 1.15s cubic-bezier(.65,0,.35,1);">
+              <sc-if value="{{ c3.rip }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:-20px; top:-20px; width:40px; height:40px; box-sizing:border-box; border-radius:50%; border:2px solid #0C7CC4; animation:kRip .5s ease-out forwards;"></span></sc-if>
+              <svg width="22" height="24" viewBox="0 0 22 24" style="display:block; transform:{{ c3.press }}; transform-origin:2px 2px; transition:transform .12s; filter:drop-shadow(0 3px 6px rgba(10,26,37,.3));"><path d="M2 1.5V19l4.6-4.2 3 6.8 3-1.3-2.9-6.7 6.3-.2z" fill="#0A1A25" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; left:16px; right:16px; bottom:16px; z-index:60; display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:18px; background:rgba(255,255,255,.74); border:1px solid rgba(255,255,255,.85); box-shadow:0 12px 30px rgba(10,26,37,.10); backdrop-filter:blur(18px) saturate(170%); -webkit-backdrop-filter:blur(18px) saturate(170%);">
+          <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4; flex:none;"></span>
+          <span style="flex:1; min-width:0; font-size:15px; font-weight:600; letter-spacing:-0.015em; color:#0A1A25;">{{ c3.say }}</span>
+          <div style="display:flex; gap:5px; flex:none;"><sc-for list="{{ c3.dots }}" as="d" hint-placeholder-count="8"><span style="width:{{ d.w }}; height:5px; border-radius:999px; background:{{ d.bg }}; transition:width .3s, background .3s;"></span></sc-for></div>
+        </div>
+      </div>
+    </x-import></div>
+  </div>
+</section>
+
+<section data-screen-label="Capabilities 04 Dashboard" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:clamp(48px,6vw,96px); align-items:center;">
+
+    <div data-demo="" style="position:relative; min-width:0; transform-origin:50% 50%; will-change:transform;"><x-import component="BorderGlow" from="./BorderGlow.jsx" background-color="#FFFFFF" glow-color="202 78% 56%" colors="#9CCCEB,#0C7CC4,#CFE8F7" border-radius="28" glow-radius="40" edge-sensitivity="24" glow-intensity="0.9" cone-spread="25" hint-size="100%,520px">
+      <div ref="{{ vp4 }}" data-vp="4" style="position:relative; width:100%; aspect-ratio:{{ c4.aspect }}; border-radius:28px; overflow:hidden; background:radial-gradient(120% 90% at 20% 110%,#9CCCEB 0%,#E0F0FA 40%,#FFFFFF 78%);">
+        <div data-app="" style="position:absolute; left:0; top:0; width:1040px; height:680px; transform-origin:0 0; transform:{{ c4.appT }}; opacity:{{ c4.appO }}; transition:transform 1.15s cubic-bezier(.65,0,.35,1), opacity .4s; border-radius:18px; background:#F4F0E9; border:1px solid #DDD6CA; box-shadow:0 30px 80px rgba(20,17,15,.14); overflow:hidden; font-family:'Archivo',sans-serif; font-size:13px; color:#14110F;">
+          <div style="height:44px; display:flex; align-items:center; gap:18px; padding:0 18px; background:#EDE7DC; border-bottom:1px solid #DDD6CA;">
+            <div style="display:flex; gap:7px;"><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span></div>
+            <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="#9A9186" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1L1 6l5 5M24 1l5 5-5 5"></path></svg>
+            <div style="flex:1; display:flex; justify-content:center;"><span style="height:26px; min-width:320px; padding:0 14px; box-sizing:border-box; border-radius:8px; background:#FBF9F5; border:1px solid #DDD6CA; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B645C;">croche.ba/owner/</span></div>
+            <div style="width:48px;"></div>
+          </div>
+          <div style="display:flex; height:636px;">
+            <div style="width:176px; flex:none; box-sizing:border-box; background:#FBF9F5; border-right:1px solid #DDD6CA; display:flex; flex-direction:column;">
+              <div style="height:64px; flex:none; display:flex; align-items:center; gap:10px; padding:0 18px; border-bottom:1px solid #DDD6CA;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; height:22px; width:auto;"><span style="display:flex; flex-direction:column; gap:2px;"><span style="font-family:'Bodoni Moda',serif; font-size:13px; letter-spacing:.2em;">CROCHÊ</span><span style="font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.18em; color:#6B645C;">ADMIN</span></span></div>
+              <div style="display:flex; flex-direction:column; padding:14px 0;">
+                <sc-for list="{{ c4.nav }}" as="n" hint-placeholder-count="7">
+                  <div style="position:relative; height:38px; display:flex; align-items:center; padding:0 18px; font-size:13.5px; color:{{ n.fg }};"><span style="position:absolute; left:0; top:9px; bottom:9px; width:2px; background:{{ n.bar }};"></span>{{ n.label }}<sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto; min-width:18px; height:18px; padding:0 5px; box-sizing:border-box; background:#7B1E3A; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:10px; display:flex; align-items:center; justify-content:center;">{{ c4.waiting }}</span></sc-if></div>
+                </sc-for>
+              </div>
+              <div style="margin-top:auto; padding:16px 18px; border-top:1px solid #DDD6CA; display:flex; flex-direction:column; gap:2px;"><span>Iman Delić</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em; color:#6B645C;">OWNER</span></div>
+            </div>
+            <div data-tgt="main" style="flex:1; min-width:0; box-sizing:border-box; padding:18px 20px; display:flex; flex-direction:column; gap:12px;">
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span style="font-family:'Bodoni Moda',serif; font-size:30px; line-height:1;">Overview</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; color:#6B645C;">SUNDAY, 16 AUGUST 2026</span>
+                <div style="margin-left:auto; display:flex; border:1px solid #DDD6CA;">
+                  <sc-for list="{{ c4.ranges }}" as="r" hint-placeholder-count="3">
+                    <span data-tgt="range-{{ r.id }}" style="padding:6px 12px; background:{{ r.bg }}; color:{{ r.fg }}; font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:.08em; transition:background .25s, color .25s;">{{ r.label }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <div data-tgt="kpis" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid #14110F;">
+                <sc-for list="{{ c4.kpis }}" as="k" hint-placeholder-count="4">
+                  <div data-tgt="kpi-{{ $index }}" style="display:flex; flex-direction:column; gap:4px; padding:12px 14px; background:{{ k.bg }}; color:{{ k.fg }}; border-right:1px solid #DDD6CA; transition:background .4s;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:.16em;">{{ k.l }}</span>
+                    <span style="font-family:'Bodoni Moda',serif; font-size:30px; line-height:1.05;">{{ k.v }}</span>
+                    <span style="font-size:11px; color:{{ k.dc }};">{{ k.d }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; height:34px; padding:0 14px; background:#EDE7DC; border:1px solid #DDD6CA; font-size:12.5px;"><span style="width:9px; height:9px; background:#7B1E3A;"></span>Yarn running low: Powder — 1 ball, Olive — 3 balls<span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:#7B1E3A; box-shadow:inset 0 -1px 0 #7B1E3A;">MATERIAL ↗</span></div>
+              <div style="flex:1; min-height:0; display:flex; gap:12px;">
+                <div data-tgt="chart" style="position:relative; flex:1; min-width:0; border:1px solid #14110F; background:#FBF9F5; padding:14px 16px; display:flex; flex-direction:column; gap:12px;">
+                  <div style="display:flex; align-items:baseline; gap:12px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.16em;">REVENUE OVER TIME</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.1em; color:#6B645C;">{{ c4.chartSum }}</span></div>
+                  <div style="position:relative; flex:1; display:flex; align-items:flex-end; gap:8px; padding-bottom:20px; background:repeating-linear-gradient(180deg,rgba(0,0,0,0) 0 69px,#DDD6CA 69px 70px);">
+                    <sc-for list="{{ c4.bars }}" as="b" hint-placeholder-count="6">
+                      <div style="position:relative; flex:1; height:100%; display:flex; align-items:flex-end; justify-content:center;">
+                        <div data-tgt="bar-{{ b.key }}" style="position:relative; width:62%; height:{{ b.h }}; background:{{ b.bg }}; transition:height .7s cubic-bezier(.22,.61,.36,1), background .3s;"><sc-if value="{{ b.dot }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:50%; top:-5px; width:10px; height:10px; margin-left:-5px; border-radius:50%; background:#7B1E3A;"></span></sc-if></div>
+                        <span style="position:absolute; left:0; right:0; bottom:-18px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.08em; color:{{ b.lc }};">{{ b.label }}</span>
+                      </div>
+                    </sc-for>
+                    <sc-if value="{{ c4.tip }}" hint-placeholder-val="{{ false }}">
+                      <div style="position:absolute; right:0; top:0; padding:10px 12px; background:#14110F; color:#F4F0E9; white-space:nowrap; box-shadow:0 10px 24px rgba(20,17,15,.3); display:flex; flex-direction:column; gap:3px; animation:kPop .3s ease-out both;">
+                        <span style="font-family:'Bodoni Moda',serif; font-size:17px;">August 2026 · 880 KM</span><span style="font-size:11px; color:#C9BFAF;">14 orders · average 63 KM · material 334 KM</span>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+                <div data-tgt="feed" style="width:292px; flex:none; box-sizing:border-box; border:1px solid #14110F; background:#FBF9F5; padding:14px 14px 6px; display:flex; flex-direction:column; overflow:hidden;">
+                  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><span style="width:7px; height:7px; border-radius:50%; background:#7B1E3A; animation:kPulse 1.6s ease-in-out infinite;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.16em;">NEW ORDERS</span></div>
+                  <sc-if value="{{ c4.arrived }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex; flex-direction:column; gap:4px; padding:10px; margin:0 -4px; background:#F4F0E9; box-shadow:inset 0 0 0 1px #7B1E3A; animation:kRowIn .45s cubic-bezier(.22,.61,.36,1) both;">
+                      <div style="display:flex; align-items:center; gap:8px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.08em;">CR-0142</span><span style="height:16px; padding:0 6px; background:#7B1E3A; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.12em; display:flex; align-items:center; box-shadow:2px 2px 0 0 #14110F;">NEW</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:11px;">67 KM</span></div>
+                      <span style="font-size:12px;">Amina Hodžić · Sarajevo</span>
+                      <span style="font-size:11.5px; color:#6B645C;">Clutch M · Bordeaux · 16.08. 09:41</span>
+                    </div>
+                  </sc-if>
+                  <sc-for list="{{ c4.feed }}" as="o" hint-placeholder-count="3">
+                    <div style="display:flex; flex-direction:column; gap:4px; padding:10px 0; border-top:1px solid #DDD6CA;">
+                      <div style="display:flex; align-items:center; gap:8px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.08em; color:#4A443E;">{{ o.id }}</span><span style="height:16px; padding:0 6px; background:{{ o.chipBg }}; color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.12em; display:flex; align-items:center;">{{ o.st }}</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:11px;">{{ o.amt }}</span></div>
+                      <span style="font-size:12px;">{{ o.who }}</span>
+                      <span style="font-size:11.5px; color:#6B645C;">{{ o.item }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute; left:{{ c4.curX }}; top:{{ c4.curY }}; z-index:50; pointer-events:none; opacity:{{ c4.curO }}; transition:left .75s cubic-bezier(.5,0,.2,1), top .75s cubic-bezier(.5,0,.2,1), opacity .3s;">
+            <div style="transform:{{ c4.curT }}; transform-origin:0 0; transition:transform 1.15s cubic-bezier(.65,0,.35,1);">
+              <sc-if value="{{ c4.rip }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:-20px; top:-20px; width:40px; height:40px; box-sizing:border-box; border-radius:50%; border:2px solid #0C7CC4; animation:kRip .5s ease-out forwards;"></span></sc-if>
+              <svg width="22" height="24" viewBox="0 0 22 24" style="display:block; transform:{{ c4.press }}; transform-origin:2px 2px; transition:transform .12s; filter:drop-shadow(0 3px 6px rgba(10,26,37,.3));"><path d="M2 1.5V19l4.6-4.2 3 6.8 3-1.3-2.9-6.7 6.3-.2z" fill="#0A1A25" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; left:16px; right:16px; bottom:16px; z-index:60; display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:18px; background:rgba(255,255,255,.74); border:1px solid rgba(255,255,255,.85); box-shadow:0 12px 30px rgba(10,26,37,.10); backdrop-filter:blur(18px) saturate(170%); -webkit-backdrop-filter:blur(18px) saturate(170%);">
+          <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4; flex:none;"></span>
+          <span style="flex:1; min-width:0; font-size:15px; font-weight:600; letter-spacing:-0.015em; color:#0A1A25;">{{ c4.say }}</span>
+          <div style="display:flex; gap:5px; flex:none;"><sc-for list="{{ c4.dots }}" as="d" hint-placeholder-count="7"><span style="width:{{ d.w }}; height:5px; border-radius:999px; background:{{ d.bg }}; transition:width .3s, background .3s;"></span></sc-for></div>
+        </div>
+      </div>
+    </x-import></div>
+
+    <div style="position:relative; order:-1; display:flex; flex-direction:column; gap:24px; max-width:46ch;">
+      <img data-ghost="" src="./uploads/pasted-1789950097988-0.png" alt="" style="width:clamp(88px,8vw,124px); height:auto; display:block; align-self:flex-start; margin-bottom:4px; will-change:transform;">
+      <span style="display:inline-flex; align-items:center; gap:10px; align-self:flex-start; height:32px; padding:0 15px 0 13px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; font-size:13px; color:#42545F;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; color:#93A3AE;">04</span><span style="width:1px; height:12px; background:#E3EAF0;"></span>Owner's dashboard</span>
+      <h3 style="margin:0; display:flex; flex-direction:column; font-weight:600; letter-spacing:-0.035em; line-height:1.04; color:#0A1A25; font-size:clamp(36px,4.4vw,60px);">
+        <x-import component="TextReveal" from="./Motion.jsx" text="Numbers you'll" hint-size="100%,1.04em"></x-import>
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="actually read." delay="50" hint-size="100%,1.04em"></x-import></span>
+      </h3>
+      <p style="margin:0; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">What's waiting, what's late, what August brought in. One screen in plain words, built around what a maker asks before she starts the day.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Capabilities 05 Emails" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:clamp(48px,6vw,96px); align-items:center;">
+
+    <div style="position:relative; order:-1; display:flex; flex-direction:column; gap:24px; max-width:46ch;">
+      <img data-ghost="" src="./uploads/pasted-1789950100962-0.png" alt="" style="width:clamp(88px,8vw,124px); height:auto; display:block; align-self:flex-start; margin-bottom:4px; will-change:transform;">
+      <span style="display:inline-flex; align-items:center; gap:10px; align-self:flex-start; height:32px; padding:0 15px 0 13px; border-radius:999px; background:#FFFFFF; border:1px solid #E3EAF0; font-size:13px; color:#42545F;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; color:#93A3AE;">05</span><span style="width:1px; height:12px; background:#E3EAF0;"></span>Customer emails</span>
+      <h3 style="margin:0; display:flex; flex-direction:column; font-weight:600; letter-spacing:-0.035em; line-height:1.04; color:#0A1A25; font-size:clamp(36px,4.4vw,60px);">
+        <x-import component="TextReveal" from="./Motion.jsx" text="Every step," hint-size="100%,1.04em"></x-import>
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="in her inbox." delay="50" hint-size="100%,1.04em"></x-import></span>
+      </h3>
+      <p style="margin:0; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">One tap moves an order forward and the customer hears about it. A bag can't be marked finished without a photo, and it can't ship without a tracking number.</p>
+    </div>
+
+    <div data-demo="" style="position:relative; min-width:0; transform-origin:50% 50%; will-change:transform;"><x-import component="BorderGlow" from="./BorderGlow.jsx" background-color="#FFFFFF" glow-color="202 78% 56%" colors="#9CCCEB,#0C7CC4,#CFE8F7" border-radius="28" glow-radius="40" edge-sensitivity="24" glow-intensity="0.9" cone-spread="25" hint-size="100%,520px">
+      <div ref="{{ vp5 }}" data-vp="5" style="position:relative; width:100%; aspect-ratio:{{ c5.aspect }}; border-radius:28px; overflow:hidden; background:radial-gradient(120% 90% at 20% 110%,#9CCCEB 0%,#E0F0FA 40%,#FFFFFF 78%);">
+        <div data-app="" style="position:absolute; left:0; top:0; width:1040px; height:680px; transform-origin:0 0; transform:{{ c5.appT }}; opacity:{{ c5.appO }}; transition:transform 1.15s cubic-bezier(.65,0,.35,1), opacity .4s; border-radius:18px; background:#F4F0E9; border:1px solid #DDD6CA; box-shadow:0 30px 80px rgba(20,17,15,.14); overflow:hidden; font-family:'Archivo',sans-serif; font-size:13px; color:#14110F;">
+          <div style="height:44px; display:flex; align-items:center; gap:18px; padding:0 18px; background:#EDE7DC; border-bottom:1px solid #DDD6CA;">
+            <div style="display:flex; gap:7px;"><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span><span style="width:11px; height:11px; border-radius:50%; background:#D3CABB;"></span></div>
+            <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="#9A9186" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1L1 6l5 5M24 1l5 5-5 5"></path></svg>
+            <div style="flex:1; display:flex; justify-content:center;"><span style="height:26px; min-width:320px; padding:0 14px; box-sizing:border-box; border-radius:8px; background:#FBF9F5; border:1px solid #DDD6CA; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B645C;">croche.ba/owner/orders/CR-0138</span></div>
+            <div style="width:48px;"></div>
+          </div>
+          <div style="display:flex; height:636px;">
+            <div style="position:relative; flex:1; min-width:0; box-sizing:border-box; padding:22px 26px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; align-items:flex-end; gap:14px;">
+                <span style="display:flex; flex-direction:column; gap:4px;"><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.18em; color:#6B645C;">ORDER</span><span style="font-family:'Bodoni Moda',serif; font-size:32px; line-height:1;">CR-0138</span></span>
+                <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; color:#6B645C;">PLACED 14.08. 20:55</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border:1px solid #DDD6CA; background:#FBF9F5;">
+                <span style="display:flex; flex-direction:column; gap:4px; padding:12px 14px; border-right:1px solid #DDD6CA;"><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; color:#6B645C;">CUSTOMER</span><span>Dženana Alić · Zenica</span></span>
+                <span style="display:flex; flex-direction:column; gap:4px; padding:12px 14px; border-right:1px solid #DDD6CA;"><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; color:#6B645C;">PIECE</span><span>Clutch S · Anthracite</span></span>
+                <span style="display:flex; flex-direction:column; gap:4px; padding:12px 14px;"><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; color:#6B645C;">AMOUNT</span><span style="font-family:'JetBrains Mono',monospace;">59 KM</span></span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:6px;">
+                <sc-for list="{{ c5.steps }}" as="s" hint-placeholder-count="6">
+                  <span style="display:flex; flex-direction:column; gap:7px;"><span style="height:4px; background:{{ s.bg }}; transition:background .4s;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; color:{{ s.fg }}; font-weight:{{ s.fw }};">{{ s.label }}</span></span>
+                </sc-for>
+              </div>
+              <div data-tgt="req" style="min-height:132px; box-sizing:border-box; padding:14px 16px; border:1px solid #DDD6CA; background:#FBF9F5; display:flex; flex-direction:column; gap:10px;">
+                <sc-if value="{{ c5.reqNone }}" hint-placeholder-val="{{ true }}"><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;">NEXT STEP</span><span style="font-size:13.5px; line-height:1.5; color:#4A443E;">{{ c5.reqText }}</span></sc-if>
+                <sc-if value="{{ c5.reqPhoto }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;">PHOTO OF THE FINISHED PIECE · REQUIRED</span>
+                  <div style="display:flex; align-items:center; gap:14px;">
+                    <sc-if value="{{ c5.noPhoto }}" hint-placeholder-val="{{ true }}"><span data-tgt="photo" style="width:78px; height:90px; box-sizing:border-box; border:1.5px dashed #B9A78C; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; color:#6B645C; text-align:center;">ADD<br>PHOTO</span></sc-if>
+                    <sc-if value="{{ c5.hasPhoto }}" hint-placeholder-val="{{ false }}"><img data-tgt="photo" src="./assets/croche/product-clutch.png" alt="" style="width:78px; height:90px; object-fit:cover; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB; animation:kPop .35s ease-out both;"></sc-if>
+                    <sc-if value="{{ c5.nudge }}" hint-placeholder-val="{{ false }}"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; color:#7B1E3A; animation:kPop .3s ease-out both;">ADD AT LEAST ONE PHOTO</span></sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ c5.reqTrack }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;">TRACKING NUMBER · REQUIRED</span>
+                  <span data-tgt="track" style="height:44px; padding:0 14px; box-sizing:border-box; border:1px solid {{ c5.trackBd }}; background:#FFFFFF; display:flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:15px; color:{{ c5.trackFg }};">{{ c5.trackTxt }}<sc-if value="{{ c5.typing }}" hint-placeholder-val="{{ false }}"><span style="width:1.5px; height:17px; margin-left:2px; background:#7B1E3A; animation:kBlink 1s step-start infinite;"></span></sc-if></span>
+                </sc-if>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span style="display:flex; align-items:center; gap:9px; font-size:12.5px;"><span style="width:15px; height:15px; background:#14110F; display:flex; align-items:center; justify-content:center;"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5.2l2.2 2.2L8 3.2" stroke="#FFF" stroke-width="1.6" stroke-linecap="square"></path></svg></span>Send this email</span>
+                <span style="font-size:12.5px; color:#6B645C;">{{ c5.mailNext }}</span>
+                <span data-tgt="advance" style="margin-left:auto; height:44px; padding:0 20px; background:#14110F; color:#F4F0E9; font-weight:500; font-size:12px; letter-spacing:.06em; display:flex; align-items:center; opacity:{{ c5.advO }}; transition:opacity .3s;">{{ c5.advLabel }}</span>
+              </div>
+              <div style="display:flex; flex-direction:column; border-top:1px solid #DDD6CA;">
+                <sc-for list="{{ c5.history }}" as="h" hint-placeholder-count="2">
+                  <div style="display:grid; grid-template-columns:96px minmax(0,1fr); gap:12px; padding:8px 0; border-bottom:1px solid #DDD6CA; font-size:12px; animation:kRowIn .35s ease-out both;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B645C;">{{ h.t }}</span><span style="color:#4A443E;">{{ h.x }}</span></div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="width:320px; flex:none; box-sizing:border-box; border-left:1px solid #DDD6CA; background:#EDE7DC; padding:20px 28px; display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <span style="align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#6B645C;">DŽENANA'S PHONE</span>
+              <div data-tgt="phone" style="width:252px; height:540px; box-sizing:border-box; border-radius:30px; background:#FFFFFF; border:6px solid #14110F; padding:18px 0 0; display:flex; flex-direction:column; overflow:hidden; font-family:'Instrument Sans',sans-serif; color:#14110F;">
+                <span style="padding:0 16px 10px; font-size:24px; font-weight:600; letter-spacing:-0.02em;">Inbox</span>
+                <sc-for list="{{ c5.mails }}" as="m" hint-placeholder-count="2">
+                  <div style="display:flex; gap:10px; padding:10px 16px; border-top:1px solid #EFEDE9; background:{{ m.bg }}; transition:background .8s; animation:kRowIn .45s cubic-bezier(.22,.61,.36,1) both;">
+                    <span style="width:30px; height:30px; flex:none; border-radius:50%; background:#F4F0E9; display:flex; align-items:center; justify-content:center;"><img src="./assets/croche/logo-mark.svg" alt="" style="display:block; width:18px; height:auto;"></span>
+                    <span style="flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;">
+                      <span style="display:flex; align-items:baseline; gap:6px;"><span style="font-size:12.5px; font-weight:600;">Crochê</span><span style="margin-left:auto; font-size:10.5px; color:#8A857D;">{{ m.t }}</span></span>
+                      <span style="font-size:12px; font-weight:{{ m.fw }};">{{ m.subj }}</span>
+                      <span style="font-size:11px; line-height:1.4; color:#6B645C;">{{ m.pre }}</span>
+                      <sc-if value="{{ m.photo }}" hint-placeholder-val="{{ false }}"><img src="./assets/croche/product-clutch.png" alt="" style="margin-top:5px; width:64px; height:72px; object-fit:cover; filter:grayscale(1); border-radius:50% 50% 0 0 / 24% 24% 0 0; background:#E4DCCB;"></sc-if>
+                      <sc-if value="{{ m.track }}" hint-placeholder-val="{{ false }}"><span style="margin-top:5px; align-self:flex-start; padding:4px 7px; background:#F4F0E9; font-family:'JetBrains Mono',monospace; font-size:10px;">BH 41 220 118 4</span></sc-if>
+                    </span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute; left:{{ c5.curX }}; top:{{ c5.curY }}; z-index:50; pointer-events:none; opacity:{{ c5.curO }}; transition:left .75s cubic-bezier(.5,0,.2,1), top .75s cubic-bezier(.5,0,.2,1), opacity .3s;">
+            <div style="transform:{{ c5.curT }}; transform-origin:0 0; transition:transform 1.15s cubic-bezier(.65,0,.35,1);">
+              <sc-if value="{{ c5.rip }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:-20px; top:-20px; width:40px; height:40px; box-sizing:border-box; border-radius:50%; border:2px solid #0C7CC4; animation:kRip .5s ease-out forwards;"></span></sc-if>
+              <svg width="22" height="24" viewBox="0 0 22 24" style="display:block; transform:{{ c5.press }}; transform-origin:2px 2px; transition:transform .12s; filter:drop-shadow(0 3px 6px rgba(10,26,37,.3));"><path d="M2 1.5V19l4.6-4.2 3 6.8 3-1.3-2.9-6.7 6.3-.2z" fill="#0A1A25" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; left:16px; right:16px; bottom:16px; z-index:60; display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:18px; background:rgba(255,255,255,.74); border:1px solid rgba(255,255,255,.85); box-shadow:0 12px 30px rgba(10,26,37,.10); backdrop-filter:blur(18px) saturate(170%); -webkit-backdrop-filter:blur(18px) saturate(170%);">
+          <span style="width:7px; height:7px; border-radius:50%; background:#0C7CC4; flex:none;"></span>
+          <span style="flex:1; min-width:0; font-size:15px; font-weight:600; letter-spacing:-0.015em; color:#0A1A25;">{{ c5.say }}</span>
+          <div style="display:flex; gap:5px; flex:none;"><sc-for list="{{ c5.dots }}" as="d" hint-placeholder-count="11"><span style="width:{{ d.w }}; height:5px; border-radius:999px; background:{{ d.bg }}; transition:width .3s, background .3s;"></span></sc-for></div>
+        </div>
+      </div>
+    </x-import></div>
+  </div>
+</section>
+
+<section data-screen-label="Capabilities close" style="position:relative; flex:0 0 100%; min-width:0; box-sizing:border-box; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always; display:flex; align-items:center; overflow:hidden; padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);">
+  <div style="position:relative; width:100%; max-width:980px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:30px; text-align:center;">
+    <div style="position:relative; width:clamp(130px,13vw,190px);"><div aria-hidden="true" style="position:absolute; left:50%; bottom:-18%; width:170%; height:60%; transform:translateX(-50%); border-radius:50%; background:radial-gradient(closest-side,#9CCCEB 0%,rgba(156,204,235,0) 100%); filter:blur(24px); opacity:.6;"></div><img data-ghost="" src="./uploads/pasted-1789950103853-0.png" alt="" style="position:relative; width:100%; height:auto; display:block; will-change:transform;"></div>
+    <h2 style="margin:0; display:flex; flex-direction:column; align-items:center; font-weight:600; letter-spacing:-0.035em; line-height:1.04; font-size:clamp(38px,5.4vw,72px); color:#0A1A25;">
+      <x-import component="TextReveal" from="./Motion.jsx" text="Crochê is one maker." hint-size="100%,1.04em"></x-import>
+      <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:300; letter-spacing:-0.015em; color:#0C7CC4;"><x-import component="TextReveal" from="./Motion.jsx" text="Yours is next." delay="60" hint-size="100%,1.04em"></x-import></span>
+    </h2>
+    <p style="margin:0; max-width:48ch; font-size:18px; line-height:1.6; color:#42545F; text-wrap:pretty;">Two chairs or forty stores, the work is the same: a look people remember, a site that sells, and a back office that runs itself.</p>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; max-width:820px;">
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Bakeries</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Cafés</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Barbers</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Salons</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Dental clinics</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Restaurants</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Boutiques</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Florists</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Gyms</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Hotels</span>
+      <span style="height:38px; padding:0 16px; border-radius:999px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(12px); display:flex; align-items:center; font-size:15px; color:#0A1A25;">Retail chains</span>
+    </div>
+    <a href="#start" style="margin-top:10px; display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 8px 0 26px; border-radius:999px; background:#0C7CC4; color:#FFFFFF; font-size:16px; font-weight:500; letter-spacing:-0.01em; box-shadow:0 6px 18px rgba(12,124,196,.24); transition:background .22s, transform .22s, box-shadow .22s;" style-hover="background:#084B7A; color:#FFFFFF; transform:translateY(-1px); box-shadow:0 10px 26px rgba(12,124,196,.3);">Start a project<span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.18);"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+  </div>
+</section>
+
+</div>
+
+</div>
+<x-import component="GradualBlur" from="./GradualBlur.jsx" target="page" position="bottom" height="7rem" strength="1.1" div-count="6" curve="bezier" opacity="0.9" hint-size="100%,112px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;zoom&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Subtle&quot;,&quot;options&quot;:[&quot;Subtle&quot;,&quot;Normal&quot;,&quot;Close&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;tilt&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Track&quot;},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Scrub&quot;,&quot;options&quot;:[&quot;Scrub&quot;,&quot;Swipe&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Track&quot;},&quot;snap&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Track&quot;}}">
+const W = 1040, H = 680;
+const OVER = [470, 360, 1.04];
+const N = [1, 2, 3, 4, 5];
+const INK = '#14110F', ACC = '#7B1E3A', META = '#6B645C', LINE = '#DDD6CA', PANEL = '#FBF9F5', PAPER = '#F4F0E9';
+
+const PALS = [
+  { id: 'kost', name: 'Kost', sub: 'original', paper: '#F4F0E9', panel: '#FBF9F5', tone: '#E4DCCB', warm: '#B9A78C', body: '#4A443E', ink: '#14110F', accent: '#7B1E3A' },
+  { id: 'champ', name: 'Champagne', sub: 'balsamico', paper: '#FAF4EA', panel: '#F3E7D3', tone: '#EACEAA', warm: '#D39858', body: '#5C3324', ink: '#150C0C', accent: '#7B1E3A' },
+  { id: 'dove', name: 'Soft Dove', sub: 'black raspberry', paper: '#F2EFEC', panel: '#E6E2DE', tone: '#C0BAB3', warm: '#887D77', body: '#52423D', ink: '#160F0C', accent: '#391214' }
+];
+const NEUTRAL = { paper: '#F3F3F2', panel: '#FFFFFF', tone: '#E3E3E1', warm: '#BDBDBA', body: '#5A5A58', ink: '#232322', accent: '#3A3A38' };
+const FONTS = [
+  { id: 'archivo', name: 'Archivo Black', full: 'Exploration 01', fam: "'Archivo Black',sans-serif", size: '36px', ls: '-0.03em', tt: 'uppercase' },
+  { id: 'anton', name: 'Anton', full: 'Exploration 02', fam: "'Anton',sans-serif", size: '44px', ls: '0', tt: 'uppercase' },
+  { id: 'bodoni', name: 'Bodoni Moda', full: 'Names, headings, numbers', fam: "'Bodoni Moda',serif", size: '44px', ls: '-0.02em', tt: 'none' }
+];
+const LOGOS = [
+  { id: 'word', name: 'Wordmark', mark: false, word: true, markH: '0', wordH: '14px' },
+  { id: 'mark', name: 'Mark', mark: true, word: false, markH: '34px', wordH: '0' },
+  { id: 'lockup', name: 'Mark + word', mark: true, word: true, markH: '24px', wordH: '9px' }
+];
+
+const SIZES = [['mini', 'Mini', '18 × 12 cm', 54], ['classic', 'Classic', '22 × 14 cm', 60], ['grande', 'Grande', '26 × 16 cm', 66]];
+const YARN = [['mlijeko', 'Milk', '#EFE7D8'], ['pepeo', 'Ash', '#B9B2A6'], ['ugalj', 'Charcoal', '#33302C'], ['kakao', 'Cocoa', '#6B4630'], ['karamel', 'Caramel', '#B87A3D'], ['safran', 'Saffron', '#E0A527'], ['bakar', 'Copper', '#C0562B'], ['ruz', 'Lipstick', '#B03A52'], ['bordo', 'Bordeaux', '#7B1E3A'], ['puder', 'Powder', '#DDA6A0'], ['lila', 'Lilac', '#8A7BA8'], ['indigo', 'Indigo', '#2C3E63'], ['bazen', 'Pool', '#3E9AA8'], ['maslina', 'Olive', '#6E7449']];
+const GLIT = [['gold', 'Gold dust', '#C9A43E'], ['silver', 'Silver dust', '#B8BCC4'], ['rose', 'Rose', '#D9A3A0'], ['white', 'White shine', '#E8E4DA']];
+
+const NAV = ['Overview', 'Orders', 'Calendar', 'Catalogue', 'Customers', 'Codes', 'Schema'];
+const STOCK = [['bordo', 'Bordeaux', '#7B1E3A', 8], ['puder', 'Powder', '#DDA6A0', 1], ['mlijeko', 'Milk', '#EFE7D8', 5], ['maslina', 'Olive', '#6E7449', 3]];
+const MODELS = [['clutch', 'Clutch', 54, 60], ['square', 'Square', 62, 70], ['triangle', 'Triangle', 58, 66], ['special', 'Special', 66, 72]];
+const IMG = id => './assets/croche/product-' + id + '.png';
+
+const MONTHS = [['SEP', 260, 5], ['OCT', 310, 6], ['NOV', 395, 7], ['DEC', 520, 9], ['JAN', 320, 6], ['FEB', 410, 7], ['MAR', 380, 6], ['APR', 560, 9], ['MAY', 620, 10], ['JUN', 540, 9], ['JUL', 710, 12], ['AUG', 880, 14]];
+const FEED = [
+  { id: 'CR-0141', who: 'Lejla Karić · Mostar', item: 'Square S · Cream · 16.08. 08:12', amt: '54 KM', st: 'NEW', chipBg: ACC },
+  { id: 'CR-0140', who: 'Sanela Begić · Tuzla', item: 'Semicircle L · Olive · 15.08. 19:03', amt: '78 KM', st: 'NEW', chipBg: ACC },
+  { id: 'CR-0138', who: 'Dženana Alić · Zenica', item: 'Clutch S · Anthracite · 14.08. 20:55', amt: '59 KM', st: 'ACCEPTED', chipBg: '#4A443E' }
+];
+
+const STEPS = [['New', '#7B1E3A'], ['Accepted', '#4A443E'], ['In progress', '#6B645C'], ['Finished', '#8B837A'], ['Shipped', '#A9A29A'], ['Delivered', '#C9BFAF']];
+const MAILS = [
+  { subj: 'Your order is written down ♡ CR-0138', pre: 'Iman will let you know today or tomorrow when she starts.', t: '14.08.' },
+  { subj: 'Accepted. Ready by 22.08.', pre: 'Your Clutch S in Anthracite is in the queue.', t: '15.08.' },
+  { subj: 'I’ve started crocheting', pre: 'Your Clutch S in Anthracite is on the hook.', t: '09:12' },
+  { subj: 'Your bag is finished', pre: 'Here it is, before it’s packed.', t: '16:40', photo: true },
+  { subj: 'On its way', pre: 'Delivery in 3–5 days.', t: '17:05', track: true }
+];
+const HIST = [
+  { t: '14.08. 20:55', x: 'Order received · email sent' },
+  { t: '15.08. 21:04', x: 'Accepted, due 22.08. · email sent' },
+  { t: 'Today 09:12', x: 'In progress · one ball of yarn reserved · email sent' },
+  { t: 'Today 16:40', x: 'Finished · photo added · email sent' },
+  { t: 'Today 17:05', x: 'Shipped · BH 41 220 118 4 · email sent' }
+];
+const TRACK = 'BH 41 220 118 4';
+
+const INIT = {
+  1: () => ({ pal: null, font: 'archivo', logo: 'word', applied: false }),
+  2: () => ({ size: null, yarns: [], glitter: null, sending: false, done: false }),
+  3: () => ({ puder: 1, dirty: false, saved: false, flash: null, special: false, toast: false, toastText: '' }),
+  4: () => ({ arrived: false, range: '6m', hover: false }),
+  5: () => ({ stage: 1, mails: 2, flash: 0, photo: false, nudge: false, track: '', typing: false })
+};
+const FINAL = {
+  1: { pal: 'kost', font: 'bodoni', logo: 'lockup', applied: true, say: 'One look, down to the sticker.' },
+  2: { size: 'classic', yarns: ['bordo', 'puder', 'mlijeko'], glitter: 'gold', done: true, say: 'Sent. Payment waits for the door.' },
+  3: { puder: 6, special: true, saved: true, say: 'No ticket. No waiting on us.' },
+  4: { arrived: true, range: '12m', say: 'Everything she asks before she starts.' },
+  5: { stage: 4, mails: 5, photo: true, track: TRACK, say: 'Every step, in her inbox.' }
+};
+const SCRIPTS = {
+  1: [
+    { cam: OVER, say: 'Beautiful bags. No look yet.', wait: 1500 },
+    { cur: 'pal-dove', cam: ['panel-palette', 1.9, 20, 20], click: { pal: 'dove' }, say: 'Three palettes, compared side by side.', wait: 1600 },
+    { cur: 'pal-kost', cam: ['panel-palette', 1.9, 20, 20], click: { pal: 'kost' }, say: 'Kost. The bag stays the only warm thing in frame.', wait: 1900 },
+    { cam: ['preview-hero', 1.45], wait: 1400 },
+    { cur: 'font-bodoni', cam: ['panel-font', 1.75], click: { font: 'bodoni' }, say: 'Bodoni for names, headings and numbers.', wait: 1700 },
+    { cur: 'logo-lockup', cam: ['panel-logo', 1.8], click: { logo: 'lockup' }, say: 'The yarn-ball mark beside the wordmark.', wait: 1600 },
+    { cur: 'preview-head', cam: ['apps', 1.35, 0, -60], say: 'One look, down to the sticker.', wait: 1900 },
+    { cur: 'apply', cam: ['apply', 1.9, -80, 50], click: { applied: true }, say: 'Applied to the shop, the emails and the packaging.', wait: 1700 },
+    { cam: OVER, wait: 2600 }
+  ],
+  2: [
+    { cam: OVER, say: 'Build your own. A clutch, in her colours.', wait: 1500 },
+    { cur: 'size-classic', cam: ['sizes', 1.6], click: { size: 'classic' }, say: 'Classic, 22 × 14 cm. The price stays in view.', wait: 1700 },
+    { cur: 'yarn-bordo', cam: ['yarns', 1.5], click: { yarns: ['bordo'] }, say: 'Bordeaux.', wait: 1250 },
+    { cur: 'yarn-puder', cam: ['yarns', 1.5], click: { yarns: ['bordo', 'puder'] }, say: 'Powder.', wait: 1250 },
+    { cur: 'yarn-mlijeko', cam: ['yarns', 1.5], click: { yarns: ['bordo', 'puder', 'mlijeko'] }, say: 'Milk. Three is enough, the palette is full.', wait: 1800 },
+    { cam: ['bag', 1.45], say: 'The bag redraws with every pick.', wait: 1700 },
+    { cur: 'gl-gold', cam: ['glitter', 1.6], click: { glitter: 'gold' }, say: 'One glitter thread, +3 KM.', wait: 1500 },
+    { cur: 'cta', cam: ['cta', 1.4, -60, -40], click: { sending: true }, then: [[1700, { sending: false, done: true, say: 'Sent. Payment waits for the door.' }]], say: 'Dedication card, address, send.', wait: 3800 },
+    { cam: OVER, wait: 2400 }
+  ],
+  3: [
+    { cam: OVER, say: '17 August. New yarn arrived.', wait: 1500 },
+    { cam: ['phone', 1.45], say: 'The shop still says Powder is on its last ball.', wait: 1900 },
+    { cur: 'plus-puder', cam: ['stock', 1.6, 40, 0], click: { puder: 2, dirty: true }, then: [[1150, { puder: 3 }], [1400, { puder: 4 }], [1650, { puder: 5 }], [1900, { puder: 6 }]], say: 'Plus five. Corrections right in the list.', wait: 2600 },
+    { cur: 'save', cam: ['save', 1.8, -120, 60], click: { dirty: false, saved: true, flash: 'puder', toast: true, toastText: 'Live on croche.ba' }, say: 'Save. That’s the whole job.', wait: 1500 },
+    { cam: ['phone', 1.45], then: [[1300, { flash: null, toast: false }]], say: 'Powder is back in the shop.', wait: 1900 },
+    { cur: 'tog-special', cam: ['models', 1.6, -60, 0], click: { special: true, flash: 'special', toast: true, toastText: 'Special is live' }, say: 'Launch night. Special opens with one switch.', wait: 1800 },
+    { cam: ['phone', 1.45], then: [[1400, { toast: false, flash: null }]], say: 'On the shop the moment it’s switched on.', wait: 1900 },
+    { cam: OVER, say: 'No ticket. No waiting on us.', wait: 2400 }
+  ],
+  4: [
+    { cam: OVER, say: 'Sunday morning. What needs her today?', wait: 1500 },
+    { cam: ['feed', 1.6], then: [[600, { arrived: true }]], say: 'CR-0142 lands the moment it’s sent.', wait: 2100 },
+    { cur: 'kpi-0', cam: ['kpis', 1.3], say: 'Four waiting for a reply. The oldest, two days.', wait: 1900 },
+    { cur: 'bar-last', cam: ['chart', 1.4], then: [[800, { hover: true }]], say: 'August: 880 KM from 14 orders.', wait: 2200 },
+    { cur: 'range-12m', cam: ['range-12m', 1.8, -60, 60], click: { range: '12m', hover: false }, say: 'The whole year in one tap.', wait: 1500 },
+    { cam: ['main', 1.1], say: '12 months: 5,905 KM from 100 orders.', wait: 2200 },
+    { cam: OVER, say: 'Everything she asks before she starts.', wait: 2200 }
+  ],
+  5: [
+    { cam: OVER, say: 'CR-0138. Accepted, due 22 August.', wait: 1500 },
+    { cur: 'advance', cam: ['advance', 1.6, -80, -40], click: { stage: 2, mails: 3, flash: 3 }, say: 'In progress. One ball of yarn gets reserved.', wait: 1800 },
+    { cam: ['phone', 1.45], then: [[1300, { flash: 0 }]], say: 'Dženana gets “I’ve started crocheting.”', wait: 1900 },
+    { cur: 'advance', cam: ['req', 1.5, 60, 20], click: { nudge: true }, say: 'Finished? Not without a photo.', wait: 1700 },
+    { cur: 'photo', cam: ['req', 1.5, 60, 20], click: { photo: true, nudge: false }, say: 'Add the photo first.', wait: 1500 },
+    { cur: 'advance', cam: ['advance', 1.6, -80, -40], click: { stage: 3, mails: 4, flash: 4 }, say: 'Now it can be marked finished.', wait: 1500 },
+    { cam: ['phone', 1.45], then: [[1300, { flash: 0 }]], say: 'She sees her bag before it’s packed.', wait: 1900 },
+    { cur: 'track', cam: ['req', 1.5, 60, 20], click: { typing: true, track: '' }, then: [[1000, { track: 'BH 41' }], [1250, { track: 'BH 41 220' }], [1500, { track: 'BH 41 220 118' }], [1750, { track: TRACK, typing: false }]], say: 'Shipping needs a tracking number.', wait: 2400 },
+    { cur: 'advance', cam: ['advance', 1.6, -80, -40], click: { stage: 4, mails: 5, flash: 5 }, say: 'Shipped.', wait: 1300 },
+    { cam: ['phone', 1.45], then: [[1300, { flash: 0 }]], say: 'The tracking number lands in her inbox.', wait: 1900 },
+    { cam: OVER, say: 'Every step, in her inbox.', wait: 2400 }
+  ]
+};
+const KM = n => n + ' KM';
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+class Component extends DCLogic {
+  vp = { 1: { current: null }, 2: { current: null }, 3: { current: null }, 4: { current: null }, 5: { current: null } };
+  refFns = {};
+  refFor(c) {
+    if (!this.refFns[c]) this.refFns[c] = el => {
+      const prev = this.vp[c].current;
+      if (prev === el) return;
+      if (prev) { if (this.ro) this.ro.unobserve(prev); if (this.io) this.io.unobserve(prev); }
+      this.vp[c].current = el;
+      if (el && this.ro) { this.ro.observe(el); if (!this.still) this.io.observe(el); this.measure(); }
+    };
+    return this.refFns[c];
+  }
+  tm = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  running = {};
+  state = { dims: {}, s1: this.fresh(1), s2: this.fresh(2), s3: this.fresh(3), s4: this.fresh(4), s5: this.fresh(5) };
+
+  fresh(c) { return Object.assign(INIT[c](), { cam: { cx: OVER[0], cy: OVER[1], s: OVER[2] }, cur: { x: W * 0.72, y: H * 0.8 }, down: false, rip: false, i: 0, say: SCRIPTS[c][0].say }); }
+
+  isStill() { return this.props.autoplay === false || window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  rootRef = el => { this.root = el; };
+  componentDidMount() {
+    this.setupTrack();
+    this.still = this.isStill();
+    this.ro = new ResizeObserver(() => this.measure());
+    this.io = new IntersectionObserver(es => es.forEach(e => {
+      const c = +e.target.dataset.vp;
+      if (e.isIntersecting) this.start(c); else this.stop(c);
+    }), { threshold: 0.4 });
+    this.observe();
+    this.measure();
+    if (this.still) N.forEach(c => this.patch(c, FINAL[c]));
+  }
+  observe() {
+    N.forEach(c => { const el = this.vp[c].current; if (el) { this.ro.observe(el); this.io.observe(el); } });
+  }
+  componentDidUpdate(prev) {
+    if (prev.tilt !== this.props.tilt) this.paint();
+    if (prev.mode !== this.props.mode) { this.applyMode(); this.paint(); }
+    if (prev.autoplay !== this.props.autoplay) {
+      this.still = this.isStill();
+      N.forEach(c => { this.stop(c); if (this.still) this.patch(c, FINAL[c]); });
+      if (!this.still) { this.io.disconnect(); this.observe(); }
+    }
+  }
+  setupTrack() {
+    const t = this.root && this.root.querySelector('[data-track]'); if (!t) return;
+    this.track = t; this.stage = this.root.querySelector('[data-stage]');
+    this.layers = Array.from(this.root.querySelectorAll('[data-layer]'));
+    this.onScroll = () => { if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.paint(); }); };
+    this.onWin = () => { if (!this.scrub) return; this.kick(); clearTimeout(this.idle); if (this.props.snap !== false && !this.drag) this.idle = setTimeout(() => this.snapNear(), 170); };
+    this.onResize = () => { this.applyMode(); this.onScroll(); };
+    this.onWheel = e => { if (this.scrub && Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); window.scrollBy(0, e.deltaX * this.ratio()); } };
+    this.onDown = e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('a,button,input,textarea')) return;
+      cancelAnimationFrame(this.anim);
+      this.drag = { x: e.clientX, sl: t.scrollLeft, sy: window.scrollY, lx: e.clientX, lt: performance.now(), v: 0, moved: false };
+      window.addEventListener('pointermove', this.onMove);
+      window.addEventListener('pointerup', this.onUp);
+    };
+    this.onMove = e => {
+      const d = this.drag; if (!d) return;
+      const dx = e.clientX - d.x;
+      if (!d.moved) {
+        if (Math.abs(dx) < 4) return;
+        d.moved = true; t.style.scrollSnapType = 'none'; t.style.cursor = 'grabbing'; document.body.style.userSelect = 'none';
+      }
+      if (this.scrub) window.scrollTo(0, d.sy - dx * this.ratio()); else t.scrollLeft = d.sl - dx;
+      const now = performance.now(), dt = Math.max(1, now - d.lt);
+      d.v = 0.75 * ((e.clientX - d.lx) / dt) + 0.25 * d.v; d.lx = e.clientX; d.lt = now;
+    };
+    this.onUp = () => {
+      window.removeEventListener('pointermove', this.onMove);
+      window.removeEventListener('pointerup', this.onUp);
+      const d = this.drag; this.drag = null; if (!d || !d.moved) return;
+      document.body.style.userSelect = ''; t.style.cursor = 'grab';
+      this.suppress = true; setTimeout(() => { this.suppress = false; }, 60);
+      const w = t.clientWidth || 1, last = t.children.length - 1;
+      const pos = this.scrub ? this.tgt : t.scrollLeft, cur = pos / w;
+      let idx = Math.round((pos - d.v * 300) / w);
+      if (Math.abs(d.v) > 0.25) idx = d.v < 0 ? Math.max(idx, Math.floor(cur) + 1) : Math.min(idx, Math.ceil(cur) - 1);
+      idx = clamp(idx, 0, last);
+      if (this.scrub) this.goTo(idx); else this.glide(idx * w);
+    };
+    this.onClick = e => { if (this.suppress) { e.preventDefault(); e.stopPropagation(); } };
+    t.addEventListener('scroll', this.onScroll, { passive: true });
+    t.addEventListener('pointerdown', this.onDown);
+    t.addEventListener('click', this.onClick, true);
+    t.addEventListener('wheel', this.onWheel, { passive: false });
+    window.addEventListener('scroll', this.onWin, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.applyMode();
+    this.paint();
+    this.fitRO = new ResizeObserver(() => { if (this.fitRaf) return; this.fitRaf = requestAnimationFrame(() => { this.fitRaf = 0; this.applyMode(); this.paint(); }); });
+    Array.from(t.children).forEach(el => { if (el.lastElementChild) this.fitRO.observe(el.lastElementChild); });
+  }
+  fits() {
+    return Array.from(this.track.children).every(el => { const c = el.lastElementChild; return !c || c.offsetHeight + 48 <= window.innerHeight; });
+  }
+  applyMode() {
+    const t = this.track, st = this.stage, r = this.root; if (!t || !st) return;
+    const want = (this.props.mode || 'Scrub') === 'Scrub' && window.innerWidth >= 800;
+    const on = want && this.fits();
+    const n = t.children.length;
+    if (on) {
+      r.style.height = (n * 100) + 'vh';
+      Object.assign(st.style, { position: 'sticky', top: '0px', height: '100vh', overflow: 'hidden' });
+      Object.assign(t.style, { overflowX: 'hidden', scrollSnapType: 'none' });
+    } else {
+      r.style.height = '';
+      Object.assign(st.style, { position: 'relative', top: '', height: '', overflow: '' });
+      Object.assign(t.style, { overflowX: 'auto', scrollSnapType: 'x mandatory' });
+    }
+    const was = this.scrub; this.scrub = on;
+    if (on && was) return;
+    if (on) { this.tgt = this.target(); t.scrollLeft = this.tgt; }
+    else if (was) t.scrollLeft = Math.round(t.scrollLeft / (t.clientWidth || 1)) * t.clientWidth;
+  }
+  ratio() { return window.innerHeight / (this.track.clientWidth || 1); }
+  range() { const r = this.root.getBoundingClientRect(); return { top: r.top + window.scrollY, len: Math.max(1, r.height - window.innerHeight), rt: r.top }; }
+  target() {
+    const g = this.range(), t = this.track;
+    return clamp(-g.rt / g.len, 0, 1) * (t.scrollWidth - t.clientWidth);
+  }
+  kick() {
+    this.tgt = this.target();
+    if (this.lerp) return;
+    const step = () => {
+      const t = this.track, cur = t.scrollLeft, diff = this.tgt - cur;
+      if (Math.abs(diff) < 0.6) { t.scrollLeft = this.tgt; this.lerp = 0; this.paint(); return; }
+      t.scrollLeft = cur + diff * 0.16; this.paint();
+      this.lerp = requestAnimationFrame(step);
+    };
+    this.lerp = requestAnimationFrame(step);
+  }
+  goTo(idx) {
+    const g = this.range(), n = this.track.children.length;
+    window.scrollTo({ top: g.top + (idx / (n - 1)) * g.len, behavior: 'smooth' });
+  }
+  snapNear() {
+    if (!this.scrub || this.drag) return;
+    const g = this.range(); if (g.rt > 1 || g.rt < -g.len - 1) return;
+    const n = this.track.children.length, p = clamp(-g.rt / g.len, 0, 1) * (n - 1), idx = Math.round(p);
+    if (Math.abs(p - idx) * window.innerHeight > 3 && Math.abs(p - idx) <= 0.5) this.goTo(idx);
+  }
+  glide(to) {
+    const t = this.track, from = t.scrollLeft, dist = to - from, t0 = performance.now();
+    const dur = clamp(Math.abs(dist) * 0.8, 360, 900), ease = x => 1 - Math.pow(1 - x, 4);
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur);
+      t.scrollLeft = from + dist * ease(k);
+      if (k < 1) this.anim = requestAnimationFrame(step); else if (!this.scrub) t.style.scrollSnapType = 'x mandatory';
+    };
+    this.anim = requestAnimationFrame(step);
+  }
+  paint() {
+    const t = this.track; if (!t) return;
+    const w = t.clientWidth || 1, p = t.scrollLeft / w, tilt = this.props.tilt !== false && !this.still;
+    this.layers.forEach((el, i) => { el.style.opacity = Math.max(0, 1 - Math.abs(p - i)).toFixed(3); });
+    Array.from(t.children).forEach((el, i) => {
+      const d = clamp(i - p, -1.5, 1.5), a = Math.min(1, Math.abs(d));
+      const demo = el.querySelector('[data-demo]');
+      if (demo) demo.style.transform = !tilt || a < 0.002 ? 'none' : 'perspective(1800px) translateX(' + (d * 8).toFixed(2) + '%) rotateY(' + (-d * 18).toFixed(2) + 'deg) scale(' + (1 - a * 0.16).toFixed(4) + ')';
+      const g = el.querySelector('[data-ghost]');
+      if (g) g.style.transform = 'translateX(' + (-d * w * 0.14).toFixed(1) + 'px) rotate(' + (d * 10).toFixed(2) + 'deg)';
+    });
+  }
+  componentWillUnmount() {
+    const t = this.track;
+    if (t) { t.removeEventListener('scroll', this.onScroll); t.removeEventListener('pointerdown', this.onDown); t.removeEventListener('click', this.onClick, true); t.removeEventListener('wheel', this.onWheel); }
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onWin);
+    clearTimeout(this.idle); cancelAnimationFrame(this.lerp);
+    if (this.fitRO) this.fitRO.disconnect(); cancelAnimationFrame(this.fitRaf);
+    if (this.onMove) { window.removeEventListener('pointermove', this.onMove); window.removeEventListener('pointerup', this.onUp); }
+    cancelAnimationFrame(this.anim); cancelAnimationFrame(this.raf);
+    if (this.ro) this.ro.disconnect();
+    if (this.io) this.io.disconnect();
+    N.forEach(c => this.tm[c].forEach(clearTimeout));
+  }
+
+  measure() {
+    const dims = {};
+    N.forEach(c => { const el = this.vp[c].current; if (el) dims[c] = { w: el.clientWidth, h: el.clientHeight }; });
+    this.setState({ dims });
+  }
+  patch(c, p) { this.setState(s => ({ ['s' + c]: Object.assign({}, s['s' + c], p) })); }
+  later(c, ms, f) { this.tm[c].push(setTimeout(f, ms)); }
+
+  start(c) { if (this.running[c] || this.still) return; this.running[c] = true; this.run(c, 0); }
+  stop(c) {
+    this.tm[c].forEach(clearTimeout); this.tm[c] = [];
+    if (!this.running[c]) return;
+    this.running[c] = false;
+    this.setState({ ['s' + c]: this.fresh(c) });
+  }
+
+  pt(c, name) {
+    const root = this.vp[c].current; if (!root) return null;
+    const app = root.querySelector('[data-app]'), el = root.querySelector('[data-tgt="' + name + '"]');
+    if (!app || !el) return null;
+    const a = app.getBoundingClientRect(), r = el.getBoundingClientRect(), k = a.width / W || 1;
+    return { x: (r.left + r.width / 2 - a.left) / k, y: (r.top + r.height / 2 - a.top) / k };
+  }
+  zoom(s) {
+    const m = { Subtle: 0.5, Normal: 1, Close: 1.35 }[this.props.zoom || 'Subtle'] || 1;
+    return 1 + (s - 1) * m;
+  }
+
+  run(c, i) {
+    if (!this.running[c]) return;
+    const sc = SCRIPTS[c];
+    if (i >= sc.length) {
+      const cur = this.state['s' + c].cur;
+      this.setState({ ['s' + c]: Object.assign(this.fresh(c), { cur }) });
+      this.later(c, 700, () => this.run(c, 0));
+      return;
+    }
+    const st = sc[i], upd = { i };
+    if (st.say) upd.say = st.say;
+    if (st.cam) {
+      if (typeof st.cam[0] === 'number') upd.cam = { cx: st.cam[0], cy: st.cam[1], s: st.cam[2] };
+      else { const p = this.pt(c, st.cam[0]); if (p) upd.cam = { cx: p.x + (st.cam[2] || 0), cy: p.y + (st.cam[3] || 0), s: this.zoom(st.cam[1]) }; }
+    }
+    if (st.cur) { const p = this.pt(c, st.cur); if (p) upd.cur = { x: p.x - 4, y: p.y - 2 }; }
+    this.patch(c, upd);
+    if (st.click) this.later(c, st.cur ? 820 : 120, () => {
+      this.patch(c, Object.assign({ down: true, rip: true }, st.click));
+      this.later(c, 150, () => this.patch(c, { down: false }));
+      this.later(c, 520, () => this.patch(c, { rip: false }));
+    });
+    (st.then || []).forEach(t => this.later(c, t[0], () => this.patch(c, t[1])));
+    this.later(c, st.wait, () => this.run(c, i + 1));
+  }
+
+  common(c, dotOn, dotOff) {
+    const st = this.state['s' + c], d = this.state.dims[c];
+    let S = 0.5, appT = 'scale(0.5)', ready = false, mobile = false;
+    if (d && d.w) {
+      ready = true; mobile = d.w < 560;
+      const fit = d.w / W;
+      let tx, ty;
+      if (mobile) { S = fit * 0.96; tx = (d.w - W * S) / 2; ty = Math.max(16, (d.h - 84 - H * S) / 2); }
+      else {
+        S = fit * st.cam.s;
+        tx = d.w / 2 - st.cam.cx * S; ty = d.h / 2 - st.cam.cy * S;
+        const g = 44;
+        tx = clamp(tx, Math.min(d.w - W * S, g), g);
+        ty = clamp(ty, Math.min(d.h - H * S, g), g);
+      }
+      appT = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + S.toFixed(4) + ')';
+    }
+    const steps = SCRIPTS[c].length, idx = this.still ? steps - 1 : st.i;
+    return {
+      appT, appO: ready ? 1 : 0, aspect: mobile ? '1.25' : '1.12',
+      curX: st.cur.x + 'px', curY: st.cur.y + 'px', curT: 'scale(' + (1 / S).toFixed(4) + ')',
+      curO: !mobile && this.running[c] ? 1 : 0, press: st.down ? 'scale(.82)' : 'scale(1)', rip: st.rip,
+      say: st.say, dots: SCRIPTS[c].map((x, j) => ({ w: j === idx ? '18px' : '5px', bg: j === idx ? dotOn : dotOff }))
+    };
+  }
+
+  nav(active, extra) {
+    return NAV.map(l => ({ label: l, fg: l === active ? INK : META, bar: l === active ? ACC : 'rgba(0,0,0,0)', hasBadge: l === 'Orders' }));
+  }
+
+  v1() {
+    const st = this.state.s1, P = PALS.find(p => p.id === st.pal) || NEUTRAL, f = FONTS.find(x => x.id === st.font), lg = LOGOS.find(x => x.id === st.logo);
+    return Object.assign(this.common(1, '#0C7CC4', 'rgba(10,26,37,.18)'), {
+      palettes: PALS.map(p => { const on = p.id === st.pal; return { id: p.id, name: p.name, sub: p.sub, bg: on ? PAPER : PANEL, bd: on ? INK : LINE, strip: [p.paper, p.tone, p.warm, p.ink, p.accent].map(h => ({ hex: h })) }; }),
+      fonts: FONTS.map(x => { const on = x.id === st.font; return { id: x.id, name: x.name, full: x.full, fam: x.fam, bg: on ? PAPER : PANEL, bd: on ? INK : LINE, radio: on ? '6px solid ' + INK : '1.5px solid #C9BFAF' }; }),
+      logos: LOGOS.map(g => { const on = g.id === st.logo; return { id: g.id, name: g.name, showMark: g.mark, showWord: g.word, markH: g.markH, wordH: g.wordH, bg: on ? PAPER : PANEL, bd: on ? INK : LINE }; }),
+      paper: P.paper, panel: P.panel, tone: P.tone, body: P.body, ink: P.ink, accent: P.accent,
+      headFam: f.fam, headSize: f.size, headLs: f.ls, headTt: f.tt,
+      hasMark: lg.mark, hasWord: lg.word,
+      note: st.applied ? 'Everywhere, as of now' : st.pal ? 'Draft · not applied' : 'Starting point',
+      applyLabel: st.applied ? 'Applied' : 'Apply everywhere', applyBg: st.applied ? PAPER : INK, applyFg: st.applied ? INK : PAPER,
+      toast: st.applied
+    });
+  }
+
+  v2() {
+    const st = this.state.s2, sz = SIZES.find(s => s[0] === st.size), n = st.yarns.length, gl = GLIT.find(g => g[0] === st.glitter);
+    const picked = st.yarns.map(id => YARN.find(y => y[0] === id));
+    let bagBg = '#2A201C', bagShadow = 'inset 0 0 0 1.5px #3A2E28';
+    if (n) {
+      const band = 13, stops = picked.map((y, i) => y[2] + ' ' + (i * band) + 'px ' + ((i + 1) * band) + 'px').join(',');
+      const layers = ['repeating-linear-gradient(90deg,rgba(0,0,0,.16) 0 1.5px,rgba(0,0,0,0) 1.5px 6px)'];
+      if (gl) layers.push('repeating-linear-gradient(180deg,rgba(0,0,0,0) 0 ' + (n * band - 2) + 'px,' + gl[2] + ' ' + (n * band - 2) + 'px ' + (n * band) + 'px)');
+      layers.push('repeating-linear-gradient(180deg,' + stops + ')');
+      bagBg = layers.join(',');
+      bagShadow = '0 30px 50px rgba(0,0,0,.55), inset 0 -10px 24px rgba(0,0,0,.25)';
+    }
+    const price = sz ? sz[3] + (gl ? 3 : 0) : null;
+    return Object.assign(this.common(2, '#0C7CC4', 'rgba(10,26,37,.18)'), {
+      stepLabel: st.done ? 'DONE' : 'COLOURS · 3/5',
+      bagBg, bagShadow,
+      mixNames: n ? 'CLUTCH · ' + picked.map(y => y[1].toUpperCase()).join(' + ') : 'CLUTCH · NO COLOURS YET',
+      count: String(n),
+      sizeLine: sz ? sz[1] + ' · ' + sz[2] : 'Choose a size',
+      price: price ? KM(price) : 'from 54 KM',
+      sizes: SIZES.map(s => { const on = s[0] === st.size; return { id: s[0], name: s[1], price: KM(s[3]), bg: on ? PAPER : 'rgba(0,0,0,0)', fg: on ? INK : PAPER, bd: on ? PAPER : '#3A2E28' }; }),
+      yarns: YARN.map(y => { const k = st.yarns.indexOf(y[0]), on = k >= 0; return { id: y[0], name: y[1], hex: y[2], on, n: '0' + (k + 1), ring: on ? '0 0 0 2px #17110F, 0 0 0 4px #F4F0E9' : 'inset 0 0 0 1px rgba(255,255,255,.08)', fg: on ? PAPER : '#9A9186' }; }),
+      fullLabel: n >= 3 ? 'PALETTE IS FULL' : n + ' / 3 COLOURS', fullFg: n >= 3 ? '#DDA6A0' : '#9A9186',
+      glitter: GLIT.map(g => { const on = g[0] === st.glitter; return { id: g[0], name: g[1], hex: g[2], bd: on ? PAPER : '#3A2E28', fg: on ? PAPER : '#C9BFAF' }; }),
+      summary: n + ' / 3 COLOURS · GLITTER: ' + (gl ? gl[1].toUpperCase() : 'NONE') + ' · EXTRAS: CLOSED',
+      ctaLabel: st.sending ? 'SENDING ORDER' : n ? 'NEXT: PIECE DETAILS' : 'PICK AT LEAST ONE COLOUR',
+      ctaO: n && sz ? 1 : 0.4, sending: st.sending,
+      done: st.done, notDone: !st.done,
+      receipt: [
+        { k: 'Model', v: 'Clutch · Classic' },
+        { k: 'Colours', v: picked.map(y => y[1]).join(', ') || 'Bordeaux, Powder, Milk' },
+        { k: 'Glitter', v: gl ? gl[1] + ' · +3 KM' : 'None' },
+        { k: 'Delivery in BiH', v: '7 KM' }
+      ]
+    });
+  }
+
+  v3() {
+    const st = this.state.s3;
+    const cnt = r => (r[0] === 'puder' ? st.puder : r[3]);
+    return Object.assign(this.common(3, '#0C7CC4', 'rgba(10,26,37,.18)'), {
+      nav: this.nav('Catalogue'),
+      note: st.dirty ? '1 UNSAVED CHANGE' : st.saved ? 'ALL CHANGES LIVE' : 'UP TO DATE',
+      noteFg: st.dirty ? ACC : META,
+      saveBg: st.dirty ? ACC : '#E4DCCB', saveFg: st.dirty ? '#FFFFFF' : META,
+      stock: STOCK.map(r => { const n = cnt(r), low = n <= 3; return { id: r[0], name: r[1], hex: r[2], n: String(n), st: low ? 'RUNNING LOW' : 'AVAILABLE', stFg: low ? ACC : INK, bg: st.flash === r[0] ? '#EDE7DC' : PANEL }; }),
+      models: MODELS.map(m => { const on = m[0] !== 'special' || st.special; return { id: m[0], name: m[1], img: IMG(m[0]), price: KM(m[3]), togBg: on ? INK : LINE, knob: on ? 'translateX(16px)' : 'translateX(0)', bg: st.flash === m[0] ? '#EDE7DC' : PANEL }; }),
+      shop: MODELS.map(m => { const on = m[0] !== 'special' || st.special; return { name: m[1], img: IMG(m[0]), sub: on ? 'FROM ' + m[2] + ' KM' : 'REVEALED AT LAUNCH', subFg: on ? '#4A443E' : ACC, o: on ? 1 : 0.45, flash: st.flash === m[0] ? 'rgba(123,30,58,.1)' : 'rgba(0,0,0,0)' }; }),
+      shopYarn: STOCK.map(r => { const last = r[0] === 'puder' && (st.puder <= 1 || (st.dirty && !st.saved)); return { hex: r[2], label: last ? 'LAST BALL' : r[1], fg: last ? ACC : '#4A443E', o: last ? 0.45 : 1 }; }),
+      toast: st.toast, toastText: st.toastText
+    });
+  }
+
+  v4() {
+    const st = this.state.s4, all = MONTHS.map((m, i) => (i === 11 && !st.arrived ? ['AUG', 813, 13] : m));
+    const rows = st.range === '3m' ? all.slice(-3) : st.range === '6m' ? all.slice(-6) : all;
+    const sum = rows.reduce((a, m) => a + m[1], 0), ord = rows.reduce((a, m) => a + m[2], 0);
+    const K = [
+      ['WAITING FOR REPLY', st.arrived ? '4' : '3', 'Oldest waiting 2 days', 1],
+      ['IN PROGRESS', '2', 'Average make time 3 days'],
+      ['REVENUE · AUGUST', st.arrived ? '880 KM' : '813 KM', st.arrived ? '+67 KM just now' : '+14% on July', st.arrived ? 2 : 0],
+      ['AVERAGE ORDER', '63 KM', 'Margin 62%']
+    ];
+    return Object.assign(this.common(4, '#0C7CC4', 'rgba(10,26,37,.18)'), {
+      nav: this.nav('Overview'), waiting: st.arrived ? '4' : '3',
+      kpis: K.map(k => ({ l: k[0], v: k[1], d: k[2], bg: k[3] === 1 ? ACC : k[3] === 2 ? '#EDE7DC' : PANEL, fg: k[3] === 1 ? '#FFFFFF' : INK, dc: k[3] === 1 ? '#F3E3E7' : k[3] === 2 ? ACC : META })),
+      bars: rows.map((m, i) => { const last = i === rows.length - 1; return { key: last ? 'last' : m[0], h: (m[1] / 1000 * 100) + '%', label: m[0], lc: last ? INK : META, bg: last ? (st.hover ? '#8C7355' : '#B9A78C') : '#E4DCCB', dot: last && st.hover }; }),
+      chartSum: (st.range === '12m' ? '12 MONTHS' : st.range === '6m' ? '6 MONTHS' : '3 MONTHS') + ': ' + sum.toLocaleString('en-US') + ' KM · ' + ord + ' ORDERS',
+      tip: st.hover, arrived: st.arrived, feed: FEED,
+      ranges: [['3m', '3M'], ['6m', '6M'], ['12m', '12M']].map(r => { const on = st.range === r[0]; return { id: r[0], label: r[1], bg: on ? INK : 'rgba(0,0,0,0)', fg: on ? '#FFFFFF' : META }; })
+    });
+  }
+
+  v5() {
+    const st = this.state.s5, s = st.stage, full = st.track === TRACK;
+    const can = s === 1 || (s === 2 && st.photo) || (s === 3 && full) || s === 4;
+    return Object.assign(this.common(5, '#0C7CC4', 'rgba(10,26,37,.18)'), {
+      steps: STEPS.map((x, i) => ({ label: x[0].toUpperCase(), bg: i <= s ? x[1] : '#E4DCCB', fg: i === s ? INK : META, fw: i === s ? 600 : 400 })),
+      reqNone: s === 1 || s >= 4, reqPhoto: s === 2, reqTrack: s === 3,
+      reqText: s === 1 ? 'Move to in progress. This reserves one ball of Anthracite.' : 'Shipped. Delivered is marked without an email.',
+      noPhoto: !st.photo, hasPhoto: st.photo, nudge: st.nudge,
+      trackTxt: st.track || (st.typing ? '' : 'BH …'), trackFg: st.track ? INK : '#9A9186', trackBd: st.typing ? INK : LINE, typing: st.typing,
+      mailNext: s === 1 ? 'Email: I’ve started crocheting' : s === 2 ? 'Email: Your bag is finished' : s === 3 ? 'Email: On its way' : 'No email for this step',
+      advLabel: ['', 'MOVE TO IN PROGRESS', 'MARK AS FINISHED', 'MARK AS SHIPPED', 'MARK AS DELIVERED'][Math.min(s, 4)],
+      advO: can ? 1 : 0.35,
+      history: HIST.slice(0, s + 1).reverse().slice(0, 3),
+      mails: MAILS.slice(0, st.mails).map((m, i) => ({ subj: m.subj, pre: m.pre, t: m.t, photo: !!m.photo, track: !!m.track, fw: i === st.mails - 1 ? 600 : 400, bg: st.flash === i + 1 ? '#F4ECEE' : '#FFFFFF' })).reverse()
+    });
+  }
+
+  renderVals() {
+    return { rootRef: this.rootRef, vp1: this.refFor(1), vp2: this.refFor(2), vp3: this.refFor(3), vp4: this.refFor(4), vp5: this.refFor(5), c1: this.v1(), c2: this.v2(), c3: this.v3(), c4: this.v4(), c5: this.v5() };
+  }
+}
+</script>
+</body>
+</html>

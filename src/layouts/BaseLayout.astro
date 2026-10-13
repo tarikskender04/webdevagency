@@ -1,0 +1,54 @@
+---
+import { site } from '../config/site';
+import '@fontsource/instrument-sans/latin-400.css';
+import '@fontsource/instrument-sans/latin-500.css';
+import '@fontsource/instrument-sans/latin-600.css';
+import '@fontsource/newsreader/latin-400-italic.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/hanken-grotesk/latin-800.css';
+import '../../design/tokens.css';
+import mark from '../../design/prototypes/uploads/pasted-1789947878169-0.png';
+import '../styles/global.css';
+interface Props { title: string; description?: string; noindex?: boolean; }
+const { title, description = site.description, noindex = false } = Astro.props;
+const indexable = import.meta.env.PUBLIC_SITE_INDEXABLE === 'true' && Boolean(Astro.site) && !noindex;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const organization = site.nameConfirmed && Astro.site ? {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': new URL('/#organization', Astro.site).href,
+  name: site.name,
+  url: Astro.site.href,
+  description: site.description,
+  ...(site.email ? { email: site.email } : {}),
+  ...(site.socialProfiles.length ? { sameAs: site.socialProfiles } : {}),
+} : undefined;
+const jsonLd = organization ? JSON.stringify(organization).replace(/</g, '\\u003c') : undefined;
+---
+<!doctype html>
+<html lang={site.language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/png" href={mark.src} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>
