@@ -1,0 +1,14 @@
+---
+import { site } from '../config/site';
+import { ContactForm } from './ContactForm';
+import { Aurora } from './Aurora';
+const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL || '';
+if (bookingUrl && new URL(bookingUrl).protocol !== 'https:') throw new Error('PUBLIC_BOOKING_URL must use HTTPS.');
+---
+<section class="contact-section" id="start" aria-labelledby="contact-heading">
+  <div class="contact-aurora effect-wash"><Aurora client:visible amplitude={1.1} speed={.3} /></div>
+  <div class="container contact-grid">
+    <div class="contact-copy" data-reveal><p class="eyebrow dotted">Start a project</p><h2 id="contact-heading">Tell us about the business. <em>We'll bring the plan.</em></h2><p class="lead">Book a free 30-minute call. We'll look at what you have now and what you need it to do, then give you a plan and a price range. No commitment.</p><div class="contact-host"><span class="host-initials" aria-hidden="true">TS</span><div><span class="eyebrow">You'll talk to</span><strong>{site.founder}</strong><span>{site.name}</span></div></div><ol class="contact-steps"><li><span>01</span><div><strong>Tell us a little</strong><p>A few quick questions. Under a minute.</p></div></li><li><span>02</span><div><strong>Pick a time</strong><p>Straight into the calendar. No back-and-forth emails.</p></div></li><li><span>03</span><div><strong>Talk it through</strong><p>30 minutes on video. You leave with a plan and a price range.</p></div></li></ol>{site.email && <p class="email-fallback">Rather write? <a href={`mailto:${site.email}`}>{site.email}</a></p>}</div>
+    <ContactForm bookingUrl={bookingUrl} email={site.email} client:visible />
+  </div>
+</section>

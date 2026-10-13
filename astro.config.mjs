@@ -18,5 +18,6 @@ export default defineConfig({
   site: siteUrl || undefined,
   output: 'static',
   trailingSlash: 'always',
+  build: { inlineStylesheets: 'always' },
   integrations: [react(), ...(indexable ? [sitemap({ filter: (page) => !new URL(page).pathname.startsWith('/404') })] : [])],
 });

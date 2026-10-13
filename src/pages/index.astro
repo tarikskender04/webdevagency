@@ -2,15 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Hero } from '../components/Hero';
 import { site } from '../config/site';
-import { Image } from 'astro:assets';
-import mark from '../../design/prototypes/uploads/pasted-1789947878169-0.png';
+import { buildAssets } from '../lib/assets';
+import { AssetImage } from '../components/AssetImage';
+import Capabilities from '../components/Capabilities.astro';
+import Process from '../components/Process.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+const assets = await buildAssets();
 ---
 <BaseLayout title={`Custom Websites for US Businesses | ${site.name}`}>
-  <header class="site-header container">
-    <a class="wordmark" href="/" aria-label={`${site.name} home`}><span class="brand-mark"><Image src={mark} alt="" width={95} height={95} format="webp" loading="eager" /></span>{site.name}</a>
-    {site.email && <nav aria-label="Main navigation"><a href={`mailto:${site.email}`}>Contact</a></nav>}
+  <header class="site-header container" id="top">
+    <a class="wordmark" href="/" aria-label={`${site.name} home`}><span class="brand-mark"><AssetImage asset={assets.mark} alt="" sizes="95px" eager /></span>{site.name}</a>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#process">Process</a></nav>
+    <a class="nav-contact" href="#start">Contact <span aria-hidden="true">↗</span></a>
   </header>
-  <main id="main" class="container">
-    <Hero />
+  <main id="main" tabindex="-1">
+    <Hero assets={assets} />
+    <Capabilities assets={assets} />
+    <Process assets={assets} />
+    <Contact />
   </main>
+  <Footer />
+  <noscript><style>.cap-track { display: block; overflow: visible; } .cap-slide { min-height: auto; padding-block: 64px; } .cap-controls { display: none; } .hero-bottom, .deck-item { animation: none; }</style></noscript>
 </BaseLayout>
+<script>
+  import { initMotion } from '../scripts/motion';
+  void initMotion();
+</script>

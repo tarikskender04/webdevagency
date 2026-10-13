@@ -6,7 +6,7 @@ During setup, pages use noindex and no sitemap is advertised. Robots still permi
 
 1. Finish the selected design, real contact channel, business information, and proof of actual work. Confirm the organization details in src/config/site.ts.
 2. Configure PUBLIC_SITE_URL with the real HTTPS production origin. Set PUBLIC_SITE_INDEXABLE=true for production only. Rebuild; environment settings are applied at build time. Keep preview environments false.
-3. Add a branded raster social image, including og:image, its alt text and dimensions, and a Twitter image card. Choose real service pages and helpful articles based on customer needs rather than creating thin city pages.
+3. Regenerate the branded 1200×630 social card if the Hero changes (`npm run asset:social` against the port 4322 preview). Production metadata includes the image, alt text and dimensions. Choose real service pages and helpful articles based on customer needs rather than creating thin city pages. Package prices and scope must be supplied before adding a packages page.
 4. Run npm run verify with the production variables. Test mobile layouts, keyboard navigation, the real contact flow, and PageSpeed Insights. Do not present lab checks as actual Core Web Vitals.
 5. Verify the domain in Google Search Console and submit /sitemap-index.xml. Check URL Inspection for indexing and monitor real queries, impressions, leads, and Core Web Vitals after launch.
 

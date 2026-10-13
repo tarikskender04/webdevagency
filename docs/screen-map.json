@@ -2,10 +2,10 @@
   "route": "/",
   "designImported": true,
   "sections": [
-    { "section": "Hero", "variant": "B", "design": "design/prototypes/Hero B.dc.html", "implementation": "src/components/Hero.tsx", "status": "headline-scaffold-work-deck-and-motion-pending" },
-    { "section": "Capabilities", "design": "design/prototypes/Capabilities.dc.html", "status": "pending" },
-    { "section": "Process", "design": "design/prototypes/Process.dc.html", "status": "pending" },
-    { "section": "Contact", "variant": "1a", "design": "design/prototypes/Contact.dc.html", "status": "pending-email-and-scheduler" },
-    { "section": "Footer", "variant": "1b", "design": "design/prototypes/Footer.dc.html", "status": "pending" }
+    { "section": "Hero", "variant": "B", "design": "design/prototypes/Hero B.dc.html", "implementation": "src/components/Hero.tsx", "status": "implemented-first-pass", "remaining": ["Other clients' project screenshots", "Prism/Strands and exact refraction"] },
+    { "section": "Capabilities", "design": "design/prototypes/Capabilities.dc.html", "implementation": "src/components/Capabilities.astro", "status": "implemented-first-pass", "remaining": ["Exact prototype cursor choreography and zoom/tilt states"] },
+    { "section": "Process", "design": "design/prototypes/Process.dc.html", "implementation": "src/components/Process.astro", "status": "implemented-first-pass", "remaining": ["Notebook pencil trace", "Exact entrance choreography", "Fixed GradualBlur"] },
+    { "section": "Contact", "variant": "1a", "design": "design/prototypes/Contact.dc.html", "implementation": "src/components/Contact.astro", "status": "brief-flow-implemented-booking-pending", "remaining": ["Real scheduler link", "Email delivery", "Headshot"] },
+    { "section": "Footer", "variant": "1b", "design": "design/prototypes/Footer.dc.html", "implementation": "src/components/Footer.astro", "status": "implemented", "remaining": ["Verified email and social profiles", "Approved legal pages"] }
   ]
 }

@@ -1,0 +1,7 @@
+---
+import { site } from '../config/site';
+---
+<footer class="site-footer">
+  <div class="footer-glow" aria-hidden="true"></div>
+  <div class="container footer-inner"><div class="footer-top"><p>Websites, online ordering and back offices for <em>local</em> businesses.</p><div class="footer-columns"><div><h2 class="eyebrow">Site</h2><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#process">Process</a><a href="#start">Start a project</a></div><div><h2 class="eyebrow">Contact</h2>{site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}<a class="footer-cta" href="#start">Book a free call →</a></div>{site.socialProfiles.length > 0 && <div><h2 class="eyebrow">Follow</h2>{site.socialProfiles.map(profile => <a href={profile} rel="noopener noreferrer" target="_blank">{new URL(profile).hostname}</a>)}</div>}</div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><a class="back-to-top" href="#top">Back to top ↑</a></div><div class="footer-wordmark" aria-hidden="true">{site.name}</div></div>
+</footer>

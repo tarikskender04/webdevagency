@@ -9,3 +9,6 @@ dist/
 .design-import-*/
 __pycache__/
 /Web Design Kit System.zip
+artifacts/
+test-results/
+playwright-report/

@@ -1,0 +1,20 @@
+---
+import type { Assets } from '../lib/assets';
+import { AssetImage } from './AssetImage';
+import { CapabilityDemo } from './CapabilityDemo';
+import { Arrow } from './Arrow';
+import { capabilities, industries } from '../config/capabilities';
+interface Props { assets: Assets; }
+const { assets } = Astro.props;
+const demoAssets = { clutch: assets.clutch, square: assets.square, productTriangle: assets.productTriangle, crocheLogo: assets.crocheLogo };
+---
+<section class="capabilities" id="work" aria-labelledby="capabilities-heading">
+  <div id="capabilities" class="cap-stage">
+    <div class="cap-track">
+      <div class="cap-slide cap-intro"><div class="container cap-grid"><div class="cap-copy"><p class="eyebrow dotted">What we build</p><h2 id="capabilities-heading">We don't just make it pretty.<br /><em>We make it work.</em></h2><p class="lead">One maker in Sarajevo, start to finish. Every screen below is the shop and back office we built for Crochê, playing itself.</p><span class="swipe-hint">Drag or swipe <span></span> →</span></div><AssetImage asset={assets.glass} alt="" className="cap-intro-motif motif" sizes="(max-width: 760px) 360px, 460px" /></div></div>
+      {capabilities.map((item, index) => <div class={`cap-slide cap-${item.kind}`}><div class="container cap-grid"><div class="cap-copy"><AssetImage asset={assets[item.motif]} alt="" className="cap-small-motif motif" sizes="124px" /><p class="section-pill"><span>{`0${index + 1}`}</span>{item.label}</p><h3>{item.title}<br /><em>{item.accent}</em></h3><p class="lead">{item.body}</p></div><div class="cap-demo"><CapabilityDemo kind={item.kind} assets={demoAssets} client:visible /></div></div></div>)}
+      <div class="cap-slide cap-close"><div class="container"><p class="eyebrow dotted">Built around your business</p><h2>Crochê is one maker.<br /><em>Yours is next.</em></h2><p class="lead">Two chairs or forty stores, the work is the same: a look people remember, a site that sells, and a back office that runs itself.</p><div class="industries" aria-label="Industries we serve">{industries.map(industry => <span>{industry}</span>)}</div><a href="#start" class="button button-ink">Start a project <Arrow diagonal /></a></div></div>
+    </div>
+    <div class="cap-controls"><span class="cap-pagination"><b data-cap-current>01</b> <span>/ 07</span></span><div class="cap-dots" role="group" aria-label="Choose a capability">{['Overview', ...capabilities.map(item => item.label), 'Your business'].map((name, index) => <button type="button" data-cap-index={index} aria-label={`Show ${name}`} aria-current={index === 0 ? 'step' : undefined} class={index === 0 ? 'active' : ''}></button>)}</div><div class="cap-arrows"><button type="button" aria-label="Previous capability" data-cap-direction="-1" disabled>←</button><button type="button" aria-label="Next capability" data-cap-direction="1">→</button></div></div>
+  </div>
+</section>

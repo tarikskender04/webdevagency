@@ -11,4 +11,7 @@ Read root CLAUDE.md, design/README.md (when imported), docs/design-sync.md, and 
 - Noindex is the setup default. Set PUBLIC_SITE_URL to the real production HTTPS origin and PUBLIC_SITE_INDEXABLE=true only when ready to launch. Preview deployments must retain noindex.
 - Use the project SEO/GEO/AEO skill for explicit audits. Skill guidance is advisory; verify claims about rich-result eligibility against current Google documentation. Installation does not require an audit during project setup.
 - Before committing application changes, run npm run verify. Update docs/screen-map.json when design sections are implemented. Importing a design is not evidence it is implemented.
+- Use .claude/skills/frontend-engineer/SKILL.md for frontend work and npm run test:browser for browser verification. Screenshots live in ignored artifacts/ and are uploaded by CI.
+- Crochê, Tierd, Una Adventure, and Captured are confirmed clients. The numerical results and dates in the original handoff are not real and must not be used in production copy.
+- Booking requires a real PUBLIC_BOOKING_URL. Until it is provided, the form prepares a local downloadable brief and explicitly says nothing was sent or booked.
 - The importer copies design/CLAUDE.md exactly into root CLAUDE.md. Keep durable engineering instructions here to avoid losing them on future imports.

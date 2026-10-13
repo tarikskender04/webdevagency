@@ -16,6 +16,14 @@ jobs:
       - run: npm ci
       - run: python3 -m unittest discover -s scripts -p 'test_*.py'
       - run: npm run verify
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-screenshots
+          path: artifacts/
+          if-no-files-found: ignore
       - name: Validate production SEO output
         run: npm run build && npm run verify:seo
         env:

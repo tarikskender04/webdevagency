@@ -4,7 +4,7 @@ export const site = {
   nameConfirmed: true,
   founder: 'Tarik Skender',
   email: '',
-  description: 'Custom websites built with React and TypeScript, with clear content, fast performance, and search visibility in mind for businesses serving the US market.',
+  description: 'Meridian designs and builds websites, online ordering and back offices for businesses in the US and Europe. See our work and start your next project.',
   locale: 'en_US',
   language: 'en-US',
   socialProfiles: [] as string[],

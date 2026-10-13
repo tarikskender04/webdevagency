@@ -13,11 +13,15 @@ assert.match(html, /<h1[^>]*>[\s\S]*?The best site your business[\s\S]*?<\/h1>/i
 assert.match(html, /<meta name="description" content="[^"]+"/, 'Description is required.');
 assert.match(html, /<meta property="og:title" content="[^"]+"/, 'Social metadata is required.');
 assert.match(html, /<a[^>]*href="#main"/, 'Skip link is required.');
+assert.ok(existsSync('dist/social-card.jpg'), 'Branded social image must ship with the site.');
+for (const section of ['capabilities-heading', 'process-heading', 'contact-heading']) assert.ok(html.includes(`id="${section}"`), 'Core section copy must be available in the HTML.');
+assert.ok(!/\+38%|Shipped since 2019|thousands of orders/.test(html), 'Unverified numerical claims must not be published.');
 assert.match(notFound, /name="robots" content="noindex, nofollow"/, '404 must stay noindex.');
 assert.match(robots, /User-agent: \*\nAllow: \//, 'Crawlers must be able to see page-level robots directives.');
 if (env.PUBLIC_SITE_URL) {
   const origin = new URL(env.PUBLIC_SITE_URL).origin;
   assert.ok(html.includes(`rel="canonical" href="${origin}/"`), 'Canonical must match the configured domain.');
+  assert.ok(html.includes(`property="og:image" content="${origin}/social-card.jpg"`), 'Social image must use the configured origin.');
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   assert.ok(blocks.length > 0, 'Confirmed organization requires structured data.');
   for (const [, content] of blocks) {

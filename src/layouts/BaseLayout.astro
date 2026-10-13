@@ -1,18 +1,29 @@
 ---
 import { site } from '../config/site';
+import headingFont from '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2?url';
+import accentFont from '@fontsource/newsreader/files/newsreader-latin-400-italic.woff2?url';
 import '@fontsource/instrument-sans/latin-400.css';
 import '@fontsource/instrument-sans/latin-500.css';
 import '@fontsource/instrument-sans/latin-600.css';
 import '@fontsource/newsreader/latin-400-italic.css';
 import '@fontsource/jetbrains-mono/latin-400.css';
 import '@fontsource/hanken-grotesk/latin-800.css';
+import '@fontsource/bodoni-moda/latin-400.css';
+import '@fontsource/bodoni-moda/latin-400-italic.css';
+import '@fontsource/archivo/latin-400.css';
+import '@fontsource/archivo/latin-500.css';
+import '@fontsource/dm-mono/latin-400.css';
+import '@fontsource/kalam/latin-400.css';
 import '../../design/tokens.css';
 import mark from '../../design/prototypes/uploads/pasted-1789947878169-0.png';
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 interface Props { title: string; description?: string; noindex?: boolean; }
 const { title, description = site.description, noindex = false } = Astro.props;
 const indexable = import.meta.env.PUBLIC_SITE_INDEXABLE === 'true' && Boolean(Astro.site) && !noindex;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const favicon = await getImage({ src: mark, width: 64, format: 'png' });
+const socialImage = Astro.site ? new URL('/social-card.jpg', Astro.site).href : undefined;
 const organization = site.nameConfirmed && Astro.site ? {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -31,18 +42,28 @@ const jsonLd = organization ? JSON.stringify(organization).replace(/</g, '\\u003
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#FFFFFF" />
+    <link rel="preload" as="font" type="font/woff2" href={headingFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={accentFont} crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
     {canonical && <link rel="canonical" href={canonical} />}
-    <link rel="icon" type="image/png" href={mark.src} />
+    <link rel="icon" type="image/png" sizes="64x64" href={favicon.src} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={site.locale} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
-    <meta name="twitter:card" content="summary" />
+    {socialImage && <>
+      <meta property="og:image" content={socialImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Meridian website design studio and Crochê project previews" />
+      <meta name="twitter:image" content={socialImage} />
+      <meta name="twitter:image:alt" content="Meridian website design studio and Crochê project previews" />
+    </>}
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}

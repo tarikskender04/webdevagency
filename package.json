@@ -13,22 +13,32 @@
     "preview": "astro preview",
     "verify:seo": "node scripts/verify-seo.mjs",
     "verify": "npm run check && npm run build && npm run verify:seo",
+    "test:browser": "playwright test",
+    "asset:social": "node scripts/generate-social-card.ts",
     "design:sync": "python3 scripts/sync_design.py",
     "design:status": "python3 scripts/sync_design.py --status"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",
     "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/archivo": "^5.3.0",
+    "@fontsource/bodoni-moda": "^5.3.0",
+    "@fontsource/dm-mono": "^5.3.0",
     "@fontsource/hanken-grotesk": "^5.3.0",
     "@fontsource/instrument-sans": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/kalam": "^5.3.0",
     "@fontsource/newsreader": "^5.3.0",
     "astro": "^7.3.8",
+    "gsap": "^3.15.0",
+    "ogl": "^1.0.11",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.64.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^6.0.3"

@@ -1,0 +1,9 @@
+import type { DemoKind } from '../components/CapabilityDemo';
+export const capabilities: { kind: DemoKind; label: string; title: string; accent: string; body: string; motif: 'star' | 'triangle' | 'glass' | 'blueMark' | 'butterfly' }[] = [
+  { kind: 'brand', label: 'Brand identity', title: 'Not a logo.', accent: 'A whole look.', body: 'Nine colour roles and one wine accent. Bodoni for the names, a mono for every price. Rules Iman can follow without calling us. Then it goes on everything: the shop, the emails, the thank-you cards and the hang tags.', motif: 'star' },
+  { kind: 'ordering', label: 'Online ordering', title: 'Pick a shape.', accent: 'Mix your colours.', body: 'Model, size, up to three yarns. The bag redraws with every pick, the price stays in view, and payment waits until the bag reaches the door.', motif: 'triangle' },
+  { kind: 'editing', label: 'Content editing', title: 'Her stock.', accent: 'Her call.', body: 'Yarn runs low, a new model opens at launch. Iman changes both from the back office, and the shop updates before the next customer looks. No ticket, no waiting on us.', motif: 'glass' },
+  { kind: 'dashboard', label: "Owner's dashboard", title: "Numbers you'll", accent: 'actually read.', body: "What's waiting, what's late, what August brought in. One screen in plain words, built around what a maker asks before she starts the day.", motif: 'blueMark' },
+  { kind: 'emails', label: 'Customer emails', title: 'Every step,', accent: 'in her inbox.', body: "One tap moves an order forward and the customer hears about it. A bag can't be marked finished without a photo, and it can't ship without a tracking number.", motif: 'butterfly' },
+];
+export const industries = ['Bakeries', 'Cafés', 'Barbers', 'Salons', 'Dental clinics', 'Restaurants', 'Boutiques', 'Florists', 'Gyms', 'Hotels', 'Retail chains'];
