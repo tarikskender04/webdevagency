@@ -1,0 +1,144 @@
+/* Capabilities slider and Crochê product demos. Loaded only where Capabilities is rendered. */
+.capabilities { position: relative; }
+.cap-stage { position: relative; background: var(--paper); }
+.cap-track { display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; align-items: stretch; }
+.cap-track::-webkit-scrollbar { display: none; }
+.cap-track.dragging { cursor: grabbing; user-select: none; scroll-snap-type: none; }
+.cap-slide { flex: 0 0 100%; min-width: 0; display: flex; align-items: center; scroll-snap-align: start; scroll-snap-stop: always; padding: 80px 0 96px; min-height: 850px; overflow: hidden; background: radial-gradient(ellipse at 80% 110%, rgba(156,204,235,.26), transparent 65%); }
+.cap-pinned .cap-slide { height: 100svh; min-height: 700px; padding-block: 48px 92px; }
+.cap-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
+.cap-copy { display: flex; flex-direction: column; gap: 24px; max-width: 46ch; }
+.cap-copy h3 { font-size: clamp(36px, 4.4vw, 60px); }
+.cap-copy em, .cap-close em { color: var(--azure); }
+.cap-intro-motif { width: min(100%, 460px); justify-self: center; }
+.cap-small-motif { width: clamp(88px, 8vw, 124px); height: 110px; align-self: flex-start; }
+.swipe-hint { display: flex; align-items: center; gap: 16px; margin-top: 12px; font: var(--t-label); text-transform: uppercase; letter-spacing: .14em; color: var(--slate-2); }
+.swipe-hint > span { height: 1px; width: 72px; background: #C7D6E1; }
+.cap-demo { min-width: 0; perspective: 1000px; }
+.cap-close { background: var(--grad-dawn); text-align: center; }
+.cap-close .container { display: flex; align-items: center; flex-direction: column; gap: 28px; }
+.cap-close .lead { max-width: 54ch; }
+.industries { display: flex; justify-content: center; gap: 12px 24px; flex-wrap: wrap; max-width: 760px; padding-block: 16px; font-size: 18px; color: var(--slate-2); }
+.cap-controls { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: space-between; gap: 24px; width: min(var(--container), calc(100% - 64px)); z-index: 2; }
+.cap-pagination { font: var(--t-label); color: var(--slate); letter-spacing: .1em; }
+.cap-pagination b { font-weight: 400; }
+.cap-pagination span { color: var(--slate-2); }
+.cap-dots { display: flex; gap: 4px; }
+.cap-dots button { display: grid; place-items: center; width: 28px; height: 28px; background: transparent; border: 0; padding: 0; }
+.cap-dots button::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--line-input); transition: background .22s, width .22s; }
+.cap-dots .active::after { width: 18px; border-radius: 4px; background: var(--azure); }
+.cap-arrows { display: flex; gap: 8px; }
+.cap-arrows button { width: 40px; height: 40px; border: 1px solid var(--line-input); border-radius: 50%; background: var(--paper); color: var(--ink); }
+.cap-arrows button:hover:not(:disabled) { border-color: var(--azure); color: var(--azure); }
+.demo-toolbar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--croche-line); }
+.demo-toolbar strong { font: 20px 'Bodoni Moda', serif; }
+.demo-toolbar > .mini-label { margin-left: auto; }
+.mock-save { background: var(--croche-ink); color: var(--croche-paper); font-size: 10px; padding: 6px 10px; }
+.brand-builder { display: grid; grid-template-columns: 37% 63%; min-height: 340px; }
+.brand-controls { display: flex; flex-direction: column; gap: 10px; padding: 18px 14px; border-right: 1px solid var(--croche-line); }
+.palette-choice { display: flex; align-items: center; justify-content: space-between; gap: 6px; border: 1px solid var(--croche-line); background: transparent; padding: 9px 8px; font-family: 'Bodoni Moda', serif; font-size: 12px; text-align: left; }
+.palette-choice.selected { border-color: var(--croche-ink); background: #EDE7DC; }
+.palette-strip { display: flex; }
+.palette-strip i { width: 7px; height: 16px; }
+.type-choice { display: flex; gap: 10px; align-items: center; padding: 9px; border: 1px solid var(--croche-ink); }
+.type-choice > .serif { font: 26px 'Bodoni Moda', serif; }
+.type-choice small { display: block; margin-top: 3px; color: #6B645C; font-size: 9px; }
+.builder-logo { max-width: 110px; margin: auto; }
+.brand-preview { display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 18px; transition: background .4s; }
+.preview-logo { width: 90px; height: 44px; object-fit: contain; }
+.brand-preview h4 { font-family: 'Bodoni Moda', serif; font-size: 30px; line-height: 1.1; }
+.brand-preview p { color: #6B645C; font-size: 10px; }
+.preview-product { width: 100%; height: 145px; }
+.preview-product img { width: 100%; height: 100%; object-fit: contain; }
+.swatch-row { display: flex; gap: 5px; }
+.swatch-row span { width: 25px; height: 16px; border: 1px solid var(--croche-line); }
+.brand-preview-bottom { display: flex; justify-content: space-between; width: 100%; gap: 16px; border-top: 1px solid var(--croche-line); padding-top: 12px; font-size: 11px; }
+.shop-nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid var(--croche-line); }
+.shop-nav img { width: 100px; height: 35px; object-fit: contain; }
+.order-builder { display: grid; grid-template-columns: 47% 53%; min-height: 340px; }
+.order-product { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 18px; }
+.order-product img { width: 100%; height: 190px; object-fit: contain; }
+.order-product > .serif { font: 30px 'Bodoni Moda', serif; }
+.order-controls { display: flex; flex-direction: column; gap: 12px; padding: 20px 16px; background: #FBF9F5; border-left: 1px solid var(--croche-line); }
+.mock-options { display: flex; gap: 5px; flex-wrap: wrap; }
+.mock-options button { border: 1px solid var(--croche-line); background: transparent; padding: 7px 9px; font-size: 10px; color: var(--croche-ink); }
+.mock-options button.selected { border-color: var(--croche-ink); background: var(--croche-ink); color: var(--croche-paper); }
+.yarn-options { display: flex; gap: 9px; }
+.yarn-options button { width: 27px; height: 27px; border: 2px solid #FBF9F5; outline: 1px solid var(--croche-line); border-radius: 50%; }
+.yarn-options button.selected { outline: 2px solid var(--croche-wine); }
+.mock-note { font-size: 10px; line-height: 1.5; color: #6B645C; }
+.order-total { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--croche-line); padding-top: 14px; margin-top: auto; }
+.order-total strong { font: 22px 'Bodoni Moda', serif; }
+.editing-panel { display: flex; flex-direction: column; gap: 16px; padding: 22px; }
+.editing-product { display: flex; gap: 22px; align-items: center; }
+.editing-product img { width: 120px; height: 115px; object-fit: contain; }
+.editing-product h4 { font: 30px 'Bodoni Moda', serif; margin-bottom: 8px; }
+.editing-product p { color: #6B645C; margin-bottom: 10px; }
+.stock-label { display: inline-block; padding: 4px 8px; background: #E4DCCB; font: 9px var(--font-mono); color: var(--croche-ink); }
+.editing-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--croche-line); padding-top: 15px; }
+.editing-row small { display: block; font-size: 10px; color: #6B645C; margin-top: 5px; }
+.toggle { width: 38px; height: 22px; padding: 3px; border: 0; border-radius: var(--r-pill); background: #B9A78C; flex: none; }
+.toggle > span { display: block; width: 16px; height: 16px; border-radius: 50%; background: #FBF9F5; transition: transform .22s; }
+.toggle[aria-checked="true"] { background: var(--croche-wine); }
+.toggle[aria-checked="true"] > span { transform: translateX(16px); }
+.mock-primary { min-height: 38px; border: 0; background: var(--croche-ink); color: var(--croche-paper); padding: 10px; font-size: 11px; }
+.dashboard-panel { padding: 20px; }
+.dashboard-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.dashboard-top h4 { font: 22px 'Bodoni Moda', serif; }
+.dashboard-stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--croche-line); }
+.dashboard-stats > div { padding: 12px; border-right: 1px solid var(--croche-line); }
+.dashboard-stats > div:last-child { border: 0; }
+.dashboard-stats span { font-size: 10px; color: #6B645C; }
+.dashboard-stats strong { display: block; font: 32px 'Bodoni Moda', serif; margin-top: 6px; }
+.chart-title { display: flex; justify-content: space-between; gap: 12px; margin-block: 22px 10px; }
+.mock-chart { display: flex; align-items: flex-end; gap: 8px; height: 118px; padding: 8px 5px 0; border-bottom: 1px solid var(--croche-line); background: repeating-linear-gradient(to top, transparent 0 29px, var(--croche-line) 29px 30px); }
+.mock-chart > span { flex: 1; background: var(--croche-wine); opacity: .72; transition: height 1s var(--ease-out); }
+.mock-chart > span:nth-child(3n) { opacity: 1; }
+.dashboard-orders { margin-top: 16px; }
+.dashboard-orders > div { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-bottom: 1px solid var(--croche-line); padding: 10px 0; font-size: 9px; }
+.email-panel { display: grid; grid-template-columns: 28% 72%; min-height: 350px; }
+.email-timeline { display: flex; flex-direction: column; gap: 12px; padding: 22px 10px; border-right: 1px solid var(--croche-line); }
+.email-timeline button { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; border: 1px solid var(--croche-line); background: transparent; font-size: 10px; }
+.email-timeline button.selected { background: var(--croche-ink); border-color: var(--croche-ink); color: var(--croche-paper); }
+.email-timeline button span { font: 9px var(--font-mono); }
+.email-preview { padding: 22px; background: #FBF9F5; animation: rise .45s var(--ease-out) both; }
+.email-preview > img { width: 100px; height: 38px; object-fit: contain; margin: 18px auto; }
+.email-preview h4 { font: 28px/1.1 'Bodoni Moda', serif; margin-bottom: 15px; }
+.email-preview p { font-size: 11px; color: #6B645C; line-height: 1.65; }
+.email-product { display: flex; gap: 14px; align-items: center; border-block: 1px solid var(--croche-line); margin-top: 18px; padding-block: 12px; }
+.email-product img { width: 80px; height: 85px; object-fit: contain; }
+.email-product > div { display: flex; flex-direction: column; gap: 8px; font-size: 10px; }
+.email-signoff { display: block; text-align: center; margin-top: 18px; font-size: 17px; }
+@media (max-width: 999px) {
+  .cap-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .cap-small-motif { height: 80px; width: 88px; }
+  .cap-copy { gap: 20px; }
+  .cap-copy h3 { font-size: 42px; }
+  .demo-toolbar > .mini-label { display: none; }
+}
+@media (max-width: 760px) {
+  .cap-slide { min-height: 960px; padding: 64px 0 96px; align-items: flex-start; }
+  .cap-grid { grid-template-columns: 1fr; gap: 32px; }
+  .cap-copy { max-width: none; gap: 20px; }
+  .cap-copy h2, .cap-copy h3 { font-size: 40px; }
+  .cap-copy .lead { font-size: 16px; }
+  .cap-small-motif { position: absolute; right: 24px; width: 64px; height: 64px; opacity: .7; }
+  .cap-intro { align-items: center; }
+  .cap-intro-motif { max-height: 360px; max-width: 360px; }
+  .cap-controls { bottom: 22px; width: calc(100% - 40px); gap: 8px; }
+  .cap-dots { gap: 0; }
+  .cap-dots button { width: 24px; }
+  .cap-arrows button { width: 34px; height: 34px; }
+  .cap-close .lead { font-size: 16px; }
+  .industries { font-size: 16px; gap: 12px 20px; }
+}
+@media (max-width: 380px) {
+  .cap-pagination { font-size: 10px; }
+  .cap-dots { display: none; }
+  .cap-arrows { gap: 4px; }
+  .brand-controls { padding: 14px 8px; }
+  .brand-preview { padding: 14px 10px; }
+  .palette-choice { font-size: 11px; padding: 8px 5px; }
+  .order-controls { padding: 16px 12px; }
+  .email-preview { padding: 18px; }
+}

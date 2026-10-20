@@ -1,0 +1,78 @@
+/* Live HTML sits behind the supplied photograph's transparent display. */
+/* Both plates map their measured transparent openings onto one fixed 16:9 scene and display.
+   Day: left .251, top .2305, width .5, height .392. Night: .2488, .233, .503, .4065.
+   Calibrate the photograph, keeping the live screen, text and scroll zoom in exactly the same position. */
+.billboard { --billboard-photo: var(--billboard-photo-day); --billboard-scene-ratio: 16 / 9; --billboard-screen-left: 24.8%; --billboard-screen-top: 23.25%; --billboard-screen-width: 50.4%; --billboard-screen-height: 40.7%; --billboard-photo-scale-x: 1.008; --billboard-photo-scale-y: 1.0382653061; --billboard-photo-left: 25.1%; --billboard-photo-top: 23.05%; --billboard-backdrop-tint: rgba(10,26,37,.35); --billboard-vignette-opacity: .4; --billboard-grain-opacity: .2; --billboard-display-glow: rgba(156,204,235,.65); --billboard-display-from: var(--paper); --billboard-display-to: var(--vapor); --billboard-display-veil: rgba(255,255,255,.66); position: relative; z-index: 1; isolation: isolate; background: var(--ink); color: var(--ink); }
+:root[data-theme="dark"] {
+  .billboard { --billboard-photo: var(--billboard-photo-night); --billboard-photo-scale-x: 1.0019880716; --billboard-photo-scale-y: 1.0012300123; --billboard-photo-left: 24.88%; --billboard-photo-top: 23.3%; --billboard-backdrop-tint: rgba(10,26,37,.75); --billboard-vignette-opacity: 1; --billboard-grain-opacity: .34; --billboard-display-glow: rgba(12,124,196,.65); --billboard-display-from: var(--ink); --billboard-display-to: var(--deep); --billboard-display-veil: rgba(10,26,37,.55); color: var(--paper); }
+}
+.billboard-process { position: relative; padding: 1px var(--gutter) 80px; background: var(--paper); color: var(--ink); }
+.billboard-closing { width: min(var(--container), 100%); margin-inline: auto; }
+.billboard-stage { position: relative; overflow: hidden; isolation: isolate; }
+.billboard-view { position: relative; width: 100%; aspect-ratio: var(--billboard-scene-ratio); }
+.billboard-scene { position: absolute; top: 0; left: 50%; width: 100%; height: 100%; aspect-ratio: var(--billboard-scene-ratio); transform: translateX(-50%); }
+.billboard-screen { position: absolute; left: var(--billboard-screen-left); top: var(--billboard-screen-top); width: var(--billboard-screen-width); height: var(--billboard-screen-height); overflow: hidden; container-type: inline-size; background: var(--ink); }
+.billboard-aurora { position: absolute; inset: 0; --tone-1: var(--billboard-display-glow); --tone-2: var(--billboard-display-from); --tone-3: var(--billboard-display-to); background: radial-gradient(ellipse at 48% 120%, var(--tone-1), transparent 75%), linear-gradient(120deg, var(--tone-2), var(--tone-3)); }
+.billboard-screen::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: var(--billboard-display-veil); }
+.billboard-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqw; height: 100%; padding: 4cqw 6cqw; text-align: center; }
+.billboard-copy h2 { font-size: 6.1cqw; font-weight: 400; line-height: 1.2; letter-spacing: -.025em; }
+.billboard-copy h2 > span { display: block; }
+.billboard-copy > p { font-size: 3.25cqw; line-height: 1.4; }
+.billboard-brand { width: 38cqw; flex: none; margin-top: 1.6cqw; }
+.billboard-photo { position: absolute; z-index: 3; width: calc(100% * var(--billboard-photo-scale-x)); height: calc(100% * var(--billboard-photo-scale-y)); left: calc(var(--billboard-screen-left) - var(--billboard-photo-left) * var(--billboard-photo-scale-x)); top: calc(var(--billboard-screen-top) - var(--billboard-photo-top) * var(--billboard-photo-scale-y)); pointer-events: none; }
+.billboard-foreground { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none; user-select: none; }
+/* Reuse the photograph's alpha so the finish never covers the live screen. */
+.billboard-photo-finish { position: absolute; inset: 0; pointer-events: none; }
+.billboard-photo-finish::before, .billboard-photo-finish::after { content: ''; position: absolute; inset: 0; mask-image: var(--billboard-photo); mask-size: 100% 100%; mask-repeat: no-repeat; }
+.billboard-photo-finish::before { z-index: 4; background: radial-gradient(ellipse at 50% 46%, transparent 32%, rgba(0,0,0,.24) 64%, rgba(0,0,0,.8) 100%); opacity: var(--billboard-vignette-opacity); }
+.billboard-photo-finish::after { z-index: 5; background: url('/textures/billboard-grain.svg') repeat; background-size: 160px 160px; opacity: var(--billboard-grain-opacity); mix-blend-mode: soft-light; }
+
+@media (max-width: 760px) {
+  /* The supplied portrait plates share this display. Cut out their opaque black placeholder in CSS,
+     preserving the original files and exposing the same live HTML/Aurora as the desktop scene. */
+  .billboard, :root[data-theme="dark"] .billboard { --billboard-scene-ratio: 941 / 1672; --billboard-screen-left: 30.6%; --billboard-screen-top: 20.65%; --billboard-screen-width: 38.7%; --billboard-screen-height: 45.15%; --billboard-photo-scale-x: 1; --billboard-photo-scale-y: 1; --billboard-photo-left: 30.6%; --billboard-photo-top: 20.65%; }
+  .billboard { --billboard-photo: var(--billboard-photo-mobile-day); }
+  :root[data-theme="dark"] .billboard { --billboard-photo: var(--billboard-photo-mobile-night); }
+  .billboard-view { aspect-ratio: var(--billboard-scene-ratio); }
+  .billboard-scene { top: -10%; width: 120%; height: 120%; }
+  .billboard-photo { clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, 30.6% 20.65%, 30.6% 65.8%, 69.3% 65.8%, 69.3% 20.65%, 30.6% 20.65%); }
+  .billboard-copy { gap: 8cqw; padding: 10cqw 7cqw; }
+  .billboard-copy h2 { font-size: 11cqw; line-height: 1.15; text-wrap: balance; }
+  .billboard-copy > p { font-size: 8cqw; }
+  .billboard-brand { width: 80cqw; margin-top: 8cqw; }
+}
+
+/* The photograph and everything in its display share one transform. Geometry is measured once per resize,
+   so the opening view fills the viewport and the closing view lands exactly in the transparent screen. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) {
+    .billboard[data-billboard-portal] { height: 280svh; view-timeline-name: --billboard-close; view-timeline-axis: block; }
+    [data-billboard-portal] .billboard-stage { position: sticky; top: 0; height: 100svh; }
+    [data-billboard-portal] .billboard-stage::before { content: ''; position: absolute; inset: -32px; pointer-events: none; --tone-1: var(--billboard-backdrop-tint); background-image: linear-gradient(var(--tone-1), var(--tone-1)), var(--billboard-photo); background-position: center; background-size: cover; filter: blur(24px); }
+    [data-billboard-portal] .billboard-view { position: absolute; top: 50%; translate: 0 -50%; transform-origin: var(--billboard-origin-x) var(--billboard-origin-y); animation-name: billboard-pull-back; animation-timing-function: cubic-bezier(.45,0,.55,1); animation-fill-mode: both; animation-timeline: --billboard-close; animation-range: contain 10% contain 76%; will-change: transform; }
+    [data-billboard-portal] .billboard-process { position: absolute; inset: 0; z-index: 2; overflow: hidden; padding: 0; background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), var(--grad-aurora); animation-name: billboard-process-out; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: --billboard-close; animation-range: contain 76% contain 86%; }
+    [data-billboard-portal] .billboard-closing { position: absolute; left: 50%; top: 50%; width: 100vw; height: 100svh; display: grid; place-items: center; padding: 32px; transform: translate(-50%, -50%) scale(calc(1 / var(--billboard-zoom))); }
+    [data-billboard-portal] .process-closing { flex-direction: column; align-items: center; justify-content: center; gap: 28px; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; text-align: center; }
+    [data-billboard-portal] .process-closing > p { max-width: 22ch; font-size: clamp(26px, 3.2vw, 44px); line-height: 1.18; }
+    [data-billboard-portal] .process-closing-motif { left: auto; right: -150px; top: -110px; }
+    [data-billboard-portal] .billboard-copy { animation-name: billboard-message-in; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: --billboard-close; animation-range: contain 80% contain 90%; }
+    /* Bring a focused closing CTA back into view even if keyboard navigation enters it late in the reveal. */
+    [data-billboard-portal] .billboard-process:focus-within { animation-name: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) and (max-width: 760px) {
+    [data-billboard-portal] .process-closing-motif { right: -32px; top: -96px; }
+  }
+}
+
+@keyframes billboard-pull-back {
+  from { transform: translate(var(--billboard-pan-x), var(--billboard-pan-y)) scale(var(--billboard-zoom)); }
+  to { transform: translate(0, 0) scale(1); }
+}
+@keyframes billboard-process-out {
+  from { opacity: 1; visibility: visible; }
+  to { opacity: 0; visibility: hidden; }
+}
+@keyframes billboard-message-in {
+  from { opacity: 0; visibility: hidden; }
+  to { opacity: 1; visibility: visible; }
+}

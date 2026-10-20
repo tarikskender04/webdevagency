@@ -1,0 +1,8 @@
+// Cloudflare Workers config. The Astro adapter adds the entry point and static assets binding at build time.
+// Secrets (RESEND_API_KEY) are set in the Cloudflare dashboard or with `wrangler secret put`, never here.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "prodigy-stdio",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true }
+}

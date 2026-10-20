@@ -1,0 +1,19 @@
+---
+import { site } from '../config/site';
+
+interface Props {
+  variant?: keyof typeof site.brandAssets;
+  tone?: 'auto' | 'ink' | 'white';
+  class?: string;
+}
+const { variant = 'logo', tone = 'auto', class: className } = Astro.props;
+const asset = site.brandAssets[variant];
+---
+<span class:list={['brand-logo', className]}>
+  <span class="sr-only">{site.name}</span>
+  <picture aria-hidden="true">
+    <!-- The pre-paint theme script updates this source. Without JS the site stays light. -->
+    {tone === 'auto' && <source data-theme-source media="not all" srcset={asset.white} />}
+    <img src={tone === 'white' ? asset.white : asset.ink} width={asset.width} height={asset.height} alt="" decoding="async" />
+  </picture>
+</span>

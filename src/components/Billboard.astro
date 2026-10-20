@@ -1,0 +1,44 @@
+---
+import type { Assets } from '../lib/assets';
+import { site } from '../config/site';
+import { Aurora } from './Aurora';
+import BrandLogo from './BrandLogo.astro';
+import '../styles/billboard.css';
+
+interface Props { assets: Assets; }
+const { assets } = Astro.props;
+const scene = assets.billboardScene;
+const dayScene = assets.billboardSceneLight;
+const mobileScene = assets.billboardSceneMobile;
+const mobileDayScene = assets.billboardSceneMobileLight;
+---
+<section id="billboard" class="billboard portal-close" aria-labelledby="billboard-heading" style={`--billboard-photo-day: url("${dayScene.src}"); --billboard-photo-night: url("${scene.src}"); --billboard-photo-mobile-day: url("${mobileDayScene.src}"); --billboard-photo-mobile-night: url("${mobileScene.src}")`}>
+  <div class="billboard-process"><div class="billboard-closing"><slot /></div></div>
+  <div class="billboard-stage">
+    <div class="billboard-view">
+      <div class="billboard-scene">
+        <div class="billboard-screen">
+          <div class="billboard-aurora" aria-hidden="true">
+            <Aurora client:visible variant="curtain" colorStops={['#9CCCEB', '#0C7CC4', '#FFFFFF', '#0C7CC4', '#9CCCEB']} darkColorStops={['#084B7A', '#0C7CC4', '#9CCCEB', '#0C7CC4', '#084B7A']} amplitude={1} blend={.6} height={.65} scale={.8} glow={.7} speed={.65} layers={2} direction="bottom" mouseInteraction />
+          </div>
+          <div class="billboard-copy">
+            <h2 id="billboard-heading"><span>{site.billboard.headline[0]}</span> <span>{site.billboard.headline[1]}</span></h2>
+            <p>{site.billboard.response}</p>
+            <div class="billboard-brand"><BrandLogo /></div>
+          </div>
+        </div>
+        <div class="billboard-photo"><picture>
+          <source data-theme-source data-theme-breakpoint="(max-width: 760px)" media="(max-width: 760px) and (prefers-color-scheme: dark)" srcset={mobileScene.srcSet} sizes="120vw" width={mobileScene.width} height={mobileScene.height} />
+          <source media="(max-width: 760px)" srcset={mobileDayScene.srcSet} sizes="120vw" width={mobileDayScene.width} height={mobileDayScene.height} />
+          <source data-theme-source media="(prefers-color-scheme: dark)" srcset={scene.srcSet} sizes="100vw" width={scene.width} height={scene.height} />
+          <img class="billboard-foreground" src={dayScene.src} srcset={dayScene.srcSet} width={dayScene.width} height={dayScene.height} sizes="100vw" alt="" loading="lazy" decoding="async" />
+        </picture>
+        <div class="billboard-photo-finish" aria-hidden="true" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import { initBillboardMotion } from '../scripts/billboard-motion';
+  initBillboardMotion();
+</script>

@@ -1,11 +1,11 @@
-# Meridian engineering instructions
+# Prodigy Stdio engineering instructions
 
 Read root CLAUDE.md, design/README.md (when imported), docs/design-sync.md, and docs/decisions.md before changing the site.
 
 - Stack: Astro static output, React, strict TypeScript. React components produce HTML at build time; hydrate only interactive components that need browser state.
 - The original handoff lives in design/. Preserve it as the exported source. Implement components in src/ and assets in public/ or src/assets/.
-- Confirmed variants: Hero B, Contact 1a, Footer 1b. Brand: Meridian. Name: Tarik Skender. Aladin Music handles Sales & Outreach. Other employee names are in src/config/site.ts; roles remain unconfirmed.
-- Do not invent clients, reviews, metrics, team roles, a US office, or a contact email. Target the US market without claiming a US location.
+- Confirmed variants: Hero B, Contact 1a, Footer 1b. Brand: Prodigy Stdio. Owned domain: prodigystdio.com; Stdio is intentional, do not change it to Studio. Name: Tarik Skender. Aladin Music handles Sales & Outreach. Other employee names are in src/config/site.ts; roles remain unconfirmed.
+- Do not invent clients, reviews, metrics, team roles, a registered company, business address, or US office. The user confirmed a Chicago base with operations in Bosnia and Herzegovina, without a registered business; this location description may be published.
 - Business identity and content are centralized in src/config/site.ts. Replace handoff placeholder identities with confirmed details.
 - Keep meaningful content in the built HTML. Use semantic headings, accessible navigation, responsive styling, and reduced-motion support.
 - Noindex is the setup default. Set PUBLIC_SITE_URL to the real production HTTPS origin and PUBLIC_SITE_INDEXABLE=true only when ready to launch. Preview deployments must retain noindex.
@@ -14,4 +14,5 @@ Read root CLAUDE.md, design/README.md (when imported), docs/design-sync.md, and 
 - Use .claude/skills/frontend-engineer/SKILL.md for frontend work and npm run test:browser for browser verification. Screenshots live in ignored artifacts/ and are uploaded by CI.
 - Crochê, Tierd, Una Adventure, and Captured are confirmed clients. The numerical results and dates in the original handoff are not real and must not be used in production copy.
 - Booking requires a real PUBLIC_BOOKING_URL. Until it is provided, the form prepares a local downloadable brief and explicitly says nothing was sent or booked.
+- Tarik Skender is the confirmed legal operator and Owner & CEO. The public enquiry/privacy email is hello@prodigystdio.com, an alias of tarik@prodigystdio.com (Google Workspace). Hosting is Cloudflare Workers; only /api/enquiry/ runs on demand, everything else is prerendered. Enquiry delivery needs RESEND_API_KEY on the host and PUBLIC_ENQUIRY_ENABLED=true at build time. Privacy and Terms remain drafts until the missing address, hosting, retention and transfer details in src/config/site.ts are confirmed; see docs/legal-launch.md.
 - The importer copies design/CLAUDE.md exactly into root CLAUDE.md. Keep durable engineering instructions here to avoid losing them on future imports.

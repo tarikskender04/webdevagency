@@ -1,0 +1,56 @@
+---
+import type { Assets } from '../lib/assets';
+import BrandLogo from './BrandLogo.astro';
+import { testimonials } from '../config/testimonials';
+import ClientGlyph from './ClientGlyph.astro';
+import { Arrow } from './Arrow';
+import '../styles/standout.css';
+interface Props { assets: Assets; }
+const { assets } = Astro.props;
+const { crowd } = assets;
+// Chip placement in the photo's sky (percent of the stage): wide crop, then the square phone crop. Plus drift offsets.
+// Every chip stays in open sky, clear of the heading, her silhouette and hand, and the crowd. On phones they arc over her head.
+const chips = [
+  { x: 5, y: 20, mx: 3, my: 11, dx: 10, dy: -12, d: 11, far: false },
+  { x: 22, y: 16, mx: 31, my: 4, dx: -8, dy: 8, d: 13, far: true },
+  { x: 82, y: 16, mx: 67, my: 9, dx: -10, dy: -14, d: 10, far: false },
+];
+---
+<section class="standout" aria-labelledby="standout-heading">
+  <div class="container standout-head">
+    <div class="standout-title" data-reveal>
+      <p class="eyebrow dotted">In a crowded market</p>
+      <h2 id="standout-heading"><span class="standout-phrase"><em>Stand out</em> with</span> <BrandLogo tone="ink" class="brand-lockup" /></h2>
+    </div>
+    <div class="standout-aside" data-reveal>
+      <p class="lead">Your competitors all have websites. Yours should be the one people remember.</p>
+      <a href="#start" class="button button-ink">Start a project <span class="button-circle"><Arrow diagonal /></span></a>
+    </div>
+  </div>
+  <figure class="container standout-stage">
+    <div class="standout-photo">
+      <img src={crowd.src} srcset={crowd.srcSet} sizes="(max-width: 1304px) calc(100vw - 40px), 1240px" width={crowd.width} height={crowd.height} alt="One woman in a white top and sunglasses stands out in a crowd of identical faces" loading="lazy" decoding="async" />
+      <!-- Same file, blurred, with a sharp window around her: the crowd falls out of focus. -->
+      <img class="standout-photo-blur" src={crowd.src} srcset={crowd.srcSet} sizes="(max-width: 1304px) calc(100vw - 40px), 1240px" width={crowd.width} height={crowd.height} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    </div>
+    <ul class="standout-chips" aria-hidden="true">
+      {testimonials.map(({ client, glyph }, index) => {
+        const chip = chips[index % chips.length];
+        return <li class:list={['client-chip', { 'client-chip-far': chip.far }]} style={`--x:${chip.x}%;--y:${chip.y}%;--mx:${chip.mx}%;--my:${chip.my}%;--dx:${chip.dx}px;--dy:${chip.dy}px;--d:${chip.d}s;--delay:-${index * 2.3}s`}><span class="client-chip-inner"><ClientGlyph glyph={glyph} />{client}</span></li>;
+      })}
+    </ul>
+    <span class="standout-tag" aria-hidden="true">Your business</span>
+  </figure>
+  <div class="container standout-quotes">
+    <ul class="quote-grid" aria-label="What clients say" tabindex="0">
+      {testimonials.map(({ client, glyph, quote, name, role, photo, placeholder }) => <li data-reveal>
+        <figure class="quote-card" data-placeholder={placeholder || undefined}>
+          {photo && <img class="quote-portrait" src={assets[photo].src} srcset={assets[photo].srcSet} sizes="(max-width: 760px) 200px, 260px" width={assets[photo].width} height={assets[photo].height} alt="" loading="lazy" decoding="async" />}
+          <div class="quote-top"><span class="client-logo"><ClientGlyph glyph={glyph} />{client}</span>{placeholder && <span class="quote-flag">Placeholder</span>}</div>
+          <blockquote><p>{quote}</p></blockquote>
+          <figcaption>{!photo && <span class="quote-avatar" aria-hidden="true">{client.charAt(0)}</span>}<span class="quote-person"><strong>{name}</strong><span>{role}</span></span>{!placeholder && <span class="quote-signature" aria-hidden="true">{name}</span>}</figcaption>
+        </figure>
+      </li>)}
+    </ul>
+  </div>
+</section>

@@ -4,6 +4,7 @@ import { AssetImage } from './AssetImage';
 import { CapabilityDemo } from './CapabilityDemo';
 import { Arrow } from './Arrow';
 import { capabilities, industries } from '../config/capabilities';
+import '../styles/capabilities.css';
 interface Props { assets: Assets; }
 const { assets } = Astro.props;
 const demoAssets = { clutch: assets.clutch, square: assets.square, productTriangle: assets.productTriangle, crocheLogo: assets.crocheLogo };
@@ -18,3 +19,8 @@ const demoAssets = { clutch: assets.clutch, square: assets.square, productTriang
     <div class="cap-controls"><span class="cap-pagination"><b data-cap-current>01</b> <span>/ 07</span></span><div class="cap-dots" role="group" aria-label="Choose a capability">{['Overview', ...capabilities.map(item => item.label), 'Your business'].map((name, index) => <button type="button" data-cap-index={index} aria-label={`Show ${name}`} aria-current={index === 0 ? 'step' : undefined} class={index === 0 ? 'active' : ''}></button>)}</div><div class="cap-arrows"><button type="button" aria-label="Previous capability" data-cap-direction="-1" disabled>←</button><button type="button" aria-label="Next capability" data-cap-direction="1">→</button></div></div>
   </div>
 </section>
+<noscript><style>.cap-track { display: block; overflow: visible; } .cap-slide { min-height: auto; padding-block: 64px; } .cap-controls { display: none; }</style></noscript>
+<script>
+  import { initCapabilitiesMotion } from '../scripts/capabilities-motion';
+  void initCapabilitiesMotion();
+</script>

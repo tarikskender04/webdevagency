@@ -4,26 +4,85 @@ import { processSteps } from '../config/process';
 import { ProcessVisual } from './ProcessVisual';
 import { ReviewPanel } from './ReviewPanel';
 import { Aurora } from './Aurora';
+import { ProcessIntro } from './ProcessIntro';
 import { AssetImage } from './AssetImage';
 import { Arrow } from './Arrow';
+import Billboard from './Billboard.astro';
+import '../styles/process-portal.css';
 interface Props { assets: Assets; }
 const { assets } = Astro.props;
+const visualMotifs = { notebook: assets.glass, design: assets.processRibbon, code: assets.processPrism, launch: assets.butterfly };
 ---
 <section id="process" class="process-section" aria-labelledby="process-heading">
-  <div class="process-aurora effect-wash"><Aurora client:visible amplitude={1.2} speed={.4} /></div>
+  <div class="process-aurora effect-wash"><Aurora client:visible amplitude={1.2} speed={.6} /></div>
+  <!-- The portal into Process: when it arrives it opens onto a title card that pixel-swaps into the intro
+       (ProcessIntro), stays open for the rows, and pulls back into the billboard display before Contact.
+       See process-portal.css. -->
+  <div class="portal portal-open">
+    <div class="portal-stage">
+      <div class="portal-heading">
+        <p class="eyebrow dotted portal-eyebrow">How the work happens</p>
+        <h2 id="process-heading"><span class="portal-line portal-line-a">From a pencil line</span> <span class="portal-line portal-line-b">to <em>opening day</em></span></h2>
+      </div>
+      <div class="portal-inside">
+        <ProcessIntro client:visible={{ rootMargin: '100%' }}>
+          <p slot="title">Take a quick look at <em>how we work</em></p>
+          <div slot="world" class="portal-world">
+            <p class="lead">Five steps, in order, every time. Here's what they looked like for Crochê, a one-woman bag studio in Sarajevo, start to finish.</p>
+            <ol class="portal-chapters">
+              {processSteps.map((step, index) => <li><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span>{step.title} <em>{step.accent}</em></span></li>)}
+            </ol>
+          </div>
+        </ProcessIntro>
+      </div>
+      <div class="portal-wall" aria-hidden="true"><span class="portal-hole" /></div>
+    </div>
+  </div>
+  <!-- Arm the opening portal before it paints, wherever it runs. Unarmed (no JavaScript) it shows its open end state. -->
+  <script is:inline>
+    (function (portal) {
+      if (CSS.supports('animation-timeline: view()') && matchMedia('(prefers-reduced-motion: no-preference) and (min-height: 560px)').matches) portal.dataset.portal = 'rest';
+    })(document.currentScript.previousElementSibling);
+  </script>
   <div class="container process-inner">
-    <div class="process-heading" data-reveal><p class="eyebrow dotted">How the work happens</p><h2 id="process-heading">From a pencil line to <em>opening day</em></h2><p class="lead">Five steps, in order, every time. Here's what they looked like for Crochê, a one-woman bag studio in Sarajevo, start to finish.</p></div>
     <div class="process-rows">
       <div class="process-spine" aria-hidden="true"><span /></div>
       {processSteps.map((step, index) => <article class={`process-row ${index % 2 ? 'process-row-reverse' : ''}`}>
         <span class="process-dot" aria-hidden="true" />
-        <div class="process-copy" data-reveal><span class="section-pill">// {String(index + 1).padStart(2, '0')}</span><h3>{step.title} <em>{step.accent}</em></h3><p>{step.body}</p><ul>{step.points.map(point => <li>{point}</li>)}</ul></div>
-        <div class="process-visual" data-reveal>
-          {step.kind === 'review' ? <ReviewPanel assets={{ square: assets.square }} client:visible /> : <ProcessVisual assets={assets} kind={step.kind} />}
-          <AssetImage asset={assets[index % 2 ? 'triangle' : 'butterfly']} alt="" className="motif process-motif" />
+        <div class="process-copy-wrap">
+          <div class="process-copy"><span class="section-pill">// {String(index + 1).padStart(2, '0')}</span><h3>{step.title} <em>{step.accent}</em></h3><p>{step.body}</p><ul>{step.points.map(point => <li>{point}</li>)}</ul></div>
+          {index === 0 && <AssetImage asset={assets.processPen} alt="" className="motif process-motif process-pen-motif" />}
+        </div>
+        <div class="process-visual">
+          <div class="process-parallax">
+            {step.kind === 'review' ? <ReviewPanel assets={{ square: assets.square, special: assets.special }} client:visible /> : <ProcessVisual assets={assets} kind={step.kind} />}
+            {step.kind !== 'review' && <AssetImage asset={visualMotifs[step.kind]} alt="" className={`motif process-motif process-${step.kind}-motif`} />}
+            {step.kind === 'notebook' && <div class="process-flyout notebook-flyout" data-process-piece data-px="-40">motion is scroll-driven only</div>}
+            {step.kind === 'design' && <div class="process-flyout palette-flyout" data-process-piece data-px="46"><span class="mini-label">Accent under 5%</span><span class="palette-flyout-colors"><i /><i /><i /></span></div>}
+            {step.kind === 'code' && <div class="process-flyout ink-flyout" data-process-piece data-px="46">The film follows the scroll</div>}
+            {step.kind === 'review' && <div class="process-flyout ink-flyout review-flyout" data-process-piece data-px="48">Every state, tested</div>}
+            {step.kind === 'launch' && <div class="process-flyout launch-flyout" data-process-piece data-px="48">Still on the phone with you</div>}
+          </div>
         </div>
       </article>)}
     </div>
-    <div class="process-closing" data-reveal><p>At every phase we are fully with you, providing only the <em>best</em>.</p><a href="#start" class="button button-ink">Start a project <span class="button-circle"><Arrow diagonal /></span></a></div>
   </div>
+  <Billboard assets={assets}>
+    <div class="process-closing"><p>At every phase we are fully with you, providing only the <em>best</em>.</p><a href="#start" class="button button-ink">Start a project <span class="button-circle"><Arrow diagonal /></span></a><AssetImage asset={assets.processOrb} alt="" className="motif process-motif process-closing-motif" /></div>
+  </Billboard>
 </section>
+<div class="process-bottom-blur" aria-hidden="true">
+  {Array.from({ length: 6 }, (_, index) => {
+    const i = index + 1;
+    const progress = i / 6;
+    const curve = progress * progress * (3 - 2 * progress);
+    const stops = [`transparent ${(i - 1) * 100 / 6}%`, `black ${i * 100 / 6}%`];
+    if (i < 6) stops.push(`black ${(i + 1) * 100 / 6}%`);
+    if (i < 5) stops.push(`transparent ${(i + 2) * 100 / 6}%`);
+    return <div style={`--blur:${.0625 * (curve * 6 + 1) * 1.1}rem;--blur-mask:linear-gradient(to bottom,${stops.join(',')})`} />;
+  })}
+</div>
+<script>
+  import { initProcessMotion } from '../scripts/process-motion';
+  initProcessMotion();
+</script>

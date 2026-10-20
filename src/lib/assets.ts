@@ -1,12 +1,14 @@
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import mark from '../../design/prototypes/uploads/pasted-1789947878169-0.png';
-import whiteMark from '../../design/prototypes/uploads/pasted-1789947661700-0.png';
 import butterfly from '../../design/prototypes/uploads/pasted-1789950103853-0.png';
 import blueMark from '../../design/prototypes/uploads/pasted-1789950100962-0.png';
 import star from '../../design/prototypes/uploads/pasted-1789950094688-0.png';
 import triangle from '../../design/prototypes/uploads/pasted-1789950097988-0.png';
 import glass from '../../design/prototypes/uploads/pasted-1789950072713-0.png';
+import processPen from '../../design/prototypes/uploads/pasted-1790097103829-0.png';
+import processRibbon from '../../design/prototypes/uploads/pasted-1789950091124-0.png';
+import processPrism from '../../design/prototypes/uploads/pasted-1790097113968-0.png';
+import processOrb from '../../design/prototypes/uploads/pasted-1790097120424-0.png';
 import clutch from '../../design/prototypes/assets/croche/product-clutch.png';
 import square from '../../design/prototypes/assets/croche/product-square.png';
 import special from '../../design/prototypes/assets/croche/product-special.png';
@@ -18,15 +20,45 @@ import sunSalt from '../../design/prototypes/assets/croche/stickers/sun-salt.png
 import palette from '../../design/prototypes/assets/croche/stickers/palette.png';
 import film from '../../design/prototypes/assets/croche/stickers/hero-film.png';
 import crocheLogo from '../../design/prototypes/assets/croche/logo-primary.svg';
-const sources = { mark, whiteMark, butterfly, blueMark, star, triangle, glass, clutch, square, special, productTriangle, comingSoon, sitemap, logoSketch, sunSalt, palette, film };
-export type ImageKey = keyof typeof sources | 'crocheLogo';
+import heroPlate from '../assets/hero/hall-dark.png';
+import heroPlateLight from '../assets/hero/hall-light.png';
+import crowd from '../assets/standout/crowd.png';
+import billboardScene from '../assets/standout/Neon Night Billboard Placeholder.png';
+import billboardSceneLight from '../assets/standout/Daylight Urban Plaza Billboard Mockup.png';
+import billboardSceneMobile from '../assets/standout/nightmobile.png';
+import billboardSceneMobileLight from '../assets/standout/daymobile.png';
+import crochePhoto from '../assets/work/croche-photo.jpg';
+import crocheLogoWhite from '../assets/work/croche-logo-white.svg';
+import unaPoster from '../assets/work/una-poster.png';
+import capturedPhoto from '../assets/work/captured-photo.jpg';
+import capturedBowl from '../assets/work/captured-bowl.png';
+import capturedWordmark from '../assets/work/captured-wordmark.png';
+import tierdType from '../assets/work/tierd-type.png';
+import tierdDot from '../assets/work/tierd-dot.png';
+import crocheBadge from '../assets/work/croche-badge.png';
+import unaBadge from '../assets/work/una-badge.png';
+import tierdBadge from '../assets/work/tierd-badge.png';
+import capturedBadge from '../assets/work/captured-badge.png';
+import imanPortrait from '../assets/testimonials/iman.jpg';
+import irmanPortrait from '../assets/testimonials/irman.jpg';
+import malikPortrait from '../assets/testimonials/malik.jpg';
+const motifKeys = ['butterfly', 'blueMark', 'star', 'triangle', 'glass', 'processPen', 'processRibbon', 'processPrism', 'processOrb'];
+const plateKeys = ['heroPlate', 'heroPlateLight', 'crowd', 'billboardScene', 'billboardSceneLight', 'billboardSceneMobile', 'billboardSceneMobileLight'];
+const plateWidths = [480, 800, 1280, 1672];
+// Hero cards render at most 240px wide; project overviews request larger artwork. Badges render at 34px; testimonial portraits fill about 200px of a quote card.
+const workKeys = ['crochePhoto', 'unaPoster', 'capturedPhoto', 'capturedBowl', 'capturedWordmark', 'tierdType', 'tierdDot'];
+const badgeKeys = ['crocheBadge', 'unaBadge', 'tierdBadge', 'capturedBadge'];
+const portraitKeys = ['imanPortrait', 'irmanPortrait', 'malikPortrait'];
+const sources = { heroPlate, heroPlateLight, crowd, billboardScene, billboardSceneLight, billboardSceneMobile, billboardSceneMobileLight, butterfly, blueMark, star, triangle, glass, processPen, processRibbon, processPrism, processOrb, clutch, square, special, productTriangle, comingSoon, sitemap, logoSketch, sunSalt, palette, film, crochePhoto, unaPoster, capturedPhoto, capturedBowl, capturedWordmark, tierdType, tierdDot, crocheBadge, unaBadge, tierdBadge, capturedBadge, imanPortrait, irmanPortrait, malikPortrait };
+export type ImageKey = keyof typeof sources | 'crocheLogo' | 'crocheLogoWhite';
 export interface Asset { src: string; srcSet?: string; width: number; height: number; }
 export type Assets = Record<ImageKey, Asset>;
-export async function buildAssets(): Promise<Assets> {
+export async function buildAssets({ workWidth = 640 }: { workWidth?: number } = {}): Promise<Assets> {
   const entries = await Promise.all(Object.entries(sources).map(async ([name, source]: [string, ImageMetadata]) => {
-    const width = name === 'mark' || name === 'whiteMark' ? 190 : ['butterfly', 'blueMark', 'star', 'triangle', 'glass'].includes(name) ? 480 : 800;
-    const image = await getImage({ src: source, width: Math.min(width, source.width), widths: [160, 320, 640, 800].filter(candidate => candidate <= Math.min(width, source.width)), format: 'webp', quality: 78 });
+    const width = plateKeys.includes(name) ? 1672 : workKeys.includes(name) ? workWidth : motifKeys.includes(name) ? 480 : badgeKeys.includes(name) ? 128 : portraitKeys.includes(name) ? 560 : 800;
+    const candidates = plateKeys.includes(name) ? [...new Set([...plateWidths, Math.min(width, source.width)])] : badgeKeys.includes(name) ? [64, 128] : portraitKeys.includes(name) ? [280, 560] : workKeys.includes(name) ? [160, 320, 640, 960, 1200] : [160, 320, 640, 800];
+    const image = await getImage({ src: source, width: Math.min(width, source.width), widths: candidates.filter(candidate => candidate <= Math.min(width, source.width)), format: 'webp', quality: plateKeys.includes(name) ? 72 : 78 });
     return [name, { src: image.src, srcSet: image.srcSet.attribute, width: Number(image.attributes.width), height: Number(image.attributes.height) }] as const;
   }));
-  return Object.fromEntries([...entries, ['crocheLogo', { src: crocheLogo.src, width: crocheLogo.width, height: crocheLogo.height }]]) as Assets;
+  return Object.fromEntries([...entries, ['crocheLogo', { src: crocheLogo.src, width: crocheLogo.width, height: crocheLogo.height }], ['crocheLogoWhite', { src: crocheLogoWhite.src, width: crocheLogoWhite.width, height: crocheLogoWhite.height }]]) as Assets;
 }

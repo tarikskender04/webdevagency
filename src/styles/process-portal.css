@@ -1,0 +1,134 @@
+/* The Process portal, after the kit's ScrollExpand (Motion.jsx, Design Kit §12: 1.1 screens of travel, a hold,
+   zoom 1.3 → 1). The page is a paper wall with a rounded hole in it. Behind the hole waits an ink title card ("Take a
+   quick look at how we work", sliding in as the portal arrives). When the portal arrives, the hole opens to full bleed
+   between the two halves of the headline and pushes them apart, then the card pixel-swaps (PixelSwap) into Process
+   itself on its aurora. Every opening visual follows --process-open in both scroll directions. ProcessIntro.tsx and PixelSwap only
+   update accessibility at the pixel reveal boundaries; no timers or per-frame React renders. The rows scroll through the open portal; billboard.css and
+   billboard-motion.ts then pull the closing scene back into the photograph's display before Contact.
+   Only where scroll-driven animations are supported, without a reduced-motion preference and on screens at least
+   560px tall. Otherwise the layout below is the static end state: heading, lead and steps, the rows, and the
+   closing band. An opening portal nobody armed (no JavaScript) shows its open end state.
+   Animations use longhands: the minifier folds `animation-timeline` into the `animation` shorthand, and Chrome
+   rejects the result. */
+
+.portal { position: relative; z-index: 1; }
+/* Moving reveal content must not become a browser scroll anchor when the motion layout changes. */
+.portal-open { overflow-anchor: none; }
+.portal-stage { position: relative; width: min(var(--container), calc(100% - 2 * var(--gutter))); margin-inline: auto; }
+.portal-wall { display: none; }
+.process-section:has(> .billboard) { padding-bottom: 0; }
+
+.portal-open .portal-stage { display: flex; flex-direction: column; gap: 24px; padding-top: 120px; }
+.portal-heading { display: flex; flex-direction: column; gap: 24px; }
+.portal-heading h2 { max-width: 16ch; }
+.portal-inside .lead { max-width: 54ch; }
+.portal-chapters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 20px; margin: 40px 0 0; padding: 0; list-style: none; }
+.portal-chapters li { display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+.portal-chapters li > span:first-child { font: 400 11px/1.4 var(--font-mono); letter-spacing: .12em; color: var(--deep); }
+
+/* Without the portal the intro stands on its own: no title card, no pixel grid, the intro in normal flow. */
+.portal-swap { overflow: visible; }
+.portal-swap .pixel-swap__layer { position: relative; }
+.portal-swap .pixel-swap__layer:first-child, .portal-swap .pixel-swap__grid { display: none; }
+.portal-swap .pixel-swap__layer:last-child { visibility: visible; }
+.portal-title-card { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 var(--gutter); background: radial-gradient(70% 55% at 50% 118%, rgba(12,124,196,.55), transparent 72%), radial-gradient(50% 40% at 12% -6%, rgba(8,75,122,.55), transparent 70%), var(--ink); color: var(--paper); text-align: center; }
+.portal-title p { max-width: 13ch; font-size: clamp(34px, 4.6vw, 68px); font-weight: 600; line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }
+.portal-title em { color: var(--sky); }
+
+@media (max-width: 919px) {
+  .portal-chapters { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 20px; }
+}
+@media (max-width: 760px) {
+  .portal-stage { width: calc(100% - 40px); }
+  .portal-open .portal-stage { padding-top: 80px; gap: 22px; }
+  .portal-inside .lead { font-size: 16px; }
+  .portal-chapters { grid-template-columns: 1fr; gap: 0; margin-top: 28px; }
+  .portal-chapters li { flex-direction: row; align-items: baseline; gap: 14px; padding: 10px 0; border-top: 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) {
+    /* The wall takes over the edges the aurora's mask used to soften, and the closing stage ends the section. */
+    .process-section { padding-bottom: 0; }
+    .process-aurora { -webkit-mask-image: none; mask-image: none; }
+
+    /* Each portal is a sticky stage in a taller track. The rest hole sits --ix% from each side and --iy small viewport units from
+       the top and bottom. */
+    .portal-open { --ix: 24; --iy: 22; --portal-size: clamp(38px, min(6.2vw, 9.4svh), 92px); --portal-gap: clamp(14px, 2.4svh, 26px); --portal-ease: cubic-bezier(.65,0,.35,1); height: 240svh; view-timeline-name: --process-open; view-timeline-axis: block; }
+    .portal-stage, .portal-open .portal-stage { position: sticky; top: 0; display: block; width: 100%; height: 100svh; margin: 0; padding: 0; overflow: hidden; }
+
+    .portal-wall { position: absolute; inset: 0; z-index: 1; display: block; pointer-events: none; }
+    /* The world behind the wall: the section's aurora gradient, deepened while a portal is narrow. In the opening
+       portal it belongs to the swapped-in intro and is opaque (the same gradient at .6 over paper), so the pixels
+       cover the title card; it fades to the live aurora once the portal is open. */
+    .portal-hole { position: absolute; box-shadow: 0 0 0 1px var(--line), 0 0 0 200vmax var(--paper); }
+    .portal-hole { inset: 0; border-radius: 0; }
+
+    .portal-inside { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-rows: 1fr auto 1fr; justify-items: center; padding: 0 var(--gutter) max(48px, 7svh); }
+    .portal-open .portal-inside { display: block; padding: 0; }
+    .portal-intro { position: absolute; inset: 0; }
+    .portal-swap { height: 100%; overflow: hidden; }
+    .portal-swap .pixel-swap__layer { position: absolute; }
+    .portal-swap .pixel-swap__layer:first-child, .portal-swap .pixel-swap__grid { display: block; }
+    .portal-swap .pixel-swap__layer[data-visible='false'] { visibility: hidden; }
+    .portal-world { position: absolute; inset: 0; isolation: isolate; display: grid; grid-template-rows: 1fr auto 1fr; justify-items: center; padding: 0 var(--gutter) max(48px, 7svh); }
+    .portal-world::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), var(--grad-aurora); opacity: 0; pointer-events: none; }
+    .portal-inside .lead { grid-row: 2; max-width: 36ch; font-size: clamp(18px, 1.7vw, 23px); text-align: center; color: var(--ink); }
+    .portal-chapters { grid-row: 3; align-self: end; width: min(var(--container), 100%); }
+
+    .portal-heading { position: absolute; inset: 0; z-index: 2; display: block; pointer-events: none; }
+    .portal-heading h2 { max-width: none; font-size: var(--portal-size); line-height: .96; letter-spacing: -.04em; }
+    .portal-line { position: absolute; white-space: nowrap; }
+    .portal-line-a { left: calc(var(--ix) * 1%); bottom: calc((100 - var(--iy)) * 1svh + var(--portal-gap)); transform-origin: 0% 100%; }
+    .portal-line-b { right: calc(var(--ix) * 1%); top: calc((100 - var(--iy)) * 1svh + var(--portal-gap)); transform-origin: 100% 0%; }
+    .portal-eyebrow { position: absolute; left: calc(var(--ix) * 1%); bottom: calc((100 - var(--iy)) * 1svh + var(--portal-gap) + var(--portal-size) * .96 + 18px); }
+
+    /* The hole, headlines, title, pixels and intro share one browser scroll timeline. Longhands are required. */
+    .portal-open[data-portal] .portal-hole { animation-name: portal-hole-open; animation-timing-function: var(--portal-ease); animation-fill-mode: both; animation-timeline: --process-open; animation-range: contain 0% contain 28%; }
+    .portal-open[data-portal] .portal-inside { animation-name: portal-world-open; animation-timing-function: var(--portal-ease); animation-fill-mode: both; animation-timeline: --process-open; animation-range: contain 0% contain 28%; }
+    .portal-open[data-portal] :is(.portal-eyebrow, .portal-line-a) { animation-name: portal-heading-up; animation-timing-function: var(--portal-ease); animation-fill-mode: both; animation-timeline: --process-open; animation-range: contain 0% contain 28%; }
+    .portal-open[data-portal] .portal-line-b { animation-name: portal-heading-down; animation-timing-function: var(--portal-ease); animation-fill-mode: both; animation-timeline: --process-open; animation-range: contain 0% contain 28%; }
+    .portal-open[data-portal] .portal-title { animation-name: portal-title-in; animation-timing-function: cubic-bezier(.22,1,.36,1); animation-fill-mode: both; animation-timeline: --process-open; animation-range: entry 15% entry 85%; }
+    .portal-open[data-portal] .portal-world::before { animation-name: portal-wash-clear; animation-timing-function: ease; animation-fill-mode: both; animation-timeline: --process-open; animation-range: contain 76% contain 98%; }
+    .portal-open[data-portal] .portal-chapters li { animation-name: portal-chapter-in; animation-timing-function: cubic-bezier(.22,.61,.36,1); animation-fill-mode: both; animation-timeline: --process-open; animation-range: contain var(--chapter-start, 74%) contain var(--chapter-end, 88%); }
+    .portal-chapters li:nth-child(2) { --chapter-start: 76.5%; --chapter-end: 90.5%; }
+    .portal-chapters li:nth-child(3) { --chapter-start: 79%; --chapter-end: 93%; }
+    .portal-chapters li:nth-child(4) { --chapter-start: 81.5%; --chapter-end: 95.5%; }
+    .portal-chapters li:nth-child(5) { --chapter-start: 84%; --chapter-end: 98%; }
+    .portal-open:not([data-portal]) :is(.portal-eyebrow, .portal-line-a) { translate: 0 calc(var(--iy) * -1svh); scale: 1.06; opacity: .2; }
+    .portal-open:not([data-portal]) .portal-line-b { translate: 0 calc(var(--iy) * 1svh); scale: 1.06; opacity: .2; }
+    .portal-open:not([data-portal]) .portal-swap .pixel-swap__layer:first-child { display: none; }
+    .portal-open:not([data-portal]) .portal-swap .pixel-swap__layer:last-child { visibility: visible; }
+
+
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) and (max-width: 1100px) {
+    .portal-open { --ix: 16; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) and (max-width: 919px) {
+    .portal-open { --ix: 7; --iy: 25; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) and (max-width: 760px) {
+    .portal-open { --ix: 5; --portal-size: min(9.4vw, 44px); --portal-zoom: 1.04; }
+    .portal-world { display: flex; flex-direction: column; justify-content: center; gap: 28px; padding: 36px 20px; }
+    .portal-inside .lead { font-size: 17px; }
+    .portal-chapters { align-self: auto; margin: 0; }
+  }
+}
+
+@keyframes portal-hole-open {
+  from { inset: calc(var(--iy) * 1svh) calc(var(--ix) * 1%); border-radius: var(--r-panel); }
+  to { inset: 0; border-radius: 0; }
+}
+@keyframes portal-world-open { from { scale: var(--portal-zoom, 1.12); } to { scale: 1; } }
+@keyframes portal-heading-up {
+  from { translate: 0 0; scale: 1; opacity: 1; }
+  to { translate: 0 calc(var(--iy) * -1svh); scale: 1.06; opacity: .2; }
+}
+@keyframes portal-heading-down {
+  from { translate: 0 0; scale: 1; opacity: 1; }
+  to { translate: 0 calc(var(--iy) * 1svh); scale: 1.06; opacity: .2; }
+}
+@keyframes portal-title-in { from { translate: 150px 0; scale: 1.1; opacity: 0; } to { translate: 0 0; scale: 1; opacity: 1; } }
+@keyframes portal-wash-clear { from { opacity: 1; } to { opacity: 0; } }
+@keyframes portal-chapter-in { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }

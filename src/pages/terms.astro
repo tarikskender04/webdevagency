@@ -1,0 +1,20 @@
+---
+import InformationLayout from '../layouts/InformationLayout.astro';
+import { site, legal, policyDetailsPending } from '../config/site';
+const contents = [
+  { id: 'scope', title: 'About these terms' },
+  { id: 'projects', title: 'Enquiries & projects' },
+  { id: 'content', title: 'Website content' },
+  { id: 'use', title: 'Using the website' },
+  { id: 'links', title: 'External services' },
+  { id: 'contact', title: 'Changes & contact' },
+];
+---
+<InformationLayout title="Website Terms" eyebrow="Using this website" description="Information about this website, its content and how project enquiries work." contents={contents} updated={legal.updated} draft={policyDetailsPending}>
+  <section id="scope" aria-labelledby="scope-heading"><h2 id="scope-heading">About these terms</h2><p>This website introduces {site.name} and our work. {site.studio.introduction}</p>{legal.operatorName ? <p>Website operator: <strong>{legal.operatorName}</strong>.</p> : <p>The legal operator’s identity and contact details will be added before public launch.</p>}{legal.contactAddress && <p>Contact address: {legal.contactAddress}</p>}<p>These terms concern the website. A project’s services and commercial terms are set out separately in an agreement identifying the contracting parties.</p></section>
+  <section id="projects" aria-labelledby="projects-heading"><h2 id="projects-heading">Enquiries &amp; projects</h2><p>Preparing or downloading a brief does not send an enquiry, place an order, book a call or create a project agreement. Email links open your email application; you decide whether to send the message. An external calendar booking is completed with the calendar provider.</p><p>Any project proposal should set out the scope, deliverables, fees, payment schedule, revisions, ownership, cancellation and any hosting, maintenance or support arrangements. A conversation, budget selection or example on this website does not replace that agreement.</p></section>
+  <section id="content" aria-labelledby="content-heading"><h2 id="content-heading">Website content</h2><p>Project showcases and interface demonstrations illustrate the work and design approach. Sample screens are not statements of a client’s actual revenue, orders or performance. We do not promise particular business results from the examples shown.</p><p>Text, artwork, photographs, logos and other materials may be protected by intellectual property rights held by {site.name}, clients or other owners. Respect those rights when using or sharing material. You may link to our public pages; other uses remain subject to permission or rights provided by law.</p></section>
+  <section id="use" aria-labelledby="use-heading"><h2 id="use-heading">Using the website</h2><p>Use the website lawfully. Do not attempt unauthorized access, interfere with its operation or use its features to transmit harmful material.</p><p>We aim to keep the information accurate and the website available, but content and availability may change. Nothing in these terms excludes rights, obligations or liability that cannot lawfully be excluded.</p></section>
+  <section id="links" aria-labelledby="links-heading"><h2 id="links-heading">External services</h2><p>External websites, email services and booking providers operate under their own terms and privacy information. Read those before providing information or completing a booking.</p><p>See our <a href="/privacy/">Privacy &amp; Cookies notice</a> for how this website handles project briefs and display preferences.</p></section>
+  <section id="contact" aria-labelledby="contact-heading"><h2 id="contact-heading">Changes &amp; contact</h2><p>We may update these terms when the website or services change. The date above identifies this version. Changes to a signed project agreement are governed by that agreement.</p>{site.email ? <p>For website questions, contact <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p>A working contact email will be published before public launch. The brief-download form does not send messages.</p>}</section>
+</InformationLayout>

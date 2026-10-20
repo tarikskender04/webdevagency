@@ -1,0 +1,87 @@
+/* Stand out: a one-screen statement band between the hero and Process. A contained crop of the crowd photo fades
+   into paper; as it scrolls in, the crowd loses focus while she stays sharp. Scroll-driven where supported; the
+   static state is the end state.
+   Stage geometry: the 2.7:1 crop shows the photo from 17% to 83% of its height, so a photo y of P% sits at
+   (P - 17) / 66 of the stage. The square phone crop shows 22%–78% of the photo's width. */
+.standout { position: relative; overflow: clip; padding-block: clamp(48px, 7vh, 88px) clamp(40px, 6vh, 72px); background: var(--paper); }
+.standout-head { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.standout-title { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.standout h2 { display: flex; flex-wrap: wrap; align-items: center; gap: .14em .24em; font-size: clamp(40px, min(4.8vw, 8vh), 72px); line-height: 1; letter-spacing: -.04em; }
+.standout-phrase em { margin-inline-end: .1em; }
+.standout-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; max-width: 34ch; padding-bottom: 6px; }
+.standout-aside .button { padding: 8px 8px 8px 28px; }
+
+/* Keep the icon and lettering together, optically centered beside the heading phrase.
+   On phones the complete lockup wraps onto its own line. This section stays paper in both themes. */
+.standout .brand-lockup { width: 5.7em; max-width: 100%; flex-shrink: 0; line-height: 0; }
+
+.standout-stage { --focus-x: 49%; --focus-y: 52%; --focus-rx: 13%; --focus-ry: 46%; position: relative; overflow: hidden; aspect-ratio: 2.7 / 1; max-height: 46vh; margin-top: clamp(-32px, -1.6vw, -12px); border-radius: 0 0 var(--r-hero) var(--r-hero); }
+.standout-photo { position: absolute; inset: 0; transform-origin: 50% 35%; -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%); mask-image: linear-gradient(180deg, transparent, #000 30%); }
+.standout-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.standout-photo-blur { filter: blur(4px); -webkit-mask-image: radial-gradient(var(--focus-rx) var(--focus-ry) at var(--focus-x) var(--focus-y), transparent 62%, #000 100%); mask-image: radial-gradient(var(--focus-rx) var(--focus-ry) at var(--focus-x) var(--focus-y), transparent 62%, #000 100%); }
+.standout-tag { position: absolute; left: 58%; top: 27%; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; padding: 7px 14px 8px 12px; border-radius: 999px 999px 999px 4px; background: var(--deep); color: var(--paper); font-size: 13.5px; font-weight: 600; box-shadow: 0 10px 24px rgba(12,124,196,.28); }
+
+/* Client chips drifting in the sky around her (placeholder logos) */
+.standout-chips { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.client-chip { position: absolute; left: var(--x); top: var(--y); animation: chip-drift var(--d) ease-in-out var(--delay) infinite alternate; }
+.client-chip-inner { display: inline-flex; align-items: center; gap: 10px; padding: 11px 19px 11px 15px; border: 1px solid rgba(255,255,255,.95); border-radius: var(--r-pill); background: rgba(255,255,255,.72); box-shadow: var(--e-2); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); color: var(--ink); font-size: 16px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+.client-chip-far .client-chip-inner { scale: .86; opacity: .9; }
+.client-glyph { flex: none; }
+
+/* Testimonials straddling the photo's lower edge */
+.standout-quotes { position: relative; z-index: 3; margin-top: clamp(-96px, -6vw, -56px); }
+.quote-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0 clamp(0px, 2.6vw, 36px); list-style: none; }
+.quote-grid:focus-visible { outline-offset: 8px; border-radius: var(--r-card); }
+.quote-grid > li { display: flex; }
+.quote-card { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; gap: 14px; width: 100%; margin: 0; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); box-shadow: var(--e-3); }
+/* The client's portrait sits behind the right of the card, greyed and faded into the paper so the quote stays in front. */
+.quote-portrait { position: absolute; z-index: -1; top: 0; right: 0; width: 46%; height: 100%; object-fit: cover; object-position: 50% 12%; opacity: .26; filter: grayscale(1); -webkit-mask-image: linear-gradient(to right, transparent, #000 62%), linear-gradient(to bottom, #000 58%, transparent 92%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 62%), linear-gradient(to bottom, #000 58%, transparent 92%); mask-composite: intersect; pointer-events: none; }
+.quote-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.client-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.quote-flag { padding: 3px 8px; border: 1px solid var(--line-input); border-radius: var(--r-pill); font: 400 10.5px/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--slate-2); }
+.quote-card blockquote { flex: 1; margin: 0; }
+.quote-card blockquote p { font-size: 16px; line-height: 1.55; color: var(--ink); text-wrap: pretty; }
+.quote-card blockquote::before { content: '\201C'; display: block; height: 30px; margin: 2px 0 6px -4px; font: italic 400 84px/.9 var(--font-serif); color: var(--sky); }
+.quote-card[data-placeholder] blockquote p { color: var(--slate); }
+.quote-card figcaption { display: flex; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.quote-avatar { display: grid; flex: none; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--vapor); color: var(--deep); font-size: 14px; font-weight: 600; }
+.quote-person { display: flex; flex-direction: column; font-size: 13.5px; line-height: 1.35; color: var(--slate-2); }
+.quote-person strong { font-size: 14px; font-weight: 600; color: var(--ink); }
+.quote-signature { margin-left: auto; padding-right: 4px; font: 400 26px/1 'Kalam', cursive; color: var(--slate); transform: rotate(-6deg); white-space: nowrap; }
+
+/* Longhands on purpose: the minifier folds `animation-timeline` into the `animation` shorthand, which Chrome rejects. */
+@supports (animation-timeline: view()) {
+  .standout-photo, .standout-photo-blur, .standout-tag, .client-chip-inner { animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); }
+  .standout-photo { animation-name: standout-settle; animation-range: entry 0% cover 50%; }
+  .standout-photo-blur { animation-name: standout-focus; animation-range: entry 60% cover 45%; }
+  .standout-tag { animation-name: standout-tag; animation-range: entry 100% cover 35%; }
+  .client-chip-inner { animation-name: chip-in; animation-range: entry 80% cover 35%; }
+}
+@keyframes chip-drift { to { translate: var(--dx) var(--dy); } }
+@keyframes chip-in { from { opacity: 0; transform: translateY(24px) scale(.9); } }
+@keyframes standout-settle { from { transform: scale(1.1); } }
+@keyframes standout-focus { from { opacity: 0; } }
+@keyframes standout-tag { from { opacity: 0; transform: translateY(10px) scale(.9); } }
+
+@media (max-width: 919px) {
+  .standout-head { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .standout-aside { padding-bottom: 0; }
+  .standout-stage { margin-top: 8px; }
+  .client-chip-inner { padding: 8px 14px 8px 11px; font-size: 14px; gap: 8px; }
+  .standout-quotes { margin-top: -48px; }
+  /* Swipeable row: the list is focusable so keyboard users can scroll it. */
+  .quote-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter) 20px; scrollbar-width: none; }
+  .quote-grid::-webkit-scrollbar { display: none; }
+  .quote-grid > li { flex: 0 0 min(84%, 360px); scroll-snap-align: center; }
+}
+@media (max-width: 760px) {
+  .standout-stage { --focus-y: 50%; --focus-rx: 23%; --focus-ry: 30%; aspect-ratio: 1; max-height: none; border-radius: 0 0 var(--r-panel) var(--r-panel); }
+  .standout-photo { -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%); mask-image: linear-gradient(180deg, transparent, #000 22%); }
+  .standout-tag { left: 63%; top: 28%; padding: 5px 11px 6px 9px; gap: 5px; font-size: 12px; }
+  .standout .lead { font-size: 16px; }
+  .client-chip { left: var(--mx); top: var(--my); }
+  .client-chip-inner { padding: 7px 12px 7px 10px; font-size: 13px; gap: 6px; }
+  .client-glyph { width: 14px; height: 14px; }
+  .standout-quotes { margin-top: -40px; }
+  .quote-grid { margin-inline: -20px; padding-inline: 20px; }
+}

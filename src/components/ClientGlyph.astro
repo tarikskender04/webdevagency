@@ -1,0 +1,12 @@
+---
+// Placeholder logo marks until each client's real logo file is supplied.
+import type { ClientGlyph } from '../config/testimonials';
+interface Props { glyph: ClientGlyph; }
+const { glyph } = Astro.props;
+---
+<svg class="client-glyph" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  {glyph === 'ring' && <><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2.6" /><circle cx="10" cy="10" r="2.2" fill="currentColor" /></>}
+  {glyph === 'peak' && <path d="M1.5 17 7.5 6l3.4 6.2L13 9l5.5 8z" fill="currentColor" />}
+  {glyph === 'diamond' && <><path d="M10 1.5 18.5 10 10 18.5 1.5 10z" fill="currentColor" /><path d="M10 6.5 13.5 10 10 13.5 6.5 10z" fill="var(--paper)" /></>}
+  {glyph === 'arc' && <><path d="M2 15a8 8 0 0 1 16 0z" fill="currentColor" /><rect x="2" y="16.5" width="16" height="2" rx="1" fill="currentColor" /></>}
+</svg>

@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+import ThemeSwitch from './ThemeSwitch.astro';
+import BrandLogo from './BrandLogo.astro';
+/** `themed`: the page below follows day and night (BaseLayout's `themed`), so the header does too. The homepage header
+ *  always does, because it sits on the hero's day or night hall. */
+interface Props { themed?: boolean; }
+const isHome = Astro.url.pathname === '/';
+const themed = isHome || Astro.props.themed;
+const home = isHome ? '' : '/';
+---
+<header class:list={['site-header', 'container', { 'site-header-page': !isHome, 'site-header-themed': themed }]} id="top">
+  <a class="wordmark" href="/" aria-label={`${site.name} home`}><BrandLogo tone={themed ? 'auto' : 'ink'} /></a>
+  <nav aria-label="Main navigation"><a href="/work/" aria-current={Astro.url.pathname === '/work/' ? 'page' : undefined}>Work</a><a href="/about/">Studio</a><a href={`${home}#process`}>Process</a></nav>
+  <a class="nav-contact" href={`${home}#start`}>Contact <span aria-hidden="true">↗</span></a>
+  <ThemeSwitch />
+</header>

@@ -1,5 +1,5 @@
 {
-  "name": "webdevagency",
+  "name": "prodigy-stdio",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -15,10 +15,12 @@
     "verify": "npm run check && npm run build && npm run verify:seo",
     "test:browser": "playwright test",
     "asset:social": "node scripts/generate-social-card.ts",
+    "asset:work": "node scripts/render-work-cards.ts",
     "design:sync": "python3 scripts/sync_design.py",
     "design:status": "python3 scripts/sync_design.py --status"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "14.3.4",
     "@astrojs/react": "^7.0.1",
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource/archivo": "^5.3.0",
@@ -41,6 +43,7 @@
     "@playwright/test": "^1.64.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "4.149.0"
   }
 }

@@ -1,0 +1,38 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+import '../styles/information.css';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  contents: readonly { id: string; title: string }[];
+  updated?: string;
+  draft?: boolean;
+}
+const { title, description, eyebrow, contents, updated, draft = false } = Astro.props;
+const updatedLabel = updated ? new Intl.DateTimeFormat('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+}).format(new Date(`${updated}T00:00:00Z`)) : undefined;
+---
+<BaseLayout title={`${title} | ${site.name}`} description={description}>
+  <Header />
+  <main id="main" tabindex="-1" class="information-page container">
+    <header class="information-heading">
+      <p class="eyebrow dotted">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+      {updated && <p class="information-updated">{draft ? 'Draft updated' : 'Last updated'} <time datetime={updated}>{updatedLabel}</time></p>}
+    </header>
+    {draft && <aside class="information-notice" aria-label="Draft policy notice"><strong>Draft for review</strong><p>Hosting, retention and international-transfer details are still being confirmed. This policy will be finalized before public launch.</p></aside>}
+    <div class="information-grid">
+      <nav class="information-contents" aria-label="On this page"><p class="eyebrow">On this page</p><ol>{contents.map(item => <li><a href={`#${item.id}`}>{item.title}</a></li>)}</ol></nav>
+      <article class="information-body" aria-label={title}><slot /></article>
+    </div>
+    <nav class="information-related" aria-label="Studio and policies"><a href="/about/">Studio</a><a href="/privacy/">Privacy &amp; Cookies</a><a href="/terms/">Website Terms</a></nav>
+  </main>
+  <Footer />
+</BaseLayout>

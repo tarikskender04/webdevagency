@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+// A small ink card in the lower-left corner (a bottom sheet on phones). It never blocks the page and is not a dialog.
+// While nothing optional is installed it only says so and asks for an OK; with optional storage listed in
+// site.consent.optional it offers Accept / Essential only. cookie-notice.ts shows it until the visitor answers, and the
+// footer's "Cookie settings" button brings it back.
+const asking = site.consent.optional.length > 0;
+---
+<section class="cookie-notice" aria-labelledby="cookie-notice-heading" data-cookie-notice hidden>
+  <div class="cookie-notice-head">
+    <span class="cookie-notice-icon" aria-hidden="true"><Icon name="cookie" size={18} /></span>
+    <p class="cookie-notice-title" id="cookie-notice-heading">Cookies, kept to a <em>minimum.</em></p>
+  </div>
+  {asking
+    ? <p>With your OK, we’d measure visits anonymously to improve the site. Your theme choice is always remembered on this device.</p>
+    : <p>No tracking or advertising cookies here. This site only keeps your theme and this choice on your device.</p>}
+  <div class="cookie-notice-actions">
+    {asking
+      ? <><button type="button" class="cookie-button cookie-button-primary" data-consent="accepted">Accept</button><button type="button" class="cookie-button" data-consent="essential">Essential only</button></>
+      : <button type="button" class="cookie-button cookie-button-primary" data-consent="acknowledged">Got it</button>}
+    <a class="cookie-notice-link" href="/privacy/#storage">Privacy &amp; Cookies</a>
+  </div>
+</section>
+<script>import '../scripts/cookie-notice';</script>

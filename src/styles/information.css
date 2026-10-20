@@ -1,0 +1,42 @@
+/* Static studio and policy pages follow the existing project-page typography and tokens. */
+.information-page { padding-block: 64px 0; }
+.information-heading { max-width: 800px; padding-bottom: 48px; }
+.information-heading h1 { margin-top: 20px; font-size: clamp(44px, 6.4vw, 76px); font-weight: 600; line-height: 1.06; letter-spacing: -.035em; text-wrap: balance; }
+.information-heading .lead { max-width: 56ch; margin-top: 24px; }
+.information-updated { margin-top: 24px; color: var(--slate-2); font: var(--t-small); }
+.information-notice { max-width: 800px; margin-bottom: 48px; padding: 24px; border: 1px solid var(--line-input); border-radius: var(--r-card); background: var(--mist-2); color: var(--slate); font: var(--t-small); }
+.information-notice strong { display: block; margin-bottom: 8px; color: var(--ink); }
+.information-grid { display: grid; grid-template-columns: minmax(180px, .4fr) minmax(0, 1fr); gap: 64px; padding-block: 48px 96px; border-top: 1px solid var(--line); }
+.information-contents { align-self: start; position: sticky; top: 32px; }
+.information-contents ol { display: grid; gap: 8px; list-style: none; padding: 0; margin: 20px 0 0; }
+.information-contents a { display: inline-block; padding-block: 4px; color: var(--slate); font: var(--t-small); }
+.information-contents a:hover { color: var(--deep); text-decoration: underline; text-underline-offset: 4px; }
+.information-body { max-width: 70ch; min-width: 0; font: var(--t-body); color: var(--slate); overflow-wrap: anywhere; }
+.information-body section { scroll-margin-top: 32px; }
+.information-body section + section { margin-top: 48px; }
+.information-body h2 { margin-bottom: 20px; color: var(--ink); font: var(--t-h2); letter-spacing: -.025em; }
+.information-body p + p, .information-body p + dl, .information-body p + ul { margin-top: 20px; }
+.information-body a:not(.button) { color: var(--deep); text-decoration: underline; text-underline-offset: 4px; }
+.information-body a:not(.button):hover { color: var(--ink); }
+.information-body .button { color: var(--paper); }
+.information-facts { margin: 0 0 20px; }
+.information-facts > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.information-facts dt { font-weight: 600; color: var(--ink); }
+.information-facts dd { margin: 0; }
+.information-facts code { font-family: var(--font-mono); font-size: 14px; }
+.studio-team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding: 0; list-style: none; }
+.studio-team li { display: flex; flex-direction: column; gap: 4px; padding-block: 16px; border-top: 1px solid var(--line); }
+.studio-team strong { color: var(--ink); font-weight: 500; }
+.studio-team span { font: var(--t-small); }
+.information-related { display: flex; flex-wrap: wrap; gap: 24px; padding-block: 32px; border-top: 1px solid var(--line); color: var(--slate); font: var(--t-small); }
+.information-related a:hover { color: var(--deep); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .information-page { padding-top: 40px; }
+  .information-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 32px 64px; }
+  .information-contents { position: static; }
+  .information-heading { padding-bottom: 32px; }
+  .information-notice { margin-bottom: 32px; }
+  .information-body h2 { font-size: 28px; }
+  .information-facts > div { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+}
+@media (max-width: 400px) { .studio-team { grid-template-columns: minmax(0, 1fr); gap: 8px; } }

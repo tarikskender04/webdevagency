@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Arrow } from '../../components/Arrow';
+import { AssetImage } from '../../components/AssetImage';
+import WorkGallery from '../../components/WorkGallery.astro';
+import SwipeHint from '../../components/SwipeHint.astro';
+import Icon from '../../components/Icon.astro';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { CollectionPiece } from '../../config/work';
+import { buildAssets } from '../../lib/assets';
+import { Aurora } from '../../components/Aurora';
+import { work, workAurora, workAuroraNight, crocheWalkthrough as walkthrough, crocheFit, crocheCollection } from '../../config/work';
+import { industries } from '../../config/capabilities';
+import { site } from '../../config/site';
+import walkthroughPoster from '../../assets/work/croche-walkthrough-poster.png';
+import walkthroughPosterPhone from '../../assets/work/croche-walkthrough-poster-phone.png';
+import '../../styles/project.css';
+
+const assets = await buildAssets({ workWidth: 1200 });
+const [featured, ...others] = work;
+const badges = { croche: assets.crocheBadge, una: assets.unaBadge, tierd: assets.tierdBadge, captured: assets.capturedBadge };
+const number = (index: number): string => String(index + 1).padStart(2, '0');
+const posterSizes = '(min-width: 1304px) 680px, (min-width: 1101px) 52vw, calc(100vw - 40px)';
+// Optional faded image behind the intro: drop a file named intro-background.(jpg|png|webp) into src/assets/work/.
+const backgrounds = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/intro-background.{jpg,jpeg,png,webp,avif}', { eager: true });
+const backgroundSource = Object.values(backgrounds)[0]?.default;
+// The walkthrough's supplied thumbnails: the 16:9 one stands in for the player at every width (phones included); the
+// 9:16 one is offered to search engines beside it.
+const poster = await getImage({ src: walkthroughPoster, width: 1280, widths: [640, 960, 1280], format: 'webp', quality: 82 });
+const posterPhone = await getImage({ src: walkthroughPosterPhone, width: 1080, widths: [360, 540, 720, 1080], format: 'webp', quality: 82 });
+// The collection: series cards (774 × 1454) and the Sun & Salt banner (1984 × 806), each with a full-size copy for the lightbox.
+const collectionFiles = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/collection/*.png', { eager: true });
+const collectionImage = async (piece: CollectionPiece, widths: number[], sizes: string) => {
+  const src = collectionFiles[`../../assets/work/collection/${piece.image}.png`].default;
+  const [preview, full] = await Promise.all([
+    getImage({ src, width: widths.at(-1), widths, format: 'webp', quality: 82 }),
+    getImage({ src, width: src.width, format: 'webp', quality: 86 }),
+  ]);
+  return { ...piece, preview, full, sizes };
+};
+const collectionCards = await Promise.all(crocheCollection.cards.map(card => collectionImage(card, [260, 400, 560, 774], '(min-width: 1101px) 21vw, calc(50vw - 30px)')));
+const collectionBanner = await collectionImage(crocheCollection.banner, [680, 1000, 1400, 1984], '(min-width: 1304px) 680px, (min-width: 1101px) 55vw, calc(100vw - 40px)');
+// Sharing and search: the walkthrough thumbnail is this page's social image, and the video is described for search engines.
+const shareImage = await getImage({ src: walkthroughPoster, width: 1200, format: 'jpg', quality: 82 });
+const absolute = (path: string): string | undefined => Astro.site && new URL(path, Astro.site).href;
+const video = walkthrough.src && walkthrough.published && Astro.site ? {
+  '@type': 'VideoObject',
+  name: `${walkthrough.heading ?? 'Behind the build:'} ${featured.client}`,
+  description: walkthrough.headline ?? featured.headline,
+  thumbnailUrl: [absolute(shareImage.src), absolute(posterPhone.src)],
+  uploadDate: walkthrough.published,
+  ...(walkthrough.length ? { duration: walkthrough.length } : {}),
+  contentUrl: absolute(walkthrough.src),
+  inLanguage: 'en',
+  publisher: { '@id': absolute('/#organization') },
+} : undefined;
+const background = backgroundSource && await getImage({ src: backgroundSource, width: Math.min(2400, backgroundSource.width), widths: [...new Set([800, 1200, 1677, backgroundSource.width].filter(width => width <= backgroundSource.width))], format: 'webp', quality: 90 });
+---
+<BaseLayout title={`Our Work: Websites, Ordering & Dashboards | ${site.name}`} description="What we built for Crochê, Una Adventure, Tierd and Captured, why we built it that way, and what it could mean for your business." image={{ src: shareImage.src, width: shareImage.attributes.width as number, height: shareImage.attributes.height as number, alt: `The Crochê walkthrough: our founder, ${site.founder}, beside the line “A site that sells”.` }} schema={video ? [video] : []} themed>
+  <Header themed />
+  <main id="main" tabindex="-1" class="project-page work-page" style={`--work-tone: ${workAurora[0]}`}>
+    <!-- A faint aurora glowing in the lower corner of the viewport, easing into each project's colours as it comes into view
+         (work-page.ts sets data-stops). Above the first project it shows the studio's own day or night ramp. -->
+    <div class="work-aurora" data-stops="" aria-hidden="true"><Aurora client:idle variant="curtain" liveStops colorStops={workAurora} darkColorStops={workAuroraNight} amplitude={1.1} blend={.9} height={.5} scale={.6} glow={.8} speed={.3} layers={2} opacity={.5} direction="bottom" /></div>
+    <!-- Reveals stay visible if the page script never runs: work-page.ts marks itself live, otherwise this lifts the hidden state. -->
+    <script is:inline>(function () { var root = document.documentElement; root.classList.add('reveal-ready'); setTimeout(function () { if (!root.hasAttribute('data-reveal-live')) root.classList.remove('reveal-ready'); }, 3000); })();</script>
+    <div class:list={['work-intro-band', { 'has-background': background }]}>
+      {background && <img class="work-intro-background" src={background.src} srcset={background.srcSet.attribute} sizes="100vw" width={background.attributes.width} height={background.attributes.height} alt="" fetchpriority="high" decoding="async" />}
+      <header class="work-intro container">
+        <p class="eyebrow dotted">Selected work</p>
+        <h1><span class="rise" style="--i: 0">The</span> <span class="rise" style="--i: 1">work,</span> <em class="rise" style="--i: 2">explained.</em></h1>
+        <p class="lead">What we built, why we built it that way, and what it could mean for your business. Start with the Crochê walkthrough, then scroll on to the rest.</p>
+      </header>
+      <!-- The page's two parts, in a strip along the bottom of the intro (the same strip the projects get further down). -->
+      <nav class="work-outline" aria-label="On this page">
+        <ol class="container">
+          <li><a href="#behind-the-build"><span class="icon-tile"><Icon name="play" /></span><span><span class="eyebrow">01</span>Behind the build</span></a></li>
+          <li><a href="#work-reference"><span class="icon-tile"><Icon name="grid" /></span><span><span class="eyebrow">02</span>Work reference</span></a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Part 01: the founder walkthrough, given a stage of its own on ink before the reference projects. -->
+    <section id="behind-the-build" class="work-feature container" aria-labelledby="feature-heading">
+      <div class="feature-panel">
+        <div class="feature-motifs" aria-hidden="true">
+          <Icon name="spark" size={320} class="feature-spark" />
+          {['top-left', 'top-right', 'bottom-left', 'bottom-right'].map(corner => <Icon name="plus" size={14} class={`feature-mark feature-mark-${corner}`} />)}
+        </div>
+        <!-- One horizontal stage: the title beside the video, the chapters in a row beneath, sized to fit a laptop viewport. -->
+        <div class="feature-main">
+          <div class="feature-copy">
+            <p class="eyebrow feature-flag" data-reveal><span class="icon-tile"><Icon name="play" /></span>01 · Featured walkthrough</p>
+            <h2 id="feature-heading" data-reveal style="--reveal-delay: 90ms">{walkthrough.heading ?? 'Behind the build:'}{' '}<em>{featured.client}.</em></h2>
+            <p class="project-headline" data-reveal style="--reveal-delay: 180ms">{walkthrough.headline ?? featured.headline}</p>
+            <ul class="feature-meta" aria-label="About this video" data-reveal style="--reveal-delay: 270ms">
+              <li><Icon name="spark" />Told by our founder</li>
+              <li><Icon name="layers" />{walkthrough.chapters.length} chapters</li>
+              {walkthrough.captions && <li><Icon name="type" />English captions</li>}
+              {walkthrough.duration && <li><Icon name="play" />{walkthrough.duration}</li>}
+            </ul>
+          </div>
+          <figure class="walkthrough-media" data-reveal="frame">
+            <div class="walkthrough-frame">
+              {walkthrough.src
+                ? <Fragment>
+                    <video controls playsinline preload="none" poster={poster.src} aria-label="Crochê project walkthrough">
+                      <source src={walkthrough.src} type="video/mp4" />
+                      {walkthrough.captions && <track default kind="captions" srclang="en" label="English" src={walkthrough.captions} />}
+                    </video>
+                    <button type="button" class="walkthrough-start" aria-label={`Play the Crochê walkthrough${walkthrough.duration ? `, ${walkthrough.duration}` : ''}`}>
+                      <img src={poster.src} srcset={poster.srcSet.attribute} sizes={posterSizes} width={poster.attributes.width} height={poster.attributes.height} alt="" decoding="async" />
+                      <span class="walkthrough-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 10 10"><path d="M2.6 1.2v7.6a.5.5 0 0 0 .76.43l6.1-3.8a.5.5 0 0 0 0-.86L3.36.77a.5.5 0 0 0-.76.43z" fill="currentColor" /></svg></span>
+                    </button>
+                    <noscript><style>.walkthrough-start { display: none; } .walkthrough-frame { aspect-ratio: 16 / 9 !important; width: auto !important; }</style></noscript>
+                  </Fragment>
+                : <div class="walkthrough-poster">
+                    <AssetImage asset={assets.crochePhoto} alt="" sizes={posterSizes} />
+                    <span class="walkthrough-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 10 10"><path d="M2.6 1.2v7.6a.5.5 0 0 0 .76.43l6.1-3.8a.5.5 0 0 0 0-.86L3.36.77a.5.5 0 0 0-.76.43z" fill="currentColor" /></svg></span>
+                    <p class="walkthrough-status"><span class="status-dot"></span>Walkthrough coming soon</p>
+                  </div>}
+            </div>
+          </figure>
+        </div>
+
+        <div class="walkthrough-chapters">
+          <div class="chapters-head">
+            <h3 class="eyebrow" id="chapters-heading" data-reveal>In this video</h3>
+            <p class="walkthrough-note" data-reveal>Rather talk it through? <a href="/#start">Get in touch</a>.</p>
+          </div>
+          <!-- A row of four on wider screens; on phones the chapters swipe one at a time. -->
+          <ol data-swipe aria-labelledby="chapters-heading">{walkthrough.chapters.map((chapter, index) => <li data-reveal style={`--reveal-delay: ${90 + index * 90}ms`}>
+            <span class="icon-tile" aria-hidden="true"><Icon name={chapter.icon} /></span>
+            <span><span class="eyebrow" aria-hidden="true">{number(index)}</span>{chapter.title}</span>
+          </li>)}</ol>
+          <SwipeHint count={walkthrough.chapters.length} />
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 02: everything below is reference material, project by project. -->
+    <header id="work-reference" class="work-reference container" aria-labelledby="reference-heading">
+      <div class="reference-rule" data-reveal="line" aria-hidden="true"></div>
+      <div class="reference-grid">
+        <div>
+          <p class="eyebrow reference-flag" data-reveal><span class="icon-tile"><Icon name="grid" /></span>02 · Work reference</p>
+          <h2 id="reference-heading" data-reveal style="--reveal-delay: 90ms">The projects, <em>for reference.</em></h2>
+        </div>
+        <div data-reveal style="--reveal-delay: 180ms">
+          <p class="lead">Screens, systems and notes from {work.length} projects, Crochê included. Browse them as a reference for what we could build for you.</p>
+          <ul class="reference-legend" aria-label="In each project">
+            <li><Icon name="image" />Screens</li>
+            <li><Icon name="layers" />Design systems</li>
+            <li><Icon name="play" />Recordings</li>
+            <li><Icon name="type" />Project notes</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <nav class="work-jump" aria-label="Projects on this page">
+      <ol class="container">{work.map(project => <li><a href={`#${project.slug}`}><AssetImage asset={badges[project.id]} alt="" sizes="32px" />{project.client}</a></li>)}</ol>
+    </nav>
+
+    <section id={featured.slug} class={`work-entry work-featured work-${featured.id} container`} data-aurora={featured.aurora.join(',')} data-aurora-night={featured.auroraNight?.join(',')} aria-labelledby={`${featured.slug}-heading`}>
+      <div class="work-entry-top">
+        <div class="work-entry-head">
+          <p class="eyebrow reference-index" data-reveal><Icon name="grid" />Reference {number(0)} / {number(work.length - 1)}</p>
+          <h2 id={`${featured.slug}-heading`} data-reveal style="--reveal-delay: 90ms">{featured.client}</h2>
+          <p class="project-headline" data-reveal style="--reveal-delay: 180ms">{featured.headline}</p>
+        </div>
+        <div class="work-entry-summary" data-reveal style="--reveal-delay: 270ms"><p class="lead">{featured.summary}</p></div>
+      </div>
+
+      <WorkGallery project={featured} assets={assets} />
+
+      <section class="project-collection" aria-labelledby="collection-heading">
+        <div class="collection-grid">
+          <div class="collection-intro" data-reveal>
+            <div class="project-section-heading"><p class="eyebrow">Crochê</p><h3 id="collection-heading">The <em>collection.</em></h3></div>
+            <a class="project-text-link" href="/#process">See how the Crochê project was made <Arrow /></a>
+          </div>
+          {[...collectionCards, collectionBanner].map((piece, index) => <a class:list={['work-tile', 'collection-piece', index === collectionCards.length ? 'collection-banner' : 'collection-card']} href={piece.full.src} data-lightbox data-caption={`Crochê · ${piece.caption}`} data-reveal style={`--reveal-delay: ${90 + index * 90}ms`}>
+            <img src={piece.preview.src} srcset={piece.preview.srcSet.attribute} sizes={piece.sizes} width={piece.preview.attributes.width} height={piece.preview.attributes.height} alt={piece.alt} loading="lazy" decoding="async" />
+            <span class="work-tile-label">{piece.caption}<span aria-hidden="true">↗</span></span>
+          </a>)}
+        </div>
+      </section>
+
+      <section class="work-fit" aria-labelledby="fit-heading">
+        <div class="project-section-heading" data-reveal><p class="eyebrow">For your business</p><h3 id="fit-heading">Built for Crochê. <em>Shaped for you.</em></h3></div>
+        <ul class="work-fit-list" data-swipe aria-label="What the Crochê build means for your business">{crocheFit.map((item, index) => <li class="work-fit-card" data-reveal style={`--reveal-delay: ${index * 90}ms`}>
+          <span class="icon-tile" aria-hidden="true"><Icon name={item.icon} /></span>
+          <h4>{item.title}</h4>
+          <dl><div><dt class="eyebrow">For Crochê</dt><dd>{item.built}</dd></div><div><dt class="eyebrow">For you</dt><dd>{item.yours}</dd></div></dl>
+        </li>)}</ul>
+        <SwipeHint count={crocheFit.length} />
+        <div class="work-fit-close" data-reveal>
+          <p class="eyebrow" id="fit-industries">The same approach fits</p>
+          <ul class="work-industries" aria-labelledby="fit-industries">{industries.map(industry => <li>{industry}</li>)}</ul>
+          <a class="button button-ink" href="/#start">Start a project <Arrow /></a>
+        </div>
+      </section>
+    </section>
+
+    {others.map((project, index) => <section id={project.slug} class={`work-entry work-${project.id} container`} data-aurora={project.aurora.join(',')} data-aurora-night={project.auroraNight?.join(',')} aria-labelledby={`${project.slug}-heading`}>
+      <div class="work-entry-top">
+        <div class="work-entry-head">
+          <p class="eyebrow reference-index" data-reveal><Icon name="grid" />Reference {number(index + 1)} / {number(work.length - 1)}</p>
+          <h2 id={`${project.slug}-heading`} data-reveal style="--reveal-delay: 90ms">{project.client}</h2>
+          <p class="project-headline" data-reveal style="--reveal-delay: 180ms">{project.headline}</p>
+        </div>
+        <div class="work-entry-summary" data-reveal style="--reveal-delay: 270ms">
+          <p class="lead">{project.summary}</p>
+          {project.palette && <ul class="work-palette" aria-label={`${project.client} colours`}>{project.palette.map(swatch => <li style={`--swatch: ${swatch.value}`}><i aria-hidden="true"></i><span>{swatch.label}</span><code>{swatch.value}</code></li>)}</ul>}
+        </div>
+      </div>
+      <WorkGallery project={project} assets={assets} />
+    </section>)}
+
+    <div class="container">
+      <aside class="project-contact" aria-label="Start a project" data-reveal><span class="icon-tile" aria-hidden="true"><Icon name="arrow" /></span><div><p class="eyebrow">Your next project</p><h2>Let’s make something <em>yours.</em></h2></div><a class="button button-ink" href="/#start">Start a project <Arrow /></a></aside>
+    </div>
+  </main>
+  <Footer />
+  <dialog class="work-lightbox" aria-label="Project image">
+    <form method="dialog"><button class="work-lightbox-close" aria-label="Close image"><span aria-hidden="true">×</span></button></form>
+    <figure><img alt="" /><figcaption></figcaption></figure>
+  </dialog>
+  <script>import '../../scripts/work-page';</script>
+</BaseLayout>

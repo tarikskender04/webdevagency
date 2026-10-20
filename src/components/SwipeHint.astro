@@ -1,0 +1,12 @@
+---
+// The bar under a phone swipe strip ([data-swipe], just after it): a hint, a track that follows the scroll and a counter.
+// work-page.ts keeps the track and counter current. Decorative: every item in the strip is reachable without it.
+interface Props { count: number; }
+const { count } = Astro.props;
+const pad = (value: number): string => String(value).padStart(2, '0');
+---
+<div class="swipe-bar" aria-hidden="true">
+  <span class="eyebrow">Swipe <span class="swipe-arrow">→</span></span>
+  <span class="swipe-track"><i></i></span>
+  <span class="eyebrow swipe-count"><b>01</b> / {pad(count)}</span>
+</div>

@@ -1,0 +1,37 @@
+/* PixelSwap's single incoming layer is revealed through animated mask rectangles. */
+.pixel-swap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  outline: none;
+}
+
+.pixel-swap__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pixel-swap__layer[data-visible='false'] {
+  visibility: hidden;
+}
+
+.pixel-swap__grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pixel-swap__pixel {
+  opacity: 0;
+  transform-box: view-box;
+}
+
+@keyframes pixel-swap-scroll {
+  from { opacity: var(--pixel-start-opacity); transform: rotate(var(--pixel-spin)) scale(var(--pixel-start-scale)); }
+  to { opacity: 1; transform: rotate(0deg) scale(var(--pixel-end-scale)); }
+}

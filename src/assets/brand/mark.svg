@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 692 902" width="692" height="902" role="img" aria-labelledby="title">
+  <title id="title">Prodigy Stdio symbol</title>
+  <defs>
+    <linearGradient id="blue" x1="310" y1="1050" x2="578" y2="653" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#005FFF"/>
+      <stop offset="1" stop-color="#0095FF"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="684" y1="650" x2="548" y2="940" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B9BABC"/>
+      <stop offset=".3" stop-color="#E1E2E4"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <linearGradient id="front" x1="510" y1="285" x2="800" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F5F7FB"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(-279 -189)">
+    <path fill="url(#blue)" d="M595 606 329 761C304 776 290 798 290 826V1032C290 1070 323 1092 355 1074L548 974V676C548 647 567 622 595 606Z"/>
+    <path fill="url(#fold)" d="M595 606 910 777 548 974V676C548 647 567 622 595 606Z"/>
+    <path fill="url(#front)" d="M366 252C366 226 383 207 406 202 416 200 425 203 438 211L910 469C941 486 958 515 958 550V702C958 735 941 760 910 777L411 508C382 492 366 464 366 433Z"/>
+  </g>
+</svg>

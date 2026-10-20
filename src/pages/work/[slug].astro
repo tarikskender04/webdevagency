@@ -1,0 +1,9 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { work } from '../../config/work';
+
+// Projects now live as sections of /work/. The old per-project URLs forward to their section.
+export const getStaticPaths = (() => work.map(project => ({ params: { slug: project.slug }, props: { href: project.href } }))) satisfies GetStaticPaths;
+const { href } = Astro.props;
+return Astro.redirect(href, 301);
+---

@@ -1,0 +1,38 @@
+/* Shared static artwork from the supplied client thumbnails. Hero motion is scoped in hero.css. */
+.work-art { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; container-type: inline-size; }
+/* Card layers. .work-layer pieces drift against the pointer by --depth, so each card has some depth of its own. */
+.work-layer { position: absolute; inset: 0; width: 100%; height: 100%; translate: calc(var(--pointer-x, 0) * var(--depth, 0px)) calc(var(--pointer-y, 0) * var(--depth, 0px) * .7); }
+img.work-layer { object-fit: cover; }
+.work-croche { --glow: rgba(123,30,58,.36); }
+.work-croche .work-art { background: #150C0C; }
+.croche-photo { --depth: -5px; scale: 1.06; }
+.croche-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,12,12,.55), rgba(21,12,12,0) 30%, rgba(21,12,12,.15) 50%, rgba(21,12,12,.72) 75%, rgba(21,12,12,.9)); }
+.croche-brand { --depth: 3px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3.78cqw; padding-bottom: 10.67cqw; }
+.croche-logo { width: 46.67cqw; height: auto; }
+.croche-tagline { font: 500 2.67cqw/1 var(--font-mono); letter-spacing: .24em; text-transform: uppercase; white-space: nowrap; color: #FFFFFF; }
+.work-una { --glow: rgba(234,90,18,.3); }
+.work-una .work-art { background: #1F4D38; }
+/* The live river covers the poster's printed one: 734px down a 1200px card, 150px tall. */
+.una-water { position: absolute; left: 0; top: 61.17%; width: 100%; height: auto; }
+.una-water rect { fill: #1F4D38; }
+.una-water path { fill: none; stroke: #6FC5C9; stroke-width: 5px; stroke-linecap: round; }
+.work-captured { --glow: rgba(255,45,138,.26); }
+.work-captured .work-art { background: #BFD9F0; }
+.cap-scene { --depth: -4px; scale: 1.05; }
+.cap-mark { --depth: 4px; }
+.cap-mark img { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Viewfinder corners around the wordmark (its box is 81.08 × 21.23cqw, 33.33cqw from the top). */
+.cap-c { --fx: 0; --fy: 0; position: absolute; top: 33.33cqw; width: 3.78cqw; height: 3.78cqw; border: 0 solid #0E0E12; }
+.cap-tl { --fx: -1; --fy: -1; left: 9.46cqw; border-top-width: .44cqw; border-left-width: .44cqw; }
+.cap-tr { --fx: 1; --fy: -1; right: 9.46cqw; border-top-width: .44cqw; border-right-width: .44cqw; }
+.cap-bl { --fx: -1; --fy: 1; top: 50.78cqw; left: 9.46cqw; border-bottom-width: .44cqw; border-left-width: .44cqw; }
+.cap-br { --fx: 1; --fy: 1; top: 50.78cqw; right: 9.46cqw; border-bottom-width: .44cqw; border-right-width: .44cqw; border-color: #FF2D8A; }
+.cap-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 28.9cqw; background: linear-gradient(180deg, rgba(244,241,234,0), rgba(244,241,234,.9) 70%); }
+.cap-caption { position: absolute; left: 6.22cqw; right: 6.22cqw; bottom: 6.22cqw; display: flex; align-items: center; justify-content: space-between; gap: 2.67cqw; font: 500 3.11cqw/1 'DM Mono', var(--font-mono); letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; color: #0E0E12; }
+.cap-caption span { display: flex; align-items: center; gap: 1.56cqw; }
+.cap-dot { width: 1.11cqw; height: 1.11cqw; border-radius: 50%; background: #FF2D8A; }
+.work-tierd { --glow: rgba(255,90,31,.28); }
+.work-tierd .work-art { background: #15110D; }
+.tierd-glow { --depth: -6px; background: radial-gradient(60% 45% at 50% 46%, rgba(255,90,31,.14), rgba(255,90,31,0) 70%); }
+.tierd-type { --depth: 3px; }
+.tierd-tagline { position: absolute; left: 0; right: 0; bottom: 8cqw; text-align: center; font: 500 3.11cqw/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: #8A7F6E; }

@@ -1,0 +1,2 @@
+# Copy to .dev.vars for `npm run dev`; `npm run preview` reads dist/server/.dev.vars. Never commit either file.
+RESEND_API_KEY=

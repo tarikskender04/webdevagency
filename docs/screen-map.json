@@ -1,11 +1,109 @@
 {
   "route": "/",
   "designImported": true,
+  "brand": {
+    "name": "Prodigy Stdio",
+    "domain": "prodigystdio.com",
+    "implementation": "src/config/site.ts, src/components/BrandLogo.astro, scripts/render-brand-assets.mjs",
+    "status": "name-and-supplied-logo-implemented",
+    "adaptations": [
+      "Shared static SVG logo in the header, billboard and Stand out heading; custom SVG lettering in the oversized footer",
+      "Ink artwork on light surfaces; blue/white symbol with white lettering in the dark hero and billboard, and in the /work/ header at night; other interior-page headers stay ink",
+      "Large footer lettering retains the existing theme gradients through an SVG mask",
+      "New symbol on an ink tile for the SVG favicon and Apple touch icon; vector and PNG brand kit available in public/brand/",
+      "Accessible brand text remains in built HTML and no-JavaScript pages retain visible ink logos",
+      "Metadata, project briefs, policy drafts and share artwork use the confirmed name; preview noindex retained"
+    ],
+    "remaining": [
+      "Connect the owned domain to the selected host when ready to launch"
+    ]
+  },
+  "theme": {
+    "implementation": "src/components/ThemeSwitch.astro, src/scripts/theme.ts, src/layouts/BaseLayout.astro",
+    "status": "implemented",
+    "adaptations": [
+      "Auto, Light and Dark choices in the shared header",
+      "Saved preference applies before paint, follows system changes in Auto and syncs across tabs",
+      "Hero/header, billboard photographs and display Aurora, and footer share one resolved theme; contact keeps its light design",
+      "Pages can opt into a full night design (BaseLayout and Header `themed`): /work/ does, with an ink ground, light header and its own night palette; other interior pages stay on paper",
+      "Live 1s day/night fade lands every colour together: no root color-scheme switch, and links that inherit their colour skip their own transition during the fade"
+    ]
+  },
   "sections": [
-    { "section": "Hero", "variant": "B", "design": "design/prototypes/Hero B.dc.html", "implementation": "src/components/Hero.tsx", "status": "implemented-first-pass", "remaining": ["Other clients' project screenshots", "Prism/Strands and exact refraction"] },
-    { "section": "Capabilities", "design": "design/prototypes/Capabilities.dc.html", "implementation": "src/components/Capabilities.astro", "status": "implemented-first-pass", "remaining": ["Exact prototype cursor choreography and zoom/tilt states"] },
-    { "section": "Process", "design": "design/prototypes/Process.dc.html", "implementation": "src/components/Process.astro", "status": "implemented-first-pass", "remaining": ["Notebook pencil trace", "Exact entrance choreography", "Fixed GradualBlur"] },
-    { "section": "Contact", "variant": "1a", "design": "design/prototypes/Contact.dc.html", "implementation": "src/components/Contact.astro", "status": "brief-flow-implemented-booking-pending", "remaining": ["Real scheduler link", "Email delivery", "Headshot"] },
-    { "section": "Footer", "variant": "1b", "design": "design/prototypes/Footer.dc.html", "implementation": "src/components/Footer.astro", "status": "implemented", "remaining": ["Verified email and social profiles", "Approved legal pages"] }
-  ]
+    {"section": "Hero", "variant": "B (user-directed chess-hall redesign)", "design": "design/prototypes/Hero B.dc.html", "implementation": "src/components/Hero.tsx", "styles": "src/styles/hero.css", "motionImplementation": "src/scripts/hero-motion.ts, src/scripts/work-deck.ts", "status": "implemented", "remaining": ["Confirmed service tags for Tierd and Captured", "Design handoff for the chess-hall direction and the work-deck carousel"]},
+    {"section": "Stand out", "design": null, "implementation": "src/components/StandOut.astro", "styles": "src/styles/standout.css", "content": "src/config/testimonials.ts", "status": "implemented-with-placeholders", "remaining": ["Approved client quotes, names and roles", "Real client logo files"]},
+    {"section": "Capabilities", "design": "design/prototypes/Capabilities.dc.html", "implementation": "src/components/Capabilities.astro", "styles": "src/styles/capabilities.css", "motionImplementation": "src/scripts/capabilities-motion.ts", "status": "detached-from-homepage", "remaining": ["Choose a page to host it", "Exact prototype cursor choreography and zoom/tilt states", "Varied per-slide layouts"]},
+    {"section": "Process", "design": "design/prototypes/Process.dc.html", "implementation": "src/components/Process.astro", "status": "implemented", "motionImplementation": "src/scripts/process-motion.ts, src/styles/process-portal.css, src/components/ProcessIntro.tsx, src/components/PixelSwap.tsx", "remaining": ["Design handoff for the portal title card, pixel swap and billboard closing"], "adaptations": ["Restrained motion with native scrolling", "Stacked layouts reveal copy and visuals independently, with vertical entrances and no card blur/parallax; phone review tabs are 44px and redundant floating decoration is hidden", "Stable small-viewport portal sizing and a centered mobile lead/chapter list", "Unverified counters and dates omitted", "User-directed portal: opens onto Process and zooms the closing band into the billboard display within the same section (no design handoff)", "Opening hole, title, pixel mask and chapter reveal share a native CSS scroll timeline that pauses and reverses at any point; one retained SVG mask avoids content copies and per-frame React updates"], "styles": "src/styles/global.css, src/styles/process-portal.css, src/styles/pixel-swap.css"},
+    {"section": "Billboard", "design": null, "implementation": "src/components/Billboard.astro (inside Process.astro)", "styles": "src/styles/billboard.css", "content": "src/config/site.ts", "motionImplementation": "src/scripts/billboard-motion.ts, src/components/Aurora.tsx, src/effects/aurora-curtain-shader.ts", "status": "implemented", "adaptations": ["User-supplied photographs with live HTML behind their measured display openings", "Process closing and photograph share one scroll-driven zoom, measured on resize to align with the real display", "Closing line shrinks into the screen before the billboard message appears; scrolling back reverses the sequence", "One closing band and CTA, restored above the photograph without JavaScript, without timeline support, on short screens or under reduced motion", "Daylight sky-blue and night deep-blue Aurora palettes update live without rebuilding WebGL; matching static fallbacks and reduced-motion support", "Dedicated user-supplied 941×1672 portrait scenes on phones, with a measured CSS display cutout, larger copy and the shared reversible zoom", "Day/night photographs, masks and backdrops follow the manual or automatic theme", "Landscape photographs share a calibrated 16:9 display; portrait photographs share separate mobile geometry. Theme-aware picture sources retain their responsive breakpoint before paint and during theme changes"], "remaining": [], "assets": ["src/assets/standout/Neon Night Billboard Placeholder.png", "src/assets/standout/Daylight Urban Plaza Billboard Mockup.png", "src/assets/standout/daymobile.png", "src/assets/standout/nightmobile.png"]},
+    {"section": "Contact", "variant": "1a", "design": "design/prototypes/Contact.dc.html", "implementation": "src/components/Contact.astro, src/components/ContactForm.tsx", "status": "brief-and-email-draft-flow-implemented-booking-pending", "adaptations": ["Confirmed public Gmail address opens an email draft; nothing sends automatically", "Copy reflects local review/download until a scheduler exists", "Privacy link and disabled pre-hydration controls prevent native submission of personal data"], "remaining": ["Real scheduler link, if wanted", "Server-side enquiry delivery, if wanted", "Headshot"]},
+    {"section": "Footer", "variant": "1b layout with user-directed light/dark palettes", "design": "design/prototypes/Footer.dc.html", "implementation": "src/components/Footer.astro", "status": "implemented", "adaptations": ["Studio and legal links, confirmed operator/email and Chicago/Bosnia description", "Responsive wrapping of policy links", "Contact CTA reflects booking availability"], "remaining": ["Verified social profiles", "Final policy details listed in docs/legal-launch.md"]}
+  ],
+  "informationPages": {
+    "routes": [
+      "/about/",
+      "/privacy/",
+      "/terms/"
+    ],
+    "design": null,
+    "implementation": "src/layouts/InformationLayout.astro, src/pages/about.astro, src/pages/privacy.astro, src/pages/terms.astro",
+    "content": "src/config/site.ts and static page copy",
+    "styles": "src/styles/information.css",
+    "status": "studio-implemented-policies-drafted",
+    "adaptations": [
+      "User-authorized studio and policy pages using existing design tokens",
+      "Static HTML, shared header/footer, accessible section navigation and no-JavaScript reading",
+      "Only confirmed team roles published",
+      "Draft notices remain while host, address, retention and transfer details are missing; setup noindex retained"
+    ],
+    "remaining": [
+      "Complete docs/legal-launch.md before public launch",
+      "Hosting provider"
+    ]
+  },
+  "projectPages": {
+    "routes": [
+      "/work/"
+    ],
+    "design": null,
+    "implementation": "src/pages/work/index.astro, src/pages/work/[slug].astro (redirects)",
+    "content": "src/config/work.ts",
+    "styles": "src/styles/project.css, src/styles/work-art.css",
+    "status": "implemented",
+    "adaptations": [
+      "User-directed single work page: Crochê first with a walkthrough video slot, then the other projects as anchored sections",
+      "Hero cards and the no-JavaScript links open each project's section; old per-project URLs redirect there",
+      "Sticky jump bar between projects and a \"For your business\" section that maps the Crochê build to other businesses",
+      "Supplied project sheets (Crochê design system, Tierd brand system and homepage, Captured homepage) under each project's details, opening full size in a lightbox",
+      "Tierd and Captured describe supplied visuals without claiming unconfirmed service scope",
+      "Walkthrough thumbnail play button: a see-through glass disc at the centre of the 16:9 thumbnail, which phones now use too",
+      "Phones (760px and below): each project's picture rows become one equal-height swipe strip with a Swipe / progress / counter bar; the For your business cards swipe; the walkthrough chapters and each project's details swipe one card at a time",
+      "Day and night: colour roles (--work-*) in project.css take the kit's tokens by day and the dark Contact 1b / Footer 1b palette at night; the studio photograph dims under an ink veil and azure glow; cards, chips and swatches become white-hairline glass; picture labels become ink glass; headline accents turn sky; the background aurora renders its night glow, with accent-only night palettes for Tierd and Captured"
+    ],
+    "remaining": [
+      "Confirm the walkthrough chapter list matches the final cut",
+      "Confirmed service scope for Tierd and Captured",
+      "Approved live-site links and additional project screenshots"
+    ],
+    "redirects": [
+      "/work/croche/ → /work/#croche",
+      "/work/una-adventure/ → /work/#una-adventure",
+      "/work/tierd/ → /work/#tierd",
+      "/work/captured/ → /work/#captured"
+    ],
+    "motionImplementation": "src/scripts/work-page.ts (jump bar, scroll reveals, reels, phone swipe bars)",
+    "structuredData": "VideoObject for the walkthrough; the walkthrough thumbnail is the page's social image"
+  },
+  "cookieNotice": {
+    "routes": ["all pages"],
+    "design": null,
+    "implementation": "src/components/CookieNotice.astro, src/scripts/cookie-notice.ts, src/lib/consent.ts",
+    "styles": "src/styles/global.css",
+    "status": "implemented",
+    "adaptations": [
+      "User-requested; no design handoff. Ink card in Footer 1b's ink-and-sky treatment, lower left; a bottom sheet on phones",
+      "Informs with Got it while site.consent.optional is empty; offers Accept / Essential only once optional storage is listed",
+      "Footer \"Cookie settings\" reopens it"
+    ],
+    "remaining": ["List 'analytics' in site.consent.optional and gate the tool with whenConsented('analytics') if analytics is added"]
+  }
 }

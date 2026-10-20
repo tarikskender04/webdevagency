@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
 ---
-<BaseLayout title="Page not found" description="The page you’re looking for could not be found." noindex>
+<BaseLayout title={`Page not found | ${site.name}`} description="The page you’re looking for could not be found." noindex>
   <main id="main" class="container error-page"><p class="eyebrow">404</p><h1>Page not found.</h1><p>The page may have moved, or the address may be incorrect.</p><a class="button" href="/">Go to the homepage</a></main>
 </BaseLayout>

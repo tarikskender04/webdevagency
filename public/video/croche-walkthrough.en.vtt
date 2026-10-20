@@ -1,0 +1,261 @@
+WEBVTT
+
+1
+00:00:00.140 --> 00:00:02.660
+Hi, I'm Tarik, founder of Prodigy Stdio,
+
+2
+00:00:02.660 --> 00:00:04.700
+where I lead product design, development,
+
+3
+00:00:04.700 --> 00:00:05.840
+and strategy.
+
+4
+00:00:05.840 --> 00:00:08.170
+We build websites and online marketing
+
+5
+00:00:08.170 --> 00:00:10.780
+solutions for businesses of every size.
+
+6
+00:00:10.780 --> 00:00:12.820
+And today I will show you how we made
+
+7
+00:00:12.820 --> 00:00:13.600
+Crochê.
+
+8
+00:00:13.600 --> 00:00:15.800
+So, let's take a look at it.
+
+9
+00:00:15.800 --> 00:00:17.870
+Crochê sells
+
+10
+00:00:17.870 --> 00:00:20.100
+hand-crocheted
+
+11
+00:00:20.100 --> 00:00:21.340
+bags.
+
+12
+00:00:21.340 --> 00:00:23.860
+Their work was already quite beautiful,
+
+13
+00:00:23.860 --> 00:00:26.600
+and what they needed was a website that
+
+14
+00:00:26.600 --> 00:00:28.570
+felt as personal as the bags
+
+15
+00:00:28.570 --> 00:00:29.760
+themselves.
+
+16
+00:00:30.330 --> 00:00:32.200
+So, the design.
+
+17
+00:00:32.200 --> 00:00:34.920
+A wine-colored accent, Bodoni for the
+
+18
+00:00:34.920 --> 00:00:37.370
+names, and monospace prices give
+
+19
+00:00:37.370 --> 00:00:39.580
+one consistent voice.
+
+20
+00:00:39.580 --> 00:00:41.950
+From the shop, to the emails, to the
+
+21
+00:00:41.950 --> 00:00:44.620
+printed tags, customers recognize the
+
+22
+00:00:44.620 --> 00:00:47.280
+brand everywhere, as on the web, also on
+
+23
+00:00:47.280 --> 00:00:48.640
+the social media.
+
+24
+00:00:48.640 --> 00:00:50.600
+And that builds trust.
+
+25
+00:00:50.600 --> 00:00:52.690
+Second, the
+
+26
+00:00:52.690 --> 00:00:54.800
+ordering.
+
+27
+00:00:56.350 --> 00:00:58.690
+You choose a model, a size, and up to
+
+28
+00:00:58.690 --> 00:01:00.140
+three yarn colors.
+
+29
+00:01:00.140 --> 00:01:02.660
+And the bag changes as
+
+30
+00:01:02.660 --> 00:01:05.180
+you choose, so the price is
+
+31
+00:01:05.180 --> 00:01:06.760
+also always in view.
+
+32
+00:01:06.760 --> 00:01:08.840
+No surprises for the customers, so people
+
+33
+00:01:08.840 --> 00:01:10.220
+order with confidence.
+
+34
+00:01:10.220 --> 00:01:12.680
+Third, the engineering.
+
+35
+00:01:13.830 --> 00:01:16.610
+The site is modular, the hero, the
+
+36
+00:01:16.610 --> 00:01:18.500
+collections, and each step of the order
+
+37
+00:01:18.500 --> 00:01:20.920
+are separate building blocks so we can
+
+38
+00:01:20.920 --> 00:01:23.720
+change or add a piece without touching the
+
+39
+00:01:23.720 --> 00:01:24.340
+rest.
+
+40
+00:01:24.340 --> 00:01:26.080
+As you see here, we have different
+
+41
+00:01:26.080 --> 00:01:28.050
+collections and different models in
+
+42
+00:01:28.050 --> 00:01:29.020
+different sizes and
+
+43
+00:01:29.020 --> 00:01:31.020
+colors.
+
+44
+00:01:31.020 --> 00:01:33.060
+The webshop is
+
+45
+00:01:33.060 --> 00:01:34.620
+dynamic.
+
+46
+00:01:34.620 --> 00:01:35.620
+What does that mean?
+
+47
+00:01:35.620 --> 00:01:37.940
+Well, let's take a look.
+
+48
+00:01:37.940 --> 00:01:39.780
+Nothing is fixed in the code.
+
+49
+00:01:40.110 --> 00:01:41.900
+Everything lives in a database that the
+
+50
+00:01:41.900 --> 00:01:44.380
+owner manages from her own dashboard.
+
+51
+00:01:44.380 --> 00:01:46.450
+Models, sizes, prices,
+
+52
+00:01:46.450 --> 00:01:48.880
+photos, color availability,
+
+53
+00:01:48.880 --> 00:01:51.490
+shipping, and even the orders and
+
+54
+00:01:51.490 --> 00:01:53.540
+emails customers receive.
+
+55
+00:01:53.540 --> 00:01:56.110
+She changes it and the website reflects
+
+56
+00:01:56.110 --> 00:01:56.540
+it.
+
+57
+00:01:56.540 --> 00:01:59.050
+No developer needed and only
+
+58
+00:01:59.050 --> 00:02:01.520
+her approved email can sign
+
+59
+00:02:01.520 --> 00:02:02.020
+in.
+
+60
+00:02:02.020 --> 00:02:03.660
+That's the
+
+61
+00:02:03.660 --> 00:02:04.960
+idea.
+
+62
+00:02:04.960 --> 00:02:06.810
+A site that sells and a business that
+
+63
+00:02:06.810 --> 00:02:07.900
+stays in control.
+
+64
+00:02:08.010 --> 00:02:10.070
+If you want that for your business, let's
+
+65
+00:02:10.070 --> 00:02:10.620
+talk.

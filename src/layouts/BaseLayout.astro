@@ -1,5 +1,6 @@
 ---
 import { site } from '../config/site';
+import CookieNotice from '../components/CookieNotice.astro';
 import headingFont from '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2?url';
 import accentFont from '@fontsource/newsreader/files/newsreader-latin-400-italic.woff2?url';
 import '@fontsource/instrument-sans/latin-400.css';
@@ -15,40 +16,71 @@ import '@fontsource/archivo/latin-500.css';
 import '@fontsource/dm-mono/latin-400.css';
 import '@fontsource/kalam/latin-400.css';
 import '../../design/tokens.css';
-import mark from '../../design/prototypes/uploads/pasted-1789947878169-0.png';
-import { getImage } from 'astro:assets';
 import '../styles/global.css';
-interface Props { title: string; description?: string; noindex?: boolean; }
-const { title, description = site.description, noindex = false } = Astro.props;
+/** `image` replaces the shared social card for this page (an absolute or root-relative URL with its size and alt text).
+ *  `schema` adds this page's own structured data nodes to the site's @graph.
+ *  `themed` marks a page designed for both day and night: in dark mode its whole ground turns ink (global.css), not
+ *  only the header and footer. Pages without it stay on paper. Pair it with `<Header themed />`. */
+interface SocialImage { src: string; width: number; height: number; alt: string; }
+interface Props { title: string; description?: string; noindex?: boolean; image?: SocialImage; schema?: Record<string, unknown>[]; themed?: boolean; }
+const { title, description = site.description, noindex = false, image, schema = [], themed = false } = Astro.props;
 const indexable = import.meta.env.PUBLIC_SITE_INDEXABLE === 'true' && Boolean(Astro.site) && !noindex;
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
-const favicon = await getImage({ src: mark, width: 64, format: 'png' });
-const socialImage = Astro.site ? new URL('/social-card.jpg', Astro.site).href : undefined;
+// Pages kept out of the index (the 404) point nowhere canonical.
+const canonical = Astro.site && !noindex ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const social: SocialImage = image ?? { src: '/social-card.jpg', width: 1200, height: 630, alt: `${site.name} website design studio and Crochê project previews` };
+const socialImage = Astro.site ? new URL(social.src, Astro.site).href : undefined;
+const organizationId = Astro.site ? new URL('/#organization', Astro.site).href : undefined;
 const organization = site.nameConfirmed && Astro.site ? {
-  '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': new URL('/#organization', Astro.site).href,
+  '@id': organizationId,
   name: site.name,
+  logo: new URL('/brand/prodigy-stdio-logo-ink.png', Astro.site).href,
   url: Astro.site.href,
   description: site.description,
+  founder: { '@type': 'Person', name: site.founder },
   ...(site.email ? { email: site.email } : {}),
   ...(site.socialProfiles.length ? { sameAs: site.socialProfiles } : {}),
 } : undefined;
-const jsonLd = organization ? JSON.stringify(organization).replace(/</g, '\\u003c') : undefined;
+// The homepage also names the website itself, which Google uses for the site name shown in results.
+const website = organization && Astro.url.pathname === '/' ? { '@type': 'WebSite', '@id': new URL('/#website', Astro.site).href, name: site.name, url: Astro.site!.href, inLanguage: site.language, publisher: { '@id': organizationId } } : undefined;
+const graph = organization ? [organization, ...(website ? [website] : []), ...schema] : [];
+const jsonLd = graph.length ? JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c') : undefined;
 ---
 <!doctype html>
-<html lang={site.language}>
+<html lang={site.language} data-themed={themed ? '' : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#FFFFFF" />
+    <script is:inline define:vars={{ themeStorageKey: site.themeStorageKey }}>
+      // Apply the saved choice before paint, including picture sources as the HTML parser adds them.
+      (() => {
+        let preference = 'system';
+        try { const saved = localStorage.getItem(themeStorageKey); if (saved === 'light' || saved === 'dark') preference = saved; } catch {}
+        const root = document.documentElement;
+        const theme = preference === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : preference;
+        root.dataset.themePreference = preference;
+        root.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0A1A25' : '#FFFFFF';
+        const observer = new MutationObserver(records => {
+          for (const record of records) for (const node of record.addedNodes) {
+            if (!(node instanceof Element)) continue;
+            const sources = node.matches('[data-theme-source]') ? [node] : node.querySelectorAll('[data-theme-source]');
+            for (const source of sources) source.setAttribute('media', theme === 'dark' ? (source.dataset.themeBreakpoint || 'all') : 'not all');
+          }
+        });
+        observer.observe(root, { childList: true, subtree: true });
+        document.addEventListener('DOMContentLoaded', () => observer.disconnect(), { once: true });
+      })();
+    </script>
     <link rel="preload" as="font" type="font/woff2" href={headingFont} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={accentFont} crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
     {canonical && <link rel="canonical" href={canonical} />}
-    <link rel="icon" type="image/png" sizes="64x64" href={favicon.src} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={site.locale} />
     <meta property="og:site_name" content={site.name} />
@@ -57,11 +89,11 @@ const jsonLd = organization ? JSON.stringify(organization).replace(/</g, '\\u003
     {canonical && <meta property="og:url" content={canonical} />}
     {socialImage && <>
       <meta property="og:image" content={socialImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Meridian website design studio and Crochê project previews" />
+      <meta property="og:image:width" content={String(social.width)} />
+      <meta property="og:image:height" content={String(social.height)} />
+      <meta property="og:image:alt" content={social.alt} />
       <meta name="twitter:image" content={socialImage} />
-      <meta name="twitter:image:alt" content="Meridian website design studio and Crochê project previews" />
+      <meta name="twitter:image:alt" content={social.alt} />
     </>}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -70,6 +102,10 @@ const jsonLd = organization ? JSON.stringify(organization).replace(/</g, '\\u003
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <CookieNotice />
     <slot />
   </body>
 </html>
+<script>
+  import '../scripts/theme';
+</script>
