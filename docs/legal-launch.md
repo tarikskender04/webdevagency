@@ -10,7 +10,7 @@ The user confirmed that Prodigy Stdio is based in Chicago, operates in Bosnia an
 - Shared footer links and a form privacy link. Contact instructions and CTA copy follow the available booking/email configuration.
 - Form fields remain disabled until the local React handler is ready. Without JavaScript, the form cannot fall back to a native GET containing names, email addresses or phone numbers.
 - Decorative footer glow/lettering does not receive pointer events, so native policy links remain clickable with JavaScript disabled.
-- Existing setup noindex behavior is unchanged. The user owns prodigystdio.com and set up the Google Workspace mailbox. Hosting is Cloudflare Workers; the site has not been deployed yet. No business registration, scheduler or analytics account has been created.
+- Existing setup noindex behavior is unchanged. The user owns prodigystdio.com and set up the Google Workspace mailbox. Hosting is Cloudflare Workers; the site is deployed at prodigystdio.com and remains noindex. No business registration, scheduler or analytics account has been created.
 
 ## Confirm before public launch
 

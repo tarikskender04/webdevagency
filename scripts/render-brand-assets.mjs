@@ -47,6 +47,23 @@ const favicon = svg('Prodigy Stdio', 64, 64,
   `<rect width="64" height="64" rx="12" fill="${ink}"/>\n<g transform="translate(13.6 8) scale(.0532)">${body(mark)}</g>`);
 await writeFile(new URL('../favicon.svg', output), favicon);
 await sharp(Buffer.from(favicon)).resize(180, 180).png().toFile(fileURLToPath(new URL('../apple-touch-icon.png', output)));
+// favicon.ico for browsers and crawlers that only request /favicon.ico: 16, 32 and 48px PNGs in one ICO container.
+const icons = await Promise.all([16, 32, 48].map(async (size) => [size, await sharp(Buffer.from(favicon)).resize(size, size).png().toBuffer()]));
+const icoHeader = Buffer.alloc(6 + icons.length * 16);
+icoHeader.writeUInt16LE(1, 2);
+icoHeader.writeUInt16LE(icons.length, 4);
+let icoOffset = icoHeader.length;
+icons.forEach(([size, png], index) => {
+  const entry = 6 + index * 16;
+  icoHeader.writeUInt8(size, entry);
+  icoHeader.writeUInt8(size, entry + 1);
+  icoHeader.writeUInt16LE(1, entry + 4);
+  icoHeader.writeUInt16LE(32, entry + 6);
+  icoHeader.writeUInt32LE(png.length, entry + 8);
+  icoHeader.writeUInt32LE(icoOffset, entry + 12);
+  icoOffset += png.length;
+});
+await writeFile(new URL('../favicon.ico', output), Buffer.concat([icoHeader, ...icons.map(([, png]) => png)]));
 
 const archive = new URL('prodigy-stdio-brand-kit.zip', output);
 await rm(archive, { force: true });

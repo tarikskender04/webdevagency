@@ -37,5 +37,5 @@ The editable vector masters are `src/assets/brand/mark.svg` and
 run `node scripts/render-brand-assets.mjs` from the repository root. The script
 uses the installed Sharp dependency and the system `zip` command.
 
-The same script renders `public/favicon.svg` and `public/apple-touch-icon.png`
+The same script renders `public/favicon.svg`, `public/favicon.ico` (16/32/48px) and `public/apple-touch-icon.png`
 with the colored symbol on an ink tile, so its white face stays visible.

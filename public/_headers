@@ -1,0 +1,4 @@
+# Applies to every prerendered page and file served from static assets (not the /api/enquiry/ worker route).
+# No includeSubDomains or preload: browsers cache this for a year, so widen it only deliberately.
+/*
+  Strict-Transport-Security: max-age=31536000

@@ -56,7 +56,7 @@ export type Assets = Record<ImageKey, Asset>;
 export async function buildAssets({ workWidth = 640 }: { workWidth?: number } = {}): Promise<Assets> {
   const entries = await Promise.all(Object.entries(sources).map(async ([name, source]: [string, ImageMetadata]) => {
     const width = plateKeys.includes(name) ? 1672 : workKeys.includes(name) ? workWidth : motifKeys.includes(name) ? 480 : badgeKeys.includes(name) ? 128 : portraitKeys.includes(name) ? 560 : 800;
-    const candidates = plateKeys.includes(name) ? [...new Set([...plateWidths, Math.min(width, source.width)])] : badgeKeys.includes(name) ? [64, 128] : portraitKeys.includes(name) ? [280, 560] : workKeys.includes(name) ? [160, 320, 640, 960, 1200] : [160, 320, 640, 800];
+    const candidates = plateKeys.includes(name) ? [...new Set([...plateWidths, Math.min(width, source.width)])] : badgeKeys.includes(name) ? [64, 128] : portraitKeys.includes(name) ? [280, 560] : workKeys.includes(name) ? [160, 320, 480, 640, 960, 1200] : [160, 320, 640, 800];
     const image = await getImage({ src: source, width: Math.min(width, source.width), widths: candidates.filter(candidate => candidate <= Math.min(width, source.width)), format: 'webp', quality: plateKeys.includes(name) ? 72 : 78 });
     return [name, { src: image.src, srcSet: image.srcSet.attribute, width: Number(image.attributes.width), height: Number(image.attributes.height) }] as const;
   }));
