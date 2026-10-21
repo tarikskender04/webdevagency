@@ -22,12 +22,20 @@ export function initProcessMotion(): () => void {
       const k = .55;
       root.dataset.processMotion = 'ready';
       const rows = Array.from(root.querySelectorAll<HTMLElement>('.process-row'));
-      const reveal = (element: HTMLElement, timeline: gsap.core.Timeline, start: string): void => {
-        ScrollTrigger.create({ trigger: element, start, once: true, onEnter: () => { timeline.play(); } });
-        // Resolve passed content immediately on deep links; reveal visible content now.
-        const bounds = element.getBoundingClientRect();
-        if (bounds.bottom < 0) timeline.progress(1);
-        else if (bounds.top < window.innerHeight * parseFloat(start.split(' ')[1]) / 100) timeline.play();
+      const observers: IntersectionObserver[] = [];
+      // Play once the element's top passes `at`% of the viewport height. IntersectionObserver reads live geometry, so a
+      // reveal can't go stale when content above it changes height after load, as ScrollTrigger's cached starts can
+      // (cards on iPhones stayed hidden well into view). Content already scrolled past resolves at once (deep links).
+      const reveal = (element: HTMLElement, timeline: gsap.core.Timeline, at: number): void => {
+        if (element.getBoundingClientRect().bottom < 0) { timeline.progress(1); return; }
+        const observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) timeline.play();
+          else if (entry.boundingClientRect.bottom < 0) timeline.progress(1);
+          else return;
+          observer.disconnect();
+        }, { rootMargin: `0px 0px ${at - 100}% 0px` });
+        observer.observe(element);
+        observers.push(observer);
       };
       rows.forEach(row => {
         const direction = row.classList.contains('process-row-reverse') ? -1 : 1;
@@ -95,8 +103,8 @@ export function initProcessMotion(): () => void {
           typedAt += duration;
         });
         // On phones each part starts as its top edge comes on screen, so it has settled by the time it is read.
-        if (stacked) reveal(row, copyTimeline, 'top 96%');
-        reveal(stacked && visual ? visual : row, timeline, stacked ? 'top 100%' : 'top 72%');
+        if (stacked) reveal(row, copyTimeline, 96);
+        reveal(stacked && visual ? visual : row, timeline, stacked ? 100 : 72);
         if (parallax && !stacked) gsap.fromTo(parallax, { yPercent: 5 * k },
           { yPercent: -7 * k, ease: 'none', scrollTrigger: { trigger: row, start: 'top bottom', end: 'bottom top', scrub: .7 } });
       });
@@ -106,7 +114,7 @@ export function initProcessMotion(): () => void {
       const closing = root.querySelector<HTMLElement>('.process-closing');
       if (closing) reveal(closing, gsap.timeline({ paused: true }).fromTo(closing,
         { opacity: 0, y: 44 * k, scale: 1 - .03 * k },
-        { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'expo.out' }), 'top 86%');
+        { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'expo.out' }), 86);
       // The bottom blur covers the rows only: the opening film runs full bleed and stays sharp.
       const inner = root.querySelector<HTMLElement>('.process-inner') ?? root;
       ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top',
@@ -120,6 +128,7 @@ export function initProcessMotion(): () => void {
       root.classList.toggle('process-in-view', visible(root));
       blur?.classList.toggle('active', visible(inner));
       return (): void => {
+        observers.forEach(observer => observer.disconnect());
         delete root.dataset.processMotion;
         root.classList.remove('process-in-view');
         rows.forEach(row => row.classList.remove('entered'));

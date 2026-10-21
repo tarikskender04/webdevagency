@@ -77,7 +77,8 @@ export function Aurora({
       void import('ogl').then(({ Renderer, Program, Mesh, Color, Triangle }) => {
         if (disposed || current !== generation || motion.matches) return;
         let renderer: InstanceType<typeof Renderer>;
-        try { renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: false, dpr: Math.min(window.devicePixelRatio, 1.5), webgl: 2 }); }
+        // The glow is a soft blur, so phones render it at 1x: less than half the pixels, no visible difference.
+        try { renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: false, dpr: Math.min(window.devicePixelRatio, matchMedia('(max-width: 760px)').matches ? 1 : 1.5), webgl: 2 }); }
         catch { return; }
         const gl = renderer.gl;
         const geometry = new Triangle(gl);

@@ -38,6 +38,19 @@ const mobileDayScene = assets.billboardSceneMobileLight;
     </div>
   </div>
 </section>
+<!-- The photograph is a CSS mask and backdrop, which browsers fetch on arrival wherever the element sits. Hold it until
+     the billboard is about a screen away (billboard.css, [data-photo-wait]); without JavaScript it loads as before. -->
+<script is:inline>
+  (function (billboard) {
+    if (!billboard || !('IntersectionObserver' in window)) return;
+    billboard.dataset.photoWait = '';
+    new IntersectionObserver(function (entries, observer) {
+      if (!entries[0].isIntersecting) return;
+      delete billboard.dataset.photoWait;
+      observer.disconnect();
+    }, { rootMargin: '150% 0px' }).observe(billboard);
+  })(document.currentScript.previousElementSibling);
+</script>
 <script>
   import { initBillboardMotion } from '../scripts/billboard-motion';
   initBillboardMotion();

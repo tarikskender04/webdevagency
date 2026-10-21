@@ -1,5 +1,11 @@
 # Confirmed project decisions
 
+- 2026-10-21, phone portal: At the user's request, the opening portal on phones (under 760px) no longer follows the scroll, which stuttered there. It is an ordinary screen-tall stage (no sticky track, so the toolbar can't uncover anything) that plays the same keyframes on a clock once 60% of it is in view: the hole opens and the headline parts over 1s, the pixels swap from 1s to 2.4s, and the wash and chapters settle by 3s. Once it has left the screen it resets, so it plays again on the way back. Tablets and desktops keep the scroll-driven version; reduced motion and short screens keep the static layout.
+
+- 2026-10-21, Process reveals: Card and copy reveals now fire from IntersectionObserver instead of ScrollTrigger start positions. ScrollTrigger caches those positions, so any later change in height above a card left its trigger too low; on the user's iPhone the Ship it card stayed hidden well into view. ScrollTrigger still drives the scrubbed parallax and spine.
+
+- 2026-10-21, loading: Phones render the Aurora glow at 1x pixel density (it is a soft blur), and the billboard photograph, a CSS mask that browsers fetched on arrival, now waits until the billboard is about a screen away (151KB off a phone's first load). The rest already loads on demand: React, GSAP and OGL only when their section nears, lazy images, the reel only in view, and every animation loop pauses off screen.
+
 - 2026-10-21, Ship it reel: At the user's request, the Ship it card plays the Crochê site reel from /work/ (public/video/croche-reel.mp4, its poster and description come from the Crochê gallery tile in config/work.ts) in place of the coming-soon screenshot. It loops muted while in view, has the same play / pause toggle as /work/ (44px to the touch, even inside the zoomed phone card), and waits on its poster under reduced motion. The reel logic now lives in src/scripts/reels.ts for both pages; the card's screen takes the video's 1600:914 shape.
 
 - 2026-10-21, phone card timing: The user found Process cards on phones appearing too late. A card used to start once its top was 12% up the screen, and the notebook drew its stickers over about four seconds. On phones the copy now starts at 4% and the card the moment its top edge appears, and the notebook draws in about 2.6 seconds. Desktop is unchanged.

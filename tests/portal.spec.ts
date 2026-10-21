@@ -116,7 +116,8 @@ test('the opening and pixel reveal reverse immediately when scrolling back from 
   expect(errors).toEqual([]);
 });
 
-for (const width of [390, 768, 1440]) {
+// Phones play the opening on the clock instead (next test).
+for (const width of [768, 1440]) {
   test(`pixels pause with scrolling, reverse through the same mask and restore motion at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
@@ -161,6 +162,37 @@ for (const width of [390, 768, 1440]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBeTruthy();
   });
 }
+
+test('phones play the opening on the clock once most of it is in view, and again after coming back', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.evaluate(() => document.fonts.ready);
+  const portal = page.locator('.portal-open');
+  await expect(portal).toHaveAttribute('data-portal-mode', 'timed');
+  await expect(portal).toHaveAttribute('data-portal', 'rest');
+  // A plain screen-tall stage, not a sticky track the scroll has to scrub through.
+  expect(await portal.evaluate((track: HTMLElement) => track.offsetHeight)).toBeLessThanOrEqual(844);
+  await portalArriving(page, .7);
+  await page.waitForTimeout(300);
+  await expect(portal).toHaveAttribute('data-portal', 'rest');
+  expect(await holeTop(page)).toBeGreaterThan(100);
+  await portalAt(page, '.portal-open', 0);
+  await expect(portal).toHaveAttribute('data-portal', 'open');
+  await expect(page.locator('.portal-swap .lead')).toBeVisible({ timeout: 4000 });
+  await expect(portal).toHaveAttribute('data-portal', 'done');
+  expect(await holeTop(page)).toBe(0);
+  await expect(page.locator('.portal-chapters > li').last()).toHaveCSS('opacity', '1');
+  await expect(page.locator('.portal-title')).toBeHidden();
+  await axe(page, '.portal-open');
+  mkdirSync('artifacts', { recursive: true });
+  await page.screenshot({ path: 'artifacts/process-timed-390.png' });
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(portal).toHaveAttribute('data-portal', 'rest');
+  await portalAt(page, '.portal-open', 0);
+  await expect(page.locator('.portal-title')).toBeVisible();
+  await expect(portal).toHaveAttribute('data-portal', 'open');
+  await expect(portal).toHaveAttribute('data-portal', 'done', { timeout: 5000 });
+});
 
 test('resizing during the reveal rebuilds the mask at the same scroll position and still reverses', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });

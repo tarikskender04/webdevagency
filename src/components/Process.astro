@@ -38,10 +38,13 @@ const visualMotifs = { notebook: assets.glass, design: assets.processRibbon, cod
       <div class="portal-wall" aria-hidden="true"><span class="portal-hole" /></div>
     </div>
   </div>
-  <!-- Arm the opening portal before it paints, wherever it runs. Unarmed (no JavaScript) it shows its open end state. -->
+  <!-- Arm the opening portal before it paints, wherever it runs. Unarmed (no JavaScript) it shows its open end state.
+       Phones get the timed opening (ProcessIntro plays it), which scrubbing a long sticky track can't keep smooth there. -->
   <script is:inline>
     (function (portal) {
-      if (CSS.supports('animation-timeline: view()') && matchMedia('(prefers-reduced-motion: no-preference) and (min-height: 560px)').matches) portal.dataset.portal = 'rest';
+      if (!CSS.supports('animation-timeline: view()') || !matchMedia('(prefers-reduced-motion: no-preference) and (min-height: 560px)').matches) return;
+      if (matchMedia('(max-width: 760px)').matches) portal.dataset.portalMode = 'timed';
+      portal.dataset.portal = 'rest';
     })(document.currentScript.previousElementSibling);
   </script>
   <div class="container process-inner">
