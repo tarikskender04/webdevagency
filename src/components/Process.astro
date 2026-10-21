@@ -84,5 +84,8 @@ const visualMotifs = { notebook: assets.glass, design: assets.processRibbon, cod
 </div>
 <script>
   import { initProcessMotion } from '../scripts/process-motion';
+  import { initReel } from '../scripts/reels';
   initProcessMotion();
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  for (const reel of document.querySelectorAll<HTMLElement>('.launch-reel')) initReel(reel, reduced);
 </script>

@@ -1,3 +1,4 @@
+import { initReel } from './reels';
 /** /work/ jump bar: marks the project currently in view and keeps its pill visible in the scrolling strip. */
 const strip = document.querySelector<HTMLOListElement>('.work-jump ol');
 const links = [...document.querySelectorAll<HTMLAnchorElement>('.work-jump a')];
@@ -127,27 +128,4 @@ for (const strip of document.querySelectorAll<HTMLElement>('[data-swipe]')) {
   new ResizeObserver(queue).observe(strip);
 }
 
-// Reels: silent screen recordings that loop while in view. With reduced motion they wait on their poster until the
-// toggle is pressed; the toggle always pauses or resumes, and a reel paused by hand stays paused.
-for (const reel of document.querySelectorAll<HTMLElement>('.work-tile-reel')) {
-  const video = reel.querySelector('video')!;
-  const toggle = reel.querySelector<HTMLButtonElement>('.work-reel-toggle')!;
-  let held = reduced.matches;
-  const sync = (): void => {
-    const playing = !video.paused;
-    reel.classList.toggle('is-playing', playing);
-    toggle.setAttribute('aria-label', (playing ? toggle.dataset.pause : toggle.dataset.play) ?? '');
-  };
-  video.addEventListener('play', sync);
-  video.addEventListener('pause', sync);
-  // Follow the visitor's last choice, not the video's state: it is also paused while loading or out of view.
-  toggle.addEventListener('click', () => {
-    held = !held;
-    if (held) video.pause();
-    else video.play().catch(sync);
-  });
-  new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting && !held) video.play().catch(sync);
-    else if (!entry.isIntersecting) video.pause();
-  }, { threshold: .35 }).observe(reel);
-}
+for (const reel of document.querySelectorAll<HTMLElement>('.work-tile-reel')) initReel(reel, reduced);

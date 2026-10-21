@@ -13,12 +13,12 @@ import clutch from '../../design/prototypes/assets/croche/product-clutch.png';
 import square from '../../design/prototypes/assets/croche/product-square.png';
 import special from '../../design/prototypes/assets/croche/product-special.png';
 import productTriangle from '../../design/prototypes/assets/croche/product-triangle.png';
-import comingSoon from '../../design/prototypes/assets/croche/screen-coming-soon.png';
-import sitemap from '../../design/prototypes/assets/croche/stickers/sitemap.png';
-import logoSketch from '../../design/prototypes/assets/croche/stickers/logo-a.png';
-import sunSalt from '../../design/prototypes/assets/croche/stickers/sun-salt.png';
-import palette from '../../design/prototypes/assets/croche/stickers/palette.png';
-import film from '../../design/prototypes/assets/croche/stickers/hero-film.png';
+// The notebook stickers were redrawn as single, sparse sketches (2026-10-21); the kit's originals stay in /design.
+import sitemap from '../assets/croche-stickers/sitemap.png';
+import logoSketch from '../assets/croche-stickers/logo.png';
+import sunSalt from '../assets/croche-stickers/sun-salt.png';
+import palette from '../assets/croche-stickers/palette.png';
+import film from '../assets/croche-stickers/film.png';
 import crocheLogo from '../../design/prototypes/assets/croche/logo-primary.svg';
 import heroPlate from '../assets/hero/hall-dark.png';
 import heroPlateLight from '../assets/hero/hall-light.png';
@@ -28,6 +28,7 @@ import billboardSceneLight from '../assets/standout/Daylight Urban Plaza Billboa
 import billboardSceneMobile from '../assets/standout/nightmobile.png';
 import billboardSceneMobileLight from '../assets/standout/daymobile.png';
 import crochePhoto from '../assets/work/croche-photo.jpg';
+import crocheReelPoster from '../assets/work/gallery/croche-reel-poster.png';
 import crocheLogoWhite from '../assets/work/croche-logo-white.svg';
 import unaPoster from '../assets/work/una-poster.png';
 import capturedPhoto from '../assets/work/captured-photo.jpg';
@@ -49,14 +50,16 @@ const plateWidths = [480, 800, 1280, 1672];
 const workKeys = ['crochePhoto', 'unaPoster', 'capturedPhoto', 'capturedBowl', 'capturedWordmark', 'tierdType', 'tierdDot'];
 const badgeKeys = ['crocheBadge', 'unaBadge', 'tierdBadge', 'capturedBadge'];
 const portraitKeys = ['imanPortrait', 'irmanPortrait', 'malikPortrait'];
-const sources = { heroPlate, heroPlateLight, crowd, billboardScene, billboardSceneLight, billboardSceneMobile, billboardSceneMobileLight, butterfly, blueMark, star, triangle, glass, processPen, processRibbon, processPrism, processOrb, clutch, square, special, productTriangle, comingSoon, sitemap, logoSketch, sunSalt, palette, film, crochePhoto, unaPoster, capturedPhoto, capturedBowl, capturedWordmark, tierdType, tierdDot, crocheBadge, unaBadge, tierdBadge, capturedBadge, imanPortrait, irmanPortrait, malikPortrait };
+// Video posters are one URL (no srcset), sized for the Ship it card on a 2x screen.
+const posterKeys = ['crocheReelPoster'];
+const sources = { heroPlate, heroPlateLight, crowd, billboardScene, billboardSceneLight, billboardSceneMobile, billboardSceneMobileLight, butterfly, blueMark, star, triangle, glass, processPen, processRibbon, processPrism, processOrb, clutch, square, special, productTriangle, crocheReelPoster, sitemap, logoSketch, sunSalt, palette, film, crochePhoto, unaPoster, capturedPhoto, capturedBowl, capturedWordmark, tierdType, tierdDot, crocheBadge, unaBadge, tierdBadge, capturedBadge, imanPortrait, irmanPortrait, malikPortrait };
 export type ImageKey = keyof typeof sources | 'crocheLogo' | 'crocheLogoWhite';
 export interface Asset { src: string; srcSet?: string; width: number; height: number; }
 export type Assets = Record<ImageKey, Asset>;
 export async function buildAssets({ workWidth = 640 }: { workWidth?: number } = {}): Promise<Assets> {
   const entries = await Promise.all(Object.entries(sources).map(async ([name, source]: [string, ImageMetadata]) => {
-    const width = plateKeys.includes(name) ? 1672 : workKeys.includes(name) ? workWidth : motifKeys.includes(name) ? 480 : badgeKeys.includes(name) ? 128 : portraitKeys.includes(name) ? 560 : 800;
-    const candidates = plateKeys.includes(name) ? [...new Set([...plateWidths, Math.min(width, source.width)])] : badgeKeys.includes(name) ? [64, 128] : portraitKeys.includes(name) ? [280, 560] : workKeys.includes(name) ? [160, 320, 480, 640, 960, 1200] : [160, 320, 640, 800];
+    const width = posterKeys.includes(name) ? 1200 : plateKeys.includes(name) ? 1672 : workKeys.includes(name) ? workWidth : motifKeys.includes(name) ? 480 : badgeKeys.includes(name) ? 128 : portraitKeys.includes(name) ? 560 : 800;
+    const candidates = posterKeys.includes(name) ? [1200] : plateKeys.includes(name) ? [...new Set([...plateWidths, Math.min(width, source.width)])] : badgeKeys.includes(name) ? [64, 128] : portraitKeys.includes(name) ? [280, 560] : workKeys.includes(name) ? [160, 320, 480, 640, 960, 1200] : [160, 320, 640, 800];
     const image = await getImage({ src: source, width: Math.min(width, source.width), widths: candidates.filter(candidate => candidate <= Math.min(width, source.width)), format: 'webp', quality: plateKeys.includes(name) ? 72 : 78 });
     return [name, { src: image.src, srcSet: image.srcSet.attribute, width: Number(image.attributes.width), height: Number(image.attributes.height) }] as const;
   }));

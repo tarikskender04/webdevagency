@@ -18,15 +18,17 @@ test('phone cards wait until visible and enter vertically without parallax or bl
   await expect(page.locator('#process')).toHaveAttribute('data-process-motion', 'ready');
   const row = page.locator('.process-row').first();
   const visual = row.locator('.process-visual');
-  await visual.evaluate(element => scrollTo({ top: element.getBoundingClientRect().top + scrollY - innerHeight * .98, behavior: 'instant' }));
+  // Still below the fold: the card waits.
+  await visual.evaluate(element => scrollTo({ top: element.getBoundingClientRect().top + scrollY - innerHeight * 1.04, behavior: 'instant' }));
   await expect(row.locator('.process-copy h3')).toHaveCSS('opacity', '1');
-  expect(await visual.evaluate(element => element.getBoundingClientRect().top)).toBeGreaterThan(664 * .88);
+  expect(await visual.evaluate(element => element.getBoundingClientRect().top)).toBeGreaterThan(664);
   await expect(visual).toHaveCSS('opacity', '0');
   await expect(row.locator('.notebook-pencil')).toHaveCSS('opacity', '0');
   expect(await visual.evaluate(element => new DOMMatrixReadOnly(getComputedStyle(element).transform).m41)).toBe(0);
-  await visual.evaluate(element => scrollTo({ top: element.getBoundingClientRect().top + scrollY - innerHeight * .55, behavior: 'instant' }));
+  // Its top edge just on screen: it enters at once and has settled within a second, before it is read.
+  await visual.evaluate(element => scrollTo({ top: element.getBoundingClientRect().top + scrollY - innerHeight * .96, behavior: 'instant' }));
   await expect.poll(() => row.locator('.notebook-pencil').evaluate(element => Number(getComputedStyle(element).opacity))).toBeGreaterThan(0);
-  await expect(visual).toHaveCSS('opacity', '1');
+  await expect(visual).toHaveCSS('opacity', '1', { timeout: 1000 });
   await expect(visual).toHaveCSS('filter', 'none');
   await expect(row.locator('.process-parallax')).toHaveCSS('transform', 'none');
   mkdirSync('artifacts', { recursive: true });

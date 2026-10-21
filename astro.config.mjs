@@ -31,5 +31,8 @@ export default defineConfig({
   },
   trailingSlash: 'always',
   build: { inlineStylesheets: 'always' },
-  integrations: [react(), ...(indexable ? [sitemap({ filter: (page) => !/^\/(404|work\/[^/]+)\/?$/.test(new URL(page).pathname) })] : [])],
+  // GSAP and OGL are only imported dynamically, so pre-bundle them at dev startup; otherwise Vite discovers them
+  // mid-session, re-optimizes, and open tabs 404 on stale deps (and React's jsx-dev-runtime ends up mismatched).
+  vite: { optimizeDeps: { include: ['gsap', 'gsap/ScrollTrigger', 'ogl'] } },
+  integrations: [react(),...(indexable ? [sitemap({ filter: (page) => !/^\/(404|work\/[^/]+)\/?$/.test(new URL(page).pathname) })] : [])],
 });

@@ -2,15 +2,19 @@ import { useId, type JSX } from 'react';
 import type { Assets, ImageKey } from '../lib/assets';
 import { AssetImage } from './AssetImage';
 import { DemoFrame } from './DemoFrame';
+import { work, type WorkTile } from '../config/work';
 interface Props { kind: 'notebook' | 'design' | 'code' | 'launch'; assets: Assets; }
 const code = ['const order = await createOrder({', '  model: "Square",', '  size: "Classic",', '  yarns: ["Natural", "Wine"],', '  payment: "on_delivery",', '});', '', 'await notifyCustomer(order);', 'return { status: "confirmed" };'];
 const stickers: { asset: ImageKey; name: string; alt: string; rotation: number; x: number; y: number; w: number; h: number }[] = [
-  { asset: 'sitemap', name: 'sitemap', alt: 'Crochê sitemap planning sketch', rotation: -3, x: 0, y: 0, w: 56, h: 26 },
-  { asset: 'logoSketch', name: 'logo', alt: 'Crochê logo sketches', rotation: 4, x: 54, y: 2, w: 46, h: 30 },
-  { asset: 'sunSalt', name: 'collection', alt: 'Sun and Salt collection planning', rotation: 3, x: 0, y: 31, w: 44, h: 40 },
-  { asset: 'palette', name: 'palette', alt: 'Crochê colour palette', rotation: -2, x: 42, y: 34, w: 56, h: 21 },
-  { asset: 'film', name: 'film', alt: 'Homepage film storyboard', rotation: -3, x: 36, y: 60, w: 62, h: 37 },
+  { asset: 'sitemap', name: 'sitemap', alt: 'Crochê sitemap planning sketch', rotation: -2, x: 0, y: 2, w: 58, h: 23 },
+  { asset: 'logoSketch', name: 'logo', alt: 'Crochê logo sketch', rotation: 4, x: 60, y: 8, w: 40, h: 14 },
+  { asset: 'sunSalt', name: 'collection', alt: 'Sun and Salt collection planning', rotation: 3, x: 2, y: 30, w: 36, h: 43 },
+  { asset: 'palette', name: 'palette', alt: 'Crochê colour palette', rotation: -2, x: 42, y: 34, w: 56, h: 12 },
+  { asset: 'film', name: 'film', alt: 'Homepage film storyboard', rotation: -2, x: 38, y: 56, w: 62, h: 22 },
 ];
+// Ship it plays the Crochê site reel from /work/, so both pages share one file and one description.
+const crocheReel = work.find(project => project.id === 'croche')!.gallery.flat().find((tile): tile is Extract<WorkTile, { type: 'reel' }> => tile.type === 'reel')!;
+const reelName = crocheReel.caption.toLowerCase();
 export function ProcessVisual({ kind, assets }: Props): JSX.Element {
   const paperId = useId().replace(/:/g, '');
   if (kind === 'notebook') return <div className="notebook">
@@ -24,7 +28,7 @@ export function ProcessVisual({ kind, assets }: Props): JSX.Element {
       </svg>
       <div className="notebook-top"><span>Crochê — planning notebook</span><span>p. 01</span></div>
       <div className="notebook-collage">
-        {stickers.map(sticker => <div key={sticker.name} className={`sticker sticker-${sticker.name}`} data-sticker data-rot={sticker.rotation} data-x={sticker.x} data-y={sticker.y} data-w={sticker.w} data-h={sticker.h}><AssetImage asset={assets[sticker.asset]} alt={sticker.alt} sizes="(max-width: 760px) 50vw, 280px" /></div>)}
+        {stickers.map(sticker => <div key={sticker.name} className={`sticker sticker-${sticker.name}`} data-sticker data-rot={sticker.rotation} data-x={sticker.x} data-y={sticker.y} data-w={sticker.w} data-h={sticker.h}><AssetImage asset={assets[sticker.asset]} alt={sticker.alt} sizes="(max-width: 760px) 62vw, 320px" /></div>)}
         <span className="notebook-pencil" data-pencil aria-hidden="true" />
       </div>
       <div className="notebook-bottom">Frame by frame, before a line of code</div>
@@ -59,7 +63,14 @@ export function ProcessVisual({ kind, assets }: Props): JSX.Element {
   </DemoFrame>;
   return <div className="process-card launch-card">
     <div className="process-card-header"><span className="status-dot" /><span className="eyebrow">Crochê — ready for opening day</span></div>
-    <div className="launch-screen"><AssetImage asset={assets.comingSoon} alt="Crochê coming-soon website" sizes="(max-width: 760px) 100vw, 560px" /><span className="launch-badge" data-process-piece>Launch assets</span></div>
+    <div className="launch-screen launch-reel">
+      <video muted loop playsInline preload="none" poster={assets.crocheReelPoster.src} width={assets.crocheReelPoster.width} height={assets.crocheReelPoster.height} aria-label={crocheReel.label}><source src={crocheReel.src} type="video/mp4" /></video>
+      <span className="launch-badge" data-process-piece>Launch assets</span>
+      <button type="button" className="work-reel-toggle" aria-label={`Play ${reelName}`} data-play={`Play ${reelName}`} data-pause={`Pause ${reelName}`}>
+        <svg className="icon-play" width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.6 1.2v7.6a.5.5 0 0 0 .76.43l6.1-3.8a.5.5 0 0 0 0-.86L3.36.77a.5.5 0 0 0-.76.43z" fill="currentColor" /></svg>
+        <svg className="icon-pause" width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><rect x="2" y="1.5" width="2.2" height="7" rx=".5" fill="currentColor" /><rect x="5.8" y="1.5" width="2.2" height="7" rx=".5" fill="currentColor" /></svg>
+      </button>
+    </div>
     <div className="launch-checklist">{['Coming-soon page', 'Catalogue & ordering', "Owner's dashboard", 'Customer emails'].map(label => <div key={label} data-process-piece><span><i>✓</i> {label}</span></div>)}</div>
     <div className="glass-zone"><div className="glass-strip" data-process-glass><span>From the first sketch to launch</span><strong>Still on the phone with you</strong></div></div>
   </div>;

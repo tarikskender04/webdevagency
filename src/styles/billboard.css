@@ -47,7 +47,9 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and (min-height: 560px) {
     .billboard[data-billboard-portal] { height: 280svh; view-timeline-name: --billboard-close; view-timeline-axis: block; }
-    [data-billboard-portal] .billboard-stage { position: sticky; top: 0; height: 100svh; }
+    /* A large viewport tall, like the Process portal's stage: a 100svh stage left a bare band under it on phones once
+       the address bar slid away. billboard-motion.ts measures the stage, so the zoom covers the taller frame. */
+    [data-billboard-portal] .billboard-stage { position: sticky; top: 0; height: 100lvh; }
     [data-billboard-portal] .billboard-stage::before { content: ''; position: absolute; inset: -32px; pointer-events: none; --tone-1: var(--billboard-backdrop-tint); background-image: linear-gradient(var(--tone-1), var(--tone-1)), var(--billboard-photo); background-position: center; background-size: cover; filter: blur(24px); }
     [data-billboard-portal] .billboard-view { position: absolute; top: 50%; translate: 0 -50%; transform-origin: var(--billboard-origin-x) var(--billboard-origin-y); animation-name: billboard-pull-back; animation-timing-function: cubic-bezier(.45,0,.55,1); animation-fill-mode: both; animation-timeline: --billboard-close; animation-range: contain 10% contain 76%; will-change: transform; }
     [data-billboard-portal] .billboard-process { position: absolute; inset: 0; z-index: 2; overflow: hidden; padding: 0; background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), var(--grad-aurora); animation-name: billboard-process-out; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: --billboard-close; animation-range: contain 76% contain 86%; }

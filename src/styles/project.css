@@ -237,10 +237,6 @@ body:has(.work-page) :is(.container, .site-header) { width: min(1120px, calc(100
 .work-tile > img, .work-tile > video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 .work-tile > video { background: var(--ink); }
 .work-tile-label { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 30px; padding: 0 12px; border-radius: var(--r-pill); background: var(--paper); color: var(--ink); font: var(--t-label); letter-spacing: .14em; text-transform: uppercase; box-shadow: var(--e-0); }
-.work-reel-toggle { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: var(--paper); color: var(--ink); box-shadow: var(--e-0); cursor: pointer; transition: background var(--dur-hover) ease, color var(--dur-hover) ease; }
-.work-reel-toggle:hover { background: var(--ink); color: var(--paper); }
-.work-reel-toggle .icon-pause, .is-playing .work-reel-toggle .icon-play { display: none; }
-.is-playing .work-reel-toggle .icon-pause { display: block; }
 /* The details: stacked beside a screenshot, or three across when they have a row of their own. */
 .work-details { display: grid; align-content: center; gap: 28px; margin: 0; padding: 8px 8px 8px 16px; list-style: none; border-radius: 0; overflow: visible; }
 .work-details .project-detail { gap: 16px; }

@@ -188,3 +188,25 @@ test('motifs and flyouts stay clear of readable copy across the responsive break
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy();
   }
 });
+
+test('Ship it plays the Crochê site reel from /work/ in view, pauses on demand and waits under reduced motion', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const reel = page.locator('.launch-reel');
+  const video = reel.locator('video');
+  await expect(video.locator('source')).toHaveAttribute('src', '/video/croche-reel.mp4');
+  await expect(video).toHaveAttribute('aria-label', /Crochê website/);
+  await reel.scrollIntoViewIfNeeded();
+  await expect.poll(() => video.evaluate((element: HTMLVideoElement) => !element.paused && element.muted)).toBeTruthy();
+  const toggle = reel.getByRole('button', { name: 'Pause site walkthrough' });
+  await toggle.click();
+  await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.paused)).toBeTruthy();
+  await expect(reel.getByRole('button', { name: 'Play site walkthrough' })).toBeVisible();
+  await page.locator('.launch-card').screenshot({ path: 'artifacts/process-launch-reel.png' });
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.reload();
+  await page.locator('.launch-reel').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(500);
+  expect(await page.locator('.launch-reel video').evaluate((element: HTMLVideoElement) => element.paused)).toBeTruthy();
+});

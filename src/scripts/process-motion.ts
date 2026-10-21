@@ -59,7 +59,7 @@ export function initProcessMotion(): () => void {
 
         const stickers = Array.from(row.querySelectorAll<HTMLElement>('[data-sticker]'));
         const pencil = row.querySelector<HTMLElement>('[data-pencil]');
-        const drawingSpeed = stacked ? .6 : 1;
+        const drawingSpeed = stacked ? .45 : 1;
         let at = .5;
         if (pencil && stickers.length) {
           const first = stickers[0];
@@ -80,7 +80,7 @@ export function initProcessMotion(): () => void {
             { left: `${x + w * .2}%`, top: `${y + h * .75}%` },
             { left: `${x + w * .9}%`, top: `${y + h}%` },
           ], duration: .6 * drawingSpeed, ease: 'none' }, at + .16 * drawingSpeed);
-          at += stacked ? .65 : 1.05;
+          at += stacked ? .42 : 1.05;
         });
         if (pencil) timeline.to(pencil, { opacity: 0, duration: .25 }, at);
 
@@ -94,8 +94,9 @@ export function initProcessMotion(): () => void {
             { clipPath: 'inset(0 0% 0 0)', duration, ease: `steps(${length})` }, typedAt);
           typedAt += duration;
         });
-        if (stacked) reveal(row, copyTimeline, 'top 85%');
-        reveal(stacked && visual ? visual : row, timeline, stacked ? 'top 88%' : 'top 72%');
+        // On phones each part starts as its top edge comes on screen, so it has settled by the time it is read.
+        if (stacked) reveal(row, copyTimeline, 'top 96%');
+        reveal(stacked && visual ? visual : row, timeline, stacked ? 'top 100%' : 'top 72%');
         if (parallax && !stacked) gsap.fromTo(parallax, { yPercent: 5 * k },
           { yPercent: -7 * k, ease: 'none', scrollTrigger: { trigger: row, start: 'top bottom', end: 'bottom top', scrub: .7 } });
       });

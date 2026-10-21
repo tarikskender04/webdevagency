@@ -8,10 +8,28 @@ interface Props { themed?: boolean; }
 const isHome = Astro.url.pathname === '/';
 const themed = isHome || Astro.props.themed;
 const home = isHome ? '' : '/';
+const onWork = Astro.url.pathname === '/work/' ? 'page' : undefined;
 ---
 <header class:list={['site-header', 'container', { 'site-header-page': !isHome, 'site-header-themed': themed }]} id="top">
   <a class="wordmark" href="/" aria-label={`${site.name} home`}><BrandLogo tone={themed ? 'auto' : 'ink'} /></a>
-  <nav aria-label="Main navigation"><a href="/work/" aria-current={Astro.url.pathname === '/work/' ? 'page' : undefined}>Work</a><a href="/about/">Studio</a><a href={`${home}#process`}>Process</a></nav>
+  <nav aria-label="Main navigation"><a href="/about/">Studio</a><a href={`${home}#process`}>Process</a><a class="nav-work" href="/work/" aria-current={onWork}>Our work <span aria-hidden="true">→</span></a></nav>
   <a class="nav-contact" href={`${home}#start`}>Contact <span aria-hidden="true">↗</span></a>
+  <!-- Phones: the nav and Contact move into a native popover (Esc, tap outside and focus return come from the browser). -->
+  <button type="button" class="nav-menu-button" popovertarget="site-menu" aria-controls="site-menu">Menu <svg class="nav-menu-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path class="nav-menu-open" d="M2.5 5.5h11M2.5 10.5h11" /><path class="nav-menu-close" d="m4 4 8 8M12 4l-8 8" /></svg></button>
   <ThemeSwitch />
+  <div class="site-menu" id="site-menu" popover>
+    <nav aria-label="Main navigation">
+      <a class="site-menu-link" href="/about/">Studio</a>
+      <a class="site-menu-link" href={`${home}#process`}>Process</a>
+      <div class="site-menu-actions">
+        <a class="nav-work" href="/work/" aria-current={onWork}>Our work <span aria-hidden="true">→</span></a>
+        <a class="nav-contact" href={`${home}#start`}>Contact <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </div>
 </header>
+<script>
+  // Same-page links (#process, #start) don't unload the page, so close the menu ourselves.
+  const menu = document.getElementById('site-menu');
+  menu?.addEventListener('click', event => { if (event.target instanceof Element && event.target.closest('a')) menu.hidePopover(); });
+</script>
