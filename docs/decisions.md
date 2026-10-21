@@ -1,6 +1,6 @@
 # Confirmed project decisions
 
-- 2026-10-21, team roles: The user confirmed Ishak Sacirbey as UI/UX Designer, Haris Susic as Software Engineer and Kemal Mesic as Frontend Engineer. /about/ shows them beside Tarik Skender (Owner & CEO) and Aladin Music (Sales & Outreach).
+- 2026-10-21, team roles: The user confirmed Ishak Sacirbey as UI/UX Designer, Haris Sušić as Software Engineer and Kemal Mešić as Frontend Engineer. /about/ shows them beside Tarik Skender (Owner & CEO) and Aladin Music (Sales & Outreach).
 
 - 2026-10-21, social profiles: The user supplied LinkedIn (linkedin.com/company/prodigy-stdio), X (x.com/prodigystdio) and Facebook (profile.php?id=61595389961132). site.socialProfiles now holds name + URL; the footer's Follow column shows the names, as in the Footer design (which labels links by network), and the Organization JSON-LD lists the URLs as sameAs.
 
@@ -34,7 +34,7 @@
 - Brand: Prodigy Stdio. Confirmed owned domain: prodigystdio.com (intentional spelling).
 - Name: Tarik Skender.
 - Sales & Outreach: Aladin Music.
-- Other supplied employees: Ishak Sacirbey, Haris Susic, Kemal Mesic. Roles and biographies are not yet confirmed.
+- Other supplied employees: Ishak Sacirbey, Haris Sušić, Kemal Mešić. Roles and biographies are not yet confirmed.
 - Hero: B. Contact: 1a. Footer: 1b.
 - The user explicitly chose a light Contact and dark Footer; preserve this pairing even though the exported README recommends matching options.
 - Implementation: React + TypeScript on Astro, with static HTML for marketing pages.

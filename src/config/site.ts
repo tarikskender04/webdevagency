@@ -74,6 +74,6 @@ export const team = [
   { name: 'Tarik Skender', role: 'Owner & CEO' },
   { name: 'Aladin Music', role: 'Sales & Outreach' },
   { name: 'Ishak Sacirbey', role: 'UI/UX Designer' },
-  { name: 'Haris Susic', role: 'Software Engineer' },
-  { name: 'Kemal Mesic', role: 'Frontend Engineer' },
+  { name: 'Haris Sušić', role: 'Software Engineer' },
+  { name: 'Kemal Mešić', role: 'Frontend Engineer' },
 ];
