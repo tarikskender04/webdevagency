@@ -4,7 +4,7 @@ Read root CLAUDE.md, design/README.md (when imported), docs/design-sync.md, and 
 
 - Stack: Astro static output, React, strict TypeScript. React components produce HTML at build time; hydrate only interactive components that need browser state.
 - The original handoff lives in design/. Preserve it as the exported source. Implement components in src/ and assets in public/ or src/assets/.
-- Confirmed variants: Hero B, Contact 1a, Footer 1b. Brand: Prodigy Stdio. Owned domain: prodigystdio.com; Stdio is intentional, do not change it to Studio. Name: Tarik Skender. Aladin Music handles Sales & Outreach. Other employee names are in src/config/site.ts; roles remain unconfirmed.
+- Confirmed variants: Hero B, Contact 1a, Footer 1b. Brand: Prodigy Stdio. Owned domain: prodigystdio.com; Stdio is intentional, do not change it to Studio. Name: Tarik Skender. Aladin Music handles Sales & Outreach. The user confirmed the other roles on 2026-10-21: Ishak Sacirbey, UI/UX Designer; Haris Susic, Software Engineer; Kemal Mesic, Frontend Engineer (src/config/site.ts).
 - Do not invent clients, reviews, metrics, team roles, a registered company, or a US office. Prodigy Stdio is based in Sarajevo, Bosnia and Herzegovina (Gradačačka 118, 71000 Sarajevo), confirmed by the user on 2026-10-21; it replaces the earlier Chicago description, which must not return. There is no registered business.
 - Business identity and content are centralized in src/config/site.ts. Replace handoff placeholder identities with confirmed details.
 - Keep meaningful content in the built HTML. Use semantic headings, accessible navigation, responsive styling, and reduced-motion support.
