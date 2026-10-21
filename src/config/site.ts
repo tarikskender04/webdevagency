@@ -30,7 +30,12 @@ export const site = {
   description: `${studioName} designs and builds websites, online ordering and back offices for businesses in the US and Europe. See our work and start your next project.`,
   locale: 'en_US',
   language: 'en-US',
-  socialProfiles: [] as string[],
+  /** Public profiles: the footer's Follow column and the Organization's sameAs. LinkedIn uses the public company URL, not the admin dashboard. */
+  socialProfiles: [
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/company/prodigy-stdio/' },
+    { name: 'X', url: 'https://x.com/prodigystdio' },
+    { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61595389961132' },
+  ] as { name: string; url: string }[],
   billboard: {
     headline: ['Your website is', 'costing you clients.'],
     response: 'We fix that.',

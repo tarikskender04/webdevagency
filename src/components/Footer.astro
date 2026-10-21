@@ -11,7 +11,7 @@ const contactLabel = import.meta.env.PUBLIC_BOOKING_URL ? 'Book a free call' : '
       <div class="footer-columns">
         <div><h2 class="eyebrow">Site</h2><a href="/about/">Studio</a><a href={`${home}#process`}>Process</a><a href={`${home}#start`}>Start a project</a></div>
         <div><h2 class="eyebrow">Contact</h2>{site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}<a class="footer-cta" href={`${home}#start`}>{contactLabel} →</a></div>
-        {site.socialProfiles.length > 0 && <div><h2 class="eyebrow">Follow</h2>{site.socialProfiles.map(profile => <a href={profile} rel="noopener noreferrer" target="_blank">{new URL(profile).hostname}</a>)}</div>}
+        {site.socialProfiles.length > 0 && <div><h2 class="eyebrow">Follow</h2>{site.socialProfiles.map(profile => <a href={profile.url} rel="noopener noreferrer" target="_blank">{profile.name}</a>)}</div>}
       </div>
     </div>
     <div class="footer-identity"><p>{site.studio.introduction}</p>{legal.operatorName && <p>Operated by {legal.operatorName}.{legal.contactAddress && <> {legal.contactAddress}</>}</p>}</div>

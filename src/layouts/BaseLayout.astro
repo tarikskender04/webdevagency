@@ -40,7 +40,7 @@ const organization = site.nameConfirmed && Astro.site ? {
   founder: { '@type': 'Person', name: site.founder },
   address: { '@type': 'PostalAddress', ...legal.postalAddress },
   ...(site.email ? { email: site.email } : {}),
-  ...(site.socialProfiles.length ? { sameAs: site.socialProfiles } : {}),
+  ...(site.socialProfiles.length ? { sameAs: site.socialProfiles.map(profile => profile.url) } : {}),
 } : undefined;
 // The homepage also names the website itself, which Google uses for the site name shown in results.
 const website = organization && Astro.url.pathname === '/' ? { '@type': 'WebSite', '@id': new URL('/#website', Astro.site).href, name: site.name, url: Astro.site!.href, inLanguage: site.language, publisher: { '@id': organizationId } } : undefined;

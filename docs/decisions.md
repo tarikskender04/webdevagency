@@ -1,5 +1,7 @@
 # Confirmed project decisions
 
+- 2026-10-21, social profiles: The user supplied LinkedIn (linkedin.com/company/prodigy-stdio), X (x.com/prodigystdio) and Facebook (profile.php?id=61595389961132). site.socialProfiles now holds name + URL; the footer's Follow column shows the names, as in the Footer design (which labels links by network), and the Organization JSON-LD lists the URLs as sameAs.
+
 - 2026-10-21, location and policies: The user dropped the Chicago description: Prodigy Stdio is based in Sarajevo, Bosnia and Herzegovina, at Gradačačka 118, 71000 Sarajevo (postal code added for Sarajevo). This supersedes the Chicago base in earlier entries. The address appears on /privacy/, /terms/, the footer and the Organization JSON-LD (PostalAddress). The remaining policy fields were filled from provider documentation (see docs/legal-launch.md), so both policy pages are final, dated 2026-10-21. The Cloudflare Web Analytics beacon stays on and /privacy/ now describes it, replacing "no third-party analytics". The US and Europe market wording in titles and descriptions is unchanged.
 
 - 2026-10-21, indexing: The user confirmed the site is launched and should be found by clients now. PUBLIC_SITE_INDEXABLE=true goes on the Cloudflare production build variables (set by the user in the dashboard); .env.example and local builds keep the false default. The Privacy and Terms pages still show their draft state until the missing details in docs/legal-launch.md are confirmed.
