@@ -1,5 +1,5 @@
 ---
-import { site } from '../config/site';
+import { site, legal } from '../config/site';
 import CookieNotice from '../components/CookieNotice.astro';
 import headingFont from '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2?url';
 import accentFont from '@fontsource/newsreader/files/newsreader-latin-400-italic.woff2?url';
@@ -38,6 +38,7 @@ const organization = site.nameConfirmed && Astro.site ? {
   url: Astro.site.href,
   description: site.description,
   founder: { '@type': 'Person', name: site.founder },
+  address: { '@type': 'PostalAddress', ...legal.postalAddress },
   ...(site.email ? { email: site.email } : {}),
   ...(site.socialProfiles.length ? { sameAs: site.socialProfiles } : {}),
 } : undefined;

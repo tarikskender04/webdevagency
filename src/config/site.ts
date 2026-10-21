@@ -24,7 +24,7 @@ export const site = {
   /** Sent briefs go out through Resend from this address (domain verified in Resend) to `email`, with the visitor as Reply-To. */
   enquiry: { from: `${studioName} <forms@prodigystdio.com>`, provider: { name: 'Resend', privacyUrl: 'https://resend.com/legal/privacy-policy' } },
   studio: {
-    introduction: `${studioName} is an independent web studio based in Chicago, operating in Bosnia and Herzegovina.`,
+    introduction: `${studioName} is an independent web studio based in Sarajevo, Bosnia and Herzegovina.`,
     focus: 'We design and build websites, online ordering and back offices for businesses in the US and Europe.',
   },
   description: `${studioName} designs and builds websites, online ordering and back offices for businesses in the US and Europe. See our work and start your next project.`,
@@ -37,17 +37,19 @@ export const site = {
   },
 };
 
-// Keep unconfirmed details empty and complete them before public launch.
-// The user explicitly confirmed the operator separately from the project contact.
+// The user confirmed the operator and the Sarajevo address. Retention and transfer wording follows the providers'
+// published practices (Cloudflare Workers Logs: 3 days on Free, 7 from 2026-12-01; Resend sends from eu-west-1, Ireland).
 export const legal = {
-  updated: '2026-10-20',
+  updated: '2026-10-21',
   operatorName: 'Tarik Skender',
-  contactAddress: '',
+  contactAddress: 'Gradačačka 118, 71000 Sarajevo, Bosnia and Herzegovina',
+  /** The same address for structured data (BaseLayout's Organization). */
+  postalAddress: { streetAddress: 'Gradačačka 118', postalCode: '71000', addressLocality: 'Sarajevo', addressCountry: 'BA' },
   hostingProvider: 'Cloudflare',
   hostingPrivacyUrl: 'https://www.cloudflare.com/privacypolicy/',
-  hostingLogRetention: '',
-  processingLocationsAndTransfers: '',
-  enquiryRetention: '',
+  hostingLogRetention: 'Cloudflare keeps the logs of our enquiry service for no more than 7 days. They record the request and any delivery error, not the contents of your brief.',
+  processingLocationsAndTransfers: 'We work from Bosnia and Herzegovina. Our providers, Cloudflare (hosting), Google (email) and Resend (email delivery, from servers in Ireland), may process information in the European Union, the United States and other countries. They protect these transfers with safeguards such as the European Commission’s Standard Contractual Clauses.',
+  enquiryRetention: 'We keep enquiries for up to two years after our last contact with you, so we can follow up on your project. If you become a client, we keep project records for as long as the law requires for business records. You can ask us to delete your enquiry at any time.',
 };
 
 export const policyDetailsPending = !(
