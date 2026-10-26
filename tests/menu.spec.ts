@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { mkdirSync } from 'node:fs';
 import { setTheme } from './helpers/theme';
 
-test('phones get a Menu that reaches Studio, Process, Our work and Contact, and closes on Esc or a same-page link', async ({ page }) => {
+test('phones get a Menu that reaches Studio, Process, Lupo, Our work and Contact, and closes on Esc or a same-page link', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
@@ -16,7 +16,7 @@ test('phones get a Menu that reaches Studio, Process, Our work and Contact, and 
   await button.click();
   await expect(menu).toBeVisible();
   const nav = menu.getByRole('navigation', { name: 'Main navigation' });
-  await expect(nav.getByRole('link')).toHaveText(['Studio', 'Process', 'Our work →', 'Contact ↗']);
+  await expect(nav.getByRole('link')).toHaveText(['Studio', 'Process', 'Lupo', 'Our work →', 'Contact ↗']);
   const accessibility = await new AxeBuilder({ page }).include('#site-menu').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
   expect(accessibility.violations.map(violation => violation.id)).toEqual([]);
   await page.keyboard.press('Escape');

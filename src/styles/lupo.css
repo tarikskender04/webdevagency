@@ -1,0 +1,145 @@
+/* /lupo/ follows Lupo's own brand (the Lupo repo's docs/brand.md), not /design: see docs/decisions.md, 2026-10-25.
+   The palette and typeface below are copied from brand.md; anything brand.md doesn't define falls back to the site's
+   tokens (spacing, radii, motion). Plus Jakarta Sans is imported by the page itself, so only /lupo/ loads it. */
+.lupo-page {
+  --lupo-sky: #6EB8FF;    /* outlines, highlights, edges. Too light for white text (2.1:1) */
+  --lupo-icy: #CFEAFF;    /* pale sky, panel wash */
+  --lupo-cloud: #FAFCFF;  /* fur and clouds; a ground the mark may sit on */
+  --lupo-navy: #1E2B50;   /* wordmark, text on light brand surfaces */
+  --lupo-peach: #FFB38A;  /* ear rim. Warm highlights only, sparingly, never a status */
+  --lupo-coral: #F26B4F;  /* ear core. Same rule as Peach */
+  --lupo-blue: #2173D9;   /* primary actions; white text on it reads 4.6:1. Not for link text */
+  --lupo-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  /* brand.md has no grey, so secondary text is Navy at reduced strength: 80% is 6.7:1 on white, 70% is 5.2:1. */
+  --lupo-text: color-mix(in srgb, var(--lupo-navy) 80%, #FFFFFF);
+  --lupo-text-soft: color-mix(in srgb, var(--lupo-navy) 70%, #FFFFFF);
+  --lupo-edge: color-mix(in srgb, var(--lupo-sky) 45%, #FFFFFF);
+  font-family: var(--lupo-font);
+  color: var(--lupo-navy);
+  overflow-x: clip;
+}
+.lupo-page :focus-visible { outline-color: var(--lupo-blue); }
+.lupo-page h2 { font-size: clamp(32px, 4.2vw, 52px); font-weight: 700; line-height: 1.08; letter-spacing: -.03em; text-wrap: balance; }
+.lupo-page h3 { font-size: 19px; font-weight: 600; line-height: 1.35; letter-spacing: -.01em; }
+.lupo-page p { text-wrap: pretty; }
+.lupo-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--lupo-blue); }
+.lupo-text { max-width: 60ch; font-size: 17px; line-height: 1.65; color: var(--lupo-text); }
+.lupo-footnote { margin-top: 32px; font-size: 15px; line-height: 1.6; color: var(--lupo-text-soft); }
+.lupo-page kbd { display: inline-block; padding: 0 .4em; border: 1px solid var(--lupo-edge); border-bottom-width: 2px; border-radius: var(--r-sm); background: var(--lupo-cloud); font: 500 .88em/1.5 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; white-space: nowrap; }
+.lupo-page code { padding: .1em .35em; border-radius: 6px; background: color-mix(in srgb, var(--lupo-icy) 55%, #FFFFFF); font-family: var(--font-mono); font-size: .86em; }
+
+/* The panel surface from brand.md ("brandSurface"): washed with Icy Blue, warming to Peach at the bottom-right corner,
+   with a thin Sky Blue edge. The Icy wash fades to Cloud White before the corner: Peach over Icy Blue mixes to grey.
+   Lupo Blue fails 4.5:1 on the wash, so eyebrows there turn Navy. */
+.lupo-wash {
+  border: 1px solid var(--lupo-edge);
+  background:
+    radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--lupo-peach) 40%, var(--lupo-cloud)), transparent 75%),
+    linear-gradient(160deg, color-mix(in srgb, var(--lupo-icy) 75%, var(--lupo-cloud)) 0%, var(--lupo-cloud) 78%);
+}
+.lupo-wash .lupo-eyebrow { color: var(--lupo-navy); }
+/* 70% Navy dips to about 4.2:1 on the deepest Icy and Peach; 80% stays above 5.4:1 anywhere on the wash. */
+.lupo-wash { --lupo-text-soft: var(--lupo-text); }
+/* Soft cloud bumps along the bottom edge, after the brand sheet's cloud elements. Decoration only. */
+.lupo-clouds { position: relative; isolation: isolate; overflow: hidden; }
+.lupo-clouds::after {
+  content: ''; position: absolute; inset: auto 0 0; z-index: -1; height: 46%; pointer-events: none;
+  background:
+    radial-gradient(38% 70% at 12% 100%, var(--lupo-cloud) 58%, transparent 72%),
+    radial-gradient(30% 62% at 44% 108%, var(--lupo-cloud) 56%, transparent 70%),
+    radial-gradient(36% 74% at 80% 104%, var(--lupo-cloud) 56%, transparent 71%);
+}
+
+.lupo-button { background: var(--lupo-blue); color: #FFFFFF; }
+/* brand.md gives no hover colour; Navy is from the palette and keeps white text readable (approved 2026-10-25). */
+.lupo-button:hover { background: var(--lupo-navy); }
+.lupo-button-soon { background: var(--lupo-icy); color: var(--lupo-navy); }
+.lupo-button-soon:hover { background: var(--lupo-icy); transform: none; }
+.lupo-download { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 36px; }
+.lupo-requirements { font-size: 14px; color: var(--lupo-text-soft); }
+
+/* Hero: copy left, the mark right. The wordmark stands alone because the mark is beside it (brand.md). */
+.lupo-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 64px; padding-block: 72px 56px; }
+.lupo-wordmark { width: 132px; }
+.lupo-hero .lupo-eyebrow { margin-top: 36px; }
+.lupo-hero h1 { margin-top: 14px; font-size: clamp(44px, 6vw, 76px); font-weight: 700; line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
+.lupo-lead { max-width: 30ch; margin-top: 20px; font-size: clamp(20px, 1.9vw, 23px); font-weight: 500; line-height: 1.4; text-wrap: balance; }
+.lupo-hero .lupo-text { margin-top: 18px; }
+.lupo-first-time { display: inline-block; margin-top: 24px; padding-block: 4px; font-size: 15px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 5px; transition: text-decoration-color var(--dur-hover) ease; }
+.lupo-first-time:hover { text-decoration-color: currentColor; }
+/* Clear space around the mark is well over a quarter of its height; the halo is background, not an effect on the mark. */
+.lupo-hero-art { display: grid; place-items: center; aspect-ratio: 1; background: radial-gradient(closest-side, color-mix(in srgb, var(--lupo-icy) 80%, #FFFFFF), transparent); }
+.lupo-hero-mark { width: min(360px, 72%); }
+
+.lupo-demo-frame { display: grid; place-items: center; margin: 0; aspect-ratio: 16 / 9; border-radius: var(--r-hero); }
+/* Until the video exists the slot is a flatter band of brand artwork, not an empty 16:9 screen. */
+.lupo-demo-placeholder { aspect-ratio: 3 / 1; }
+.lupo-demo-frame video { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+.lupo-demo-frame figcaption { justify-self: start; margin-top: 12px; font-size: 14px; color: var(--lupo-text-soft); }
+.lupo-demo-mark { width: clamp(88px, 13vw, 160px); }
+
+.lupo-section { padding-block: 72px; }
+.lupo-section-head { max-width: 680px; margin-bottom: 40px; }
+.lupo-section-head h2 { margin-top: 14px; }
+.lupo-section-head .lupo-text { margin-top: 18px; }
+.lupo-card { padding: 28px; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); background: var(--lupo-cloud); }
+.lupo-card p { margin-top: 10px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+
+.lupo-steps, .lupo-permissions, .lupo-facts, .lupo-install-steps { margin: 0; padding: 0; list-style: none; }
+.lupo-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: lupo-step; }
+.lupo-steps li { counter-increment: lupo-step; }
+.lupo-steps li::before { content: counter(lupo-step, decimal-leading-zero); display: block; margin-bottom: 20px; font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--lupo-blue); }
+
+.lupo-panel { padding: clamp(28px, 5vw, 64px); border-radius: var(--r-panel); }
+.lupo-panel .lupo-section-head { margin-bottom: 36px; }
+.lupo-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.lupo-facts li { padding-top: 20px; border-top: 1px solid var(--lupo-edge); }
+.lupo-facts p { margin-top: 8px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+
+.lupo-install { display: grid; gap: 48px; }
+.lupo-install-with-gif { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.lupo-install-steps { display: grid; gap: 28px; max-width: 680px; counter-reset: lupo-install; }
+.lupo-install-steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 18px; counter-increment: lupo-install; }
+.lupo-install-steps li::before { content: counter(lupo-install); grid-row: span 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--lupo-blue); color: #FFFFFF; font-size: 15px; font-weight: 700; }
+.lupo-install-steps h3 { align-self: center; }
+.lupo-install-steps p { margin-top: 6px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+.lupo-install-steps strong { font-weight: 600; color: var(--lupo-navy); }
+.lupo-install-gif { width: 100%; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); }
+
+.lupo-permissions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+
+.lupo-releases { max-width: 720px; border-top: 1px solid var(--lupo-edge); }
+.lupo-release { border-bottom: 1px solid var(--lupo-edge); }
+.lupo-release summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; }
+.lupo-release summary::-webkit-details-marker { display: none; }
+.lupo-release summary::after { content: '+'; font-size: 22px; font-weight: 500; line-height: 1; color: var(--lupo-blue); }
+.lupo-release[open] summary::after { content: '−'; }
+.lupo-release summary span { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.lupo-release time { font-weight: 500; color: var(--lupo-text-soft); }
+.lupo-release ul { margin: 0; padding: 0 0 24px 20px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+.lupo-release li + li { margin-top: 6px; }
+
+.lupo-closing { padding-block: 72px 112px; }
+.lupo-closing .lupo-panel { display: grid; justify-items: center; padding-block: clamp(56px, 8vw, 104px) clamp(96px, 12vw, 152px); text-align: center; }
+.lupo-closing .lupo-download { justify-content: center; margin-top: 28px; }
+.lupo-studio { max-width: 62ch; margin: 28px auto 0; font-size: 15px; line-height: 1.6; text-align: center; color: var(--lupo-text-soft); }
+.lupo-studio a { color: var(--lupo-navy); font-weight: 600; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 4px; }
+.lupo-studio a:hover { text-decoration-color: currentColor; }
+
+@media (max-width: 960px) {
+  .lupo-steps, .lupo-permissions, .lupo-facts { grid-template-columns: minmax(0, 1fr); }
+  .lupo-install-with-gif { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .lupo-hero { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 32px 40px; }
+  .lupo-hero-art { order: -1; justify-self: start; width: 180px; }
+  .lupo-hero-mark { width: 128px; }
+  .lupo-hero .lupo-eyebrow { margin-top: 28px; }
+  .lupo-download { align-items: flex-start; flex-direction: column; }
+  .lupo-closing .lupo-download { align-items: center; }
+  .lupo-demo-frame { aspect-ratio: 4 / 3; border-radius: var(--r-panel); }
+  .lupo-demo-placeholder { aspect-ratio: 16 / 9; }
+  .lupo-section { padding-block: 48px; }
+  .lupo-card { padding: 24px; }
+  .lupo-closing { padding-block: 48px 80px; }
+}

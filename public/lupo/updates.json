@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "build": 1,
+  "date": "2026-10-26",
+  "minimumSystem": "26.0",
+  "url": "https://prodigystdio.com/lupo/releases/Lupo-0.1.0.zip",
+  "sha256": "c3b958d5383e36782cbc4edb49d3d6e58966c2a98e1a036c2bfa8461e435b06a",
+  "notes": [
+    "First public release."
+  ],
+  "releases": [
+    {
+      "version": "0.1.0",
+      "date": "2026-10-26",
+      "notes": [
+        "First public release."
+      ]
+    }
+  ]
+}

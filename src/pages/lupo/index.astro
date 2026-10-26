@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image, getImage } from 'astro:assets';
+import { site } from '../../config/site';
+import { lupo } from '../../config/lupo';
+import { formatReleaseDate, lupoDownload, lupoLatest, lupoMinimumSystem, lupoReleases } from '../../lib/lupo-release';
+import lupoMark from '../../assets/lupo/lupo-mark.png';
+import lupoWordmark from '../../assets/lupo/lupo-wordmark.png';
+import lupoIcon from '../../assets/lupo/lupo-icon-1024.png';
+import lupoSocial from '../../assets/lupo/lupo-social.png';
+import '@fontsource/plus-jakarta-sans/latin-400.css';
+import '@fontsource/plus-jakarta-sans/latin-500.css';
+import '@fontsource/plus-jakarta-sans/latin-600.css';
+import '@fontsource/plus-jakarta-sans/latin-700.css';
+import '../../styles/lupo.css';
+// Copy is the approved draft in docs/lupo-copy.md; use it verbatim.
+// The share card (src/assets/lupo/lupo-social.png) repeats the hero copy; re-render it if the hero changes.
+const shareImage = await getImage({ src: lupoSocial, width: 1200, format: 'jpg', quality: 86 });
+const icon = await getImage({ src: lupoIcon, width: 512, format: 'png' });
+const absolute = (path: string): string | undefined => Astro.site && new URL(path, Astro.site).href;
+const firstRelease = lupoReleases[lupoReleases.length - 1];
+const application = Astro.site ? {
+  '@type': 'SoftwareApplication',
+  '@id': absolute('/lupo/#app'),
+  name: 'Lupo',
+  description: 'A free Mac menu-bar app for Claude Code and Codex. Talk while you work, circle what you mean on screen, and your agent gets your words and screenshots in order.',
+  url: absolute('/lupo/'),
+  image: absolute(icon.src),
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: `macOS ${lupoMinimumSystem} or later`,
+  processorRequirements: 'Apple Silicon',
+  softwareVersion: lupoLatest.version,
+  datePublished: firstRelease.date,
+  ...(lupoDownload ? { downloadUrl: absolute('/lupo/Lupo.dmg') } : {}),
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  publisher: { '@id': absolute('/#organization') },
+} : undefined;
+---
+<BaseLayout title={`Lupo: Show AI What You Mean | ${site.name}`} description="Lupo is a free Mac app for Claude Code and Codex. Talk while you work, circle what you mean on screen, and your agent gets your words and screenshots in order." image={{ src: shareImage.src, width: 1200, height: 630, alt: 'Lupo, the wolf on a sky-blue tile, beside the line “Show AI what you mean.”' }} schema={application ? [application] : []}>
+  <Header />
+  <main id="main" tabindex="-1" class="lupo-page">
+    <section class="lupo-hero container" aria-labelledby="lupo-title">
+      <div class="lupo-hero-copy">
+        {/* PNG, not the default WebP: lossy WebP leaves a faint speckled box around the lettering on the white page. */}
+        <Image class="lupo-wordmark" src={lupoWordmark} alt="Lupo" format="png" widths={[180, 360]} sizes="180px" loading="eager" />
+        <p class="lupo-eyebrow">Free Mac app</p>
+        <h1 id="lupo-title">Show AI what you mean.</h1>
+        <p class="lupo-lead">Talk and point at your screen. Your coding agent gets the full picture.</p>
+        <p class="lupo-text">Lupo lives in your menu bar. Press a hotkey and talk while you work. When you see something, freeze the screen, circle it and keep going, across any app. Press Done and Lupo hands it all to Claude Code or Codex, in the order it happened.</p>
+        <div class="lupo-download">
+          {lupoDownload
+            ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
+            : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
+          <p class="lupo-requirements">{lupo.requirements} · Version {lupoLatest.version}</p>
+        </div>
+        <a class="lupo-first-time" href="#first-launch">First time? Here’s how to open it <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="lupo-hero-art" aria-hidden="true">
+        <Image class="lupo-hero-mark" src={lupoMark} alt="" widths={[360, 720]} sizes="(max-width: 760px) 240px, 360px" loading="eager" fetchpriority="high" />
+      </div>
+    </section>
+
+    <section class="lupo-demo container" aria-label="Demo video">
+      {lupo.demoVideo
+        ? <figure class="lupo-demo-frame">
+            <video src={lupo.demoVideo.src} poster={lupo.demoVideo.poster} controls preload="metadata" playsinline></video>
+            <figcaption>One session, start to finish.</figcaption>
+          </figure>
+        : <div class="lupo-demo-frame lupo-demo-placeholder lupo-wash lupo-clouds">
+            <Image class="lupo-demo-mark" src={lupoMark} alt="" widths={[160, 320]} sizes="160px" />
+          </div>}
+    </section>
+
+    <section class="lupo-section container" aria-labelledby="lupo-how">
+      <div class="lupo-section-head">
+        <p class="lupo-eyebrow">How it works</p>
+        <h2 id="lupo-how">Stop explaining screenshots.</h2>
+        <p class="lupo-text">Telling an agent about a visual problem usually means screenshot, crop, paste, explain, and again for the next one. With Lupo you just talk and point, the way you would with someone sitting next to you.</p>
+      </div>
+      <ol class="lupo-steps">
+        <li class="lupo-card">
+          <h3>Press <kbd>{lupo.shortcuts.session}</kbd> and talk.</h3>
+          <p>Say what you’d tell a colleague looking over your shoulder. No need to write a perfect prompt.</p>
+        </li>
+        <li class="lupo-card">
+          <h3>Press <kbd>{lupo.shortcuts.capture}</kbd> to mark it.</h3>
+          <p>The screen freezes. Circle it or draw an arrow, then keep talking. Switch apps as often as you like.</p>
+        </li>
+        <li class="lupo-card">
+          <h3>Press Done.</h3>
+          <p>Lupo writes a <code>context.md</code> with your words and the marked-up screenshots in order, and hands it to Claude Code in VS Code, Cursor or a terminal, or to Codex. Or copy it and paste it anywhere.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="lupo-section container" aria-labelledby="lupo-privacy">
+      <div class="lupo-panel lupo-wash">
+        <div class="lupo-section-head">
+          <p class="lupo-eyebrow">Private by design</p>
+          <h2 id="lupo-privacy">It all stays on your Mac.</h2>
+        </div>
+        <ul class="lupo-facts">
+          <li><h3>On-device transcription.</h3><p>macOS turns your voice into text on your Mac. Nothing is uploaded.</p></li>
+          <li><h3>No account, no cloud.</h3><p>Nothing to sign up for. Your sessions are saved in a folder on your Mac.</p></li>
+          <li><h3>No AI rewriting.</h3><p>Your agent gets exactly what you said and showed. Lupo adds nothing.</p></li>
+        </ul>
+        <p class="lupo-footnote">Lupo only goes online to check for updates. What you hand to your agent is up to you.</p>
+      </div>
+    </section>
+
+    <section class="lupo-section container" id="first-launch" aria-labelledby="lupo-install">
+      <div class="lupo-section-head">
+        <p class="lupo-eyebrow">Installing</p>
+        <h2 id="lupo-install">Opening Lupo the first time</h2>
+        <p class="lupo-text">Lupo isn’t from the App Store and hasn’t been notarized by Apple yet, so macOS asks you to confirm it the first time you open it. It takes about a minute, and you only do it once.</p>
+      </div>
+      <div class:list={['lupo-install', { 'lupo-install-with-gif': lupo.firstLaunchGif }]}>
+        <ol class="lupo-install-steps">
+          <li><h3>Drag Lupo into Applications.</h3><p>Open <code>Lupo.dmg</code> and drag Lupo onto the Applications folder.</p></li>
+          <li><h3>Open Lupo.</h3><p>macOS says it can’t verify the app. Click <strong>Done</strong>. That’s expected.</p></li>
+          <li><h3>Click Open Anyway.</h3><p>Open <strong>System Settings → Privacy &amp; Security</strong> and scroll down to Security. Next to the message about Lupo, click <strong>Open Anyway</strong>.</p></li>
+          <li><h3>Confirm it.</h3><p>Use Touch ID or your password, then click <strong>Open Anyway</strong> once more. Lupo’s wolf appears in your menu bar.</p></li>
+        </ol>
+        {lupo.firstLaunchGif && <img class="lupo-install-gif" src={lupo.firstLaunchGif.src} width={lupo.firstLaunchGif.width} height={lupo.firstLaunchGif.height} alt={lupo.firstLaunchGif.alt} loading="lazy" />}
+      </div>
+      <p class="lupo-footnote">Updates install from inside Lupo, so you won’t see this again.</p>
+    </section>
+
+    <section class="lupo-section container" aria-labelledby="lupo-permissions">
+      <div class="lupo-section-head">
+        <p class="lupo-eyebrow">Permissions</p>
+        <h2 id="lupo-permissions">What Lupo asks for, and why</h2>
+      </div>
+      <ul class="lupo-permissions">
+        <li class="lupo-card"><h3>Microphone.</h3><p>To hear your narration. It’s transcribed on your Mac.</p></li>
+        <li class="lupo-card"><h3>Screen Recording.</h3><p>To take the screenshots you capture. Lupo only grabs the screen when you press capture. macOS asks you to reopen Lupo after you allow this one.</p></li>
+        <li class="lupo-card"><h3>Accessibility (optional).</h3><p>Only for auto-paste, so Lupo can press ⌘V in your agent’s chat for you. You still press Return yourself. Skip it and Lupo copies to the clipboard instead.</p></li>
+      </ul>
+    </section>
+
+    <section class="lupo-section container" aria-labelledby="lupo-changelog">
+      <div class="lupo-section-head">
+        <p class="lupo-eyebrow">Changelog</p>
+        <h2 id="lupo-changelog">What’s new</h2>
+      </div>
+      <div class="lupo-releases">
+        {lupoReleases.map((release, index) => (
+          <details class="lupo-release" open={index === 0}>
+            <summary><span>Version {release.version} <time datetime={release.date}>{formatReleaseDate(release.date)}</time></span></summary>
+            <ul>{release.notes.map(note => <li>{note}</li>)}</ul>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="lupo-closing container" aria-labelledby="lupo-closing">
+      <div class="lupo-panel lupo-wash lupo-clouds">
+        <h2 id="lupo-closing">Try it on your next bug.</h2>
+        <div class="lupo-download">
+          {lupoDownload
+            ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
+            : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
+          <p class="lupo-requirements">{lupo.requirements}</p>
+        </div>
+      </div>
+      <p class="lupo-studio">Lupo is made by {site.name}. We design and build websites, and we make the tools we wish we had. <a href="/work/">See our work <span aria-hidden="true">→</span></a></p>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

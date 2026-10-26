@@ -4,5 +4,7 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "prodigy-stdio",
   "compatibility_date": "2026-10-01",
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Counts Lupo downloads (/lupo/download/). The dataset is created on the first write; read it with npm run lupo:downloads.
+  "analytics_engine_datasets": [{ "binding": "LUPO_DOWNLOADS", "dataset": "lupo_downloads" }]
 }
