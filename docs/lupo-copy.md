@@ -142,6 +142,43 @@ confirm it the first time you open it. It takes about a minute, and you only do 
 
 ---
 
+## Added 2026-10-26 (draft, awaiting approval)
+
+[Written from the Lupo brief's origin note. Not yet approved by Tarik.]
+
+### Demo video play badge
+
+**Watch the demo** 1:10 [screen readers: "Play the Lupo demo video, 1:10"]
+
+### Beside "How it works"
+
+- **Without Lupo:** Screenshot → Crop → Paste → Explain → Repeat
+- **With Lupo:** Talk → Point → Done
+
+### 3b. Why I built it [after How it works]
+
+**Eyebrow:** Why I built it
+
+## I built Lupo for myself first.
+
+I'm Tarik Skender. I run Prodigy Stdio, a web studio in Sarajevo, and most of my days are spent
+building sites with a coding agent.
+
+Most of what I ask for is visual: this spacing, that headline, the button over there. I'd end the
+day with a desktop full of screenshots and a chat full of paragraphs explaining them. The
+screenshot was never the hard part. Explaining it was.
+
+Showing the same thing to someone sitting next to me took seconds. So I built Lupo to work that
+way: I talk, I point, and the agent gets the full picture.
+
+**Card:** [Lupo mark] × [prodigystdio logo]
+- **Made by:** Tarik Skender
+- **Role:** Owner & CEO, Prodigy Stdio
+- **Based in:** Sarajevo, Bosnia and Herzegovina
+- **Link:** More about the studio →
+
+---
+
 ## Elsewhere on the site
 
 - **Header nav and phone menu:** Lupo

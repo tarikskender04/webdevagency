@@ -29,10 +29,10 @@ export function Hero({ assets }: Props): JSX.Element {
       <div className="hero-title">
         <h1 id="hero-heading">The best site your business <em>has ever had</em></h1>
       </div>
-      <p className="hero-sub">We design and build the site, write the words, and hand you a system your team can run.</p>
+      <p className="hero-sub">We build sites that bring in customers. Una Adventure took €20,000 in reservations in its first three months.</p>
       <div className="hero-actions">
         <a className="button hero-primary" href="#start">Start a project <Arrow /></a>
-        <a className="button hero-secondary" href="#process">See the work</a>
+        <a className="button hero-secondary" href="/work/">See the work</a>
       </div>
     </div>
     {/* Selected work: the active client stands on the pedestal and the strip below picks one (src/scripts/work-deck.ts). */}
@@ -43,7 +43,7 @@ export function Hero({ assets }: Props): JSX.Element {
         {work.map(({ id, client, tag, description, href, linkLabel }, index) => {
           const offset = deckOffset(index, 0, work.length);
           const badge = assets[`${id}Badge` as ImageKey];
-          const art = <WorkArt id={id} assets={assets} eager={offset === 0} />;
+          const art = <WorkArt id={id} assets={assets} eager={offset === 0} sizes="(max-width: 760px) 44vw, (max-width: 999px) 260px, 240px" />;
           return <div key={id} className={`deck-slot work-${id}`} data-pos={offset} data-parked={Math.abs(offset) > deckReach(work.length) || undefined} role="group" aria-roledescription="slide" aria-label={`${client}, ${index + 1} of ${work.length}`} aria-hidden={offset !== 0 || undefined} style={{ '--deal-delay': `${.45 + Math.min(Math.abs(offset), 2) * .12}s` } as CSSProperties}>
             <span className="deck-float">
               <span className="deck-tag"><img className="deck-badge" src={badge.src} srcSet={badge.srcSet} sizes="34px" width={badge.width} height={badge.height} alt="" decoding="async" /><span className="deck-tag-label"><span>{tag}</span></span></span>

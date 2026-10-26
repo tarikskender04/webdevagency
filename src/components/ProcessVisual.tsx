@@ -12,6 +12,8 @@ const stickers: { asset: ImageKey; name: string; alt: string; rotation: number; 
   { asset: 'palette', name: 'palette', alt: 'Crochê colour palette', rotation: -2, x: 42, y: 34, w: 56, h: 12 },
   { asset: 'film', name: 'film', alt: 'Homepage film storyboard', rotation: -2, x: 38, y: 56, w: 62, h: 22 },
 ];
+// A sticker's width is its share (w%) of the collage, which spans about 90vw on phones, 36vw on tablets and 503px at most.
+const stickerSizes = (w: number): string => `(max-width: 760px) ${Math.round(w * .9)}vw, (max-width: 1400px) ${Math.round(w * .36)}vw, ${Math.round(w * 5.03)}px`;
 // Ship it plays the Crochê site reel from /work/, so both pages share one file and one description.
 const crocheReel = work.find(project => project.id === 'croche')!.gallery.flat().find((tile): tile is Extract<WorkTile, { type: 'reel' }> => tile.type === 'reel')!;
 const reelName = crocheReel.caption.toLowerCase();
@@ -28,7 +30,7 @@ export function ProcessVisual({ kind, assets }: Props): JSX.Element {
       </svg>
       <div className="notebook-top"><span>Crochê — planning notebook</span><span>p. 01</span></div>
       <div className="notebook-collage">
-        {stickers.map(sticker => <div key={sticker.name} className={`sticker sticker-${sticker.name}`} data-sticker data-rot={sticker.rotation} data-x={sticker.x} data-y={sticker.y} data-w={sticker.w} data-h={sticker.h}><AssetImage asset={assets[sticker.asset]} alt={sticker.alt} sizes="(max-width: 760px) 62vw, 320px" /></div>)}
+        {stickers.map(sticker => <div key={sticker.name} className={`sticker sticker-${sticker.name}`} data-sticker data-rot={sticker.rotation} data-x={sticker.x} data-y={sticker.y} data-w={sticker.w} data-h={sticker.h}><AssetImage asset={assets[sticker.asset]} alt={sticker.alt} sizes={stickerSizes(sticker.w)} /></div>)}
         <span className="notebook-pencil" data-pencil aria-hidden="true" />
       </div>
       <div className="notebook-bottom">Frame by frame, before a line of code</div>

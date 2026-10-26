@@ -32,6 +32,9 @@ installed copy of Lupo: once published, don't rename, move or remove a field.
   (`CFBundleVersion`, an integer that only goes up; the app compares this), `date` (`YYYY-MM-DD`),
   `minimumSystem` (`LSMinimumSystemVersion`), `url` (absolute URL of the zip) and `sha256` (the
   updater checks the zip against it before installing). `notes` is the latest release's notes.
+  `notesMarkdown` (optional, from Lupo 0.1.2) is the same notes with their `##` headings and bold
+  titles, for the app's update window; `notes` stays one plain line per change. Entries in
+  `releases` carry it too, so the app can list every version someone skipped.
 - **`releases`** is the history, newest first, and only the page reads it. Each release adds its
   entry at the top; the first entry always matches the top level.
 - Notes are plain sentences, one change each, written for users. They appear on the page verbatim.

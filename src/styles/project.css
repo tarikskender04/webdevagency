@@ -100,6 +100,7 @@ body:has(.work-page) :is(.container, .site-header) { width: min(1120px, calc(100
 /* Each project opens with its title on the left and its summary on the right, sharing one row. */
 .work-entry-top { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: end; gap: 32px 96px; }
 .work-entry-summary .lead { max-width: 52ch; }
+.work-live-link { margin-top: 18px; }
 /* Colours sampled from the supplied artwork. */
 .work-palette { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 460px; margin: 24px 0 0; padding: 0; list-style: none; }
 .work-palette li { display: grid; gap: 2px; padding: 8px 8px 12px; border: 1px solid var(--work-control); border-radius: var(--r-md); background: var(--work-surface); font-size: 14px; color: var(--work-text); }

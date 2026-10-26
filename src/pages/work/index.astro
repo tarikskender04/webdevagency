@@ -72,7 +72,7 @@ const background = backgroundSource && await getImage({ src: backgroundSource, w
       <header class="work-intro container">
         <p class="eyebrow dotted">Selected work</p>
         <h1><span class="rise" style="--i: 0">The</span> <span class="rise" style="--i: 1">work,</span> <em class="rise" style="--i: 2">explained.</em></h1>
-        <p class="lead">What we built, why we built it that way, and what it could mean for your business. Start with the Crochê walkthrough, then scroll on to the rest.</p>
+        <p class="lead">What we built, why we built it that way, and what it could mean for your business.</p>
       </header>
       <!-- The page's two parts, in a strip along the bottom of the intro (the same strip the projects get further down). -->
       <nav class="work-outline" aria-label="On this page">
@@ -172,7 +172,7 @@ const background = backgroundSource && await getImage({ src: backgroundSource, w
           <h2 id={`${featured.slug}-heading`} data-reveal style="--reveal-delay: 90ms">{featured.client}</h2>
           <p class="project-headline" data-reveal style="--reveal-delay: 180ms">{featured.headline}</p>
         </div>
-        <div class="work-entry-summary" data-reveal style="--reveal-delay: 270ms"><p class="lead">{featured.summary}</p></div>
+        <div class="work-entry-summary" data-reveal style="--reveal-delay: 270ms"><p class="lead">{featured.summary}</p>{featured.liveUrl && <a class="project-text-link work-live-link" href={featured.liveUrl}>Visit {new URL(featured.liveUrl).hostname.replace(/^www\./, '')} <Arrow /></a>}</div>
       </div>
 
       <WorkGallery project={featured} assets={assets} />
@@ -215,6 +215,7 @@ const background = backgroundSource && await getImage({ src: backgroundSource, w
         </div>
         <div class="work-entry-summary" data-reveal style="--reveal-delay: 270ms">
           <p class="lead">{project.summary}</p>
+          {project.liveUrl && <a class="project-text-link work-live-link" href={project.liveUrl}>Visit {new URL(project.liveUrl).hostname.replace(/^www\./, '')} <Arrow /></a>}
           {project.palette && <ul class="work-palette" aria-label={`${project.client} colours`}>{project.palette.map(swatch => <li style={`--swatch: ${swatch.value}`}><i aria-hidden="true"></i><span>{swatch.label}</span><code>{swatch.value}</code></li>)}</ul>}
         </div>
       </div>

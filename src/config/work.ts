@@ -1,7 +1,8 @@
 import type { IconName } from '../lib/icons';
 
 /** Client cards and the /work/ page sections, in carousel order. Copy describes the supplied work;
- *  service scope is only included where confirmed. No results, dates or live-site URLs are assumed.
+ *  service scope is only included where confirmed. No results or dates are assumed; `liveUrl` is set only for sites
+ *  confirmed live (checked 2026-10-24).
  *  `href` points at the project's section on /work/; the old /work/<slug>/ URLs redirect there. */
 export type WorkId = 'croche' | 'una' | 'tierd' | 'captured';
 export interface WorkDetail { title: string; body: string; }
@@ -31,6 +32,8 @@ export interface Work {
   description: string;
   href: string;
   linkLabel: string;
+  /** The client's live site, linked under the summary on /work/. */
+  liveUrl?: string;
   headline: string;
   summary: string;
   details: WorkDetail[];
@@ -53,7 +56,7 @@ export const work: Work[] = [
     id: 'croche', slug: 'croche', client: 'Crochê', tag: 'Crochê · brand + site',
     aurora: ['#7B1E3A', '#7B1E3A', '#7B1E3A'],
     description: 'Crochê: the view from inside a red hand-crocheted bag',
-    href: '/work/#croche', linkLabel: 'View the Crochê project',
+    href: '/work/#croche', linkLabel: 'View the Crochê project', liveUrl: 'https://croche.ba/',
     headline: 'A handmade brand, taken digital.',
     summary: 'Crochê makes hand-crocheted bags in Sarajevo. The project brings its identity, collection and ordering experience together, with a back office built around the maker’s day.',
     details: [
@@ -77,7 +80,7 @@ export const work: Work[] = [
     id: 'una', slug: 'una-adventure', client: 'Una Adventure', tag: 'Una Adventure · site + dashboard',
     aurora: ['#1F4D38', '#6FC5C9', '#1F4D38'],
     description: 'Una Adventure: rafting on the Una River in Bihać',
-    href: '/work/#una-adventure', linkLabel: 'View the Una Adventure project',
+    href: '/work/#una-adventure', linkLabel: 'View the Una Adventure project', liveUrl: 'https://www.unaadventure.com/',
     headline: 'The river sets the direction.',
     summary: 'A website and owner dashboard for Una Adventure, a rafting business on the Una River in Bihać, Bosnia and Herzegovina. The visual direction takes its cues from the water and the outdoors.',
     details: [

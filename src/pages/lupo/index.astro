@@ -2,8 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import BrandLogo from '../../components/BrandLogo.astro';
 import { Image, getImage } from 'astro:assets';
-import { site } from '../../config/site';
+import { site, team } from '../../config/site';
 import { lupo } from '../../config/lupo';
 import { formatReleaseDate, lupoDownload, lupoLatest, lupoMinimumSystem, lupoReleases } from '../../lib/lupo-release';
 import lupoMark from '../../assets/lupo/lupo-mark.png';
@@ -21,6 +22,7 @@ const shareImage = await getImage({ src: lupoSocial, width: 1200, format: 'jpg',
 const icon = await getImage({ src: lupoIcon, width: 512, format: 'png' });
 const absolute = (path: string): string | undefined => Astro.site && new URL(path, Astro.site).href;
 const firstRelease = lupoReleases[lupoReleases.length - 1];
+const founderRole = team.find(person => person.name === site.founder)?.role;
 const application = Astro.site ? {
   '@type': 'SoftwareApplication',
   '@id': absolute('/lupo/#app'),
@@ -41,11 +43,15 @@ const application = Astro.site ? {
 <BaseLayout title={`Lupo: Show AI What You Mean | ${site.name}`} description="Lupo is a free Mac app for Claude Code and Codex. Talk while you work, circle what you mean on screen, and your agent gets your words and screenshots in order." image={{ src: shareImage.src, width: 1200, height: 630, alt: 'Lupo, the wolf on a sky-blue tile, beside the line “Show AI what you mean.”' }} schema={application ? [application] : []}>
   <Header />
   <main id="main" tabindex="-1" class="lupo-page">
+    <div class="lupo-sky lupo-sky-band">
+    <span class="lupo-puff lupo-puff-1" aria-hidden="true"></span>
+    <span class="lupo-puff lupo-puff-2" aria-hidden="true"></span>
+    <span class="lupo-puff lupo-puff-3" aria-hidden="true"></span>
     <section class="lupo-hero container" aria-labelledby="lupo-title">
       <div class="lupo-hero-copy">
         {/* PNG, not the default WebP: lossy WebP leaves a faint speckled box around the lettering on the white page. */}
         <Image class="lupo-wordmark" src={lupoWordmark} alt="Lupo" format="png" widths={[180, 360]} sizes="180px" loading="eager" />
-        <p class="lupo-eyebrow">Free Mac app</p>
+        <p class="lupo-eyebrow lupo-tag">Free Mac app</p>
         <h1 id="lupo-title">Show AI what you mean.</h1>
         <p class="lupo-lead">Talk and point at your screen. Your coding agent gets the full picture.</p>
         <p class="lupo-text">Lupo lives in your menu bar. Press a hotkey and talk while you work. When you see something, freeze the screen, circle it and keep going, across any app. Press Done and Lupo hands it all to Claude Code or Codex, in the order it happened.</p>
@@ -58,14 +64,26 @@ const application = Astro.site ? {
         <a class="lupo-first-time" href="#first-launch">First time? Here’s how to open it <span aria-hidden="true">↓</span></a>
       </div>
       <div class="lupo-hero-art" aria-hidden="true">
-        <Image class="lupo-hero-mark" src={lupoMark} alt="" widths={[360, 720]} sizes="(max-width: 760px) 240px, 360px" loading="eager" fetchpriority="high" />
+        <Image class="lupo-hero-mark" src={lupoMark} alt="" widths={[400, 800]} sizes="(max-width: 760px) 128px, 400px" loading="eager" fetchpriority="high" />
       </div>
     </section>
+    {/* Two layers of cloud bumps tiled sideways; the front one is the page's white, so the sky ends in cloud. */}
+    <div class="lupo-cloudbank" aria-hidden="true"><span></span><span></span></div>
+    </div>
 
-    <section class="lupo-demo container" aria-label="Demo video">
+    <section class="lupo-demo container" id="demo" aria-label="Demo video">
       {lupo.demoVideo
-        ? <figure class="lupo-demo-frame">
-            <video src={lupo.demoVideo.src} poster={lupo.demoVideo.poster} controls preload="metadata" playsinline></video>
+        ? <figure class="lupo-demo-frame" data-lupo-demo>
+            <div class="lupo-demo-screen">
+              <video src={lupo.demoVideo.src} poster={lupo.demoVideo.poster} width="1920" height="1080" controls preload="none" playsinline></video>
+              {/* Shown by the script below, which hides the native controls until the first play. Without JS the controls stay. */}
+              <button type="button" class="lupo-play" hidden aria-label={`Play the Lupo demo video, ${lupo.demoVideo.duration}`}>
+                <span class="lupo-play-badge">
+                  <span class="lupo-play-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor" /></svg></span>
+                  Watch the demo <span class="lupo-play-time">{lupo.demoVideo.duration}</span>
+                </span>
+              </button>
+            </div>
             <figcaption>One session, start to finish.</figcaption>
           </figure>
         : <div class="lupo-demo-frame lupo-demo-placeholder lupo-wash lupo-clouds">
@@ -74,10 +92,22 @@ const application = Astro.site ? {
     </section>
 
     <section class="lupo-section container" aria-labelledby="lupo-how">
-      <div class="lupo-section-head">
-        <p class="lupo-eyebrow">How it works</p>
-        <h2 id="lupo-how">Stop explaining screenshots.</h2>
-        <p class="lupo-text">Telling an agent about a visual problem usually means screenshot, crop, paste, explain, and again for the next one. With Lupo you just talk and point, the way you would with someone sitting next to you.</p>
+      <div class="lupo-how-head">
+        <div class="lupo-section-head">
+          <p class="lupo-eyebrow">How it works</p>
+          <h2 id="lupo-how">Stop explaining screenshots.</h2>
+          <p class="lupo-text">Telling an agent about a visual problem usually means screenshot, crop, paste, explain, and again for the next one. With Lupo you just talk and point, the way you would with someone sitting next to you.</p>
+        </div>
+        <div class="lupo-compare">
+          <div class="lupo-compare-row">
+            <p class="lupo-compare-label">Without Lupo</p>
+            <ol class="lupo-chips"><li>Screenshot</li><li>Crop</li><li>Paste</li><li>Explain</li><li class="lupo-chip-repeat">Repeat</li></ol>
+          </div>
+          <div class="lupo-compare-row lupo-compare-lupo">
+            <p class="lupo-compare-label">With Lupo</p>
+            <ol class="lupo-chips"><li>Talk</li><li>Point</li><li>Done</li></ol>
+          </div>
+        </div>
       </div>
       <ol class="lupo-steps">
         <li class="lupo-card">
@@ -93,6 +123,32 @@ const application = Astro.site ? {
           <p>Lupo writes a <code>context.md</code> with your words and the marked-up screenshots in order, and hands it to Claude Code in VS Code, Cursor or a terminal, or to Codex. Or copy it and paste it anywhere.</p>
         </li>
       </ol>
+    </section>
+
+    {/* Draft copy, not yet in docs/lupo-copy.md's approved set: written from the Lupo brief's origin note. */}
+    <section class="lupo-section container" id="maker" aria-labelledby="lupo-maker">
+      <div class="lupo-maker">
+        <div class="lupo-maker-story">
+          <p class="lupo-eyebrow">Why I built it</p>
+          <h2 id="lupo-maker">I built Lupo for myself first.</h2>
+          <p class="lupo-text">I’m {site.founder}. I run {site.name}, a web studio in Sarajevo, and most of my days are spent building sites with a coding agent.</p>
+          <p class="lupo-text">Most of what I ask for is visual: this spacing, that headline, the button over there. I’d end the day with a desktop full of screenshots and a chat full of paragraphs explaining them. The screenshot was never the hard part. Explaining it was.</p>
+          <p class="lupo-text">Showing the same thing to someone sitting next to me took seconds. So I built Lupo to work that way: I talk, I point, and the agent gets the full picture.</p>
+        </div>
+        <aside class="lupo-maker-card lupo-wash" aria-label="Who makes Lupo">
+          <div class="lupo-maker-lockup">
+            <Image class="lupo-maker-mark" src={lupoMark} alt="" widths={[64, 128]} sizes="64px" />
+            <span class="lupo-maker-x" aria-hidden="true">×</span>
+            <BrandLogo tone="ink" class="lupo-maker-studio" />
+          </div>
+          <dl class="lupo-maker-facts">
+            <div><dt>Made by</dt><dd>{site.founder}</dd></div>
+            <div><dt>Role</dt><dd>{founderRole}, {site.name}</dd></div>
+            <div><dt>Based in</dt><dd>Sarajevo, Bosnia and Herzegovina</dd></div>
+          </dl>
+          <a class="lupo-maker-link" href="/about/">More about the studio <span aria-hidden="true">→</span></a>
+        </aside>
+      </div>
     </section>
 
     <section class="lupo-section container" aria-labelledby="lupo-privacy">
@@ -156,7 +212,10 @@ const application = Astro.site ? {
     </section>
 
     <section class="lupo-closing container" aria-labelledby="lupo-closing">
-      <div class="lupo-panel lupo-wash lupo-clouds">
+      <div class="lupo-panel lupo-sky lupo-sky-panel">
+        <span class="lupo-puff lupo-puff-1" aria-hidden="true"></span>
+        <span class="lupo-puff lupo-puff-3" aria-hidden="true"></span>
+        <div class="lupo-closing-mark" aria-hidden="true"><Image src={lupoMark} alt="" widths={[120, 240]} sizes="120px" /></div>
         <h2 id="lupo-closing">Try it on your next bug.</h2>
         <div class="lupo-download">
           {lupoDownload
@@ -164,9 +223,24 @@ const application = Astro.site ? {
             : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
           <p class="lupo-requirements">{lupo.requirements}</p>
         </div>
+        <div class="lupo-cloudbank" aria-hidden="true"><span></span><span></span></div>
       </div>
       <p class="lupo-studio">Lupo is made by {site.name}. We design and build websites, and we make the tools we wish we had. <a href="/work/">See our work <span aria-hidden="true">→</span></a></p>
     </section>
   </main>
   <Footer />
 </BaseLayout>
+
+<script>
+  // The play badge stands in for the native controls until the first play; after that the video keeps its controls.
+  for (const frame of document.querySelectorAll<HTMLElement>('[data-lupo-demo]')) {
+    const video = frame.querySelector('video');
+    const play = frame.querySelector<HTMLButtonElement>('.lupo-play');
+    if (!video || !play) continue;
+    video.controls = false;
+    play.hidden = false;
+    const start = (): void => { play.hidden = true; video.controls = true; };
+    video.addEventListener('play', start, { once: true });
+    play.addEventListener('click', () => { start(); video.focus(); void video.play().catch(() => {}); });
+  }
+</script>

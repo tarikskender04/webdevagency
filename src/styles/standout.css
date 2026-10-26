@@ -43,6 +43,9 @@
 .quote-card blockquote p { font-size: 16px; line-height: 1.55; color: var(--ink); text-wrap: pretty; }
 .quote-card blockquote::before { content: '\201C'; display: block; height: 30px; margin: 2px 0 6px -4px; font: italic 400 84px/.9 var(--font-serif); color: var(--sky); }
 .quote-card[data-placeholder] blockquote p { color: var(--slate); }
+/* The result in each quote: ink at 600 on a sky marker under the lower part of the line, the same sky as the quote mark.
+   Its resting state is fully drawn; motion.ts draws it in from the left after the card fades up. */
+.quote-mark { padding: 0 2px; margin: 0 -2px; border-radius: 3px; background: linear-gradient(transparent 58%, var(--sky) 58%) no-repeat 0 0 / 100% 100%; color: var(--ink); font-weight: 600; white-space: nowrap; }
 .quote-card figcaption { display: flex; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
 .quote-avatar { display: grid; flex: none; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--vapor); color: var(--deep); font-size: 14px; font-weight: 600; }
 .quote-person { display: flex; flex-direction: column; font-size: 13.5px; line-height: 1.35; color: var(--slate-2); }

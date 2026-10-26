@@ -12,10 +12,6 @@ img.work-layer { object-fit: cover; }
 .croche-tagline { font: 500 2.67cqw/1 var(--font-mono); letter-spacing: .24em; text-transform: uppercase; white-space: nowrap; color: #FFFFFF; }
 .work-una { --glow: rgba(234,90,18,.3); }
 .work-una .work-art { background: #1F4D38; }
-/* The live river covers the poster's printed one: 734px down a 1200px card, 150px tall. */
-.una-water { position: absolute; left: 0; top: 61.17%; width: 100%; height: auto; }
-.una-water rect { fill: #1F4D38; }
-.una-water path { fill: none; stroke: #6FC5C9; stroke-width: 5px; stroke-linecap: round; }
 .work-captured { --glow: rgba(255,45,138,.26); }
 .work-captured .work-art { background: #BFD9F0; }
 .cap-scene { --depth: -4px; scale: 1.05; }

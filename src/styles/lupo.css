@@ -58,24 +58,92 @@
 .lupo-download { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 36px; }
 .lupo-requirements { font-size: 14px; color: var(--lupo-text-soft); }
 
-/* Hero: copy left, the mark right. The wordmark stands alone because the mark is beside it (brand.md). */
-.lupo-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 64px; padding-block: 72px 56px; }
+/* The sky, after the brand sheet: raw Sky Blue only in the top corners, the middle Icy fading to Cloud White where the text
+   and the mark sit (brand.md: text never on raw Sky Blue; the mark on white or Cloud White), Peach low in the corners
+   over Cloud White only. Used by the hero band and the closing panel. */
+.lupo-sky {
+  --lupo-text: color-mix(in srgb, var(--lupo-navy) 88%, #FFFFFF);
+  position: relative; isolation: isolate; overflow: hidden;
+  background:
+    radial-gradient(44% 58% at 100% 0%, color-mix(in srgb, var(--lupo-sky) 78%, var(--lupo-icy)), transparent 72%),
+    radial-gradient(30% 42% at 0% 0%, color-mix(in srgb, var(--lupo-sky) 50%, var(--lupo-icy)), transparent 72%),
+    radial-gradient(26% 32% at 0% 100%, color-mix(in srgb, var(--lupo-peach) 40%, var(--lupo-cloud)), transparent 72%),
+    radial-gradient(30% 36% at 100% 100%, color-mix(in srgb, var(--lupo-peach) 48%, var(--lupo-cloud)), transparent 72%),
+    linear-gradient(180deg, color-mix(in srgb, var(--lupo-sky) 36%, var(--lupo-icy)) 0%, var(--lupo-icy) 36%, var(--lupo-cloud) 84%);
+}
+.lupo-sky .lupo-eyebrow { color: var(--lupo-navy); }
+/* The hero band runs up under the site header (transparent on this page) so the sky starts at the top of the window. */
+.lupo-sky-band { margin-top: -140px; padding-top: 140px; }
+body:has(.lupo-sky-band) .site-header-page { border-bottom-color: transparent; }
+
+/* Small clouds drifting in the sky: a pill with two round bumps, after the brand sheet's cloud elements. Decoration only. */
+.lupo-puff { position: absolute; z-index: -1; width: var(--puff, 180px); aspect-ratio: 3 / 1; opacity: .9; filter: blur(1.5px); pointer-events: none; }
+.lupo-puff, .lupo-puff::before, .lupo-puff::after { border-radius: var(--r-pill); }
+.lupo-puff::before, .lupo-puff::after { content: ''; position: absolute; aspect-ratio: 1; border-radius: 50%; background: var(--lupo-cloud); }
+.lupo-puff { background: linear-gradient(var(--lupo-cloud), var(--lupo-cloud)) 0 100% / 100% 62% no-repeat; }
+.lupo-puff::before { left: 16%; bottom: 22%; width: 42%; }
+.lupo-puff::after { right: 18%; bottom: 30%; width: 30%; }
+.lupo-sky-band .lupo-puff-1 { --puff: 150px; top: 168px; left: 46%; }
+.lupo-sky-band .lupo-puff-2 { --puff: 230px; top: 46%; right: -60px; opacity: .75; }
+.lupo-sky-band .lupo-puff-3 { --puff: 120px; top: 62%; left: -24px; opacity: .8; }
+
+/* Two layers of cloud bumps tiled sideways along the bottom of the sky. Each layer is one tile wider than its box so it can
+   drift by exactly one tile and loop without a seam. The front layer is the page's white. */
+.lupo-cloudbank { position: absolute; inset: auto 0 -1px; z-index: -1; height: clamp(120px, 15vw, 210px); pointer-events: none; }
+.lupo-cloudbank span { --tile: 560px; --cloud: #FFFFFF; position: absolute; inset: 0 auto 0 0; width: calc(100% + var(--tile)); background-repeat: repeat-x; background-size: var(--tile) 100%;
+  background-image:
+    radial-gradient(110px 54% at 0 100%, var(--cloud) 95%, transparent 100%),
+    radial-gradient(124px 82% at 150px 100%, var(--cloud) 95%, transparent 100%),
+    radial-gradient(100px 60% at 300px 100%, var(--cloud) 95%, transparent 100%),
+    radial-gradient(128px 92% at 430px 100%, var(--cloud) 95%, transparent 100%),
+    radial-gradient(110px 54% at 560px 100%, var(--cloud) 95%, transparent 100%),
+    linear-gradient(to top, var(--cloud) 20%, transparent 20%); }
+.lupo-cloudbank span:first-child { --tile: 760px; --cloud: color-mix(in srgb, var(--lupo-cloud) 70%, var(--lupo-icy)); bottom: 22%; opacity: .85; translate: -180px 0; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes lupo-drift { to { translate: calc(-1 * var(--tile)) 0; } }
+  @keyframes lupo-bob { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
+  .lupo-cloudbank span { animation: lupo-drift 90s linear infinite; }
+  .lupo-cloudbank span:first-child { animation-duration: 150s; }
+  .lupo-puff { animation: lupo-bob 9s ease-in-out infinite alternate; }
+  .lupo-puff-2 { animation-duration: 12s; animation-delay: -4s; }
+  .lupo-puff-3 { animation-duration: 10s; animation-delay: -7s; }
+}
+
+/* Hero: copy left, the mark right. The wordmark stands alone because the mark is beside it (brand.md). The bottom padding
+   leaves room for the cloud bank and the top of the demo video, which overlaps it. */
+.lupo-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 64px; padding-block: clamp(48px, 6vw, 88px) clamp(170px, 19vw, 280px); }
 .lupo-wordmark { width: 132px; }
 .lupo-hero .lupo-eyebrow { margin-top: 36px; }
+.lupo-tag { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 10px; border: 1px solid var(--lupo-edge); border-radius: var(--r-pill); background: color-mix(in srgb, #FFFFFF 70%, transparent); }
+.lupo-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--lupo-blue); }
 .lupo-hero h1 { margin-top: 14px; font-size: clamp(44px, 6vw, 76px); font-weight: 700; line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
 .lupo-lead { max-width: 30ch; margin-top: 20px; font-size: clamp(20px, 1.9vw, 23px); font-weight: 500; line-height: 1.4; text-wrap: balance; }
 .lupo-hero .lupo-text { margin-top: 18px; }
 .lupo-first-time { display: inline-block; margin-top: 24px; padding-block: 4px; font-size: 15px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 5px; transition: text-decoration-color var(--dur-hover) ease; }
 .lupo-first-time:hover { text-decoration-color: currentColor; }
-/* Clear space around the mark is well over a quarter of its height; the halo is background, not an effect on the mark. */
-.lupo-hero-art { display: grid; place-items: center; aspect-ratio: 1; background: radial-gradient(closest-side, color-mix(in srgb, var(--lupo-icy) 80%, #FFFFFF), transparent); }
-.lupo-hero-mark { width: min(360px, 72%); }
+/* Clear space around the mark is well over a quarter of its height. It sits on a Cloud White halo (brand.md: the mark on
+   white or Cloud White); the halo is background, not an effect on the mark. */
+.lupo-hero-art { display: grid; place-items: center; aspect-ratio: 1; background: radial-gradient(closest-side, var(--lupo-cloud) 58%, color-mix(in srgb, var(--lupo-cloud) 60%, transparent) 76%, transparent); }
+.lupo-hero-mark { width: min(400px, 74%); }
 
+/* The video sits on the hero's clouds: pulled up over the bottom of the sky band. */
+.lupo-demo { position: relative; z-index: 1; margin-top: calc(-1 * clamp(130px, 15vw, 220px)); }
 .lupo-demo-frame { display: grid; place-items: center; margin: 0; aspect-ratio: 16 / 9; border-radius: var(--r-hero); }
+.lupo-demo-frame[data-lupo-demo] { display: block; aspect-ratio: auto; }
 /* Until the video exists the slot is a flatter band of brand artwork, not an empty 16:9 screen. */
 .lupo-demo-placeholder { aspect-ratio: 3 / 1; }
-.lupo-demo-frame video { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
-.lupo-demo-frame figcaption { justify-self: start; margin-top: 12px; font-size: 14px; color: var(--lupo-text-soft); }
+.lupo-demo-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid var(--lupo-edge); border-radius: var(--r-hero); background: var(--lupo-cloud); box-shadow: var(--e-3); }
+.lupo-demo-screen video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.lupo-play { position: absolute; inset: 0; display: grid; place-items: center; padding: 0; border: 0; background: color-mix(in srgb, var(--lupo-navy) 14%, transparent); color: var(--lupo-navy); font: inherit; cursor: pointer; transition: background var(--dur-hover) ease; }
+.lupo-play[hidden] { display: none; }
+.lupo-play:hover { background: color-mix(in srgb, var(--lupo-navy) 6%, transparent); }
+.lupo-play:focus-visible { outline: 3px solid var(--lupo-blue); outline-offset: -6px; border-radius: inherit; }
+.lupo-play-badge { display: inline-flex; align-items: center; gap: 14px; padding: 8px 22px 8px 8px; border-radius: var(--r-pill); background: #FFFFFF; font-size: 16px; font-weight: 600; box-shadow: var(--e-3); transition: transform var(--dur-hover) var(--ease-out); }
+.lupo-play:hover .lupo-play-badge { transform: scale(1.04); }
+.lupo-play-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--lupo-blue); color: #FFFFFF; }
+.lupo-play-icon svg { width: 22px; height: 22px; margin-left: 3px; }
+.lupo-play-time { font-weight: 500; color: var(--lupo-text-soft); }
+.lupo-demo-frame figcaption { justify-self: start; margin-top: 14px; font-size: 14px; color: var(--lupo-text-soft); }
 .lupo-demo-mark { width: clamp(88px, 13vw, 160px); }
 
 .lupo-section { padding-block: 72px; }
@@ -84,6 +152,40 @@
 .lupo-section-head .lupo-text { margin-top: 18px; }
 .lupo-card { padding: 28px; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); background: var(--lupo-cloud); }
 .lupo-card p { margin-top: 10px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+
+/* How it works: the heading beside a two-row before/after of the same paragraph. */
+.lupo-how-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 32px 64px; margin-bottom: 40px; }
+.lupo-how-head .lupo-section-head { margin-bottom: 0; }
+.lupo-compare { display: grid; gap: 14px; }
+.lupo-compare-row { padding: 18px 20px 20px; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); background: #FFFFFF; }
+.lupo-compare-label { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lupo-text-soft); }
+.lupo-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.lupo-chips li { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--lupo-text); }
+.lupo-chips li + li::before { content: '→' / ''; font-weight: 500; color: var(--lupo-text-soft); }
+.lupo-chips .lupo-chip-repeat { color: var(--lupo-text-soft); }
+.lupo-chip-repeat::after { content: '↻' / ''; }
+/* The Lupo row is the brand panel: three steps, Lupo Blue. */
+.lupo-compare-lupo { border-color: var(--lupo-sky); background: linear-gradient(160deg, color-mix(in srgb, var(--lupo-icy) 60%, var(--lupo-cloud)), var(--lupo-cloud)); }
+.lupo-compare-lupo .lupo-compare-label { color: var(--lupo-navy); }
+.lupo-compare-lupo .lupo-chips li { font-size: 17px; color: var(--lupo-navy); }
+
+/* Why I built it: the story beside a card naming who makes Lupo, with the video's "Lupo × prodigystdio" lockup. */
+.lupo-maker { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: start; gap: 40px 72px; }
+.lupo-maker-story h2 { margin-top: 14px; }
+.lupo-maker-story .lupo-text { margin-top: 18px; }
+.lupo-maker-story h2 + .lupo-text { margin-top: 24px; font-size: 19px; font-weight: 500; color: var(--lupo-navy); }
+.lupo-maker-card { display: grid; gap: 28px; padding: 32px; border-radius: var(--r-panel); }
+.lupo-maker-lockup { display: flex; align-items: center; gap: 14px; }
+.lupo-maker-mark { width: 64px; flex: none; }
+.lupo-maker-x { font-size: 20px; color: var(--lupo-text-soft); }
+.lupo-maker-studio { width: 168px; }
+.lupo-maker-studio img { display: block; width: 100%; height: auto; }
+.lupo-maker-facts { display: grid; gap: 16px; margin: 0; }
+.lupo-maker-facts div { padding-top: 14px; border-top: 1px solid var(--lupo-edge); }
+.lupo-maker-facts dt { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lupo-text); }
+.lupo-maker-facts dd { margin: 4px 0 0; font-size: 17px; font-weight: 600; }
+.lupo-maker-link { justify-self: start; padding-block: 4px; font-size: 15px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 5px; transition: text-decoration-color var(--dur-hover) ease; }
+.lupo-maker-link:hover { text-decoration-color: currentColor; }
 
 .lupo-steps, .lupo-permissions, .lupo-facts, .lupo-install-steps { margin: 0; padding: 0; list-style: none; }
 .lupo-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: lupo-step; }
@@ -120,7 +222,13 @@
 .lupo-release li + li { margin-top: 6px; }
 
 .lupo-closing { padding-block: 72px 112px; }
-.lupo-closing .lupo-panel { display: grid; justify-items: center; padding-block: clamp(56px, 8vw, 104px) clamp(96px, 12vw, 152px); text-align: center; }
+.lupo-closing .lupo-panel { display: grid; justify-items: center; padding-block: clamp(48px, 7vw, 88px) clamp(120px, 15vw, 200px); text-align: center; }
+.lupo-sky-panel { border: 1px solid var(--lupo-edge); }
+.lupo-sky-panel .lupo-puff-1 { --puff: 160px; top: 18%; left: 7%; }
+.lupo-sky-panel .lupo-puff-3 { --puff: 200px; top: 30%; right: 5%; opacity: .75; }
+/* The mark on its Cloud White halo, as in the hero. */
+.lupo-closing-mark { display: grid; place-items: center; width: 200px; aspect-ratio: 1; margin: -24px 0 4px; background: radial-gradient(closest-side, var(--lupo-cloud) 58%, transparent); }
+.lupo-closing-mark img { width: 120px; }
 .lupo-closing .lupo-download { justify-content: center; margin-top: 28px; }
 .lupo-studio { max-width: 62ch; margin: 28px auto 0; font-size: 15px; line-height: 1.6; text-align: center; color: var(--lupo-text-soft); }
 .lupo-studio a { color: var(--lupo-navy); font-weight: 600; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 4px; }
@@ -128,17 +236,27 @@
 
 @media (max-width: 960px) {
   .lupo-steps, .lupo-permissions, .lupo-facts { grid-template-columns: minmax(0, 1fr); }
+  .lupo-how-head, .lupo-maker { grid-template-columns: minmax(0, 1fr); }
+  .lupo-maker-card { max-width: 480px; }
   .lupo-install-with-gif { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
-  .lupo-hero { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 32px 40px; }
+  .lupo-hero { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 32px 150px; }
+  .lupo-sky-band .lupo-puff-1 { top: 150px; left: auto; right: 8%; --puff: 110px; }
+  .lupo-sky-band :is(.lupo-puff-2, .lupo-puff-3) { display: none; }
+  .lupo-demo { margin-top: -96px; }
+  .lupo-demo-screen { border-radius: var(--r-panel); }
+  .lupo-play-badge { gap: 10px; padding: 6px 16px 6px 6px; font-size: 15px; }
+  .lupo-play-icon { width: 40px; height: 40px; }
+  .lupo-play-icon svg { width: 18px; height: 18px; }
+  .lupo-maker-card { padding: 24px; }
+  .lupo-sky-panel .lupo-puff { display: none; }
   .lupo-hero-art { order: -1; justify-self: start; width: 180px; }
   .lupo-hero-mark { width: 128px; }
   .lupo-hero .lupo-eyebrow { margin-top: 28px; }
   .lupo-download { align-items: flex-start; flex-direction: column; }
   .lupo-closing .lupo-download { align-items: center; }
-  .lupo-demo-frame { aspect-ratio: 4 / 3; border-radius: var(--r-panel); }
-  .lupo-demo-placeholder { aspect-ratio: 16 / 9; }
+  .lupo-demo-placeholder { aspect-ratio: 16 / 9; border-radius: var(--r-panel); }
   .lupo-section { padding-block: 48px; }
   .lupo-card { padding: 24px; }
   .lupo-closing { padding-block: 48px 80px; }

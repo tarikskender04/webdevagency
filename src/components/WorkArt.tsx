@@ -1,19 +1,11 @@
-import type { CSSProperties, JSX } from 'react';
+import type { JSX } from 'react';
 import type { Assets, ImageKey } from '../lib/assets';
 import type { WorkId } from '../config/work';
 import '../styles/work-art.css';
 interface Props { id: WorkId; assets: Assets; eager: boolean; sizes?: string; }
-// Una's river: the thumbnail's four wave rows (start x, y, opacity, flow seconds), drawn two periods wider on each
-// side so they can slide one 300-unit period and loop without a seam.
-const waves = [[-200, 22, .35, 12], [-260, 56, .55, 10], [-220, 90, .75, 8.5], [-290, 124, .95, 7]];
-const wave = (start: number, y: number): string => {
-  let d = `M${start - 600} ${y}`;
-  for (let x = start - 600, up = true; x < 1500; x += 150, up = !up) d += ` C${x + 50} ${up ? y - 14 : y + 14},${x + 100} ${up ? y - 14 : y + 14},${x + 150} ${y}`;
-  return d;
-};
 /** A client's showcase card, rebuilt from its thumbnail in layers. `.work-layer` pieces drift against the pointer
- *  (hero.css), and the active card runs its own small loop: Crochê's photo drifts, Una's river flows, Captured's
- *  viewfinder focuses on the wordmark and Tierd's dot pulses. */
+ *  (hero.css), and the active card runs its own small loop: Crochê's photo drifts, Captured's viewfinder focuses on the
+ *  wordmark and Tierd's dot pulses. Una's card is its supplied poster artwork, river included. */
 export function WorkArt({ id, assets, eager, sizes = '(max-width: 760px) 46vw, 240px' }: Props): JSX.Element {
   const layer = (key: ImageKey, className: string): JSX.Element => <img className={`work-layer ${className}`} src={assets[key].src} srcSet={assets[key].srcSet} sizes={sizes} width={assets[key].width} height={assets[key].height} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" />;
   if (id === 'croche') return <>
@@ -24,13 +16,7 @@ export function WorkArt({ id, assets, eager, sizes = '(max-width: 760px) 46vw, 2
       <span className="croche-tagline">Hand-crocheted bags · Sarajevo</span>
     </span>
   </>;
-  if (id === 'una') return <>
-    {layer('unaPoster', 'una-poster')}
-    <svg className="una-water" viewBox="0 0 900 150" aria-hidden="true">
-      <rect width="900" height="150" />
-      {waves.map(([start, y, opacity, seconds]) => <path key={y} d={wave(start, y)} opacity={opacity} style={{ '--flow': `${seconds}s` } as CSSProperties} />)}
-    </svg>
-  </>;
+  if (id === 'una') return layer('unaPoster', 'una-poster');
   if (id === 'captured') return <>
     {layer('capturedPhoto', 'cap-scene')}
     <span className="work-layer cap-mark">

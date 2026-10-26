@@ -8,9 +8,14 @@ export function initMotion(): () => void {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       if (!motion.matches) {
-        const animation = (entry.target as HTMLElement).animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 700, easing: 'cubic-bezier(.22,.61,.36,1)' });
-        animations.add(animation);
-        void animation.finished.then(() => animations.delete(animation), () => animations.delete(animation));
+        const target = entry.target as HTMLElement;
+        const track = (animation: Animation): void => {
+          animations.add(animation);
+          void animation.finished.then(() => animations.delete(animation), () => animations.delete(animation));
+        };
+        track(target.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 700, easing: 'cubic-bezier(.22,.61,.36,1)' }));
+        // Testimonial highlights draw in left to right once the card has mostly settled.
+        target.querySelectorAll('.quote-mark').forEach(mark => track(mark.animate([{ backgroundSize: '0% 100%' }, { backgroundSize: '100% 100%' }], { duration: 700, delay: 450, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' })));
       }
       revealObserver.unobserve(entry.target);
     });

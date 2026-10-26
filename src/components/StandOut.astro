@@ -15,6 +15,20 @@ const chips = [
   { x: 22, y: 16, mx: 31, my: 4, dx: -8, dy: 8, d: 13, far: true },
   { x: 82, y: 16, mx: 67, my: 9, dx: -10, dy: -14, d: 10, far: false },
 ];
+// Splits a quote around its highlighted phrases; a phrase missing from the quote fails the build rather than vanishing.
+const segment = (quote: string, highlights: string[] = []): { text: string; marked: boolean }[] => {
+  const parts: { text: string; marked: boolean }[] = [];
+  let rest = quote;
+  for (const phrase of highlights) {
+    const at = rest.indexOf(phrase);
+    if (at < 0) throw new Error(`Highlight "${phrase}" is not in the quote, or is out of order: ${quote}`);
+    if (at > 0) parts.push({ text: rest.slice(0, at), marked: false });
+    parts.push({ text: phrase, marked: true });
+    rest = rest.slice(at + phrase.length);
+  }
+  if (rest) parts.push({ text: rest, marked: false });
+  return parts;
+};
 ---
 <section class="standout" aria-labelledby="standout-heading">
   <div class="container standout-head">
@@ -43,11 +57,11 @@ const chips = [
   </figure>
   <div class="container standout-quotes">
     <ul class="quote-grid" aria-label="What clients say" tabindex="0">
-      {testimonials.map(({ client, glyph, quote, name, role, photo, placeholder }) => <li data-reveal>
+      {testimonials.map(({ client, glyph, quote, highlights, name, role, photo, placeholder }) => <li data-reveal>
         <figure class="quote-card" data-placeholder={placeholder || undefined}>
           {photo && <img class="quote-portrait" src={assets[photo].src} srcset={assets[photo].srcSet} sizes="(max-width: 760px) 200px, 260px" width={assets[photo].width} height={assets[photo].height} alt="" loading="lazy" decoding="async" />}
           <div class="quote-top"><span class="client-logo"><ClientGlyph glyph={glyph} />{client}</span>{placeholder && <span class="quote-flag">Placeholder</span>}</div>
-          <blockquote><p>{quote}</p></blockquote>
+          <blockquote><p>{segment(quote, highlights).map(({ text, marked }) => marked ? <mark class="quote-mark">{text}</mark> : text)}</p></blockquote>
           <figcaption>{!photo && <span class="quote-avatar" aria-hidden="true">{client.charAt(0)}</span>}<span class="quote-person"><strong>{name}</strong><span>{role}</span></span>{!placeholder && <span class="quote-signature" aria-hidden="true">{name}</span>}</figcaption>
         </figure>
       </li>)}

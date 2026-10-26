@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 
 const updates = JSON.parse(readFileSync('public/lupo/updates.json', 'utf8'));
 const hasDmg = existsSync('public/lupo/Lupo.dmg');
@@ -16,7 +16,7 @@ test('the Lupo page shows the approved sections, the version from updates.json a
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Show AI what you mean.');
   await expect(page.getByRole('img', { name: 'Lupo' })).toBeVisible();
   await expect(page.locator('main').getByRole('heading', { level: 2 })).toHaveText([
-    'Stop explaining screenshots.', 'It all stays on your Mac.', 'Opening Lupo the first time', 'What Lupo asks for, and why', 'What’s new', 'Try it on your next bug.',
+    'Stop explaining screenshots.', 'I built Lupo for myself first.', 'It all stays on your Mac.', 'Opening Lupo the first time', 'What Lupo asks for, and why', 'What’s new', 'Try it on your next bug.',
   ]);
   await expect(page.locator('.lupo-hero .lupo-requirements')).toHaveText(`Free · macOS 26 Tahoe · Apple Silicon · Version ${updates.version}`);
   // Until the release script writes Lupo.dmg, there is nothing to download: the button says Coming soon and isn't a link.
@@ -49,6 +49,23 @@ for (const width of [320, 390, 1440]) {
     expect(accessibility.violations.map(violation => ({ id: violation.id, nodes: violation.nodes.map(node => node.target) }))).toEqual([]);
   });
 }
+
+test('the demo video is served and the play badge hands over to the native controls', async ({ page, request }) => {
+  const video = await request.head('/lupo/media/lupo-demo.mp4');
+  expect(video.ok()).toBe(true);
+  expect(video.headers()['content-type']).toContain('video/mp4');
+  // Workers static assets are capped at 25 MiB per file.
+  expect(statSync('public/lupo/media/lupo-demo.mp4').size).toBeLessThan(25 * 1024 * 1024);
+  expect((await request.head('/lupo/media/lupo-demo-poster.jpg')).ok()).toBe(true);
+
+  await page.goto('/lupo/');
+  const player = page.locator('.lupo-demo video');
+  await expect(player).toHaveJSProperty('controls', false);
+  await page.getByRole('button', { name: /Play the Lupo demo video/ }).click();
+  await expect(page.locator('.lupo-play')).toBeHidden();
+  await expect(player).toHaveJSProperty('controls', true);
+  await expect(page.locator('.lupo-demo figcaption')).toHaveText('One session, start to finish.');
+});
 
 test('the Download button counts and redirects to the stable DMG path', async ({ request }) => {
   const response = await request.get('/lupo/download/', { maxRedirects: 0 });
