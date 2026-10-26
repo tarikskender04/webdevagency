@@ -1,0 +1,102 @@
+/* The /lupo/ hero scene, after the home page's billboard portal (billboard.css), run the other way: the camera pushes into
+   a Mac until its screen is the window. The dog loop plays behind, the copy sits top left and the Mac sits on the clouds
+   below it, opposite the dog. On scroll the copy lifts away, the Mac rises to the centre and the camera goes into its
+   screen, where the demo video waits (lupo-portal.ts moves it there and measures the geometry). Then the page carries on.
+   Only where scroll-driven animations run, without a reduced-motion preference and on screens at least 560px tall.
+   Otherwise this is a plain hero over the loop's first frame, with the demo section under it.
+   Animations use longhands: the minifier folds `animation-timeline` into the `animation` shorthand, and Chrome rejects
+   the result (process-portal.css). The Mac is drawn in CSS from the brand palette, so it stays sharp as the camera closes in. */
+
+/* The scene runs up under the site header (transparent on this page) so the loop starts at the top of the window. */
+.lupo-portal { --lupo-header: 140px; margin-top: calc(-1 * var(--lupo-header)); }
+body:has(.lupo-portal) .site-header-page { border-bottom-color: transparent; }
+.lupo-portal-stage { position: relative; isolation: isolate; overflow: hidden; padding-top: var(--lupo-header); background: var(--lupo-cloud); }
+/* The dog sits right of centre in the loop; keep it in frame as the window narrows. */
+.lupo-backdrop { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 72% 50%; }
+/* A white veil from the left keeps the copy off the brighter blues (brand.md: text never on raw Sky Blue), and the static
+   scene fades to the page's white at the bottom. */
+.lupo-backdrop-veil {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, #FFFFFF 62%, transparent) 0%, color-mix(in srgb, #FFFFFF 34%, transparent) 38%, transparent 58%),
+    linear-gradient(180deg, transparent 72%, #FFFFFF 100%);
+}
+.lupo-hero { position: relative; z-index: 2; padding-block: clamp(40px, 6vw, 88px) clamp(120px, 14vw, 200px); }
+.lupo-portal-view { display: none; }
+
+/* The Mac, seen nearly from the front as a flat drawing: the lid, and under it the thin front edge of the base, a little
+   wider than the lid. At rest it is turned a few degrees toward the dog; as the camera arrives it faces you.
+   The lid is near-black Navy; the aluminium is Cloud White shading through Icy to Navy. */
+.lupo-mac { --mac-ink: color-mix(in srgb, var(--lupo-navy) 45%, #000000); --mac-alu: color-mix(in srgb, var(--lupo-icy) 55%, var(--lupo-cloud)); position: absolute; transform-origin: 50% 100%; }
+.lupo-mac-lid { position: relative; padding: 1.6% 1.6% 1.8%; border-radius: 3.4% / 5.2%; background: var(--mac-ink); box-shadow: inset 0 0 0 1px color-mix(in srgb, #FFFFFF 18%, transparent), 0 0 0 1px color-mix(in srgb, var(--lupo-navy) 35%, transparent); }
+.lupo-mac-screen { position: relative; overflow: hidden; aspect-ratio: var(--lupo-screen-ratio, 16 / 10); border-radius: 1.6% / 2.6%; background: #FFFFFF; }
+/* The notch, with the camera in it, as on current MacBooks. */
+.lupo-mac-notch { position: absolute; top: 0; left: 50%; z-index: 2; width: 9.5%; aspect-ratio: 5.4; translate: -50% 0; border-radius: 0 0 18% 18% / 0 0 42% 42%; background: var(--mac-ink); }
+.lupo-mac-notch::before { content: ''; position: absolute; top: 50%; left: 50%; width: 6%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: color-mix(in srgb, var(--lupo-sky) 30%, var(--mac-ink)); }
+/* The desktop is laid out at the window's size and scaled into the screen, so at the end it is the window, at 1:1. */
+.lupo-mac-desktop {
+  --aurora-at: top;
+  position: absolute; left: 50%; top: 50%; width: var(--lupo-stage-w, 1440px); height: var(--lupo-stage-h, 900px);
+  display: grid; place-items: center; container-type: size; background: #FFFFFF;
+  transform: translate(-50%, -50%) scale(var(--lupo-desktop-scale, .3));
+}
+.lupo-mac-desktop .lupo-demo-frame { width: min(calc(100cqw - 2 * var(--gutter)), calc((100cqh - 200px) * 16 / 9), var(--container)); }
+/* The base's front edge, with the thumb notch, and a soft shadow where it sits on the clouds. */
+.lupo-mac-base { position: relative; left: -5%; width: 110%; aspect-ratio: 100 / 2.8; border-radius: 0 0 9% 9% / 0 0 100% 100%;
+  background: linear-gradient(180deg, var(--lupo-cloud) 0%, var(--mac-alu) 45%, color-mix(in srgb, var(--lupo-navy) 30%, var(--lupo-icy)) 100%);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 0 0 1px color-mix(in srgb, var(--lupo-navy) 14%, transparent), 0 24px 40px -18px color-mix(in srgb, var(--lupo-navy) 40%, transparent); }
+.lupo-mac-base::before { content: ''; position: absolute; top: 0; left: 50%; width: 12%; height: 40%; translate: -50% 0; border-radius: 0 0 10px 10px; background: color-mix(in srgb, var(--lupo-navy) 14%, var(--lupo-icy)); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) {
+    /* A sticky stage a large viewport tall in a taller track, like the home page's portals. */
+    .lupo-portal[data-lupo-portal] { height: 300lvh; view-timeline-name: --lupo-dive; view-timeline-axis: block; }
+    [data-lupo-portal] .lupo-portal-stage { position: sticky; top: 0; height: 100lvh; padding-top: 0; }
+    [data-lupo-portal] .lupo-backdrop-veil { background: linear-gradient(90deg, color-mix(in srgb, #FFFFFF 62%, transparent) 0%, color-mix(in srgb, #FFFFFF 34%, transparent) 38%, transparent 58%); }
+    [data-lupo-portal] .lupo-hero { position: absolute; inset: 0 0 auto; padding-block: calc(var(--lupo-header) - 16px) 0; }
+    [data-lupo-portal] .lupo-portal-view { position: absolute; inset: 0; z-index: 1; display: block; transform-origin: var(--lupo-ox, 50%) var(--lupo-oy, 50%); }
+    /* At rest the Mac stands under the copy (lupo-portal.ts measures where the copy ends). */
+    [data-lupo-portal] .lupo-mac { --mac-turn: 9deg; left: max(var(--gutter), calc((100% - var(--container)) / 2)); top: var(--lupo-mac-top, 50lvh); width: var(--lupo-mac-w, 560px); }
+
+    /* One scroll timeline: the copy lifts away, the Mac rises to the centre, then the camera goes into the screen and
+       holds there before the page carries on. The loop stays at its own size: it is a 1080p clip, so scaling it up blurs it. */
+    [data-lupo-portal] .lupo-hero { animation-name: lupo-copy-out; animation-timing-function: cubic-bezier(.45,0,.55,1); animation-fill-mode: both; animation-timeline: --lupo-dive; animation-range: contain 0% contain 22%; }
+    [data-lupo-portal] .lupo-portal-view { animation-name: lupo-dive; animation-timing-function: cubic-bezier(.65,0,.35,1); animation-fill-mode: both; animation-timeline: --lupo-dive; animation-range: contain 4% contain 80%; will-change: transform; }
+    /* The Mac turns to face you while it rises, before the camera goes in. */
+    [data-lupo-portal] .lupo-mac { animation-name: lupo-turn; animation-timing-function: cubic-bezier(.45,0,.55,1); animation-fill-mode: both; animation-timeline: --lupo-dive; animation-range: contain 0% contain 32%; }
+    /* The screen's corners square off as it fills the window, or the lid's black would show in the window's corners. */
+    [data-lupo-portal] .lupo-mac-screen { animation-name: lupo-screen-square; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: --lupo-dive; animation-range: contain 60% contain 76%; }
+    [data-lupo-portal] .lupo-mac-notch { animation-name: lupo-notch-out; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: --lupo-dive; animation-range: contain 66% contain 76%; }
+    /* Bring the copy back if keyboard focus lands in it mid-way. */
+    [data-lupo-portal] .lupo-hero:focus-within { animation-name: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-height: 560px) and (max-width: 760px) {
+    /* Phones: the copy over the open sky at the top, the loop in the lower half with the dog at the right, the Mac in front. */
+    [data-lupo-portal] .lupo-backdrop { top: auto; height: 58%; object-position: 90% 50%; mask-image: linear-gradient(transparent, #000 22%); }
+    [data-lupo-portal] .lupo-backdrop-veil { display: none; }
+    [data-lupo-portal] .lupo-hero { padding-top: calc(var(--lupo-header) - 40px); }
+    [data-lupo-portal] .lupo-mac { --mac-turn: 5deg; left: calc((100% - var(--lupo-mac-w, 86%)) / 2); }
+    /* The window is portrait but the screen is a Mac's, so the desktop sits in it with white either side; without the
+       aurora the two read as one white desktop. */
+    [data-lupo-portal] .lupo-mac-desktop::before, [data-lupo-portal] .lupo-mac-desktop::after { display: none; }
+  }
+}
+
+@keyframes lupo-copy-out { to { opacity: 0; translate: 0 -10vh; visibility: hidden; } }
+@keyframes lupo-dive {
+  0% { transform: none; }
+  40% { transform: translate(var(--lupo-pan-x), var(--lupo-pan-y)) scale(1.15); }
+  100% { transform: translate(var(--lupo-pan-x), var(--lupo-pan-y)) scale(var(--lupo-zoom, 3)); }
+}
+/* Both ends keep perspective() so the turn interpolates. */
+@keyframes lupo-turn {
+  from { transform: perspective(2400px) rotateY(var(--mac-turn)); }
+  to { transform: perspective(2400px) rotateY(0deg); }
+}
+@keyframes lupo-notch-out { to { opacity: 0; } }
+@keyframes lupo-screen-square { to { border-radius: 0; } }
+
+@media (max-width: 760px) {
+  .lupo-hero { padding-block: 28px 96px; }
+  .lupo-backdrop { object-position: 80% 50%; }
+}

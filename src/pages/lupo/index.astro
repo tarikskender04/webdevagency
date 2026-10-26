@@ -8,14 +8,15 @@ import { site, team } from '../../config/site';
 import { lupo } from '../../config/lupo';
 import { formatReleaseDate, lupoDownload, lupoLatest, lupoMinimumSystem, lupoReleases } from '../../lib/lupo-release';
 import lupoMark from '../../assets/lupo/lupo-mark.png';
-import lupoWordmark from '../../assets/lupo/lupo-wordmark.png';
 import lupoIcon from '../../assets/lupo/lupo-icon-1024.png';
+import lupoWordmarkWhite from '../../assets/lupo/lupo-wordmark-white.png';
 import lupoSocial from '../../assets/lupo/lupo-social.png';
 import '@fontsource/plus-jakarta-sans/latin-400.css';
 import '@fontsource/plus-jakarta-sans/latin-500.css';
 import '@fontsource/plus-jakarta-sans/latin-600.css';
 import '@fontsource/plus-jakarta-sans/latin-700.css';
 import '../../styles/lupo.css';
+import '../../styles/lupo-portal.css';
 // Copy is the approved draft in docs/lupo-copy.md; use it verbatim.
 // The share card (src/assets/lupo/lupo-social.png) repeats the hero copy; re-render it if the hero changes.
 const shareImage = await getImage({ src: lupoSocial, width: 1200, format: 'jpg', quality: 86 });
@@ -43,32 +44,38 @@ const application = Astro.site ? {
 <BaseLayout title={`Lupo: Show AI What You Mean | ${site.name}`} description="Lupo is a free Mac app for Claude Code and Codex. Talk while you work, circle what you mean on screen, and your agent gets your words and screenshots in order." image={{ src: shareImage.src, width: 1200, height: 630, alt: 'Lupo, the wolf on a sky-blue tile, beside the line “Show AI what you mean.”' }} schema={application ? [application] : []}>
   <Header />
   <main id="main" tabindex="-1" class="lupo-page">
-    <div class="lupo-sky lupo-sky-band">
-    <span class="lupo-puff lupo-puff-1" aria-hidden="true"></span>
-    <span class="lupo-puff lupo-puff-2" aria-hidden="true"></span>
-    <span class="lupo-puff lupo-puff-3" aria-hidden="true"></span>
-    <section class="lupo-hero container" aria-labelledby="lupo-title">
-      <div class="lupo-hero-copy">
-        {/* PNG, not the default WebP: lossy WebP leaves a faint speckled box around the lettering on the white page. */}
-        <Image class="lupo-wordmark" src={lupoWordmark} alt="Lupo" format="png" widths={[180, 360]} sizes="180px" loading="eager" />
-        <p class="lupo-eyebrow lupo-tag">Free Mac app</p>
+    {/* The hero is a scene: the dog loop behind, the copy on the left and a Mac below it. Where scroll-driven animations run
+        (lupo-portal.css), scrolling pushes the camera into the Mac's screen; the demo video moves into that screen
+        (lupo-portal.ts), so when the screen fills the window you are looking at the demo. Otherwise the scene is a plain
+        hero with the demo section under it. */}
+    <div class="lupo-portal" data-lupo-portal-root>
+    <div class="lupo-portal-stage">
+      <video class="lupo-backdrop" src={lupo.backdrop.src} poster={lupo.backdrop.poster} muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-lupo-backdrop></video>
+      <div class="lupo-backdrop-veil" aria-hidden="true"></div>
+      <section class="lupo-hero container" aria-labelledby="lupo-title">
         <h1 id="lupo-title">Show AI what you mean.</h1>
         <p class="lupo-lead">Talk and point at your screen. Your coding agent gets the full picture.</p>
-        <p class="lupo-text">Lupo lives in your menu bar. Press a hotkey and talk while you work. When you see something, freeze the screen, circle it and keep going, across any app. Press Done and Lupo hands it all to Claude Code or Codex, in the order it happened.</p>
         <div class="lupo-download">
           {lupoDownload
             ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
             : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
-          <p class="lupo-requirements">{lupo.requirements} · Version {lupoLatest.version}</p>
+          <p class="lupo-requirements">{lupo.requirements} · <a href="#changelog">Version {lupoLatest.version}</a></p>
         </div>
         <a class="lupo-first-time" href="#first-launch">First time? Here’s how to open it <span aria-hidden="true">↓</span></a>
+      </section>
+      <div class="lupo-portal-view">
+        <div class="lupo-mac">
+          <div class="lupo-mac-lid">
+            <div class="lupo-mac-screen">
+              {/* The desktop the demo sits on: laid out at the window's size and scaled into the screen, so it is sharp when the camera arrives. */}
+              <div class="lupo-mac-desktop lupo-aurora"></div>
+              <span class="lupo-mac-notch" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="lupo-mac-base" aria-hidden="true"></div>
+        </div>
       </div>
-      <div class="lupo-hero-art" aria-hidden="true">
-        <Image class="lupo-hero-mark" src={lupoMark} alt="" widths={[400, 800]} sizes="(max-width: 760px) 128px, 400px" loading="eager" fetchpriority="high" />
-      </div>
-    </section>
-    {/* Two layers of cloud bumps tiled sideways; the front one is the page's white, so the sky ends in cloud. */}
-    <div class="lupo-cloudbank" aria-hidden="true"><span></span><span></span></div>
+    </div>
     </div>
 
     <section class="lupo-demo container" id="demo" aria-label="Demo video">
@@ -86,13 +93,14 @@ const application = Astro.site ? {
             </div>
             <figcaption>One session, start to finish.</figcaption>
           </figure>
-        : <div class="lupo-demo-frame lupo-demo-placeholder lupo-wash lupo-clouds">
+        : <div class="lupo-demo-frame lupo-demo-placeholder lupo-wash">
             <Image class="lupo-demo-mark" src={lupoMark} alt="" widths={[160, 320]} sizes="160px" />
           </div>}
     </section>
 
-    <section class="lupo-section container" aria-labelledby="lupo-how">
-      <div class="lupo-how-head">
+    <section class="lupo-section lupo-how container" aria-labelledby="lupo-how">
+      <span class="lupo-texture" aria-hidden="true"></span>
+      <div class="lupo-how-head" data-reveal>
         <div class="lupo-section-head">
           <p class="lupo-eyebrow">How it works</p>
           <h2 id="lupo-how">Stop explaining screenshots.</h2>
@@ -109,17 +117,22 @@ const application = Astro.site ? {
           </div>
         </div>
       </div>
+      {/* The steps carry red marks like the ones Lupo draws on captures (brand.md: marks stay red): numbered badges, an arrow
+          from each step to the next, a circle round the capture shortcut and a line under Done. They draw in as they scroll into
+          view (lupo.css); without motion they are simply there. */}
       <ol class="lupo-steps">
-        <li class="lupo-card">
+        <li class="lupo-card" data-reveal style="--reveal-delay: 0ms">
           <h3>Press <kbd>{lupo.shortcuts.session}</kbd> and talk.</h3>
           <p>Say what you’d tell a colleague looking over your shoulder. No need to write a perfect prompt.</p>
+          <svg class="lupo-doodle lupo-doodle-arrow" viewBox="0 0 136 64" aria-hidden="true"><path pathLength="1" d="M6 52C30 18 78 10 128 34" /><path class="lupo-doodle-head" pathLength="1" d="M120 20L128 34L112 36" /></svg>
         </li>
-        <li class="lupo-card">
-          <h3>Press <kbd>{lupo.shortcuts.capture}</kbd> to mark it.</h3>
+        <li class="lupo-card" data-reveal style="--reveal-delay: 90ms">
+          <h3>Press <span class="lupo-circled"><kbd>{lupo.shortcuts.capture}</kbd><svg class="lupo-doodle" viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" vector-effect="non-scaling-stroke" d="M150 10C100 0 20 6 10 38C2 66 80 78 140 72C190 66 200 40 182 20C170 8 140 4 116 8" /></svg></span> to mark it.</h3>
           <p>The screen freezes. Circle it or draw an arrow, then keep talking. Switch apps as often as you like.</p>
+          <svg class="lupo-doodle lupo-doodle-arrow" viewBox="0 0 136 64" aria-hidden="true"><path pathLength="1" d="M6 52C30 18 78 10 128 34" /><path class="lupo-doodle-head" pathLength="1" d="M120 20L128 34L112 36" /></svg>
         </li>
-        <li class="lupo-card">
-          <h3>Press Done.</h3>
+        <li class="lupo-card" data-reveal style="--reveal-delay: 180ms">
+          <h3>Press <span class="lupo-underlined">Done<svg class="lupo-doodle" viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" vector-effect="non-scaling-stroke" d="M2 10C30 2 60 14 90 6S140 4 158 9" /></svg></span>.</h3>
           <p>Lupo writes a <code>context.md</code> with your words and the marked-up screenshots in order, and hands it to Claude Code in VS Code, Cursor or a terminal, or to Codex. Or copy it and paste it anywhere.</p>
         </li>
       </ol>
@@ -128,14 +141,14 @@ const application = Astro.site ? {
     {/* Draft copy, not yet in docs/lupo-copy.md's approved set: written from the Lupo brief's origin note. */}
     <section class="lupo-section container" id="maker" aria-labelledby="lupo-maker">
       <div class="lupo-maker">
-        <div class="lupo-maker-story">
+        <div class="lupo-maker-story" data-reveal>
           <p class="lupo-eyebrow">Why I built it</p>
           <h2 id="lupo-maker">I built Lupo for myself first.</h2>
           <p class="lupo-text">I’m {site.founder}. I run {site.name}, a web studio in Sarajevo, and most of my days are spent building sites with a coding agent.</p>
           <p class="lupo-text">Most of what I ask for is visual: this spacing, that headline, the button over there. I’d end the day with a desktop full of screenshots and a chat full of paragraphs explaining them. The screenshot was never the hard part. Explaining it was.</p>
           <p class="lupo-text">Showing the same thing to someone sitting next to me took seconds. So I built Lupo to work that way: I talk, I point, and the agent gets the full picture.</p>
         </div>
-        <aside class="lupo-maker-card lupo-wash" aria-label="Who makes Lupo">
+        <aside class="lupo-maker-card lupo-wash" aria-label="Who makes Lupo" data-reveal style="--reveal-delay: 90ms">
           <div class="lupo-maker-lockup">
             <Image class="lupo-maker-mark" src={lupoMark} alt="" widths={[64, 128]} sizes="64px" />
             <span class="lupo-maker-x" aria-hidden="true">×</span>
@@ -152,7 +165,7 @@ const application = Astro.site ? {
     </section>
 
     <section class="lupo-section container" aria-labelledby="lupo-privacy">
-      <div class="lupo-panel lupo-wash">
+      <div class="lupo-panel lupo-wash" data-reveal>
         <div class="lupo-section-head">
           <p class="lupo-eyebrow">Private by design</p>
           <h2 id="lupo-privacy">It all stays on your Mac.</h2>
@@ -166,42 +179,82 @@ const application = Astro.site ? {
       </div>
     </section>
 
-    <section class="lupo-section container" id="first-launch" aria-labelledby="lupo-install">
-      <div class="lupo-section-head">
-        <p class="lupo-eyebrow">Installing</p>
-        <h2 id="lupo-install">Opening Lupo the first time</h2>
+    {/* Install: the heading beside its intro, then the four steps across as a track, over a faint Lupo silhouette. */}
+    <section class="lupo-section lupo-install-section container" id="first-launch" aria-labelledby="lupo-install">
+      <span class="lupo-texture" aria-hidden="true"></span>
+      <div class="lupo-install-head" data-reveal>
+        <div>
+          <p class="lupo-eyebrow">Installing</p>
+          <h2 id="lupo-install">Opening Lupo the first time</h2>
+        </div>
         <p class="lupo-text">Lupo isn’t from the App Store and hasn’t been notarized by Apple yet, so macOS asks you to confirm it the first time you open it. It takes about a minute, and you only do it once.</p>
       </div>
-      <div class:list={['lupo-install', { 'lupo-install-with-gif': lupo.firstLaunchGif }]}>
+      <div class="lupo-install">
         <ol class="lupo-install-steps">
-          <li><h3>Drag Lupo into Applications.</h3><p>Open <code>Lupo.dmg</code> and drag Lupo onto the Applications folder.</p></li>
-          <li><h3>Open Lupo.</h3><p>macOS says it can’t verify the app. Click <strong>Done</strong>. That’s expected.</p></li>
-          <li><h3>Click Open Anyway.</h3><p>Open <strong>System Settings → Privacy &amp; Security</strong> and scroll down to Security. Next to the message about Lupo, click <strong>Open Anyway</strong>.</p></li>
-          <li><h3>Confirm it.</h3><p>Use Touch ID or your password, then click <strong>Open Anyway</strong> once more. Lupo’s wolf appears in your menu bar.</p></li>
+          <li data-reveal><h3>Drag Lupo into Applications.</h3><p>Open <code>Lupo.dmg</code> and drag Lupo onto the Applications folder.</p></li>
+          <li data-reveal style="--reveal-delay: 90ms"><h3>Open Lupo.</h3><p>macOS says it can’t verify the app. Click <strong>Done</strong>. That’s expected.</p></li>
+          <li data-reveal style="--reveal-delay: 180ms"><h3>Click Open Anyway.</h3><p>Open <strong>System Settings → Privacy &amp; Security</strong> and scroll down to Security. Next to the message about Lupo, click <strong>Open Anyway</strong>.</p></li>
+          <li data-reveal style="--reveal-delay: 270ms"><h3>Confirm it.</h3><p>Use Touch ID or your password, then click <strong>Open Anyway</strong> once more. Lupo’s wolf appears in your menu bar.</p></li>
         </ol>
         {lupo.firstLaunchGif && <img class="lupo-install-gif" src={lupo.firstLaunchGif.src} width={lupo.firstLaunchGif.width} height={lupo.firstLaunchGif.height} alt={lupo.firstLaunchGif.alt} loading="lazy" />}
+        <p class="lupo-footnote">Updates install from inside Lupo, so you won’t see this again.</p>
       </div>
-      <p class="lupo-footnote">Updates install from inside Lupo, so you won’t see this again.</p>
     </section>
 
-    <section class="lupo-section container" aria-labelledby="lupo-permissions">
-      <div class="lupo-section-head">
+    {/* Permissions: drawn as a Mac settings window, one row per permission with its switch (decorative; the optional one is off). */}
+    <section class="lupo-section lupo-permissions-section container" aria-labelledby="lupo-permissions">
+      <div class="lupo-section-head" data-reveal>
         <p class="lupo-eyebrow">Permissions</p>
         <h2 id="lupo-permissions">What Lupo asks for, and why</h2>
       </div>
-      <ul class="lupo-permissions">
-        <li class="lupo-card"><h3>Microphone.</h3><p>To hear your narration. It’s transcribed on your Mac.</p></li>
-        <li class="lupo-card"><h3>Screen Recording.</h3><p>To take the screenshots you capture. Lupo only grabs the screen when you press capture. macOS asks you to reopen Lupo after you allow this one.</p></li>
-        <li class="lupo-card"><h3>Accessibility (optional).</h3><p>Only for auto-paste, so Lupo can press ⌘V in your agent’s chat for you. You still press Return yourself. Skip it and Lupo copies to the clipboard instead.</p></li>
-      </ul>
+      <div class="lupo-window" data-reveal style="--reveal-delay: 90ms">
+        <div class="lupo-window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        <ul class="lupo-permissions">
+          <li>
+            <span class="lupo-permission-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" /></svg></span>
+            <div><h3>Microphone.</h3><p>To hear your narration. It’s transcribed on your Mac.</p></div>
+            <span class="lupo-switch is-on" aria-hidden="true"></span>
+          </li>
+          <li>
+            <span class="lupo-permission-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4.5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1ZM8.5 20.5h7M12 16.5v4" /><circle cx="12" cy="10.5" r="2.5" /></svg></span>
+            <div><h3>Screen Recording.</h3><p>To take the screenshots you capture. Lupo only grabs the screen when you press capture. macOS asks you to reopen Lupo after you allow this one.</p></div>
+            <span class="lupo-switch is-on" aria-hidden="true"></span>
+          </li>
+          <li>
+            <span class="lupo-permission-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.8" r="1.8" /><path d="M5 8.5l7 1.6 7-1.6M12 10.1v4.4l-3.2 6M12 14.5l3.2 6" /></svg></span>
+            <div><h3>Accessibility (optional).</h3><p>Only for auto-paste, so Lupo can press ⌘V in your agent’s chat for you. You still press Return yourself. Skip it and Lupo copies to the clipboard instead.</p></div>
+            <span class="lupo-switch" aria-hidden="true"></span>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section class="lupo-section container" aria-labelledby="lupo-changelog">
-      <div class="lupo-section-head">
+    <section class="lupo-closing container" aria-labelledby="lupo-closing">
+      <div class="lupo-panel lupo-aurora lupo-night" data-reveal>
+        {/* Icon and wordmark side by side, as in lupo-logo.png; on the dark panel the wordmark is white (brand.md allows it). */}
+        <div class="lupo-closing-mark">
+          <Image class="lupo-closing-icon" src={lupoIcon} alt="" widths={[104, 208]} sizes="104px" />
+          <Image class="lupo-closing-wordmark" src={lupoWordmarkWhite} alt="Lupo" widths={[120, 240]} sizes="120px" />
+        </div>
+        <h2 id="lupo-closing">Try it on your next bug.</h2>
+        <div class="lupo-download">
+          {lupoDownload
+            ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
+            : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
+          <p class="lupo-requirements">{lupo.requirements}</p>
+        </div>
+      </div>
+      <p class="lupo-studio">Lupo is made by {site.name}. We design and build websites, and we make the tools we wish we had. <a href="/work/">See our work <span aria-hidden="true">→</span></a></p>
+    </section>
+
+    {/* The changelog is for people who already use Lupo, so it sits after the call to action, as a release log: a dot per
+        version on a line, the newest open. The hero's version number links here. */}
+    <section class="lupo-section lupo-changelog container" id="changelog" aria-labelledby="lupo-changelog">
+      <div class="lupo-changelog-head" data-reveal>
         <p class="lupo-eyebrow">Changelog</p>
         <h2 id="lupo-changelog">What’s new</h2>
       </div>
-      <div class="lupo-releases">
+      <div class="lupo-releases" data-reveal style="--reveal-delay: 90ms">
         {lupoReleases.map((release, index) => (
           <details class="lupo-release" open={index === 0}>
             <summary><span>Version {release.version} <time datetime={release.date}>{formatReleaseDate(release.date)}</time></span></summary>
@@ -210,28 +263,16 @@ const application = Astro.site ? {
         ))}
       </div>
     </section>
-
-    <section class="lupo-closing container" aria-labelledby="lupo-closing">
-      <div class="lupo-panel lupo-sky lupo-sky-panel">
-        <span class="lupo-puff lupo-puff-1" aria-hidden="true"></span>
-        <span class="lupo-puff lupo-puff-3" aria-hidden="true"></span>
-        <div class="lupo-closing-mark" aria-hidden="true"><Image src={lupoMark} alt="" widths={[120, 240]} sizes="120px" /></div>
-        <h2 id="lupo-closing">Try it on your next bug.</h2>
-        <div class="lupo-download">
-          {lupoDownload
-            ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
-            : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
-          <p class="lupo-requirements">{lupo.requirements}</p>
-        </div>
-        <div class="lupo-cloudbank" aria-hidden="true"><span></span><span></span></div>
-      </div>
-      <p class="lupo-studio">Lupo is made by {site.name}. We design and build websites, and we make the tools we wish we had. <a href="/work/">See our work <span aria-hidden="true">→</span></a></p>
-    </section>
   </main>
   <Footer />
 </BaseLayout>
 
 <script>
+  import { initLupoPortal } from '../../scripts/lupo-portal';
+  import { initMotion } from '../../scripts/motion';
+  initLupoPortal();
+  // Sections below the hero fade up as they scroll into view, as on the rest of the site.
+  initMotion();
   // The play badge stands in for the native controls until the first play; after that the video keeps its controls.
   for (const frame of document.querySelectorAll<HTMLElement>('[data-lupo-demo]')) {
     const video = frame.querySelector('video');

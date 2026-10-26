@@ -9,5 +9,9 @@ export const lupo = {
   /** Re-encoded from ~/Documents/SHOWCASE/LUPOFINAL.mp4 (CRF 25, faststart) to stay under the Workers 25 MiB asset limit.
    *  The poster is the frame at 0:25. The captions are burned into the video. */
   demoVideo: { src: '/lupo/media/lupo-demo.mp4', poster: '/lupo/media/lupo-demo-poster.jpg', duration: '1:10' } as { src: string; poster: string; duration: string } | undefined,
+  /** The hero's background loop: ~/Documents/SHOWCASE/Animate_dog_illustration_background_1080p_20261026170107.mp4, 8 s,
+   *  with the audio dropped and the video stream copied as is (faststart), since re-encoding a 1080p clip shown full-window
+   *  visibly softens it. The poster is its first frame, shown when motion is reduced. */
+  backdrop: { src: '/lupo/media/lupo-backdrop.mp4', poster: '/lupo/media/lupo-backdrop-poster.jpg' },
   firstLaunchGif: undefined as { src: string; width: number; height: number; alt: string } | undefined,
 };

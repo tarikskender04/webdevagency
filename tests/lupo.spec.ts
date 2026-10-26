@@ -14,9 +14,8 @@ test('the Lupo page shows the approved sections, the version from updates.json a
   await page.goto('/lupo/');
   await expect(page).toHaveTitle('Lupo: Show AI What You Mean | Prodigy Stdio');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Show AI what you mean.');
-  await expect(page.getByRole('img', { name: 'Lupo' })).toBeVisible();
   await expect(page.locator('main').getByRole('heading', { level: 2 })).toHaveText([
-    'Stop explaining screenshots.', 'I built Lupo for myself first.', 'It all stays on your Mac.', 'Opening Lupo the first time', 'What Lupo asks for, and why', 'What’s new', 'Try it on your next bug.',
+    'Stop explaining screenshots.', 'I built Lupo for myself first.', 'It all stays on your Mac.', 'Opening Lupo the first time', 'What Lupo asks for, and why', 'Try it on your next bug.', 'What’s new',
   ]);
   await expect(page.locator('.lupo-hero .lupo-requirements')).toHaveText(`Free · macOS 26 Tahoe · Apple Silicon · Version ${updates.version}`);
   // Until the release script writes Lupo.dmg, there is nothing to download: the button says Coming soon and isn't a link.
@@ -59,12 +58,27 @@ test('the demo video is served and the play badge hands over to the native contr
   expect((await request.head('/lupo/media/lupo-demo-poster.jpg')).ok()).toBe(true);
 
   await page.goto('/lupo/');
-  const player = page.locator('.lupo-demo video');
+  const player = page.locator('[data-lupo-demo] video');
   await expect(player).toHaveJSProperty('controls', false);
   await page.getByRole('button', { name: /Play the Lupo demo video/ }).click();
   await expect(page.locator('.lupo-play')).toBeHidden();
   await expect(player).toHaveJSProperty('controls', true);
-  await expect(page.locator('.lupo-demo figcaption')).toHaveText('One session, start to finish.');
+  await expect(page.locator('[data-lupo-demo] figcaption')).toHaveText('One session, start to finish.');
+});
+
+test('the hero portal puts the demo on the Mac, and reduced motion keeps it in its section with the loop still', async ({ page, request }) => {
+  expect((await request.head('/lupo/media/lupo-backdrop.mp4')).ok()).toBe(true);
+  expect((await request.head('/lupo/media/lupo-backdrop-poster.jpg')).ok()).toBe(true);
+  await page.goto('/lupo/');
+  await expect(page.locator('[data-lupo-portal]')).toHaveCount(1);
+  await expect(page.locator('.lupo-mac-screen [data-lupo-demo]')).toHaveCount(1);
+  await expect(page.locator('#demo')).toBeHidden();
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator('[data-lupo-portal]')).toHaveCount(0);
+  await expect(page.locator('#demo [data-lupo-demo]')).toBeVisible();
+  await expect(page.locator('.lupo-mac')).toBeHidden();
+  await expect(page.locator('[data-lupo-backdrop]')).toHaveJSProperty('paused', true);
 });
 
 test('the Download button counts and redirects to the stable DMG path', async ({ request }) => {

@@ -14,6 +14,10 @@ Once approved, this copy is final and the page uses it verbatim. Things in [brac
 
 ## 1. Hero
 
+[2026-10-26, at Tarik's request: the hero shows only the heading, the lead, the button and the line beside it, and the
+first-time link. The logo lockup, the eyebrow and the paragraph below are no longer on the page; they are kept here for
+reference.]
+
 [Lupo logo lockup (image). Download button and requirements beside it.]
 
 **Eyebrow:** Free Mac app

@@ -1,6 +1,6 @@
 /* /lupo/ follows Lupo's own brand (the Lupo repo's docs/brand.md), not /design: see docs/decisions.md, 2026-10-25.
    The palette and typeface below are copied from brand.md; anything brand.md doesn't define falls back to the site's
-   tokens (spacing, radii, motion). Plus Jakarta Sans is imported by the page itself, so only /lupo/ loads it. */
+   tokens (spacing, radii, motion, the mono label face). Plus Jakarta Sans is imported by the page itself, so only /lupo/ loads it. */
 .lupo-page {
   --lupo-sky: #6EB8FF;    /* outlines, highlights, edges. Too light for white text (2.1:1) */
   --lupo-icy: #CFEAFF;    /* pale sky, panel wash */
@@ -9,6 +9,7 @@
   --lupo-peach: #FFB38A;  /* ear rim. Warm highlights only, sparingly, never a status */
   --lupo-coral: #F26B4F;  /* ear core. Same rule as Peach */
   --lupo-blue: #2173D9;   /* primary actions; white text on it reads 4.6:1. Not for link text */
+  --lupo-mark-red: #FF3B30; /* the red of the marks Lupo draws on captures (macOS systemRed). Only for marks, never text */
   --lupo-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   /* brand.md has no grey, so secondary text is Navy at reduced strength: 80% is 6.7:1 on white, 70% is 5.2:1. */
   --lupo-text: color-mix(in srgb, var(--lupo-navy) 80%, #FFFFFF);
@@ -22,7 +23,8 @@
 .lupo-page h2 { font-size: clamp(32px, 4.2vw, 52px); font-weight: 700; line-height: 1.08; letter-spacing: -.03em; text-wrap: balance; }
 .lupo-page h3 { font-size: 19px; font-weight: 600; line-height: 1.35; letter-spacing: -.01em; }
 .lupo-page p { text-wrap: pretty; }
-.lupo-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--lupo-blue); }
+/* Labels use the site's mono label face (--t-label), in Lupo Blue. */
+.lupo-eyebrow { font: 400 12px/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--lupo-blue); }
 .lupo-text { max-width: 60ch; font-size: 17px; line-height: 1.65; color: var(--lupo-text); }
 .lupo-footnote { margin-top: 32px; font-size: 15px; line-height: 1.6; color: var(--lupo-text-soft); }
 .lupo-page kbd { display: inline-block; padding: 0 .4em; border: 1px solid var(--lupo-edge); border-bottom-width: 2px; border-radius: var(--r-sm); background: var(--lupo-cloud); font: 500 .88em/1.5 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; white-space: nowrap; }
@@ -40,15 +42,6 @@
 .lupo-wash .lupo-eyebrow { color: var(--lupo-navy); }
 /* 70% Navy dips to about 4.2:1 on the deepest Icy and Peach; 80% stays above 5.4:1 anywhere on the wash. */
 .lupo-wash { --lupo-text-soft: var(--lupo-text); }
-/* Soft cloud bumps along the bottom edge, after the brand sheet's cloud elements. Decoration only. */
-.lupo-clouds { position: relative; isolation: isolate; overflow: hidden; }
-.lupo-clouds::after {
-  content: ''; position: absolute; inset: auto 0 0; z-index: -1; height: 46%; pointer-events: none;
-  background:
-    radial-gradient(38% 70% at 12% 100%, var(--lupo-cloud) 58%, transparent 72%),
-    radial-gradient(30% 62% at 44% 108%, var(--lupo-cloud) 56%, transparent 70%),
-    radial-gradient(36% 74% at 80% 104%, var(--lupo-cloud) 56%, transparent 71%);
-}
 
 .lupo-button { background: var(--lupo-blue); color: #FFFFFF; }
 /* brand.md gives no hover colour; Navy is from the palette and keeps white text readable (approved 2026-10-25). */
@@ -57,82 +50,67 @@
 .lupo-button-soon:hover { background: var(--lupo-icy); transform: none; }
 .lupo-download { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 36px; }
 .lupo-requirements { font-size: 14px; color: var(--lupo-text-soft); }
+.lupo-requirements a { text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 4px; transition: text-decoration-color var(--dur-hover) ease; }
+.lupo-requirements a:hover { text-decoration-color: currentColor; }
 
-/* The sky, after the brand sheet: raw Sky Blue only in the top corners, the middle Icy fading to Cloud White where the text
-   and the mark sit (brand.md: text never on raw Sky Blue; the mark on white or Cloud White), Peach low in the corners
-   over Cloud White only. Used by the hero band and the closing panel. */
-.lupo-sky {
-  --lupo-text: color-mix(in srgb, var(--lupo-navy) 88%, #FFFFFF);
+/* A faint Lupo silhouette as a texture: the one-colour menu-bar silhouette (lupo-silhouette.svg, the same curves as the
+   Lupo repo's scripts/make-menu-icon.py), never the full-colour mark, which brand.md keeps free of effects. It is Sky Blue,
+   faint, and fades out toward the content. Place it with inset and size on the element that uses it. */
+.lupo-texture {
+  position: absolute; z-index: -1; aspect-ratio: 1; pointer-events: none; background: var(--lupo-sky); opacity: .16;
+  mask-image: url('../assets/lupo/lupo-silhouette.svg'), linear-gradient(var(--lupo-texture-fade, 200deg), #000 20%, transparent 85%);
+  mask-size: contain, 100% 100%; mask-repeat: no-repeat; mask-composite: intersect;
+}
+
+/* Aurora: blurred light in the brand blues with a little Peach, over a faint grid that fades out toward the text. Used by the
+   hero band (light, glow from the top) and the closing panel (near-black, glow from the bottom). The glow is mixed toward the
+   ground where text sits (brand.md: text never on raw Sky Blue). It drifts slowly only with prefers-reduced-motion:
+   no-preference; otherwise it holds still in its resting position. */
+.lupo-aurora {
+  --aurora-a: color-mix(in srgb, var(--lupo-sky) 85%, transparent);
+  --aurora-b: color-mix(in srgb, var(--lupo-blue) 50%, transparent);
+  --aurora-c: var(--lupo-icy);
+  --aurora-warm: color-mix(in srgb, var(--lupo-peach) 55%, transparent);
+  --aurora-at: top;
+  --lupo-grid: color-mix(in srgb, var(--lupo-navy) 6%, transparent);
   position: relative; isolation: isolate; overflow: hidden;
+}
+.lupo-aurora::before, .lupo-aurora::after { content: ''; position: absolute; pointer-events: none; }
+.lupo-aurora::before {
+  inset: 0; z-index: -1;
+  background-image: linear-gradient(to right, var(--lupo-grid) 1px, transparent 1px), linear-gradient(to bottom, var(--lupo-grid) 1px, transparent 1px);
+  background-size: 64px 64px; background-position: center var(--aurora-at);
+  mask-image: radial-gradient(80% 70% at 50% var(--aurora-at), #000 10%, transparent 70%);
+}
+.lupo-aurora::after {
+  inset: -10% -15% auto; z-index: -2; height: min(900px, 100%); filter: blur(64px);
   background:
-    radial-gradient(44% 58% at 100% 0%, color-mix(in srgb, var(--lupo-sky) 78%, var(--lupo-icy)), transparent 72%),
-    radial-gradient(30% 42% at 0% 0%, color-mix(in srgb, var(--lupo-sky) 50%, var(--lupo-icy)), transparent 72%),
-    radial-gradient(26% 32% at 0% 100%, color-mix(in srgb, var(--lupo-peach) 40%, var(--lupo-cloud)), transparent 72%),
-    radial-gradient(30% 36% at 100% 100%, color-mix(in srgb, var(--lupo-peach) 48%, var(--lupo-cloud)), transparent 72%),
-    linear-gradient(180deg, color-mix(in srgb, var(--lupo-sky) 36%, var(--lupo-icy)) 0%, var(--lupo-icy) 36%, var(--lupo-cloud) 84%);
+    radial-gradient(34% 52% at 18% 8%, var(--aurora-a), transparent 70%),
+    radial-gradient(36% 48% at 78% 0%, var(--aurora-b), transparent 70%),
+    radial-gradient(56% 50% at 48% 22%, var(--aurora-c), transparent 72%),
+    radial-gradient(18% 30% at 96% 34%, var(--aurora-warm), transparent 70%);
 }
-.lupo-sky .lupo-eyebrow { color: var(--lupo-navy); }
-/* The hero band runs up under the site header (transparent on this page) so the sky starts at the top of the window. */
-.lupo-sky-band { margin-top: -140px; padding-top: 140px; }
-body:has(.lupo-sky-band) .site-header-page { border-bottom-color: transparent; }
-
-/* Small clouds drifting in the sky: a pill with two round bumps, after the brand sheet's cloud elements. Decoration only. */
-.lupo-puff { position: absolute; z-index: -1; width: var(--puff, 180px); aspect-ratio: 3 / 1; opacity: .9; filter: blur(1.5px); pointer-events: none; }
-.lupo-puff, .lupo-puff::before, .lupo-puff::after { border-radius: var(--r-pill); }
-.lupo-puff::before, .lupo-puff::after { content: ''; position: absolute; aspect-ratio: 1; border-radius: 50%; background: var(--lupo-cloud); }
-.lupo-puff { background: linear-gradient(var(--lupo-cloud), var(--lupo-cloud)) 0 100% / 100% 62% no-repeat; }
-.lupo-puff::before { left: 16%; bottom: 22%; width: 42%; }
-.lupo-puff::after { right: 18%; bottom: 30%; width: 30%; }
-.lupo-sky-band .lupo-puff-1 { --puff: 150px; top: 168px; left: 46%; }
-.lupo-sky-band .lupo-puff-2 { --puff: 230px; top: 46%; right: -60px; opacity: .75; }
-.lupo-sky-band .lupo-puff-3 { --puff: 120px; top: 62%; left: -24px; opacity: .8; }
-
-/* Two layers of cloud bumps tiled sideways along the bottom of the sky. Each layer is one tile wider than its box so it can
-   drift by exactly one tile and loop without a seam. The front layer is the page's white. */
-.lupo-cloudbank { position: absolute; inset: auto 0 -1px; z-index: -1; height: clamp(120px, 15vw, 210px); pointer-events: none; }
-.lupo-cloudbank span { --tile: 560px; --cloud: #FFFFFF; position: absolute; inset: 0 auto 0 0; width: calc(100% + var(--tile)); background-repeat: repeat-x; background-size: var(--tile) 100%;
-  background-image:
-    radial-gradient(110px 54% at 0 100%, var(--cloud) 95%, transparent 100%),
-    radial-gradient(124px 82% at 150px 100%, var(--cloud) 95%, transparent 100%),
-    radial-gradient(100px 60% at 300px 100%, var(--cloud) 95%, transparent 100%),
-    radial-gradient(128px 92% at 430px 100%, var(--cloud) 95%, transparent 100%),
-    radial-gradient(110px 54% at 560px 100%, var(--cloud) 95%, transparent 100%),
-    linear-gradient(to top, var(--cloud) 20%, transparent 20%); }
-.lupo-cloudbank span:first-child { --tile: 760px; --cloud: color-mix(in srgb, var(--lupo-cloud) 70%, var(--lupo-icy)); bottom: 22%; opacity: .85; translate: -180px 0; }
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes lupo-drift { to { translate: calc(-1 * var(--tile)) 0; } }
-  @keyframes lupo-bob { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
-  .lupo-cloudbank span { animation: lupo-drift 90s linear infinite; }
-  .lupo-cloudbank span:first-child { animation-duration: 150s; }
-  .lupo-puff { animation: lupo-bob 9s ease-in-out infinite alternate; }
-  .lupo-puff-2 { animation-duration: 12s; animation-delay: -4s; }
-  .lupo-puff-3 { animation-duration: 10s; animation-delay: -7s; }
+  @keyframes lupo-aurora { from { transform: translateX(-3%) scaleY(1); } to { transform: translateX(3%) scaleY(1.12); } }
+  .lupo-aurora::after { transform-origin: 50% 0; animation: lupo-aurora 18s ease-in-out infinite alternate; }
 }
-
-/* Hero: copy left, the mark right. The wordmark stands alone because the mark is beside it (brand.md). The bottom padding
-   leaves room for the cloud bank and the top of the demo video, which overlaps it. */
-.lupo-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 64px; padding-block: clamp(48px, 6vw, 88px) clamp(170px, 19vw, 280px); }
-.lupo-wordmark { width: 132px; }
-.lupo-hero .lupo-eyebrow { margin-top: 36px; }
-.lupo-tag { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 10px; border: 1px solid var(--lupo-edge); border-radius: var(--r-pill); background: color-mix(in srgb, #FFFFFF 70%, transparent); }
-.lupo-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--lupo-blue); }
-.lupo-hero h1 { margin-top: 14px; font-size: clamp(44px, 6vw, 76px); font-weight: 700; line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
-.lupo-lead { max-width: 30ch; margin-top: 20px; font-size: clamp(20px, 1.9vw, 23px); font-weight: 500; line-height: 1.4; text-wrap: balance; }
-.lupo-hero .lupo-text { margin-top: 18px; }
-.lupo-first-time { display: inline-block; margin-top: 24px; padding-block: 4px; font-size: 15px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 5px; transition: text-decoration-color var(--dur-hover) ease; }
+/* The hero copy. The scene around it (background loop, Mac, the camera push) is in lupo-portal.css. */
+.lupo-hero h1 { max-width: 12ch; font-size: clamp(44px, 4.6vw, 68px); font-weight: 700; line-height: 1.02; letter-spacing: -.045em; text-wrap: balance; }
+.lupo-lead { max-width: 34ch; margin-top: 16px; font-size: clamp(19px, 1.6vw, 22px); font-weight: 500; line-height: 1.4; text-wrap: balance; }
+.lupo-hero .lupo-download { margin-top: 24px; }
+.lupo-first-time { display: inline-block; margin-top: 14px; padding-block: 4px; font-size: 15px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 5px; transition: text-decoration-color var(--dur-hover) ease; }
 .lupo-first-time:hover { text-decoration-color: currentColor; }
-/* Clear space around the mark is well over a quarter of its height. It sits on a Cloud White halo (brand.md: the mark on
-   white or Cloud White); the halo is background, not an effect on the mark. */
-.lupo-hero-art { display: grid; place-items: center; aspect-ratio: 1; background: radial-gradient(closest-side, var(--lupo-cloud) 58%, color-mix(in srgb, var(--lupo-cloud) 60%, transparent) 76%, transparent); }
-.lupo-hero-mark { width: min(400px, 74%); }
 
-/* The video sits on the hero's clouds: pulled up over the bottom of the sky band. */
-.lupo-demo { position: relative; z-index: 1; margin-top: calc(-1 * clamp(130px, 15vw, 220px)); }
+/* The demo video, under the hero or, while the portal runs, on the Mac's screen. A thin glass bezel with a Lupo Blue glow beneath. */
+.lupo-demo { position: relative; z-index: 1; padding-block: clamp(48px, 6vw, 88px); }
 .lupo-demo-frame { display: grid; place-items: center; margin: 0; aspect-ratio: 16 / 9; border-radius: var(--r-hero); }
 .lupo-demo-frame[data-lupo-demo] { display: block; aspect-ratio: auto; }
 /* Until the video exists the slot is a flatter band of brand artwork, not an empty 16:9 screen. */
 .lupo-demo-placeholder { aspect-ratio: 3 / 1; }
-.lupo-demo-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid var(--lupo-edge); border-radius: var(--r-hero); background: var(--lupo-cloud); box-shadow: var(--e-3); }
+.lupo-demo-screen {
+  position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid color-mix(in srgb, var(--lupo-navy) 10%, transparent); border-radius: var(--r-hero); background: var(--lupo-cloud);
+  box-shadow: 0 0 0 10px color-mix(in srgb, #FFFFFF 55%, transparent), 0 0 0 11px var(--lupo-edge), 0 48px 120px -32px color-mix(in srgb, var(--lupo-blue) 45%, transparent), var(--e-2);
+}
 .lupo-demo-screen video { display: block; width: 100%; height: 100%; object-fit: contain; }
 .lupo-play { position: absolute; inset: 0; display: grid; place-items: center; padding: 0; border: 0; background: color-mix(in srgb, var(--lupo-navy) 14%, transparent); color: var(--lupo-navy); font: inherit; cursor: pointer; transition: background var(--dur-hover) ease; }
 .lupo-play[hidden] { display: none; }
@@ -143,7 +121,7 @@ body:has(.lupo-sky-band) .site-header-page { border-bottom-color: transparent; }
 .lupo-play-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--lupo-blue); color: #FFFFFF; }
 .lupo-play-icon svg { width: 22px; height: 22px; margin-left: 3px; }
 .lupo-play-time { font-weight: 500; color: var(--lupo-text-soft); }
-.lupo-demo-frame figcaption { justify-self: start; margin-top: 14px; font-size: 14px; color: var(--lupo-text-soft); }
+.lupo-demo-frame figcaption { justify-self: start; margin-top: 24px; font: 400 12px/1.4 var(--font-mono); letter-spacing: .08em; color: var(--lupo-text-soft); }
 .lupo-demo-mark { width: clamp(88px, 13vw, 160px); }
 
 .lupo-section { padding-block: 72px; }
@@ -158,7 +136,7 @@ body:has(.lupo-sky-band) .site-header-page { border-bottom-color: transparent; }
 .lupo-how-head .lupo-section-head { margin-bottom: 0; }
 .lupo-compare { display: grid; gap: 14px; }
 .lupo-compare-row { padding: 18px 20px 20px; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); background: #FFFFFF; }
-.lupo-compare-label { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lupo-text-soft); }
+.lupo-compare-label { font: 400 12px/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--lupo-text-soft); }
 .lupo-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; margin: 12px 0 0; padding: 0; list-style: none; }
 .lupo-chips li { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--lupo-text); }
 .lupo-chips li + li::before { content: '→' / ''; font-weight: 500; color: var(--lupo-text-soft); }
@@ -182,15 +160,40 @@ body:has(.lupo-sky-band) .site-header-page { border-bottom-color: transparent; }
 .lupo-maker-studio img { display: block; width: 100%; height: auto; }
 .lupo-maker-facts { display: grid; gap: 16px; margin: 0; }
 .lupo-maker-facts div { padding-top: 14px; border-top: 1px solid var(--lupo-edge); }
-.lupo-maker-facts dt { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lupo-text); }
+.lupo-maker-facts dt { font: 400 12px/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--lupo-text); }
 .lupo-maker-facts dd { margin: 4px 0 0; font-size: 17px; font-weight: 600; }
 .lupo-maker-link { justify-self: start; padding-block: 4px; font-size: 15px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 5px; transition: text-decoration-color var(--dur-hover) ease; }
 .lupo-maker-link:hover { text-decoration-color: currentColor; }
 
 .lupo-steps, .lupo-permissions, .lupo-facts, .lupo-install-steps { margin: 0; padding: 0; list-style: none; }
-.lupo-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: lupo-step; }
-.lupo-steps li { counter-increment: lupo-step; }
-.lupo-steps li::before { content: counter(lupo-step, decimal-leading-zero); display: block; margin-bottom: 20px; font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--lupo-blue); }
+.lupo-steps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: lupo-step; }
+.lupo-steps li { position: relative; counter-increment: lupo-step; }
+/* The step numbers are Lupo's capture badges: a red disc with a white numeral and a white ring. White on the red is
+   3.5:1, so the numeral is large text (19px bold). */
+.lupo-steps li::before { content: counter(lupo-step); display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 20px; border-radius: 50%; background: var(--lupo-mark-red); box-shadow: 0 0 0 2.5px #FFFFFF, 0 2px 8px color-mix(in srgb, var(--lupo-navy) 30%, transparent); color: #FFFFFF; font: 700 19px/1 var(--lupo-font); }
+/* The How it works cards let the silhouette behind them show through. */
+.lupo-how { position: relative; isolation: isolate; }
+.lupo-how .lupo-texture { right: -6%; bottom: -10%; width: min(560px, 46%); --lupo-texture-fade: 160deg; }
+.lupo-how .lupo-card { background: color-mix(in srgb, var(--lupo-cloud) 78%, transparent); }
+
+/* The marks. Strokes as wide as the app draws them, round-capped, in the capture red. */
+.lupo-doodle { overflow: visible; pointer-events: none; }
+.lupo-doodle path { fill: none; stroke: var(--lupo-mark-red); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+/* An arrow from each card's top right corner over the gap into the next card. */
+.lupo-doodle-arrow { position: absolute; z-index: 2; top: -14px; right: -64px; width: 110px; }
+.lupo-circled, .lupo-underlined { position: relative; display: inline-block; }
+.lupo-circled { margin-inline: 8px 6px; }
+.lupo-circled .lupo-doodle { position: absolute; inset: -12px -16px -10px -14px; width: calc(100% + 30px); height: calc(100% + 22px); }
+.lupo-underlined .lupo-doodle { position: absolute; left: -4px; right: -6px; bottom: -8px; width: calc(100% + 10px); height: 10px; }
+/* Each mark draws itself in as it scrolls into view, the arrowheads last. Without scroll-driven animations, or with
+   reduced motion, the marks are simply drawn. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .lupo-doodle path { stroke-dasharray: 1; stroke-dashoffset: 1; animation-name: lupo-draw; animation-timing-function: ease-out; animation-fill-mode: both; animation-timeline: view(); animation-range: entry 60% cover 40%; }
+    .lupo-doodle .lupo-doodle-head { animation-range: cover 38% cover 46%; }
+  }
+}
+@keyframes lupo-draw { to { stroke-dashoffset: 0; } }
 
 .lupo-panel { padding: clamp(28px, 5vw, 64px); border-radius: var(--r-panel); }
 .lupo-panel .lupo-section-head { margin-bottom: 36px; }
@@ -198,66 +201,129 @@ body:has(.lupo-sky-band) .site-header-page { border-bottom-color: transparent; }
 .lupo-facts li { padding-top: 20px; border-top: 1px solid var(--lupo-edge); }
 .lupo-facts p { margin-top: 8px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
 
-.lupo-install { display: grid; gap: 48px; }
-.lupo-install-with-gif { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-.lupo-install-steps { display: grid; gap: 28px; max-width: 680px; counter-reset: lupo-install; }
-.lupo-install-steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 18px; counter-increment: lupo-install; }
-.lupo-install-steps li::before { content: counter(lupo-install); grid-row: span 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--lupo-blue); color: #FFFFFF; font-size: 15px; font-weight: 700; }
-.lupo-install-steps h3 { align-self: center; }
-.lupo-install-steps p { margin-top: 6px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+/* Install: the heading beside its intro, then the four steps across a line, each on a numbered node. A large silhouette
+   sits faintly behind, off the right edge. */
+.lupo-install-section { position: relative; isolation: isolate; }
+.lupo-install-section .lupo-texture { top: -4%; right: -14%; width: min(620px, 52%); --lupo-texture-fade: 225deg; }
+.lupo-install-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 24px 64px; margin-bottom: 56px; }
+.lupo-install-head h2 { margin-top: 14px; }
+.lupo-install-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: lupo-install; }
+.lupo-install-steps li { position: relative; counter-increment: lupo-install; }
+.lupo-install-steps li::before { content: counter(lupo-install, decimal-leading-zero); position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 24px; border: 1px solid var(--lupo-edge); border-radius: 50%; background: #FFFFFF; box-shadow: var(--e-1); color: var(--lupo-blue); font: 400 13px/1 var(--font-mono); }
+/* The line runs from each node to the next one. */
+.lupo-install-steps li:not(:last-child)::after { content: ''; position: absolute; top: 22px; left: 52px; right: -24px; height: 1px; background: linear-gradient(90deg, var(--lupo-sky), var(--lupo-edge)); }
+.lupo-install-steps p { margin-top: 8px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
 .lupo-install-steps strong { font-weight: 600; color: var(--lupo-navy); }
-.lupo-install-gif { width: 100%; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); }
+.lupo-install-gif { width: 100%; max-width: 880px; margin-top: 48px; border: 1px solid var(--lupo-edge); border-radius: var(--r-card); }
+.lupo-install .lupo-footnote { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--lupo-edge); }
 
-.lupo-permissions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+/* Permissions: a Mac settings window, centred under a centred heading. Each row has a Lupo Blue icon tile and a switch. */
+.lupo-permissions-section .lupo-section-head { margin-inline: auto; text-align: center; }
+.lupo-window { max-width: 860px; margin-inline: auto; overflow: hidden; border: 1px solid var(--lupo-edge); border-radius: var(--r-panel); background: #FFFFFF; box-shadow: var(--e-2), 0 40px 100px -40px color-mix(in srgb, var(--lupo-blue) 35%, transparent); }
+.lupo-window-bar { display: flex; gap: 8px; padding: 14px 18px; border-bottom: 1px solid var(--lupo-edge); background: linear-gradient(180deg, var(--lupo-cloud), color-mix(in srgb, var(--lupo-icy) 35%, var(--lupo-cloud))); }
+.lupo-window-bar span { width: 12px; height: 12px; border-radius: 50%; background: color-mix(in srgb, var(--lupo-navy) 14%, var(--lupo-cloud)); }
+.lupo-permissions li { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: start; gap: 20px; padding: 24px clamp(20px, 3.5vw, 32px); }
+.lupo-permissions li + li { border-top: 1px solid var(--lupo-edge); }
+.lupo-permissions p { margin-top: 6px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+.lupo-permission-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(160deg, var(--lupo-sky), var(--lupo-blue)); color: #FFFFFF; }
+.lupo-permission-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+/* A switch as macOS draws it: Lupo Blue when on, a pale track when off. */
+.lupo-switch { position: relative; flex: none; width: 38px; height: 22px; margin-top: 2px; border-radius: 11px; background: color-mix(in srgb, var(--lupo-navy) 14%, var(--lupo-cloud)); }
+.lupo-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px color-mix(in srgb, var(--lupo-navy) 35%, transparent); }
+.lupo-switch.is-on { background: var(--lupo-blue); }
+.lupo-switch.is-on::after { left: 18px; }
 
-.lupo-releases { max-width: 720px; border-top: 1px solid var(--lupo-edge); }
-.lupo-release { border-bottom: 1px solid var(--lupo-edge); }
-.lupo-release summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; }
+/* Changelog: after the call to action, quieter than the sections above. The heading on the left, and a release log on
+   the right: a line with a dot per version, the newest filled and open. */
+.lupo-changelog { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; gap: 24px 64px; padding-block: 24px 96px; }
+.lupo-changelog h2 { margin-top: 10px; font-size: clamp(26px, 2.6vw, 32px); }
+.lupo-releases { position: relative; padding-left: 28px; }
+.lupo-releases::before { content: ''; position: absolute; top: 26px; bottom: 26px; left: 5px; width: 1px; background: var(--lupo-edge); }
+.lupo-release { position: relative; }
+.lupo-release::before { content: ''; position: absolute; top: 21px; left: -28px; width: 11px; height: 11px; border: 1px solid var(--lupo-sky); border-radius: 50%; background: #FFFFFF; }
+.lupo-release:first-child::before { border-color: var(--lupo-blue); background: var(--lupo-blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--lupo-sky) 30%, transparent); }
+.lupo-release summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; font-size: 16px; font-weight: 600; cursor: pointer; list-style: none; }
 .lupo-release summary::-webkit-details-marker { display: none; }
 .lupo-release summary::after { content: '+'; font-size: 22px; font-weight: 500; line-height: 1; color: var(--lupo-blue); }
 .lupo-release[open] summary::after { content: '−'; }
-.lupo-release summary span { display: flex; flex-wrap: wrap; gap: 4px 10px; }
-.lupo-release time { font-weight: 500; color: var(--lupo-text-soft); }
-.lupo-release ul { margin: 0; padding: 0 0 24px 20px; font-size: 16px; line-height: 1.6; color: var(--lupo-text); }
+.lupo-release summary span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.lupo-release time { font: 400 13px/1.4 var(--font-mono); color: var(--lupo-text-soft); }
+.lupo-release ul { margin: 0; padding: 4px 0 20px 20px; font-size: 15px; line-height: 1.6; color: var(--lupo-text); }
 .lupo-release li + li { margin-top: 6px; }
 
+/* Closing: the aurora on near-black Navy (brand.md: the mark on near-black; the wordmark would turn white here), the glow
+   rising from the bottom edge. White text; secondary text is white at reduced strength. */
 .lupo-closing { padding-block: 72px 112px; }
-.lupo-closing .lupo-panel { display: grid; justify-items: center; padding-block: clamp(48px, 7vw, 88px) clamp(120px, 15vw, 200px); text-align: center; }
-.lupo-sky-panel { border: 1px solid var(--lupo-edge); }
-.lupo-sky-panel .lupo-puff-1 { --puff: 160px; top: 18%; left: 7%; }
-.lupo-sky-panel .lupo-puff-3 { --puff: 200px; top: 30%; right: 5%; opacity: .75; }
-/* The mark on its Cloud White halo, as in the hero. */
-.lupo-closing-mark { display: grid; place-items: center; width: 200px; aspect-ratio: 1; margin: -24px 0 4px; background: radial-gradient(closest-side, var(--lupo-cloud) 58%, transparent); }
-.lupo-closing-mark img { width: 120px; }
-.lupo-closing .lupo-download { justify-content: center; margin-top: 28px; }
+.lupo-night {
+  --aurora-a: color-mix(in srgb, var(--lupo-blue) 75%, transparent);
+  --aurora-b: color-mix(in srgb, var(--lupo-sky) 45%, transparent);
+  --aurora-c: color-mix(in srgb, var(--lupo-blue) 30%, transparent);
+  --aurora-warm: color-mix(in srgb, var(--lupo-coral) 30%, transparent);
+  --aurora-at: bottom;
+  --lupo-grid: color-mix(in srgb, #FFFFFF 6%, transparent);
+  --lupo-text-soft: color-mix(in srgb, #FFFFFF 72%, transparent);
+  border: 1px solid color-mix(in srgb, #FFFFFF 10%, transparent);
+  background: color-mix(in srgb, var(--lupo-navy) 55%, #000000);
+  color: #FFFFFF;
+}
+.lupo-night::after {
+  inset: auto -10% -60%; height: 110%; transform-origin: 50% 100%;
+  background:
+    radial-gradient(46% 42% at 50% 30%, var(--aurora-a), transparent 70%),
+    radial-gradient(30% 36% at 20% 42%, var(--aurora-b), transparent 70%),
+    radial-gradient(40% 40% at 50% 12%, var(--aurora-c), transparent 72%),
+    radial-gradient(24% 30% at 84% 40%, var(--aurora-warm), transparent 70%);
+}
+.lupo-closing .lupo-panel { display: grid; justify-items: center; padding-block: clamp(56px, 8vw, 104px); text-align: center; }
+/* The lockup's proportions follow lupo-logo.png: the wordmark about 57% of the tile's height, centred a little above the
+   tile's middle, with a quarter of the tile's height between them (brand.md's clear space). The icon has a transparent
+   margin round its tile (824 of 1024), so the gap is measured from the tile. */
+.lupo-closing-mark { display: flex; align-items: center; }
+.lupo-closing-icon { display: block; width: 104px; }
+.lupo-closing-wordmark { display: block; width: 111px; margin: -8px 0 0 calc(104px * 824 / 1024 / 4 - 104px * 100 / 1024); }
+.lupo-closing h2 { margin-top: 28px; }
+.lupo-closing .lupo-download { justify-content: center; margin-top: 32px; }
+.lupo-night .lupo-button:hover { background: var(--lupo-cloud); color: var(--lupo-navy); }
+.lupo-night .lupo-button-soon { background: color-mix(in srgb, #FFFFFF 12%, transparent); color: #FFFFFF; }
+.lupo-night .lupo-button-soon:hover { background: color-mix(in srgb, #FFFFFF 12%, transparent); color: #FFFFFF; }
+.lupo-night :focus-visible { outline-color: #FFFFFF; }
 .lupo-studio { max-width: 62ch; margin: 28px auto 0; font-size: 15px; line-height: 1.6; text-align: center; color: var(--lupo-text-soft); }
 .lupo-studio a { color: var(--lupo-navy); font-weight: 600; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--lupo-edge); text-underline-offset: 4px; }
 .lupo-studio a:hover { text-decoration-color: currentColor; }
 
 @media (max-width: 960px) {
-  .lupo-steps, .lupo-permissions, .lupo-facts { grid-template-columns: minmax(0, 1fr); }
-  .lupo-how-head, .lupo-maker { grid-template-columns: minmax(0, 1fr); }
+  .lupo-steps, .lupo-facts { grid-template-columns: minmax(0, 1fr); }
+  .lupo-how-head, .lupo-maker, .lupo-install-head, .lupo-changelog { grid-template-columns: minmax(0, 1fr); }
+  /* One column: the arrows would point sideways into nothing, so only the badges and the marks inside the cards stay. */
+  .lupo-doodle-arrow { display: none; }
+  .lupo-install-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .lupo-install-steps li:nth-child(2n)::after { display: none; }
   .lupo-maker-card { max-width: 480px; }
-  .lupo-install-with-gif { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
-  .lupo-hero { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 32px 150px; }
-  .lupo-sky-band .lupo-puff-1 { top: 150px; left: auto; right: 8%; --puff: 110px; }
-  .lupo-sky-band :is(.lupo-puff-2, .lupo-puff-3) { display: none; }
-  .lupo-demo { margin-top: -96px; }
-  .lupo-demo-screen { border-radius: var(--r-panel); }
+  .lupo-demo-screen { border-radius: var(--r-panel); box-shadow: 0 0 0 6px color-mix(in srgb, #FFFFFF 55%, transparent), 0 0 0 7px var(--lupo-edge), 0 32px 80px -24px color-mix(in srgb, var(--lupo-blue) 45%, transparent); }
   .lupo-play-badge { gap: 10px; padding: 6px 16px 6px 6px; font-size: 15px; }
   .lupo-play-icon { width: 40px; height: 40px; }
   .lupo-play-icon svg { width: 18px; height: 18px; }
   .lupo-maker-card { padding: 24px; }
-  .lupo-sky-panel .lupo-puff { display: none; }
-  .lupo-hero-art { order: -1; justify-self: start; width: 180px; }
-  .lupo-hero-mark { width: 128px; }
-  .lupo-hero .lupo-eyebrow { margin-top: 28px; }
   .lupo-download { align-items: flex-start; flex-direction: column; }
   .lupo-closing .lupo-download { align-items: center; }
   .lupo-demo-placeholder { aspect-ratio: 16 / 9; border-radius: var(--r-panel); }
   .lupo-section { padding-block: 48px; }
   .lupo-card { padding: 24px; }
+  /* Phones: the install steps run down a line, the number beside each step. */
+  .lupo-install-head { margin-bottom: 36px; }
+  .lupo-install-steps { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .lupo-install-steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 16px; padding-bottom: 28px; }
+  .lupo-install-steps li::before { grid-row: span 2; width: 36px; height: 36px; margin-bottom: 0; }
+  .lupo-install-steps li:not(:last-child)::after, .lupo-install-steps li:nth-child(2n):not(:last-child)::after { display: block; top: 44px; bottom: 8px; left: 18px; right: auto; width: 1px; height: auto; background: var(--lupo-edge); }
+  .lupo-install-steps h3 { display: flex; align-items: center; min-height: 36px; }
+  .lupo-install-section .lupo-texture { top: 2%; right: -30%; width: 80%; }
+  .lupo-permissions li { grid-template-columns: 40px minmax(0, 1fr); }
+  .lupo-permission-icon { width: 40px; height: 40px; }
+  .lupo-switch { display: none; }
+  .lupo-changelog { padding-block: 8px 64px; }
   .lupo-closing { padding-block: 48px 80px; }
+  .lupo-closing-icon { width: 80px; }
+  .lupo-closing-wordmark { width: 85px; margin: -6px 0 0 calc(80px * 824 / 1024 / 4 - 80px * 100 / 1024); }
 }
