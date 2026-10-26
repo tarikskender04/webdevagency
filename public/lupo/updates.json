@@ -1,17 +1,23 @@
 {
-  "version": "0.1.1",
-  "build": 2,
+  "version": "0.1.2",
+  "build": 3,
   "date": "2026-10-26",
   "minimumSystem": "26.0",
-  "url": "https://prodigystdio.com/lupo/releases/Lupo-0.1.1.zip",
-  "sha256": "3afcca954f55478976126bf739999e7c50ffc50844e87e35014c18b8378994bc",
+  "url": "https://prodigystdio.com/lupo/releases/Lupo-0.1.2.zip",
+  "sha256": "d0268b4921b6365fa0da11a11a513ead729d6b5c4c4b8e0963c2fdfb8ab89da3",
   "notes": [
-    "When Lupo leaves the prompt on your clipboard for you to paste, it now says so clearly (\"Copied. Paste with ⌘V\") and tells you where to paste it.",
-    "New Paste for Me button: one click and Lupo pastes the prompt into your current chat from then on. You still press Return to send.",
-    "Messages after Done stay on screen longer, so you have time to read them.",
-    "Right after an update, Lupo now shows what changed."
+    "A clearer update window: Updates now open in Lupo's own window, with each change given a short title and grouped by what's new, improved or fixed."
   ],
+  "notesMarkdown": "## Improved\n- **A clearer update window** Updates now open in Lupo's own window, with each change given a short title and grouped by what's new, improved or fixed.",
   "releases": [
+    {
+      "version": "0.1.2",
+      "date": "2026-10-26",
+      "notes": [
+        "A clearer update window: Updates now open in Lupo's own window, with each change given a short title and grouped by what's new, improved or fixed."
+      ],
+      "notesMarkdown": "## Improved\n- **A clearer update window** Updates now open in Lupo's own window, with each change given a short title and grouped by what's new, improved or fixed."
+    },
     {
       "version": "0.1.1",
       "date": "2026-10-26",
