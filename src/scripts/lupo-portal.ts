@@ -39,11 +39,13 @@ export function initLupoPortal(): () => void {
     // The screen takes the window's shape, within a laptop's range, so the desktop fills it at rest and covers the window at the end.
     const ratio = Math.min(1.8, Math.max(1.45, width / height));
     set('--lupo-screen-ratio', String(ratio));
-    // The Mac stands right under the copy, as large as the room below allows: the lid (bezels plus a screen of this ratio)
-    // and the base's front edge under it.
-    const top = hero.offsetTop + hero.offsetHeight + 28;
-    const room = height * .96 - top;
-    const macWidth = Math.max(320, Math.min(room / (.065 + .968 / ratio), width < 761 ? width * .86 : Math.min(width * .48, 760)));
+    // The Mac stands right under the copy, as large as the room below allows. Up to a third of the lid (bezels plus a
+    // screen of this ratio) may run off the bottom of the window. On wide screens it stops short of the dog's face.
+    const top = hero.offsetTop + hero.offsetHeight + 36;
+    const lid = .065 + .968 / ratio;
+    const room = (height - top) / (lid * .68);
+    const reach = width < 761 ? width * .86 : Math.min(width * .62 - hero.offsetLeft, 1120);
+    const macWidth = Math.max(320, Math.min(room, reach));
     set('--lupo-mac-top', `${top}px`);
     set('--lupo-mac-w', `${macWidth}px`);
     // Offsets ignore the running scroll transform, so measuring mid-animation can't feed the current zoom back in.

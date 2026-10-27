@@ -18,7 +18,7 @@
     "asset:work": "node scripts/render-work-cards.ts",
     "design:sync": "python3 scripts/sync_design.py",
     "design:status": "python3 scripts/sync_design.py --status",
-    "lupo:downloads": "node --env-file-if-exists=.env.cloudflare scripts/lupo-downloads.mjs"
+    "lupo:downloads": "node scripts/lupo-downloads.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "14.3.4",

@@ -5,6 +5,7 @@
   "name": "prodigy-stdio",
   "compatibility_date": "2026-10-01",
   "observability": { "enabled": true },
-  // Counts Lupo downloads (/lupo/download/). The dataset is created on the first write; read it with npm run lupo:downloads.
-  "analytics_engine_datasets": [{ "binding": "LUPO_DOWNLOADS", "dataset": "lupo_downloads" }]
+  // Records Lupo downloads (/lupo/download/), one row each, kept until deleted. The schema is in migrations/; apply it with
+  // `npx wrangler d1 migrations apply prodigy-stdio --remote` (or --local). Read the numbers with npm run lupo:downloads.
+  "d1_databases": [{ "binding": "DB", "database_name": "prodigy-stdio", "database_id": "23637906-8954-4cda-ac90-4146b1634e59" }]
 }

@@ -13,5 +13,8 @@ export const lupo = {
    *  with the audio dropped and the video stream copied as is (faststart), since re-encoding a 1080p clip shown full-window
    *  visibly softens it. The poster is its first frame, shown when motion is reduced. */
   backdrop: { src: '/lupo/media/lupo-backdrop.mp4', poster: '/lupo/media/lupo-backdrop-poster.jpg' },
+  /** The hero's "N downloads and counting" label appears once the all-time count (from /lupo/stats.json) reaches this.
+   *  Raise it to keep a small number off the page. */
+  downloadsShownFrom: 1,
   firstLaunchGif: undefined as { src: string; width: number; height: number; alt: string } | undefined,
 };

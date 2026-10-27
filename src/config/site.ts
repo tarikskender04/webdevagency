@@ -45,7 +45,7 @@ export const site = {
 // The user confirmed the operator and the Sarajevo address. Retention and transfer wording follows the providers'
 // published practices (Cloudflare Workers Logs: 3 days on Free, 7 from 2026-12-01; Resend sends from eu-west-1, Ireland).
 export const legal = {
-  updated: '2026-10-25',
+  updated: '2026-10-27',
   operatorName: 'Tarik Skender',
   contactAddress: 'Gradačačka 118, 71000 Sarajevo, Bosnia and Herzegovina',
   /** The same address for structured data (BaseLayout's Organization). */

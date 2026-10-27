@@ -57,11 +57,16 @@ const application = Astro.site ? {
         <p class="lupo-lead">Talk and point at your screen. Your coding agent gets the full picture.</p>
         <div class="lupo-download">
           {lupoDownload
-            ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
+            ? <a class="button lupo-button" href={lupoDownload.href}><svg class="lupo-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14" /></svg>Download for Mac</a>
             : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
-          <p class="lupo-requirements">{lupo.requirements} · <a href="#changelog">Version {lupoLatest.version}</a></p>
+          {/* The requirements and the first-time link stack beside the button, so the copy ends higher and the Mac has room. */}
+          <div class="lupo-hero-meta">
+            {/* Filled in by the script below from /lupo/stats.json. The line keeps its height while empty, so the copy and the Mac don't move when it arrives. */}
+            {lupoDownload && <p class="lupo-count" data-lupo-count data-shown-from={lupo.downloadsShownFrom} aria-live="polite"></p>}
+            <p class="lupo-requirements">{lupo.requirements} · <a href="#changelog">Version {lupoLatest.version}</a></p>
+            <a class="lupo-first-time" href="#first-launch">First time? Here’s how to open it <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
-        <a class="lupo-first-time" href="#first-launch">First time? Here’s how to open it <span aria-hidden="true">↓</span></a>
       </section>
       <div class="lupo-portal-view">
         <div class="lupo-mac">
@@ -239,7 +244,7 @@ const application = Astro.site ? {
         <h2 id="lupo-closing">Try it on your next bug.</h2>
         <div class="lupo-download">
           {lupoDownload
-            ? <a class="button lupo-button" href={lupoDownload.href}>Download for Mac</a>
+            ? <a class="button lupo-button" href={lupoDownload.href}><svg class="lupo-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14" /></svg>Download for Mac</a>
             : <span class="button lupo-button lupo-button-soon">Coming soon</span>}
           <p class="lupo-requirements">{lupo.requirements}</p>
         </div>
@@ -283,5 +288,18 @@ const application = Astro.site ? {
     const start = (): void => { play.hidden = true; video.controls = true; };
     video.addEventListener('play', start, { once: true });
     play.addEventListener('click', () => { start(); video.focus(); void video.play().catch(() => {}); });
+  }
+  // The all-time download count beside the button. If it can't be read, or is below the threshold, the line stays empty.
+  const count = document.querySelector<HTMLElement>('[data-lupo-count]');
+  if (count) {
+    fetch('/lupo/stats.json')
+      .then(response => (response.ok ? response.json() : undefined))
+      .then((stats?: { downloads?: number }) => {
+        const downloads = stats?.downloads;
+        if (typeof downloads !== 'number' || downloads < Number(count.dataset.shownFrom)) return;
+        count.textContent = `${downloads.toLocaleString('en')} ${downloads === 1 ? 'download' : 'downloads'} and counting`;
+        count.dataset.ready = '';
+      })
+      .catch(() => {});
   }
 </script>

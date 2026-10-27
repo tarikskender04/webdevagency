@@ -88,6 +88,23 @@ test('the Download button counts and redirects to the stable DMG path', async ({
   expect(response.headers()['cache-control']).toBe('no-store');
 });
 
+test('the hero download count comes from stats.json, and the line is empty when there is no count', async ({ page, request }) => {
+  const response = await request.get('/lupo/stats.json');
+  await page.goto('/lupo/');
+  const count = page.locator('[data-lupo-count]');
+  // Without a DMG there is no Download button, so no count beside it.
+  if (!hasDmg) return expect(count).toHaveCount(0);
+  // CI's preview has no database tables, so the endpoint answers 503 there; locally it reads the preview database.
+  if (response.ok()) {
+    const { downloads } = await response.json();
+    expect(typeof downloads).toBe('number');
+    if (downloads >= 1) await expect(count).toHaveText(`${downloads.toLocaleString('en')} ${downloads === 1 ? 'download' : 'downloads'} and counting`);
+  } else {
+    expect(response.status()).toBe(503);
+    await expect(count).toHaveText('');
+  }
+});
+
 test('updates.json is served as JSON with the fields installed apps read', async ({ request }) => {
   const response = await request.get('/lupo/updates.json');
   expect(response.ok()).toBe(true);
